@@ -5,9 +5,11 @@ import java.sql.Date;
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(detachable = "true")
 public class Mensaje {
+	@PrimaryKey
 	private int id;
 	private String contenido;
 	private Date fecha;

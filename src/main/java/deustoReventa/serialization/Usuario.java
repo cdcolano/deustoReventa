@@ -4,9 +4,12 @@ import java.util.*;
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.Unique;
 
 @PersistenceCapable(detachable = "true")
 public class Usuario {
+	
+	@Unique
 	private String email;
 	private String password;
 	private Tarjeta tarjeta;

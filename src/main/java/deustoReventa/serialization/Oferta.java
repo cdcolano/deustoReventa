@@ -2,15 +2,24 @@ package deustoReventa.serialization;
 
 import java.sql.Date;
 
+import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
 
 
 @PersistenceCapable(detachable = "true")
 public class Oferta {
+	
+	@PrimaryKey
 	private int id;
 	private double cantidad;
 	private Date fecha;
 	private boolean estado;
+	@Persistent(defaultFetchGroup = "true")
+	@Join
+	private Producto producto;
+	private Usuario usuario_emisor;
 	
 	public int getId() {
 		return id;
@@ -48,6 +57,5 @@ public class Oferta {
 	public void setUsuario_emisor(Usuario usuario_emisor) {
 		this.usuario_emisor = usuario_emisor;
 	}
-	private Producto producto;
-	private Usuario usuario_emisor;
+	
 }
