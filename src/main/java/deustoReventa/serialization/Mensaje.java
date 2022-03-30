@@ -13,12 +13,7 @@ public class Mensaje {
 	private int id;
 	private String contenido;
 	private Date fecha;
-	@Persistent(defaultFetchGroup = "true")
-	@Join
-	private Usuario emisor;
-	@Persistent(defaultFetchGroup = "true")
-	@Join
-	private Usuario receptor;
+	
 	
 	
 	public int getId() {
@@ -39,16 +34,5 @@ public class Mensaje {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public Usuario getEmisor() {
-		return emisor;
-	}
-	public void setEmisor(Usuario emisor) {
-		this.emisor = emisor;
-	}
-	public Usuario getReceptor() {
-		return receptor;
-	}
-	public void setReceptor(Usuario receptor) {
-		this.receptor = receptor;
-	}
+
 }

@@ -14,15 +14,28 @@ public class Usuario {
 	private String password;
 	private Tarjeta tarjeta;
 	
+	
+	@Persistent(defaultFetchGroup = "true")
+	@Join
 	private List<Producto> productosEnVenta;
 	
+	
+	@Persistent(defaultFetchGroup = "true")
+	@Join
 	private List<Producto>productosVendidos;
 	
-	private List<Producto>productosComprados;
 	
+	@Persistent(defaultFetchGroup = "true")
+	@Join
+	private List<Compra>compras;
+	
+	
+	@Persistent(defaultFetchGroup = "true")
+	@Join
 	private List<Mensaje>mensajesRecibidos;
 	
-
+	@Persistent(defaultFetchGroup = "true")
+	@Join
 	private List<Mensaje>mensajesEnviados;
 	
 	@Persistent(defaultFetchGroup = "true")
@@ -35,9 +48,12 @@ public class Usuario {
 	@Join
 	private List<Usuario>vendedoresLike;//esta es asi seguro
 	
+	@Persistent(defaultFetchGroup = "true")
+	@Join
 	private List<Oferta>ofertasRecibidas;//se consigue a través del producto
 	
-	
+	@Persistent(defaultFetchGroup = "true")
+	@Join
 	private List<Oferta>ofertasEnviadas;
 	
 	public Usuario() {
@@ -46,7 +62,7 @@ public class Usuario {
 		mensajesRecibidos=new ArrayList<>();
 		mensajesEnviados= new ArrayList<>();
 		productosFavoritos= new ArrayList<>();
-		productosComprados= new ArrayList<>();
+		compras= new ArrayList<>();
 		vendedoresLike= new ArrayList<>();
 		ofertasRecibidas= new ArrayList<>();
 	}
@@ -93,12 +109,7 @@ public class Usuario {
 	public void setProductosFavoritos(List<Producto> productosFavoritos) {
 		this.productosFavoritos = productosFavoritos;
 	}
-	public List<Producto> getProductosComprados() {
-		return productosComprados;
-	}
-	public void setProductosComprados(List<Producto> productosComprados) {
-		this.productosComprados = productosComprados;
-	}
+
 	public int getDenuncias() {
 		return denuncias;
 	}
@@ -132,6 +143,14 @@ public class Usuario {
 
 	public void setTarjeta(Tarjeta tarjeta) {
 		this.tarjeta = tarjeta;
+	}
+
+	public List<Compra> getCompras() {
+		return compras;
+	}
+
+	public void setCompras(List<Compra> compras) {
+		this.compras = compras;
 	}
 	
 }

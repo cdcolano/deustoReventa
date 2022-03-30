@@ -7,8 +7,11 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
 
 @PersistenceCapable(detachable = "true")
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 public class Producto {
 	
 	@PrimaryKey
@@ -16,6 +19,10 @@ public class Producto {
 	private double precioSalida;
 	private String nombre;
 	private Date fechaPubli;
+	
+	@Persistent(defaultFetchGroup = "true")
+	@Join
+	private Categoria categoria;
 	
 	@Persistent(defaultFetchGroup = "true")
 	@Join
@@ -59,5 +66,11 @@ public class Producto {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+	public Categoria getCategoria() {
+		return categoria;
+	}
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 }

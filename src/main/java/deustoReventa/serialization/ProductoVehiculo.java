@@ -2,7 +2,11 @@ package deustoReventa.serialization;
 
 import javax.jdo.annotations.PersistenceCapable;
 
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+
 @PersistenceCapable(detachable = "true")
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
 public class ProductoVehiculo extends Producto{
 	private int kilometros;
 	private int caballos;
