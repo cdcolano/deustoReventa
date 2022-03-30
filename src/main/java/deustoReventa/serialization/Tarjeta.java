@@ -1,5 +1,8 @@
 package deustoReventa.serialization;
 
+import javax.jdo.annotations.PersistenceCapable;
+
+@PersistenceCapable(detachable = "true")
 public class Tarjeta {
 	private String nombre;
 	private int codigoSecreto;
