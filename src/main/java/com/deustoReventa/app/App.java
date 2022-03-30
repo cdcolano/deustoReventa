@@ -10,7 +10,7 @@ public class App
     {
         System.out.println( "Hello World!" );
     }
-    public static MetodoPrueba() {
+    public void MetodoPrueba() {
     	System.out.println("prueba metodo en branch");
     }
 }
