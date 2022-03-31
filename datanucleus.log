@@ -1,0 +1,176 @@
+11:02:16,836 (main) INFO  [DataNucleus.SchemaTool] - DataNucleus SchemaTool : Creación del esquema para clases
+11:02:16,836 (main) INFO  [DataNucleus.SchemaTool] - DataNucleus SchemaTool : Classpath
+11:02:16,837 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-maven-plugin\5.0.2\datanucleus-maven-plugin-5.0.2.jar
+11:02:16,837 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-utils\3.0.8\plexus-utils-3.0.8.jar
+11:02:16,837 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-artifact\3.0.4\maven-artifact-3.0.4.jar
+11:02:16,847 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-plugin-api\3.0.4\maven-plugin-api-3.0.4.jar
+11:02:16,847 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-model\3.0.4\maven-model-3.0.4.jar
+11:02:16,847 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-inject-plexus\2.3.0\sisu-inject-plexus-2.3.0.jar
+11:02:16,847 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-component-annotations\1.5.5\plexus-component-annotations-1.5.5.jar
+11:02:16,847 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-inject-bean\2.3.0\sisu-inject-bean-2.3.0.jar
+11:02:16,847 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-guice\3.1.0\sisu-guice-3.1.0-no_aop.jar
+11:02:16,847 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-guava\0.9.9\sisu-guava-0.9.9.jar
+11:02:16,847 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-container-default\1.5.5\plexus-container-default-1.5.5.jar
+11:02:16,848 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-classworlds\2.2.2\plexus-classworlds-2.2.2.jar
+11:02:16,848 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\xbean\xbean-reflect\3.4\xbean-reflect-3.4.jar
+11:02:16,848 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\log4j\log4j\1.2.12\log4j-1.2.12.jar
+11:02:16,848 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\commons-logging\commons-logging-api\1.1\commons-logging-api-1.1.jar
+11:02:16,848 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\com\google\collections\google-collections\1.0\google-collections-1.0.jar
+11:02:16,848 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\junit\junit\3.8.2\junit-3.8.2.jar
+11:02:16,849 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\Documents\procesos software\deustoReventa\target\classes
+11:02:16,849 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-core\5.2.10\datanucleus-core-5.2.10.jar
+11:02:16,849 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-api-jdo\5.2.8\datanucleus-api-jdo-5.2.8.jar
+11:02:16,849 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar
+11:02:16,849 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\javax.jdo\3.2.0-release\javax.jdo-3.2.0-release.jar
+11:02:16,849 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\javax\transaction\javax.transaction-api\1.3\javax.transaction-api-1.3.jar
+11:02:16,849 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\glassfish\corba\glassfish-corba-omgapi\4.2.2\glassfish-corba-omgapi-4.2.2.jar
+11:02:16,849 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-rdbms\5.2.10\datanucleus-rdbms-5.2.10.jar
+11:02:16,849 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\mysql\mysql-connector-java\5.1.17\mysql-connector-java-5.1.17.jar
+11:02:16,853 (main) ERROR [DataNucleus.SchemaTool] - Error creating NucleusContext
+No se puede leer el archivo de propiedades "C:\Users\Carlos\Documents\procesos"
+org.datanucleus.exceptions.NucleusUserException: No se puede leer el archivo de propiedades "C:\Users\Carlos\Documents\procesos"
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:80)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:298)
+Caused by: java.lang.NullPointerException: inStream parameter is null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Properties.load(Properties.java:407)
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:74)
+	... 1 more
+Nested Throwables StackTrace:
+java.lang.NullPointerException: inStream parameter is null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Properties.load(Properties.java:407)
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:74)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:298)
+11:08:24,960 (main) INFO  [DataNucleus.SchemaTool] - DataNucleus SchemaTool : Creación del esquema para clases
+11:08:24,960 (main) INFO  [DataNucleus.SchemaTool] - DataNucleus SchemaTool : Classpath
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-maven-plugin\5.0.2\datanucleus-maven-plugin-5.0.2.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-utils\3.0.8\plexus-utils-3.0.8.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-artifact\3.0.4\maven-artifact-3.0.4.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-plugin-api\3.0.4\maven-plugin-api-3.0.4.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-model\3.0.4\maven-model-3.0.4.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-inject-plexus\2.3.0\sisu-inject-plexus-2.3.0.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-component-annotations\1.5.5\plexus-component-annotations-1.5.5.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-inject-bean\2.3.0\sisu-inject-bean-2.3.0.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-guice\3.1.0\sisu-guice-3.1.0-no_aop.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-guava\0.9.9\sisu-guava-0.9.9.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-container-default\1.5.5\plexus-container-default-1.5.5.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-classworlds\2.2.2\plexus-classworlds-2.2.2.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\xbean\xbean-reflect\3.4\xbean-reflect-3.4.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\log4j\log4j\1.2.12\log4j-1.2.12.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\commons-logging\commons-logging-api\1.1\commons-logging-api-1.1.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\com\google\collections\google-collections\1.0\google-collections-1.0.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\junit\junit\3.8.2\junit-3.8.2.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\Documents\procesos software\deustoReventa\target\classes
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-core\5.2.10\datanucleus-core-5.2.10.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-api-jdo\5.2.8\datanucleus-api-jdo-5.2.8.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\javax.jdo\3.2.0-release\javax.jdo-3.2.0-release.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\javax\transaction\javax.transaction-api\1.3\javax.transaction-api-1.3.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\glassfish\corba\glassfish-corba-omgapi\4.2.2\glassfish-corba-omgapi-4.2.2.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-rdbms\5.2.10\datanucleus-rdbms-5.2.10.jar
+11:08:24,964 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\mysql\mysql-connector-java\5.1.17\mysql-connector-java-5.1.17.jar
+11:08:24,964 (main) ERROR [DataNucleus.SchemaTool] - Error creating NucleusContext
+No se puede leer el archivo de propiedades "C:\Users\Carlos\Documents\procesos"
+org.datanucleus.exceptions.NucleusUserException: No se puede leer el archivo de propiedades "C:\Users\Carlos\Documents\procesos"
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:80)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:298)
+Caused by: java.lang.NullPointerException: inStream parameter is null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Properties.load(Properties.java:407)
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:74)
+	... 1 more
+Nested Throwables StackTrace:
+java.lang.NullPointerException: inStream parameter is null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Properties.load(Properties.java:407)
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:74)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:298)
+11:10:51,333 (main) INFO  [DataNucleus.SchemaTool] - DataNucleus SchemaTool : Creación del esquema para clases
+11:10:51,334 (main) INFO  [DataNucleus.SchemaTool] - DataNucleus SchemaTool : Classpath
+11:10:51,334 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-maven-plugin\5.0.2\datanucleus-maven-plugin-5.0.2.jar
+11:10:51,334 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-utils\3.0.8\plexus-utils-3.0.8.jar
+11:10:51,334 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-artifact\3.0.4\maven-artifact-3.0.4.jar
+11:10:51,334 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-plugin-api\3.0.4\maven-plugin-api-3.0.4.jar
+11:10:51,334 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-model\3.0.4\maven-model-3.0.4.jar
+11:10:51,334 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-inject-plexus\2.3.0\sisu-inject-plexus-2.3.0.jar
+11:10:51,335 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-component-annotations\1.5.5\plexus-component-annotations-1.5.5.jar
+11:10:51,335 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-inject-bean\2.3.0\sisu-inject-bean-2.3.0.jar
+11:10:51,335 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-guice\3.1.0\sisu-guice-3.1.0-no_aop.jar
+11:10:51,335 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-guava\0.9.9\sisu-guava-0.9.9.jar
+11:10:51,335 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-container-default\1.5.5\plexus-container-default-1.5.5.jar
+11:10:51,335 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-classworlds\2.2.2\plexus-classworlds-2.2.2.jar
+11:10:51,335 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\xbean\xbean-reflect\3.4\xbean-reflect-3.4.jar
+11:10:51,335 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\log4j\log4j\1.2.12\log4j-1.2.12.jar
+11:10:51,335 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\commons-logging\commons-logging-api\1.1\commons-logging-api-1.1.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\com\google\collections\google-collections\1.0\google-collections-1.0.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\junit\junit\3.8.2\junit-3.8.2.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\Documents\procesos software\deustoReventa\target\classes
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-core\5.2.10\datanucleus-core-5.2.10.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-api-jdo\5.2.8\datanucleus-api-jdo-5.2.8.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\javax.jdo\3.2.0-release\javax.jdo-3.2.0-release.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\javax\transaction\javax.transaction-api\1.3\javax.transaction-api-1.3.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\glassfish\corba\glassfish-corba-omgapi\4.2.2\glassfish-corba-omgapi-4.2.2.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-rdbms\5.2.10\datanucleus-rdbms-5.2.10.jar
+11:10:51,336 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\mysql\mysql-connector-java\5.1.17\mysql-connector-java-5.1.17.jar
+11:10:51,341 (main) ERROR [DataNucleus.SchemaTool] - Error creating NucleusContext
+No se puede leer el archivo de propiedades "C:/Users/Carlos/Documents/procesos"
+org.datanucleus.exceptions.NucleusUserException: No se puede leer el archivo de propiedades "C:/Users/Carlos/Documents/procesos"
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:80)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:298)
+Caused by: java.lang.NullPointerException: inStream parameter is null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Properties.load(Properties.java:407)
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:74)
+	... 1 more
+Nested Throwables StackTrace:
+java.lang.NullPointerException: inStream parameter is null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Properties.load(Properties.java:407)
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:74)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:298)
+11:11:05,797 (main) INFO  [DataNucleus.SchemaTool] - DataNucleus SchemaTool : Creación del esquema para clases
+11:11:05,797 (main) INFO  [DataNucleus.SchemaTool] - DataNucleus SchemaTool : Classpath
+11:11:05,797 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-maven-plugin\5.0.2\datanucleus-maven-plugin-5.0.2.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-utils\3.0.8\plexus-utils-3.0.8.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-artifact\3.0.4\maven-artifact-3.0.4.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-plugin-api\3.0.4\maven-plugin-api-3.0.4.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\maven\maven-model\3.0.4\maven-model-3.0.4.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-inject-plexus\2.3.0\sisu-inject-plexus-2.3.0.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-component-annotations\1.5.5\plexus-component-annotations-1.5.5.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-inject-bean\2.3.0\sisu-inject-bean-2.3.0.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-guice\3.1.0\sisu-guice-3.1.0-no_aop.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\sonatype\sisu\sisu-guava\0.9.9\sisu-guava-0.9.9.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-container-default\1.5.5\plexus-container-default-1.5.5.jar
+11:11:05,798 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\codehaus\plexus\plexus-classworlds\2.2.2\plexus-classworlds-2.2.2.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\apache\xbean\xbean-reflect\3.4\xbean-reflect-3.4.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\log4j\log4j\1.2.12\log4j-1.2.12.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\commons-logging\commons-logging-api\1.1\commons-logging-api-1.1.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\com\google\collections\google-collections\1.0\google-collections-1.0.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\junit\junit\3.8.2\junit-3.8.2.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\Documents\procesos software\deustoReventa\target\classes
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-core\5.2.10\datanucleus-core-5.2.10.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-api-jdo\5.2.8\datanucleus-api-jdo-5.2.8.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\log4j\log4j\1.2.17\log4j-1.2.17.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\javax.jdo\3.2.0-release\javax.jdo-3.2.0-release.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\javax\transaction\javax.transaction-api\1.3\javax.transaction-api-1.3.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\glassfish\corba\glassfish-corba-omgapi\4.2.2\glassfish-corba-omgapi-4.2.2.jar
+11:11:05,799 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\org\datanucleus\datanucleus-rdbms\5.2.10\datanucleus-rdbms-5.2.10.jar
+11:11:05,800 (main) INFO  [DataNucleus.SchemaTool] - >>  C:\Users\Carlos\.m2\repository\mysql\mysql-connector-java\5.1.17\mysql-connector-java-5.1.17.jar
+11:11:05,803 (main) ERROR [DataNucleus.SchemaTool] - Error creating NucleusContext
+No se puede leer el archivo de propiedades "C:/Users/Carlos/Documents/procesos"
+org.datanucleus.exceptions.NucleusUserException: No se puede leer el archivo de propiedades "C:/Users/Carlos/Documents/procesos"
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:80)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:298)
+Caused by: java.lang.NullPointerException: inStream parameter is null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Properties.load(Properties.java:407)
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:74)
+	... 1 more
+Nested Throwables StackTrace:
+java.lang.NullPointerException: inStream parameter is null
+	at java.base/java.util.Objects.requireNonNull(Objects.java:233)
+	at java.base/java.util.Properties.load(Properties.java:407)
+	at org.datanucleus.util.PersistenceUtils.setPropertiesUsingFile(PersistenceUtils.java:74)
+	at org.datanucleus.store.schema.SchemaTool.main(SchemaTool.java:298)

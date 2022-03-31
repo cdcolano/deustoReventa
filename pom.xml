@@ -14,6 +14,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <config.files.dir>C:/Users/Carlos/Documents/procesos software/deustoReventa/src/main/resources</config.files.dir>
+    <!-- config.files.dir>${basedir}/src/main/resources</config.files.dir>  -->
     <maven.compiler.source>1.7</maven.compiler.source>
     <maven.compiler.target>1.7</maven.compiler.target>
   </properties>
@@ -95,7 +97,69 @@
           <artifactId>maven-project-info-reports-plugin</artifactId>
           <version>3.0.0</version>
         </plugin>
+        <plugin>
+			<groupId>org.datanucleus</groupId>
+			<artifactId>datanucleus-maven-plugin</artifactId>
+			<version>5.0.2</version>
+			<configuration>
+				<log4jConfiguration>${config.files.dir}/log4j.properties</log4jConfiguration>
+				<verbose>true</verbose>
+				<props>${config.files.dir}/datanucleus.properties</props>
+			</configuration>
+			<executions>
+				<execution>
+					<phase>compile</phase>
+					<goals>
+				<goal>enhance</goal>
+				</goals>
+				</execution>
+			</executions>
+		</plugin>
       </plugins>
     </pluginManagement>
   </build>
+  
+  <profiles>
+		<!-- run as 'mvn exec:java -Pmanager' -->
+		<profile>
+			<id>manager</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<configuration>
+							<mainClass>donations.server.DonationManager</mainClass>
+							<arguments>
+								<argument>${server.hostname}</argument>
+								<argument>${server.port}</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<!-- run as 'mvn exec:java -Pclient' -->
+			<id>client</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<configuration>
+							<mainClass>donations.client.Donor</mainClass>
+							<arguments>
+								<argument>${server.hostname}</argument>
+								<argument>${server.port}</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>

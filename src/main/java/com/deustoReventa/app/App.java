@@ -2,6 +2,7 @@ package com.deustoReventa.app;
 
 import java.util.Date;
 
+import dao.CategoriaDAO;
 import dao.ICategoriaDAO;
 import dao.IProductoDAO;
 import dao.IUsuarioDAO;
@@ -40,6 +41,11 @@ public class App
         IProductoDAO prod= new ProductoDAO();
         IUsuarioDAO iUsuari= new UsuarioDAO();
         ICategoriaDAO iCategoria= new CategoriaDAO();
+        
+        
+        prod.storeProducto(p);
+        iUsuari.storeUsuario(u);
+        iCategoria.storeCategoria(c);
         
         
         
