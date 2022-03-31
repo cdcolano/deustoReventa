@@ -1,6 +1,6 @@
 package deustoReventa.serialization;
 
-import java.sql.Date;
+import java.util.Date;
 
 import javax.jdo.annotations.Join;
 import javax.jdo.annotations.PersistenceCapable;

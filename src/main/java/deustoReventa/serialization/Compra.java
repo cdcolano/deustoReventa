@@ -14,6 +14,7 @@ public class Compra {
 	@Join
 	private Usuario comprador;
 	private Usuario vendedor;
+	
 	@Persistent(defaultFetchGroup = "true")
 	@Join
 	private Producto producto;
