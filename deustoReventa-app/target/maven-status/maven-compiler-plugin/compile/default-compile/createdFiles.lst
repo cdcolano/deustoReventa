@@ -1,0 +1,17 @@
+serialization\Oferta.class
+serialization\ProductoVehiculo.class
+serialization\Tarjeta.class
+serialization\Producto.class
+serialization\Categoria.class
+serialization\Mensaje.class
+dao\IProductoDAO.class
+serialization\Compra.class
+serialization\Usuario.class
+dao\ICategoriaDAO.class
+service\VentasService.class
+dao\IUsuarioDAO.class
+serialization\ProductoOrdenador.class
+dao\CategoriaDAO.class
+com\deustoCompany\app\App.class
+dao\UsuarioDAO.class
+dao\ProductoDAO.class
