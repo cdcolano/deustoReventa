@@ -1,0 +1,66 @@
+package com.deustoCompany.app;
+
+import java.util.Date;
+
+import dao.CategoriaDAO;
+import dao.ICategoriaDAO;
+import dao.IProductoDAO;
+import dao.IUsuarioDAO;
+import dao.ProductoDAO;
+import dao.UsuarioDAO;
+import serialization.Categoria;
+import serialization.Producto;
+import serialization.Usuario;
+import service.VentasService;
+
+/**
+ * Hello world!
+ *
+ */
+public class App 
+{
+    public static void main( String[] args )
+    {
+    	
+        Usuario u = new Usuario();
+        u.setEmail("jon.egiluz@mecomeElPepiono.es");
+        u.setPassword("j");
+        
+        Categoria c= new Categoria();
+        c.setId(1);
+        c.setNombre("vehiculos");
+ 
+        
+        Producto p= new Producto();
+        p.setId(1);
+        p.setCategoria(c);
+        p.setFechaPubli(new Date(System.currentTimeMillis()));
+        p.setNombre("Golf");
+        p.setPrecioSalida(3000);
+        p.setReservado(false);
+        p.setVendedor(u);
+        
+        u.addProductoEnVenta(p);
+        VentasService v= new VentasService();
+        IProductoDAO prod= new ProductoDAO();
+        IUsuarioDAO iUsuari= new UsuarioDAO();
+        ICategoriaDAO iCategoria= new CategoriaDAO();
+        
+        iCategoria.deleteAllCategorias();
+        prod.deleteAllProductos();
+        
+        iUsuari.deleteAllUsuarios();
+        iUsuari.storeUsuario(u);
+        System.out.println(p.getVendedor().getEmail());
+        prod.storeProducto(p);
+       
+        v.comprarProducto(u, p, 100);
+      //  iCategoria.storeCategoria(c);
+        
+        
+        
+    }
+    public void MetodoPrueba() {
+    	System.out.println("prueba metodo en branch");
+    }
+}
