@@ -2,6 +2,7 @@ package service;
 
 
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.jdo.JDOHelper;
@@ -10,7 +11,7 @@ import javax.jdo.PersistenceManagerFactory;
 
 import dao.*;
 import serialization.*;
-
+import java.util.*;
 
 
 public class VentasService {
@@ -34,10 +35,12 @@ public class VentasService {
 		return false;
 	}
 	
-	public void registro(Usuario u) {
+	public boolean registro(Usuario u) {
 		if (usuarioDao.getUsuario(u.getEmail())==null) {
 			usuarioDao.storeUsuario(u);
+			return true;
 		}
+		return false;	
 	}
 	
 	public void comprarProducto(String email, int idProducto, double precio) {
@@ -79,6 +82,40 @@ public class VentasService {
 		}finally {
 			pm.close();
 		}
+	}
+
+
+	public Producto getProducto(int x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Producto p=null;
+		try {
+			p=pm.getObjectById(Producto.class,x);
+		}catch(Exception e) {
+			System.out.println("* Error el producto no existe *S");
+		}finally {
+			pm.close();
+		}
+		return p;
+		
+	}
+	
+
+	public List<Producto> getProductos() {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<Producto> p=new ArrayList<Producto>();
+		try {
+			p=productDao.getProductos();
+		}catch(Exception e) {
+			System.out.println("* Error el producto no existe *S");
+		}finally {
+			pm.close();
+		}
+		return p;
+		
+	}
+	
+	public Usuario getUsuario(String email) {
+		return usuarioDao.getUsuario(email);
 	}
 	
 	

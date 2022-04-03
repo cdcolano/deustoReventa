@@ -15,6 +15,8 @@
 	<properties>
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<server.hostname>127.0.0.1</server.hostname>
+		<server.port>8080</server.port>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -52,6 +54,31 @@
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
 			<version>[1.2.17, )</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-server</artifactId>
+			<version>2.29</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.containers</groupId>
+			<artifactId>jersey-container-servlet</artifactId>
+			<version>2.29</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.core</groupId>
+			<artifactId>jersey-common</artifactId>
+			<version>2.29</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.inject</groupId>
+			<artifactId>jersey-hk2</artifactId>
+			<version>2.29</version>
+		</dependency>
+		<dependency>
+			<groupId>org.glassfish.jersey.media</groupId>
+			<artifactId>jersey-media-json-jackson</artifactId>
+			<version>2.29</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -141,6 +168,56 @@
 				<nohelp>true</nohelp>
 			</configuration>
 		</plugin>
+		<plugin>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-maven-plugin</artifactId>
+			<version>9.4.19.v20190610</version>
+        </plugin>
 	</plugins>
 </build>
+
+
+<profiles>
+		<!-- run as 'mvn exec:java -Pmanager' -->
+		<profile>
+			<id>manager</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<configuration>
+							<mainClass>server.MainServer</mainClass>
+							<arguments>
+								<argument>${server.hostname}</argument>
+								<argument>${server.port}</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+
+		<profile>
+			<!-- run as 'mvn exec:java -Pclient' -->
+			<id>client</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.codehaus.mojo</groupId>
+						<artifactId>exec-maven-plugin</artifactId>
+						<version>1.2.1</version>
+						<configuration>
+							<mainClass>client.MainCliente</mainClass>
+							<arguments>
+								<argument>${server.hostname}</argument>
+								<argument>${server.port}</argument>
+							</arguments>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
 </project>
