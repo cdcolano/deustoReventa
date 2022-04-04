@@ -2,6 +2,7 @@ package com.deustoReventa.app;
 
 import java.util.Date;
 
+import dao.CategoriaDAO;
 import dao.ICategoriaDAO;
 import dao.IProductoDAO;
 import dao.IUsuarioDAO;

@@ -32,7 +32,7 @@ public class Compra {
 		this.comprador = comprador;
 	}
 	public Usuario getVendedor() {
-		return vendedor;
+		return vendedor; 
 	}
 	public void setVendedor(Usuario vendedor) {
 		this.vendedor = vendedor;

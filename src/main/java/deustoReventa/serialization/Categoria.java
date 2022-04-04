@@ -8,7 +8,7 @@ public class Categoria {
 	
 	@PrimaryKey
 	private int id;
-	private String nombre;
+	private String nombre, tipo;
 	
 	public int getId() {
 		return id;
@@ -22,4 +22,12 @@ public class Categoria {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+	
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 }
