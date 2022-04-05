@@ -56,6 +56,7 @@ public class VentasService {
 			usuarioDao.storeUsuario(u);
 			return true;
 		}
+		System.out.println("*No se ha realizado el registro*");
 		return false;	
 	}
 	

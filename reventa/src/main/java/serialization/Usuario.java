@@ -7,10 +7,10 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 
-//@PersistenceCapable(detachable = "true")
+@PersistenceCapable(detachable = "true")
 public class Usuario {
 	
-//	@PrimaryKey
+	@PrimaryKey
 	private String email;
 	private String password;
 	private Tarjeta tarjeta;
@@ -22,36 +22,36 @@ public class Usuario {
 	private List<Producto>productosVendidos;
 	
 	
-//	@Persistent(defaultFetchGroup = "true",dependentElement = "true")
+	@Persistent(defaultFetchGroup = "true",dependentElement = "true")
 	private List<Producto>productos;
 	
-//	@Persistent(defaultFetchGroup = "true",  dependentElement = "true")
-//	@Join
+	@Persistent(defaultFetchGroup = "true",  dependentElement = "true")
+	@Join
 	private List<Compra>compras;
 	
 	
-//	@Persistent(defaultFetchGroup = "true")
-//	@Join
+	@Persistent(defaultFetchGroup = "true")
+	@Join
 	private List<Mensaje>mensajesRecibidos;
 	
-//	@Persistent(defaultFetchGroup = "true")
-//	@Join
+	@Persistent(defaultFetchGroup = "true")
+	@Join
 	private List<Mensaje>mensajesEnviados;
 	
 	
-//	@Persistent(defaultFetchGroup = "true",  dependentElement = "true")
-//	@Join
+	@Persistent(defaultFetchGroup = "true",  dependentElement = "true")
+	@Join
 	private List<Producto>productosFavoritos;
 
 	
-//	@Persistent(defaultFetchGroup = "true",  dependentElement = "true")
-//	@Join
+	@Persistent(defaultFetchGroup = "true",  dependentElement = "true")
+	@Join
 	private List<Usuario>vendedoresLike;//esta es asi seguro
 	
 	
 	
-//	@Persistent(defaultFetchGroup = "true", dependentElement = "true")
-//	@Join
+	@Persistent(defaultFetchGroup = "true", dependentElement = "true")
+	@Join
 	private List<Oferta>ofertasEnviadas;
 	
 	public Usuario() {

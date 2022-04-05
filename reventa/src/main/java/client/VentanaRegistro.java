@@ -117,6 +117,7 @@ public class VentanaRegistro extends JFrame{
 					t.setMesVencimiento(Integer.parseInt(tfMesVen.getText()));
 					u.setTarjeta(t);
 					registrar(u);
+					VentanaRegistro.this.dispose();
 				}catch(NumberFormatException ex) {
 					lError.setText("Los campos codigo y año/mes de vencimiento de la tarjeta deben ser numericos");
 				}catch(Exception exc) {
@@ -128,7 +129,7 @@ public class VentanaRegistro extends JFrame{
 		});
 		pAceptar.add(bAceptar);
 		pAceptar.setBackground(Color.WHITE);
-		
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		getContentPane().add(lError,BorderLayout.NORTH);
 		getContentPane().add(pCentral,BorderLayout.CENTER);
 		getContentPane().add(pAceptar, BorderLayout.SOUTH);

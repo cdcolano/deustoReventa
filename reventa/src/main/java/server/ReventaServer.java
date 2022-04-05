@@ -16,6 +16,8 @@ import javax.ws.rs.core.Response;
 import serialization.Categoria;
 import serialization.Compra;
 import serialization.Producto;
+import serialization.ProductoOrdenador;
+import serialization.ProductoVehiculo;
 import serialization.Usuario;
 import service.VentasService;
 
@@ -61,9 +63,17 @@ public class ReventaServer {
 	}
 	
 	@POST
-	@Path("/sale/{x}")
-	public Response addProducto(Producto p, @PathParam("x") String email) {
-		vs.ponerALaVenta(email,p);
+	@Path("/saleOrdenador")
+	public Response addProductoOrdenador(ProductoOrdenador p) {
+		vs.ponerALaVenta(p.getEmailVendedor(),p);
+		System.out.println("*Producto puesto a la venta*");
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/saleVehiculo")
+	public Response addProductoVehiculo(ProductoVehiculo p) {
+		vs.ponerALaVenta(p.getEmailVendedor(),p);
 		System.out.println("*Producto puesto a la venta*");
 		return Response.ok().build();
 	}

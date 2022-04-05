@@ -131,6 +131,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 		} catch (Exception ex) {
 			System.out.println("   $ Error no existe ese usuario: " + ex.getMessage());
+			return null;
 		} finally {
 			//System.out.println(usuario.getEmail());
 			pm.close();

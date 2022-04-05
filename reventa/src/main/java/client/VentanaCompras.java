@@ -68,8 +68,25 @@ public class VentanaCompras extends JFrame{
 			e1.printStackTrace();
 		}
 		getContentPane().add(pCentro,BorderLayout.CENTER);
+		JPanel pVender= new JPanel();
+		JButton bVender= new JButton("Vender");
+		bVender.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaProducto vR= new VentanaProducto(client, VentanaCompras.this.webTarget,VentanaCompras.this.email);
+				VentanaCompras.this.dispose();
+				
+			}
+			
+		});
 		
-		
+		pVender.add(bVender);
+		getContentPane().add(pVender, BorderLayout.SOUTH);
+		this.pack();
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setLocationRelativeTo(null);
+		setVisible(true);
 		
 		//TODO desplegar todos los productos
 		//TODO coger el producto seleccionado
@@ -110,6 +127,8 @@ public class VentanaCompras extends JFrame{
 			throw new ReventaException("" + response.getStatus());
 		}
 	}
+	
+	
 	
 	
 	public Usuario getUsuario(String email)throws ReventaException {

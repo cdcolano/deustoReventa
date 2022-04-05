@@ -26,6 +26,7 @@ dao\IUsuarioDAO.class
 serialization\ProductoOrdenador.class
 dao\CategoriaDAO.class
 client\VentanaLogin.class
+client\VentanaCompras$3.class
 client\VentanaRegistro$1.class
 dao\ProductoDAO.class
 client\VentanaLogin$2.class

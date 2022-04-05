@@ -219,7 +219,7 @@ public class VentanaProducto extends JFrame{
 			            	lError.setText("El formato de la ram no es adecuado");
 			            	return;
 			            }
-			           addProducto(p, VentanaProducto.this.email, lError);
+			           addProductoOrdenador(p);
 		            }else if(c.getId()==2) {
 			            	ProductoVehiculo p=new ProductoVehiculo();
 			            	p.setNombre(nombre);
@@ -254,7 +254,7 @@ public class VentanaProducto extends JFrame{
 				            	lError.setText("El formato del año de fabricacion no es adecuado");
 				            	return;
 				            }
-				           addProducto(p, VentanaProducto.this.email, lError);
+				           addProductoVehiculo(p);
 		            }
 		            
 		         
@@ -318,15 +318,41 @@ public class VentanaProducto extends JFrame{
 		return lCategorias;
 	}
 	
-	public void addProducto(Producto p, String email, JLabel lError) {
+	public void addProductoOrdenador(Producto p) {
 		try {
-			WebTarget webTarget=this.webTarget.path("/reventa/sale/"+email);
+			WebTarget webTarget=this.webTarget.path("reventa/saleOrdenador");
 			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 			System.out.println(webTarget.getUri());
+			p.setEmailVendedor(email);
 			Response response = invocationBuilder.post(Entity.entity(p, MediaType.APPLICATION_JSON));
+			System.out.println(response.getStatus());
 		}catch(Exception e) {
-			lError.setText("Ha ocurrido un error al conectar con el servidor");
+			//lError.setText("Ha ocurrido un error al conectar con el servidor");
 			System.out.println(e.getMessage());
+		}
+	}
+	
+	public void addProductoVehiculo(Producto p) {
+		try {
+			WebTarget webTarget=this.webTarget.path("reventa/saleVehiculo");
+			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+			System.out.println(webTarget.getUri());
+			p.setEmailVendedor(email);
+			Response response = invocationBuilder.post(Entity.entity(p, MediaType.APPLICATION_JSON));
+			System.out.println(response.getStatus());
+		}catch(Exception e) {
+			//lError.setText("Ha ocurrido un error al conectar con el servidor");
+			System.out.println(e.getMessage());
+		}
+	}
+	
+	
+	public void registrar(Usuario u) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/registro");
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
 		}
 	}
 	

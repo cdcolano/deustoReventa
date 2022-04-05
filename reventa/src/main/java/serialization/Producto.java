@@ -35,7 +35,8 @@ public class Producto {
 
 	private boolean reservado;
 	private boolean vendido;
-
+	private String emailVendedor;
+	
 	public Producto(double precioSalida, String nombre, Categoria c) {
 		vendido=false;
 		reservado=false;
@@ -115,5 +116,15 @@ public class Producto {
 	public void setOfertasRecibidas(List<Oferta> ofertasRecibidas) {
 		this.ofertasRecibidas = ofertasRecibidas;
 	}
+
+	public String getEmailVendedor() {
+		return emailVendedor;
+	}
+
+	public void setEmailVendedor(String emailVendedor) {
+		this.emailVendedor = emailVendedor;
+	}
+
+	
 
 }
