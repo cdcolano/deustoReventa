@@ -1,11 +1,13 @@
 # deustoReventa
 Lo primero que hay que realizar es compilar el código
-
+...
 _mvn clean compile_
-
+...
+Despues crear las tablas en la base de datos
+...
 _mvn datanucleus:schema-create_
-
-En dos ventanas distintas ejecutar:
+...
+Por último,en dos ventanas distintas ejecutar:
 
 _mvn jetty:run_
 _mvn exec:java -Pclient
