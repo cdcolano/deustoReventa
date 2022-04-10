@@ -1,8 +1,9 @@
 # deustoReventa
 _Lo primero que hay que realizar es compilar el código_
 
-´´´mvn clean compile
-´´´
+```
+mvn clean compile
+```
 
 _Despues crear las tablas en la base de datos_
 ´´´
