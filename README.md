@@ -1,8 +1,8 @@
 # deustoReventa
 Lo primero que hay que realizar es compilar el código
-...
+´´´
 _mvn clean compile_
-...
+´´´
 Despues crear las tablas en la base de datos
 ...
 _mvn datanucleus:schema-create_
