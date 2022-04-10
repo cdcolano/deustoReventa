@@ -21,9 +21,14 @@ _Despues crear las tablas en la base de datos_
 ```
 mvn datanucleus:schema-create
 ```
-_Por último,en dos ventanas distintas ejecutar_
+_Lanzar el servidor_
 
 ```
-_mvn jetty:run_
-_mvn exec:java -Pclient
+mvn jetty:run
+```
+
+_Lanzar el cliente_
+
+```
+mvn exec:java -Pclient
 ```
