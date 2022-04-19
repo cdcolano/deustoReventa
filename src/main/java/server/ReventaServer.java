@@ -86,9 +86,31 @@ public class ReventaServer {
 	}
 	
 	@GET
-	@Path("/productos")
-	public List<Producto> getProductos() {
-		 List<Producto>prod=vs.getProductos();
+	@Path("/productosOrdenador")
+	public List<ProductoOrdenador> getProductosOrdenador() {
+		 List<ProductoOrdenador>prod=vs.getProductosOrdenador();
+		 return prod;
+	}
+	
+	@GET
+	@Path("/productosVehiculo")
+	public List<ProductoVehiculo> getProductosVehiculo() {
+		 List<ProductoVehiculo>prod=vs.getProductosVehiculos();
+		 return prod;
+	}
+	
+	
+	@GET
+	@Path("/productosOrdenador/venta")
+	public List<ProductoOrdenador> getProductosOrdenadorEnVenta() {
+		 List<ProductoOrdenador>prod=vs.getProductosOrdenadorEnVenta();
+		 return prod;
+	}
+	
+	@GET
+	@Path("/productosVehiculo/venta")
+	public List<ProductoVehiculo> getProductosVehiculoEnVenta() {
+		 List<ProductoVehiculo>prod=vs.getProductosVehiculosEnVenta();
 		 return prod;
 	}
 	
@@ -102,6 +124,14 @@ public class ReventaServer {
 	@GET
 	@Path("/getUsuario/{x}")
 	public Response getUsuario(@PathParam("x") String x) {
+		System.out.println(x);
+		Usuario usuario=vs.getUsuario(x);
+		return Response.ok(usuario).build();
+	}
+	
+	@GET
+	@Path("/ventas/{x}")
+	public Response getVentas(@PathParam("x") String x) {
 		System.out.println(x);
 		Usuario usuario=vs.getUsuario(x);
 		return Response.ok(usuario).build();

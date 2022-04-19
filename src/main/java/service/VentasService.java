@@ -129,6 +129,63 @@ public class VentasService {
 		
 	}
 	
+	public List<ProductoOrdenador> getProductosOrdenador() {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoOrdenador> p=new ArrayList<ProductoOrdenador>();
+		try {
+			p=productDao.getProductosOrdenador();
+		}catch(Exception e) {
+			System.out.println("* Error el producto no existe *S");
+		}finally {
+			pm.close();
+		}
+		return p;
+		
+	}
+	
+	
+	public List<ProductoOrdenador> getProductosOrdenadorEnVenta() {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoOrdenador> p=new ArrayList<ProductoOrdenador>();
+		try {
+			p=productDao.getProductosOrdenadorEnVenta();
+		}catch(Exception e) {
+			System.out.println("* Error el producto no existe *S");
+		}finally {
+			pm.close();
+		}
+		return p;
+		
+	}
+	
+	public List<ProductoVehiculo> getProductosVehiculos() {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoVehiculo> p=new ArrayList<ProductoVehiculo>();
+		try {
+			p=productDao.getProductosVehiculos();
+		}catch(Exception e) {
+			System.out.println("* Error el producto no existe *S");
+		}finally {
+			pm.close();
+		}
+		return p;
+		
+	}
+	
+	public List<ProductoVehiculo> getProductosVehiculosEnVenta() {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoVehiculo> p=new ArrayList<ProductoVehiculo>();
+		try {
+			p=productDao.getProductosVehiculosEnVenta();
+		}catch(Exception e) {
+			System.out.println("* Error el producto no existe *S");
+		}finally {
+			pm.close();
+		}
+		return p;
+		
+	}
+	
 	public Usuario getUsuario(String email) {
 		return usuarioDao.getUsuario(email);
 	}

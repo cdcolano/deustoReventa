@@ -12,6 +12,8 @@ import javax.jdo.Transaction;
 
 
 import serialization.Producto;
+import serialization.ProductoOrdenador;
+import serialization.ProductoVehiculo;
 import serialization.Usuario;
 
 
@@ -115,6 +117,190 @@ public class ProductoDAO implements IProductoDAO{
 
 		return productos;
 	}
+	
+	
+	public List<ProductoOrdenador> getProductosOrdenador() {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+		pm.getFetchPlan().setMaxFetchDepth(3);
+
+		Transaction tx = pm.currentTransaction();
+		List<ProductoOrdenador> productos = new ArrayList<>();
+
+		try {
+			System.out.println("   * Retrieving an Extent for Products.");
+
+			tx.begin();
+			Extent<ProductoOrdenador> extent = pm.getExtent(ProductoOrdenador.class, true);
+
+			for (ProductoOrdenador p : extent) {
+				productos.add(p);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("   $ Error retrieving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return productos;
+	}
+	
+	
+	
+	public List<ProductoOrdenador> getProductosOrdenadorEnVenta() {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+		pm.getFetchPlan().setMaxFetchDepth(3);
+
+		Transaction tx = pm.currentTransaction();
+		List<ProductoOrdenador> productos = new ArrayList<>();
+
+		try {
+			System.out.println("   * Retrieving an Extent for Products.");
+
+			tx.begin();
+			Extent<ProductoOrdenador> extent = pm.getExtent(ProductoOrdenador.class, true);
+
+			for (ProductoOrdenador p : extent) {
+				if (!(p.isReservado()||p.isVendido()))
+				productos.add(p);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("   $ Error retrieving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return productos;
+	}
+	
+	
+	public List<ProductoVehiculo> getProductosVehiculos() {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+		pm.getFetchPlan().setMaxFetchDepth(3);
+
+		Transaction tx = pm.currentTransaction();
+		List<ProductoVehiculo> productos = new ArrayList<>();
+
+		try {
+			System.out.println("   * Retrieving an Extent for Products.");
+
+			tx.begin();
+			Extent<ProductoVehiculo> extent = pm.getExtent(ProductoVehiculo.class, true);
+
+			for (ProductoVehiculo p : extent) {
+				productos.add(p);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("   $ Error retrieving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return productos;
+	}
+	
+	public List<ProductoVehiculo> getProductosVehiculosEnVenta() {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+		pm.getFetchPlan().setMaxFetchDepth(3);
+
+		Transaction tx = pm.currentTransaction();
+		List<ProductoVehiculo> productos = new ArrayList<>();
+
+		try {
+			System.out.println("   * Retrieving an Extent for Products.");
+
+			tx.begin();
+			Extent<ProductoVehiculo> extent = pm.getExtent(ProductoVehiculo.class, true);
+
+			for (ProductoVehiculo p : extent) {
+				if(!(p.isReservado() || p.isVendido()))
+				productos.add(p);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("   $ Error retrieving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return productos;
+	}
+	
+	
+	
+	public List<Producto> getProductosVendidos() {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+		pm.getFetchPlan().setMaxFetchDepth(3);
+
+		Transaction tx = pm.currentTransaction();
+		List<Producto> productos = new ArrayList<>();
+
+		try {
+			System.out.println("   * Retrieving an Extent for Products.");
+
+			tx.begin();
+			Extent<Producto> extent = pm.getExtent(Producto.class, true);
+
+			for (Producto p : extent) {
+				if (p.isVendido()) productos.add(p);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("   $ Error retrieving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return productos;
+	}
+	
 	
 
 	public void updateProducto(Producto prod) {

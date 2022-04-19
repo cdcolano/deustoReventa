@@ -372,4 +372,6 @@ public class VentanaProducto extends JFrame{
 		}
 	}
 	
+
+	
 }
