@@ -15,6 +15,7 @@ import javax.ws.rs.core.Response;
 
 import serialization.Categoria;
 import serialization.Compra;
+import serialization.Mensaje;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
@@ -135,6 +136,12 @@ public class ReventaServer {
 		System.out.println(x);
 		Usuario usuario=vs.getUsuario(x);
 		return Response.ok(usuario).build();
+	}
+	@GET
+	@Path("/mensajes/{x}")
+	public List<Mensaje> getMensajes(@PathParam("x") String x) {
+		List<Mensaje> mensajes = vs.getUsuario(x).getMensajesRecibidos();
+		return mensajes;
 	}
 	
 
