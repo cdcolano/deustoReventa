@@ -51,6 +51,7 @@ public class VentanaCompras extends JFrame{
 		cbOrdenar.addItem("Ordenar por Ventas del Vendedor");
 		cbOrdenar.addItem("Ordenar por Fecha de Publicacion ascendente");
 		cbOrdenar.addItem("Ordenar por Fecha de Publicacion descendente");
+		cbOrdenar.addItem("Favoritos");
 		
 		cbOrdenar.addItemListener (new ItemListener () {
 
@@ -66,6 +67,9 @@ public class VentanaCompras extends JFrame{
 					}
 					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
 						ordenarPorFechaDesc(productos, pCentro);
+					}
+					else if (seleccion.compareTo("Favoritos")==0) {
+						mostrarFavoritos(pCentro, email);
 					}
 				}
 			}
@@ -287,5 +291,20 @@ public class VentanaCompras extends JFrame{
 		}
 		pCentro.revalidate();
 		//TODO si no pCentro repaint
+	}
+	
+	
+	public void mostrarFavoritos(JPanel pCentro, String email) {
+		try {
+			Usuario u=getUsuario(email);
+			for (Producto p: u.getProductosFavoritos()) {
+				crearPanel(p, pCentro);
+			}
+		} catch (ReventaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 }
