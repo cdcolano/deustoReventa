@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -46,7 +49,9 @@ public class VentanaCompras extends JFrame{
 		JComboBox<String>cbOrdenar= new JComboBox<>();
 		cbOrdenar.addItem("Sin orden");
 		cbOrdenar.addItem("Ordenar por Ventas del Vendedor");
-
+		cbOrdenar.addItem("Ordenar por Fecha de Publicacion ascendente");
+		cbOrdenar.addItem("Ordenar por Fecha de Publicacion descendente");
+		
 		cbOrdenar.addItemListener (new ItemListener () {
 
 			@Override
@@ -56,8 +61,13 @@ public class VentanaCompras extends JFrame{
 					if (seleccion.compareTo("Ordenar por Ventas del Vendedor")==0) {
 							ordenarPorVentas(productos, pCentro);
 					}
+					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion ascendente")==0) {
+						ordenarPorFechaAsc(productos, pCentro);
+					}
+					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
+						ordenarPorFechaDesc(productos, pCentro);
+					}
 				}
-				
 			}
 		});
 		
@@ -227,7 +237,55 @@ public class VentanaCompras extends JFrame{
 	}
 	
 	
+	public void ordenarPorFechaAsc(List<Producto>productos, JPanel pCentro) {
+		productos.sort(new Comparator<Producto>(){
+			   @Override
+			   public int compare(Producto p1,Producto p2) {
+				   try {
+		               Date Pdate = new Date(p1.getFechaPubli());
+		               Date Qdate= new Date(p2.getFechaPubli());
+					   return Pdate.compareTo(Qdate);
+				   }
+					catch(Exception exc) {
+						System.out.println("*ERROR * " + exc.getMessage());
+						return 0;
+					}
+			     //TODO return 1 if rhs should be before lhs 
+			     //     return -1 if lhs should be before rhs
+			     //     return 0 otherwise (meaning the order stays the same)
+			     }
+			 });
+		pCentro.removeAll();
+		for (Producto p:productos) {
+			crearPanel(p, pCentro);
+		}
+		pCentro.revalidate();
+		//TODO si no pCentro repaint
+	}
 	
-	
-	
+	public void ordenarPorFechaDesc(List<Producto>productos, JPanel pCentro) {
+		productos.sort(new Comparator<Producto>(){
+			   @Override
+			   public int compare(Producto p1,Producto p2) {
+				   try {
+		               Date Pdate = new Date(p1.getFechaPubli());
+		               Date Qdate= new Date(p2.getFechaPubli());
+					   return Qdate.compareTo(Pdate);
+				   }
+					catch(Exception exc) {
+						System.out.println("*ERROR * " + exc.getMessage());
+						return 0;
+					}
+			     //TODO return 1 if rhs should be before lhs 
+			     //     return -1 if lhs should be before rhs
+			     //     return 0 otherwise (meaning the order stays the same)
+			     }
+			 });
+		pCentro.removeAll();
+		for (Producto p:productos) {
+			crearPanel(p, pCentro);
+		}
+		pCentro.revalidate();
+		//TODO si no pCentro repaint
+	}
 }
