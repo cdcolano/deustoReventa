@@ -14,42 +14,52 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
+import serialization.Usuario;
+
 public class VentanaChat extends JFrame {
 	private Client client;
 	private WebTarget webTarget;
 	private JPanel panelCentro;
+	private JPanel panelSur;
 	private JTextField mensaje,nick,ip;
 	private JTextArea campoChat;
 	private JButton botonEnviar;
+	private static VentanaChat v1;
 	
-	public VentanaChat() {
-		//client=c;
-		//this.webTarget=webTarget;
+	public VentanaChat(Client c, WebTarget wt, String email1, String email2) {
+		client=c;
+		this.webTarget=webTarget;
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100,100,450,300);
+		v1=this;
+		v1.setTitle("");
 		panelCentro= new JPanel();
-		panelCentro.setLayout(new BorderLayout());		
-		campoChat= new JTextArea();
-		botonEnviar = new JButton();
+		
+		panelSur = new JPanel();
+		panelSur.setLayout(new GridLayout());
+		campoChat= new JTextArea("DIABLO");
+		campoChat.setEditable(false);
+		botonEnviar = new JButton("ENVIAR");
 		mensaje = new JTextField(20);
-		nick = new JTextField(5);
-		ip = new JTextField(8);
 		
 		
-		panelCentro.add(nick, BorderLayout.NORTH);
-		panelCentro.add(ip, BorderLayout.NORTH);
-		panelCentro.add(campoChat, BorderLayout.CENTER);
-		panelCentro.add(mensaje, BorderLayout.CENTER);
-		panelCentro.add(botonEnviar, BorderLayout.SOUTH);
+		panelSur.add(campoChat);
+		panelSur.add(mensaje);
+		panelSur.add(botonEnviar);
 		
-		
+		v1.add(panelCentro);
+		v1.add(panelSur);
 		botonEnviar.addActionListener(new ActionListener()
 				{
 					public void actionPerformed (ActionEvent e) {
-						
+						String a = "\n" + mensaje.getText();
+						campoChat.append(a);
+						v1.pack();
 					}
 				});
-	}
-	public static void main(String[]args) {
-		System.out.println("hola");
+		setLocationRelativeTo(null);
+		this.pack();
+		setVisible(true);
 	}
 	
 }
