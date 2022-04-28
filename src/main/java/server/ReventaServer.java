@@ -138,9 +138,15 @@ public class ReventaServer {
 		return Response.ok(usuario).build();
 	}
 	@GET
-	@Path("/mensajes/{x}")
-	public List<Mensaje> getMensajes(@PathParam("x") String x) {
+	@Path("/mensajesRecibidos/{x}")
+	public List<Mensaje> getMensajesRec(@PathParam("x") String x) {
 		List<Mensaje> mensajes = vs.getUsuario(x).getMensajesRecibidos();
+		return mensajes;
+	}
+	@GET
+	@Path("/mensajesEnviados/{x}")
+	public List<Mensaje> getMensajesEnv(@PathParam("x") String x){
+		List<Mensaje> mensajes = vs.getUsuario(x).getMensajesEnviados();
 		return mensajes;
 	}
 	
