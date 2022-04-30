@@ -53,7 +53,7 @@ public class CategoriaDAO implements ICategoriaDAO {
 		 * By default only 1 level is retrieved from the db so if we wish to fetch more
 		 * than one level, we must indicate it
 		 */
-		pm.getFetchPlan().setMaxFetchDepth(3);
+		
 
 		Transaction tx = pm.currentTransaction();
 		List<Categoria> categorias = new ArrayList<>();
@@ -81,37 +81,12 @@ public class CategoriaDAO implements ICategoriaDAO {
 
 		return categorias;
 	}
-	
-	public void deleteAllCategorias() {
-		System.out.println("- Cleaning the DB...");
-		PersistenceManager pm = pmf.getPersistenceManager();
-		Transaction tx = pm.currentTransaction();
-		try {
-			tx.begin();
-			
-			// Getting ready for removing objects - Remove Relationships between User and other things
-			Extent<Categoria> extentU = pm.getExtent(Categoria.class, true);
-			
-		
-			// Updating the database so changes are considered before commit
-			pm.flush();
 
-			// Deleting All Products - Copies in Books will be deleted due to 'delete on cascade'
-			Query<Categoria> query2 = pm.newQuery(Categoria.class);
-			System.out.println(" * '" + query2.deletePersistentAll() + "' products deleted from the DB.");
+	public PersistenceManagerFactory getPmf() {
+		return pmf;
+	}
 
-			tx.commit();
-		} catch (Exception ex) {
-			System.err.println(" $ Error cleaning the DB: " + ex.getMessage());
-			ex.printStackTrace();
-		} finally {
-			if (tx != null && tx.isActive()) {
-				tx.rollback();
-			}
-
-			if (pm != null && !pm.isClosed()) {
-				pm.close();
-			}
-		}
+	public void setPmf(PersistenceManagerFactory pmf) {
+		this.pmf = pmf;
 	}
 }

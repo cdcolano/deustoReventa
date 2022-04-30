@@ -52,7 +52,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 		 * By default only 1 level is retrieved from the db so if we wish to fetch more
 		 * than one level, we must indicate it
 		 */
-		pm.getFetchPlan().setMaxFetchDepth(3);
 
 		Transaction tx = pm.currentTransaction();
 		List<Usuario> usuarios = new ArrayList<>();
@@ -141,7 +140,7 @@ public class UsuarioDAO implements IUsuarioDAO {
 	}
 	
 	
-	public int getComprasSize() {
+	/*public int getComprasSize() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
@@ -168,8 +167,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 		return resultado;
 	}
-	
-	public void updateUsuario(Usuario usuario, Compra c) {
+	*/
+	/*public void updateUsuario(Usuario usuario, Compra c) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Usuario u=pm.getObjectById(Usuario.class,usuario.getEmail());
 		Usuario temporal=u.clone();
@@ -178,11 +177,11 @@ public class UsuarioDAO implements IUsuarioDAO {
 		pm.makePersistent(temporal);
 		pm.close();
 	}
-	
+	*/
 	
 	
 
-	public void deleteUsuario(Usuario usuario) {
+	/*public void deleteUsuario(Usuario usuario) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
 		try {
@@ -197,9 +196,17 @@ public class UsuarioDAO implements IUsuarioDAO {
 			}
 			pm.close();
 		}
-	}
+	}*/
 	
-	public void updateVentasUsuario(String email, Producto p) {
+	public PersistenceManagerFactory getPmf() {
+		return pmf;
+	}
+
+	public void setPmf(PersistenceManagerFactory pmf) {
+		this.pmf = pmf;
+	}
+
+/*	public void updateVentasUsuario(String email, Producto p) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		try {
 			Usuario u=pm.getObjectById(Usuario.class,email);
@@ -242,6 +249,6 @@ public class UsuarioDAO implements IUsuarioDAO {
 				pm.close();
 			}
 		}
-	}
+	}*/
 
 }
