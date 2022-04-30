@@ -22,7 +22,7 @@ _Despues realizar el enhance_
 mvn datanucleus:enhance
 ```
 
-```
+
 _Despues crear las tablas en la base de datos_
 ```
 mvn datanucleus:schema-create
