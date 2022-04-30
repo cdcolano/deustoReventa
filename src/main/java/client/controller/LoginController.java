@@ -1,6 +1,6 @@
-package client;
+package client.controller;
 
-import java.io.ObjectInputFilter.Status;
+
 
 import javax.swing.JLabel;
 import javax.ws.rs.client.Entity;
@@ -8,7 +8,9 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import client.gui.VentanaLogin;
 import serialization.Usuario;
 import util.ReventaException;
 
@@ -24,7 +26,7 @@ public class LoginController {
 			u.setPassword(password);
 			System.out.println(webTarget.getUri());
 			Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
-			
+
 			if (response.getStatus() != Status.OK.getStatusCode()) {
 				throw new ReventaException("" + response.getStatus());
 			}
