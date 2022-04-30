@@ -1,4 +1,4 @@
-package client;
+package client.gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -43,7 +43,7 @@ public class VentanaChat extends JFrame {
 		
 		panelSur = new JPanel();
 		panelSur.setLayout(new GridLayout());
-		campoChat= new JTextArea("DIABLO");
+		campoChat= new JTextArea("Probando Chat");
 		campoChat.setEditable(false);
 		botonEnviar = new JButton("ENVIAR");
 		mensaje = new JTextField(20);
