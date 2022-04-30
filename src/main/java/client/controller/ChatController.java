@@ -71,9 +71,7 @@ public class ChatController {
 		}
 		return lConversacionRecibido;
 	}
-	public List<Mensaje> getConversacionEnviados(String emailEmisor, String emailReceptor){
-		
-	}
+	
 	
 	
 }
