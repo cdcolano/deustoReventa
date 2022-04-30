@@ -47,15 +47,13 @@ public class ChatController {
 		
 		return lMensajesRecibidos;
 	}
-	public List<Mensaje> getConversacionRecibidos(String emailEmisor, String emailReceptor){
+	public List<Mensaje> getConversacion(String emailEmisor, String emailReceptor){
 		List<Mensaje> lConversacionRecibido= new ArrayList<Mensaje>();
 		try {
 			Usuario emisor = getUsuario(emailEmisor);
 			Usuario receptor = getUsuario(emailReceptor);
 			List<Mensaje> lMensajesEmisor = emisor.getMensajesEnviados();
 			List<Mensaje> lMensajesReceptor = receptor.getMensajesRecibidos();
-			//int mayor = Math.max(lMensajesEmisor.size(),lMensajeReceptor.size());
-			//int count = 0;
 	
 			for(int i =0; i<lMensajesEmisor.size();i++) {
 				for(int t =0; t<lMensajesReceptor.size();i++) {
