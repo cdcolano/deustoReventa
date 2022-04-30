@@ -143,14 +143,15 @@ public class UsuarioTest {
 	public void testClone() {
 		u.setTarjeta(tarjeta);
 		u.setDenuncias(100);
+		u.setEmail("a");
 		ArrayList<Compra>compras= new ArrayList<>();
 		compras.add(c);
 		u.setCompras(compras);
 		
 		ArrayList<Mensaje>mensajes= new ArrayList<>();
 		mensajes.add(m);
-		u.setMensajesEnviados(null);
-		u.setMensajesRecibidos(null);
+		u.setMensajesEnviados(mensajes);
+		u.setMensajesRecibidos(mensajes);
 		
 		ArrayList<Producto>productos=new ArrayList<Producto>();
 		productos.add(p);
@@ -199,7 +200,7 @@ public class UsuarioTest {
 		u.setProductos(productos);
 		assertEquals(u.getProductos().size(),1);
 	}
-
+	
 	
 	
 	

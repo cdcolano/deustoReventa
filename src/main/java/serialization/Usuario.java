@@ -1,4 +1,6 @@
 package serialization;
+import static org.mockito.Mockito.never;
+
 import java.util.*;
 
 import javax.jdo.annotations.Join;
@@ -60,6 +62,7 @@ public class Usuario {
 		mensajesRecibidos=new ArrayList<>();
 		mensajesEnviados= new ArrayList<>();
 		productosFavoritos= new ArrayList<>();
+		productos= new ArrayList<>();
 		compras= new ArrayList<>();
 		vendedoresLike= new ArrayList<>();
 		ofertasEnviadas= new ArrayList<>();
@@ -166,6 +169,7 @@ public class Usuario {
 		u.getMensajesRecibidos().addAll(mensajesRecibidos);
 		u.getOfertasEnviadas().addAll(ofertasEnviadas);
 		u.getProductosEnVenta().addAll(productosEnVenta);
+		u.getProductos().addAll(productos);
 		u.getProductosFavoritos().addAll(productosFavoritos);
 		u.getProductosVendidos().addAll(productosVendidos);
 		u.getVendedoresLike().addAll(vendedoresLike);

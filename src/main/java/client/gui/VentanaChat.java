@@ -68,31 +68,7 @@ public class VentanaChat extends JFrame {
 		setVisible(true);
 	}
 	
-	public Mensaje getMensajeRecibido(String email)throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/mensajesRecibidos/"+email);
-		System.out.println(webTarget.getUri());
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response response = invocationBuilder.get();
-		if(response.getStatus() == Status.OK.getStatusCode()) {
-			Mensaje m = response.readEntity(Mensaje.class);
-			return m;
-		}else {
-			throw new ReventaException("" + response.getStatus());
-		}
-		
-	}
-	public Mensaje getMensajeEnviado(String email)throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/mensajesEnviados/"+email);
-		System.out.println(webTarget.getUri());
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response response = invocationBuilder.get();
-		if(response.getStatus() == Status.OK.getStatusCode()) {
-			Mensaje m = response.readEntity(Mensaje.class);
-			return m;
-		}else {
-			throw new ReventaException("" + response.getStatus());
-		}
-		
-	}
+	
+	
 	
 }

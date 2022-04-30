@@ -28,9 +28,9 @@ public class Compra {
 		this.id = id;
 	}
 	
-	//public Producto getProducto() {
-	//	return producto;
-	//}
+	public Producto getProducto() {
+		return producto;
+	}
 	public void setProducto(Producto producto) {
 		this.producto = producto;
 	}

@@ -93,13 +93,6 @@ public class Producto {
 		this.vendido = vendido;
 	}
 	
-	public Producto clone() {
-		Producto p= new Producto(precioSalida, nombre, categoria);
-		p.setVendido(this.vendido);
-		p.setReservado(this.reservado);
-		p.setId(this.id);
-		return p;
-	}
 
 	public Categoria getCategoria() {
 		return categoria;

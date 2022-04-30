@@ -19,6 +19,7 @@
 		<policy.file>${basedir}/security/java.policy</policy.file>
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 		<doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
+		<java.home.dir>C:\Program Files\Eclipse Foundation\jdk-17.0.0.35-hotspot</java.home.dir>
 	</properties>
 
 	<!-- search for the latest version of dependencies in http://mvnrepository.com -->
@@ -193,14 +194,14 @@
 					<fork>false</fork>
                     <props>${config.files.dir}/datanucleus.properties</props>
 				</configuration>
-				<executions>
+				<!-- executions>
 					<execution>
 						<phase>compile</phase>
 						<goals>
 							<goal>enhance</goal>
 						</goals>
 					</execution>
-				</executions>
+				</executions> -->
 			</plugin>
 			<plugin>
 				<groupId>org.eclipse.jetty</groupId>
@@ -309,7 +310,7 @@
 						<artifactId>exec-maven-plugin</artifactId>
 						<version>1.2.1</version>
 						<configuration>
-							<mainClass>client.MainCliente</mainClass>
+							<mainClass>client.main.MainCliente</mainClass>
 							<arguments>
 								<argument>${server.hostname}</argument>
 								<argument>${server.port}</argument>
@@ -348,7 +349,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>3.0.1</version>
+				
 				<configuration>
+                    <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
 					<show>private</show>
 					<nohelp>true</nohelp>
 					<source>8</source>

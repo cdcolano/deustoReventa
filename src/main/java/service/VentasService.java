@@ -21,7 +21,7 @@ public class VentasService {
 	IProductoDAO productDao;
 	IUsuarioDAO	usuarioDao;
 	ICategoriaDAO categoriaDao;
-	
+
 	PersistenceManagerFactory pmf;
 	
 	public VentasService() {
@@ -32,6 +32,46 @@ public class VentasService {
 	}
 	
 	
+	public IProductoDAO getProductDao() {
+		return productDao;
+	}
+
+
+	public void setProductDao(IProductoDAO productDao) {
+		this.productDao = productDao;
+	}
+
+
+	public IUsuarioDAO getUsuarioDao() {
+		return usuarioDao;
+	}
+
+
+	public void setUsuarioDao(IUsuarioDAO usuarioDao) {
+		this.usuarioDao = usuarioDao;
+	}
+
+
+	public ICategoriaDAO getCategoriaDao() {
+		return categoriaDao;
+	}
+
+
+	public void setCategoriaDao(ICategoriaDAO categoriaDao) {
+		this.categoriaDao = categoriaDao;
+	}
+
+
+	public PersistenceManagerFactory getPmf() {
+		return pmf;
+	}
+
+
+	public void setPmf(PersistenceManagerFactory pmf) {
+		this.pmf = pmf;
+	}
+
+
 	public boolean logIn(String email, String contrasena) {	
 		try {
 			Usuario u= usuarioDao.getUsuario(email);
@@ -75,7 +115,7 @@ public class VentasService {
 		}catch(Exception e){
 			if (u==null) {
 				System.out.println("Error al realizar la compra no existe ese usuario");
-			}else if(p==null) {
+			}else {
 				System.out.println("Error al realizar la compra no existe producto");
 			}
 		}finally {
@@ -91,9 +131,7 @@ public class VentasService {
 			u=pm.getObjectById(Usuario.class, email);
 			u.getProductos().add(p);
 		}catch(Exception e){
-			if (u==null) {
 				System.out.println("Error al realizar la compra no existe ese usuario");
-			}
 		}finally {
 			pm.close();
 		}
@@ -121,7 +159,7 @@ public class VentasService {
 		try {
 			p=productDao.getProductos();
 		}catch(Exception e) {
-			System.out.println("* Error el producto no existe *S");
+			System.out.println("* Error el producto no existe *");
 		}finally {
 			pm.close();
 		}
