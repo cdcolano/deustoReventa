@@ -1,9 +1,11 @@
-package client;
+package client.main;
 
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 // esto es una prueba
+
+import client.gui.VentanaLogin;
 
 public class MainCliente {
 	
