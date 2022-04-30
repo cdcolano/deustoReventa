@@ -9,7 +9,7 @@ _Crear una base de datos llamada productsDB en MySQL y dar permisos al usuario p
 ```
 
 DROP SCHEMA IF EXISTS productsDB;
-DROP USER 'spq'@'localhost';
+DROP USER IF EXISTS 'spq'@'localhost';
 
 CREATE SCHEMA productsDB;
 
