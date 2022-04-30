@@ -1,7 +1,7 @@
-package client;
+package client.controller;
 
-import java.io.ObjectInputFilter.Status;
 
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
