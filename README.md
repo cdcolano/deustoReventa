@@ -17,6 +17,12 @@ CREATE USER 'spq'@'localhost' IDENTIFIED BY 'spq';
 GRANT ALL ON productsDB.* TO 'spq'@'localhost';
 
 ```
+_Despues realizar el enhance_
+```
+mvn datanucleus:enhance
+```
+
+```
 _Despues crear las tablas en la base de datos_
 ```
 mvn datanucleus:schema-create
