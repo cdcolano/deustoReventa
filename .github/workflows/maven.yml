@@ -26,6 +26,10 @@ jobs:
       run: mysql -uroot -h127.0.0.1 < src/sql/deustoReventa.sql  
     - name: compile the code
       run: mvn clean compile
+    - name: Test with Maven
+      run: mvn test
+    - name: Datanucleus enhance
+      run: mvn datanucleus:enhance
     - name: Create Datanucleus schema
       run: mvn datanucleus:schema-create
     - name: Launch the server in background mode 
@@ -34,8 +38,6 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
-    - name: Test with Maven
-      run: mvn test
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
     - name: Install graphviz
