@@ -52,7 +52,7 @@ public class VentanaChat extends JFrame {
 		webTarget= wt;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);
-		cc = new ChatController(wt,email1);
+		cc = new ChatController(wt,email1,udao);
 		v1=this;
 		v1.setTitle("");
 		

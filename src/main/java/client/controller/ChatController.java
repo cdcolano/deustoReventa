@@ -33,10 +33,11 @@ public class ChatController {
 	UsuarioDAO uDao;
 
 	
-	public ChatController(WebTarget webTarget, String email) {
+	public ChatController(WebTarget webTarget, String email,UsuarioDAO uDao) {
 		super();
 		this.webTarget = webTarget;
 		this.email = email;
+		this.uDao = uDao;
 	}
 	public Usuario getUsuario(String email)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/getUsuario/"+ email);
@@ -52,6 +53,8 @@ public class ChatController {
 	}
 	public void enviar(String email1, String email2, Mensaje m) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/enviar/"+email1+"/"+email2);
+		System.out.println(email1);
+		System.out.println(email2);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 		Mensaje m1= new Mensaje();
 		m1.setContenido(m.getContenido());
