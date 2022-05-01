@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -44,14 +45,14 @@ public class VentanaChat extends JFrame {
 	
 	
 	
-	public VentanaChat(/*Client c, WebTarget wt,*/ String email1) {
-		//client=c;
-		em1=email1;
+	public VentanaChat(Client c, WebTarget wt, String email1) {
+		this.client=c;
+		this.em1=email1;
 		udao = new UsuarioDAO();
-		//this.webTarget=webTarget;
+		webTarget= wt;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);
-		cc = new ChatController();
+		cc = new ChatController(wt,email1);
 		v1=this;
 		v1.setTitle("");
 		
@@ -98,8 +99,15 @@ public class VentanaChat extends JFrame {
 			public void actionPerformed (ActionEvent e) {
 				Mensaje m = new Mensaje();
 				m.setContenido(mensaje.getText());
-				
-				
+				Date fecha = new Date();
+				long milliseconds = fecha.getTime();
+				m.setFecha(milliseconds);
+				try {
+					cc.enviar(email1, comboUsuarios.getSelectedItem().toString(), m);
+				} catch (ReventaException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				v1.pack();
 			}
 		});
@@ -116,11 +124,6 @@ public class VentanaChat extends JFrame {
 		setLocationRelativeTo(null);
 		this.pack();
 		setVisible(true);
-	}
-	
-	
-	public static void main(String[]args) {
-		VentanaChat vc = new VentanaChat("a");
 	}
 
 }

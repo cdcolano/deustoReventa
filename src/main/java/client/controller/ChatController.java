@@ -9,6 +9,7 @@ import java.lang.*;
 import javax.swing.*;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.StyledDocument;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.Response.Status;
 import client.gui.VentanaProducto;
 import dao.UsuarioDAO;
 import serialization.Categoria;
+import serialization.Compra;
 import serialization.Mensaje;
 import serialization.Usuario;
 import util.ReventaException;
@@ -27,8 +29,15 @@ import util.ReventaException;
 
 public class ChatController {
 	private WebTarget webTarget;
+	private String email;
 	UsuarioDAO uDao;
+
 	
+	public ChatController(WebTarget webTarget, String email) {
+		super();
+		this.webTarget = webTarget;
+		this.email = email;
+	}
 	public Usuario getUsuario(String email)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/getUsuario/"+ email);
 		System.out.println(webTarget.getUri());
@@ -41,7 +50,17 @@ public class ChatController {
 			throw new ReventaException("" + response.getStatus());
 		}	
 	}
-	
+	public void enviar(String email1, String email2, Mensaje m) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/enviar/"+email1+"/"+email2);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Mensaje m1= new Mensaje();
+		m1.setContenido(m.getContenido());
+		m1.setFecha(m.getFecha());
+		Response response = invocationBuilder.post(Entity.entity(m1, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
 	/*public List<Mensaje> getMensajesEnviados(String email) throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/mensajesEnviados/"+email);
 		List<Mensaje>lMensajesEnviados = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Mensaje>>() {
