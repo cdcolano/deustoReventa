@@ -27,6 +27,7 @@ import util.ReventaException;
 
 public class ChatController {
 	private WebTarget webTarget;
+	UsuarioDAO uDao;
 	
 	public Usuario getUsuario(String email)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/getUsuario/"+ email);
@@ -138,6 +139,16 @@ public class ChatController {
 		}
 		return lMEnviados;
 	}
+	public List<String> getEmailUsuarios(){
+		List<String> listaEmail = new ArrayList<>();
+		List<Usuario> lU = uDao.getUsuarios();
+		
+		for(int i = 0; i<lU.size();i++) {
+			listaEmail.add(lU.get(i).getEmail());
+		}
+		return listaEmail;
+	}
+	
 
 
 	
