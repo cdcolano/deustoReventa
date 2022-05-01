@@ -5,6 +5,10 @@ import java.util.Comparator;
 import java.util.List;
 import java.lang.*;
 
+
+import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.StyledDocument;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
@@ -17,6 +21,8 @@ import serialization.Categoria;
 import serialization.Mensaje;
 import serialization.Usuario;
 import util.ReventaException;
+
+
 
 public class ChatController {
 	private WebTarget webTarget;
@@ -83,6 +89,29 @@ public class ChatController {
 		return lm1;
 		
 	}
+	public void cargarPane(JTextPane pane, StyledDocument doc, List<Mensaje> lm, String email) {
+		Usuario u;
+		try {
+			u = getUsuario(email);
+			for(int i = 0; i<lm.size();i++) {
+				for(int t=0; t<u.getMensajesEnviados().size();t++) {
+					if(lm.get(i).getId()==u.getMensajesEnviados().get(t).getId()) {
+						doc.insertString(doc.getLength(),lm.get(i).getContenido(), null);
+					}else {
+						
+					}
+				}
+			}
+		} catch (ReventaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (BadLocationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
 	
 	
 	

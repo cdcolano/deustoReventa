@@ -12,6 +12,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.text.StyledDocument;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
@@ -53,6 +54,7 @@ public class VentanaChat extends JFrame {
 		panelSur.setLayout(new GridLayout());
 		campoChat= new JTextPane();
 		campoChat.setEditable(false);
+		StyledDocument doc = campoChat.getStyledDocument();
 		botonEnviar = new JButton("ENVIAR");
 		mensaje = new JTextField(20);
 		
@@ -71,7 +73,6 @@ public class VentanaChat extends JFrame {
 					public void actionPerformed (ActionEvent e) {
 						String a = "\n" + mensaje.getText();
 						campoChat.setText(a);
-						/*https://stackoverflow.com/questions/9650992/how-to-change-text-color-in-the-jtextarea--------METODO NECESARIO AQUI*/
 						v1.pack();
 					}
 				});
