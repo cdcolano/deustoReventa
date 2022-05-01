@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -18,22 +20,28 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import client.controller.ChatController;
 import serialization.Mensaje;
 import serialization.Usuario;
 import util.ReventaException;
 
 public class VentanaChat extends JFrame {
 	private Client client;
+	private String em1,em2;
 	private WebTarget webTarget;
 	private JPanel panelCentro;
 	private JPanel panelSur;
 	private JTextField mensaje,nick,ip;
-	private JTextArea campoChat;
+	private JTextPane campoChat;
 	private JButton botonEnviar;
 	private static VentanaChat v1;
+	private ChatController cc;
+	
 	
 	public VentanaChat(Client c, WebTarget wt, String email1, String email2) {
 		client=c;
+		em1=email1;
+		em2=email2;
 		this.webTarget=webTarget;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);
@@ -43,7 +51,7 @@ public class VentanaChat extends JFrame {
 		
 		panelSur = new JPanel();
 		panelSur.setLayout(new GridLayout());
-		campoChat= new JTextArea("Probando Chat");
+		campoChat= new JTextPane();
 		campoChat.setEditable(false);
 		botonEnviar = new JButton("ENVIAR");
 		mensaje = new JTextField(20);
@@ -55,18 +63,27 @@ public class VentanaChat extends JFrame {
 		
 		v1.add(panelCentro);
 		v1.add(panelSur);
+		
+		Thread hilo = new Thread();
+		hilo.start();
 		botonEnviar.addActionListener(new ActionListener()
 				{
 					public void actionPerformed (ActionEvent e) {
 						String a = "\n" + mensaje.getText();
-						campoChat.append(a);
+						campoChat.setText(a);
+						/*https://stackoverflow.com/questions/9650992/how-to-change-text-color-in-the-jtextarea--------METODO NECESARIO AQUI*/
 						v1.pack();
 					}
 				});
+			
 		setLocationRelativeTo(null);
 		this.pack();
 		setVisible(true);
 	}
+
+
+		
+	
 	
 	
 	

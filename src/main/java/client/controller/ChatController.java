@@ -1,6 +1,7 @@
 package client.controller;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.lang.*;
 
@@ -30,10 +31,10 @@ public class ChatController {
 			return u;
 		} else {
 			throw new ReventaException("" + response.getStatus());
-		}
+		}	
 	}
 	
-	public List<Mensaje> getMensajesEnviados(String email) throws ReventaException{
+	/*public List<Mensaje> getMensajesEnviados(String email) throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/mensajesEnviados/"+email);
 		List<Mensaje>lMensajesEnviados = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Mensaje>>() {
 	     } );
@@ -46,7 +47,8 @@ public class ChatController {
 	     } );
 		
 		return lMensajesRecibidos;
-	}
+	}*/
+	
 	public List<Mensaje> getConversacion(String emailEmisor, String emailReceptor){
 		List<Mensaje> lConversacionRecibido= new ArrayList<Mensaje>();
 		try {
@@ -68,6 +70,18 @@ public class ChatController {
 			e.printStackTrace();
 		}
 		return lConversacionRecibido;
+	}
+	public List<Mensaje> getListaEntera(String email1, String email2){
+		List<Mensaje> lm1 = new ArrayList<>();
+		List<Mensaje> lm2 = new ArrayList<>();
+		lm1= getConversacion(email1, email2);
+		lm2= getConversacion(email2, email1);
+		lm1.addAll(lm2);
+		
+		lm1.sort(Comparator.comparing(Mensaje::getFecha));
+		
+		return lm1;
+		
 	}
 	
 	
