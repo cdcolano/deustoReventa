@@ -108,6 +108,7 @@ public class VentanaChat extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
+				lm1.addElement(mensaje.getText());
 				v1.pack();
 			}
 		});
