@@ -14,7 +14,7 @@ public class VentanaVentasTableModel extends AbstractTableModel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private final List<String> headers = Arrays.asList( "idcompra", "Opinion", "Precio");
+	private final List<String> headers = Arrays.asList( "idcompra", "Opinion", "Precio", "Producto");
 	private List<Compra> ventas;
 
 	public VentanaVentasTableModel(List<Compra> ventas) {
@@ -43,6 +43,7 @@ public class VentanaVentasTableModel extends AbstractTableModel {
 			case 0: return venta.getId();
 			case 1: return venta.getOpinion();
 			case 2: return venta.getPrecio();
+			case 3: return venta.getProducto();
 			
 			default: return null;
 		}
