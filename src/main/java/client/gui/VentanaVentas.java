@@ -1,4 +1,4 @@
-package client.gui;
+/*package client.gui;
 
 import javax.swing.JTable;
 
@@ -24,3 +24,4 @@ public class VentanaVentas {
 	
 
 }
+*/
