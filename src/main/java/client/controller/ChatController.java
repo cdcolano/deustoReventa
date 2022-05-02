@@ -132,14 +132,16 @@ public class ChatController {
 		WebTarget webTarget = this.webTarget.path("reventa/mensajesRecibidos/"+email );
 		List<Mensaje>lMRecibidos = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Mensaje>>() {
 	     } );
+		lMRecibidos.sort(Comparator.comparing(Mensaje::getFecha).reversed());
 		return lMRecibidos;
 	}
 	
 	public List<Mensaje> getMensajesEnviados(String email){
 		WebTarget webTarget = this.webTarget.path("reventa/mensajesEnviados/"+email );
-		List<Mensaje>lMRecibidos = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Mensaje>>() {
+		List<Mensaje>lMEnviados= webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Mensaje>>() {
 	     } );
-		return lMRecibidos;
+		lMEnviados.sort(Comparator.comparing(Mensaje::getFecha).reversed());
+		return lMEnviados;
 	}
 	public List<String> getEmailUsuarios(){
 		List<String> listaEmail = new ArrayList<>();
