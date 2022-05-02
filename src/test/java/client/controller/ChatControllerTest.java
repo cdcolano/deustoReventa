@@ -25,17 +25,20 @@ import javax.ws.rs.core.MediaType;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChatControllerTest {
-	@Mock
+	
 	Usuario us1;
-	@Mock
+	
 	Usuario us2;
 	@Mock
 	private WebTarget webTarget1;
+	@Mock
+	private WebTarget webTarget2;
 	@Mock
 	private Invocation.Builder builder;
 	
 	@Mock
 	UsuarioDAO uDao;
+	
 	ChatController cc;
 	@Before
 	public void setUp() {
@@ -58,8 +61,8 @@ public class ChatControllerTest {
 	
 	@Test
 	public void testGetMensajesRecibidos() {
-		when(webTarget1.path("reventa/mensajesRecibidos/a")).thenReturn(webTarget1);
-		when(webTarget1.request()).thenReturn(builder);
+		when(webTarget1.path("reventa/mensajesRecibidos/a")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(builder);
 		List<Mensaje> aM = new ArrayList<>();
 		when(builder.get(new GenericType<List<Mensaje>>() {})).thenReturn(aM);
 		List<Mensaje> listaFinal = new ArrayList<>();
@@ -79,32 +82,37 @@ public class ChatControllerTest {
 		aM.add(m2);
 		
 		us1.setMensajesRecibidos(aM);
-		cc.getMensajesRecibidos(null);
+		//cc.getMensajesRecibidos(us1.getEmail());
 		listaFinal = cc.getMensajesRecibidos("a");
 		assertEquals(aM, listaFinal);
 		
 	}
 	@Test
 	public void testGetMensajesEnviados() {
+		when(webTarget1.path("reventa/mensajesRecibidos/a")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(builder);
 		List<Mensaje> aM = new ArrayList<>();
+		when(builder.get(new GenericType<List<Mensaje>>() {})).thenReturn(aM);
 		List<Mensaje> listaFinal = new ArrayList<>();
 		Mensaje m1 = new Mensaje();
 		Date fecha = new Date(0);
-		long fechaLong = fecha.getTime();
+		long fechaLong = 2;
 		m1.setFecha(fechaLong);
 		m1.setContenido("prueba 1");
 		
 		Mensaje m2 = new Mensaje();
 		Date fecha2 = new Date();
-		long fecha2Long = fecha2.getTime();
+		long fecha2Long = 1;
 		m2.setFecha(fecha2Long);
 		m2.setContenido("prueba 2");
 		
 		aM.add(m1);
 		aM.add(m2);
+		
 		us1.setMensajesEnviados(aM);
-		listaFinal = cc.getMensajesEnviados("a");
-		assertTrue(listaFinal.get(0).getFecha()>listaFinal.get(1).getFecha());
+		//cc.getMensajesRecibidos(us1.getEmail());
+		listaFinal = cc.getMensajesRecibidos("a");
+		assertEquals(aM, listaFinal);
 	}
 }
 

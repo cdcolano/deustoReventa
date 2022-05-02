@@ -83,6 +83,9 @@ public class MainServer{
 		vs.ponerALaVenta(u2.getEmail(), p3);
 		vs.ponerALaVenta(u2.getEmail(), p4);
 		
+		vs.enviarMensaje(u1.getEmail(), u2.getEmail(), "hola", System.currentTimeMillis());
+		vs.enviarMensaje(u2.getEmail(), u1.getEmail(), "hola", System.currentTimeMillis());
+		vs.enviarMensaje(u1.getEmail(), u2.getEmail(), "que tal?", System.currentTimeMillis());
 		
 	}
 }

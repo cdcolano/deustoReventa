@@ -1,9 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VentasService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">VentasService.java</span></div><h1>VentasService.java</h1><pre class="source lang-java linenums">package service;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VentasService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">service</a> &gt; <span class="el_source">VentasService.java</span></div><h1>VentasService.java</h1><pre class="source lang-java linenums">package service;
 
 
-
-import java.util.ArrayList;
-import java.util.Date;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.JDOUserException;
@@ -24,209 +21,382 @@ public class VentasService {
 
 	PersistenceManagerFactory pmf;
 	
-<span class="fc" id="L27">	public VentasService() {</span>
-<span class="fc" id="L28">		productDao= new ProductoDAO();</span>
-<span class="fc" id="L29">		usuarioDao= new UsuarioDAO();</span>
-<span class="fc" id="L30">		categoriaDao= new CategoriaDAO();</span>
-<span class="fc" id="L31">		pmf= JDOHelper.getPersistenceManagerFactory(&quot;datanucleus.properties&quot;);</span>
-<span class="fc" id="L32">	}</span>
+<span class="fc" id="L24">	public VentasService() {</span>
+<span class="fc" id="L25">		productDao= new ProductoDAO();</span>
+<span class="fc" id="L26">		usuarioDao= new UsuarioDAO();</span>
+<span class="fc" id="L27">		categoriaDao= new CategoriaDAO();</span>
+<span class="fc" id="L28">		pmf= JDOHelper.getPersistenceManagerFactory(&quot;datanucleus.properties&quot;);</span>
+<span class="fc" id="L29">	}</span>
 	
 	
 	public IProductoDAO getProductDao() {
-<span class="fc" id="L36">		return productDao;</span>
+<span class="fc" id="L33">		return productDao;</span>
 	}
 
 
 	public void setProductDao(IProductoDAO productDao) {
-<span class="fc" id="L41">		this.productDao = productDao;</span>
-<span class="fc" id="L42">	}</span>
+<span class="fc" id="L38">		this.productDao = productDao;</span>
+<span class="fc" id="L39">	}</span>
 
 
 	public IUsuarioDAO getUsuarioDao() {
-<span class="fc" id="L46">		return usuarioDao;</span>
+<span class="fc" id="L43">		return usuarioDao;</span>
 	}
 
 
 	public void setUsuarioDao(IUsuarioDAO usuarioDao) {
-<span class="fc" id="L51">		this.usuarioDao = usuarioDao;</span>
-<span class="fc" id="L52">	}</span>
+<span class="fc" id="L48">		this.usuarioDao = usuarioDao;</span>
+<span class="fc" id="L49">	}</span>
 
 
 	public ICategoriaDAO getCategoriaDao() {
-<span class="fc" id="L56">		return categoriaDao;</span>
+<span class="fc" id="L53">		return categoriaDao;</span>
 	}
 
 
 	public void setCategoriaDao(ICategoriaDAO categoriaDao) {
-<span class="fc" id="L61">		this.categoriaDao = categoriaDao;</span>
-<span class="fc" id="L62">	}</span>
+<span class="fc" id="L58">		this.categoriaDao = categoriaDao;</span>
+<span class="fc" id="L59">	}</span>
 
 
 	public PersistenceManagerFactory getPmf() {
-<span class="fc" id="L66">		return pmf;</span>
+<span class="fc" id="L63">		return pmf;</span>
 	}
 
 
 	public void setPmf(PersistenceManagerFactory pmf) {
-<span class="fc" id="L71">		this.pmf = pmf;</span>
-<span class="fc" id="L72">	}</span>
+<span class="fc" id="L68">		this.pmf = pmf;</span>
+<span class="fc" id="L69">	}</span>
 
 
 	public boolean logIn(String email, String contrasena) {	
 		try {
-<span class="fc" id="L77">			Usuario u= usuarioDao.getUsuario(email);</span>
-<span class="fc bfc" id="L78" title="All 2 branches covered.">			if (u!=null) {</span>
-<span class="fc bfc" id="L79" title="All 2 branches covered.">				if (u.getPassword().contentEquals(contrasena)) {</span>
-<span class="fc" id="L80">					return true;</span>
+<span class="fc" id="L74">			Usuario u= usuarioDao.getUsuario(email);</span>
+<span class="fc bfc" id="L75" title="All 2 branches covered.">			if (u!=null) {</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">				if (u.getPassword().contentEquals(contrasena)) {</span>
+<span class="fc" id="L77">					return true;</span>
 				}
 			}
-<span class="fc" id="L83">			return false;</span>
-<span class="fc" id="L84">		}catch(JDOUserException exception) {</span>
-<span class="fc" id="L85">			return false;</span>
+<span class="fc" id="L80">			return false;</span>
+<span class="fc" id="L81">		}catch(JDOUserException exception) {</span>
+<span class="fc" id="L82">			return false;</span>
 		}
 		
 	}
 	
 	public List&lt;Categoria&gt; getCategorias(){
-<span class="fc" id="L91">		return categoriaDao.getCategorias();</span>
+<span class="fc" id="L88">		return categoriaDao.getCategorias();</span>
 	}
 	
 	public boolean registro(Usuario u) {
-<span class="fc bfc" id="L95" title="All 2 branches covered.">		if (usuarioDao.getUsuario(u.getEmail())==null) {</span>
-<span class="fc" id="L96">			usuarioDao.storeUsuario(u);</span>
-<span class="fc" id="L97">			return true;</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">		if (usuarioDao.getUsuario(u.getEmail())==null) {</span>
+<span class="fc" id="L93">			usuarioDao.storeUsuario(u);</span>
+<span class="fc" id="L94">			return true;</span>
 		}
-<span class="fc" id="L99">		System.out.println(&quot;*No se ha realizado el registro*&quot;);</span>
-<span class="fc" id="L100">		return false;	</span>
+<span class="fc" id="L96">		System.out.println(&quot;*No se ha realizado el registro*&quot;);</span>
+<span class="fc" id="L97">		return false;	</span>
 	}
 	
 	public void comprarProducto(String email, int idProducto, double precio) {
-<span class="fc" id="L104">		PersistenceManager pm=pmf.getPersistenceManager();</span>
-<span class="fc" id="L105">		Usuario u= null;</span>
-<span class="fc" id="L106">		Producto p=null;</span>
+<span class="fc" id="L101">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="fc" id="L102">		Usuario u= null;</span>
+<span class="fc" id="L103">		Producto p=null;</span>
 		try {	
-<span class="fc" id="L108">			u=pm.getObjectById(Usuario.class, email);</span>
-<span class="fc" id="L109">			p=pm.getObjectById(Producto.class, idProducto);</span>
-<span class="fc" id="L110">			Compra c= new Compra();</span>
-<span class="fc" id="L111">			c.setProducto(p);</span>
-<span class="fc" id="L112">			c.setPrecio(precio);</span>
-<span class="fc" id="L113">			u.getCompras().add(c);</span>
-<span class="fc" id="L114">			p.setVendido(true);</span>
-<span class="fc" id="L115">		}catch(Exception e){</span>
-<span class="fc bfc" id="L116" title="All 2 branches covered.">			if (u==null) {</span>
-<span class="fc" id="L117">				System.out.println(&quot;Error al realizar la compra no existe ese usuario&quot;);</span>
+<span class="fc" id="L105">			u=pm.getObjectById(Usuario.class, email);</span>
+<span class="fc" id="L106">			p=pm.getObjectById(Producto.class, idProducto);</span>
+<span class="fc" id="L107">			Compra c= new Compra();</span>
+<span class="fc" id="L108">			c.setProducto(p);</span>
+<span class="fc" id="L109">			c.setPrecio(precio);</span>
+<span class="fc" id="L110">			u.getCompras().add(c);</span>
+			//uVendedor.getProductosVendidos().add(p);
+<span class="fc" id="L112">			p.setVendido(true);</span>
+<span class="fc" id="L113">		}catch(Exception e){</span>
+<span class="fc bfc" id="L114" title="All 2 branches covered.">			if (u==null) {</span>
+<span class="fc" id="L115">				System.out.println(&quot;Error al realizar la compra no existe ese usuario&quot;);</span>
 			}else {
-<span class="fc" id="L119">				System.out.println(&quot;Error al realizar la compra no existe producto&quot;);</span>
+<span class="fc" id="L117">				System.out.println(&quot;Error al realizar la compra no existe producto&quot;);</span>
+<span class="fc" id="L118">				System.out.println(e.getMessage());</span>
 			}
 		}finally {
-<span class="fc" id="L122">			pm.close();</span>
+<span class="fc" id="L121">			pm.close();</span>
 		}
-<span class="fc" id="L124">	}</span>
+<span class="fc" id="L123">	}</span>
+	
+
+	public void addProductoFav(int id, String email) {
+		// TODO Auto-generated method stub
+<span class="nc" id="L128">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="nc" id="L129">		Usuario u= null;</span>
+		try {
+<span class="nc" id="L131">			u=pm.getObjectById(Usuario.class, email);</span>
+<span class="nc" id="L132">			Producto p=pm.getObjectById(Producto.class,id);</span>
+<span class="nc" id="L133">			u.getProductosFavoritos().add(p);</span>
+			//tengo que meter en una lista todos 
+<span class="nc" id="L135">		}catch(Exception e){</span>
+<span class="nc bnc" id="L136" title="All 2 branches missed.">			if (u==null) {</span>
+<span class="nc" id="L137">				System.out.println(&quot;Error al seleccionar el producto para guardarlo en FAV&quot;);</span>
+			}else {
+<span class="nc" id="L139">				System.out.println(&quot;Error al guardar el producto como FAV&quot;);</span>
+			}
+		}finally {
+<span class="nc" id="L142">			pm.close();</span>
+		}
+		
+<span class="nc" id="L145">	}</span>
+	
+
+	
+	public void addUsuarioFav(String email2 , String email) {
+<span class="nc" id="L150">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="nc" id="L151">		Usuario u1 = null;</span>
+<span class="nc" id="L152">		Usuario u2 = null;</span>
+		try {
+<span class="nc" id="L154">			u1 = pm.getObjectById(Usuario.class, email);</span>
+<span class="nc" id="L155">			u2 = pm.getObjectById(Usuario.class, email2);</span>
+<span class="nc" id="L156">			u1.getVendedoresLike().add(u2);</span>
+<span class="nc" id="L157">		}catch(Exception e) {</span>
+<span class="nc bnc" id="L158" title="All 2 branches missed.">			if(u1==null) {</span>
+<span class="nc" id="L159">				System.out.println(&quot;Error al seleccionar el usuario para guardarlo en los usuarios que te gustan&quot;);</span>
+			}else {
+<span class="nc" id="L161">				System.out.println(&quot;Error al guardar el usuario como me gusta&quot;);</span>
+			}
+<span class="nc" id="L163">		}</span>
+<span class="nc" id="L164">	}</span>
+	
+	public void enviarMensaje(String email1, String email2, String contenido, long fecha) {
+<span class="nc" id="L167">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+<span class="nc" id="L168">		System.out.println(email1);</span>
+<span class="nc" id="L169">		System.out.println(email2);</span>
+<span class="nc" id="L170">		Usuario u1 = null;</span>
+<span class="nc" id="L171">		Usuario u2 = null;</span>
+		try {
+<span class="nc" id="L173">			u1=pm.getObjectById(Usuario.class, email1);</span>
+<span class="nc" id="L174">			u2=pm.getObjectById(Usuario.class, email2);</span>
+<span class="nc" id="L175">			System.out.println(&quot;ENTRO&quot;);</span>
+<span class="nc" id="L176">			Mensaje m = new Mensaje();</span>
+<span class="nc" id="L177">			m.setContenido(contenido);</span>
+<span class="nc" id="L178">			m.setFecha(fecha);</span>
+<span class="nc" id="L179">			u1.getMensajesEnviados().add(m);</span>
+<span class="nc" id="L180">			u2.getMensajesRecibidos().add(m);</span>
+<span class="nc" id="L181">		}catch(Exception e) {</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">			if(u1== null) {</span>
+<span class="nc" id="L183">				System.out.println(&quot;Error al enviar mensaje, el usuario emisor no existe&quot;);</span>
+			}
+<span class="nc bnc" id="L185" title="All 2 branches missed.">			else if(u2==null) {</span>
+<span class="nc" id="L186">				System.out.println(&quot;Error al enviar mensaje, el usuario receptor no existe&quot;);</span>
+			}
+			else {
+<span class="nc" id="L189">				System.out.println(&quot;Error al enviar el mensaje&quot;);</span>
+			}
+		}finally {
+<span class="nc" id="L192">			pm.close();</span>
+		}
+<span class="nc" id="L194">	}</span>
 	
 	
 	public void ponerALaVenta(String email, Producto p) {
-<span class="fc" id="L128">		PersistenceManager pm=pmf.getPersistenceManager();</span>
-<span class="fc" id="L129">		Usuario u= null;</span>
+<span class="fc" id="L198">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="fc" id="L199">		Usuario u= null;</span>
 		try {	
-<span class="fc" id="L131">			u=pm.getObjectById(Usuario.class, email);</span>
-<span class="fc" id="L132">			u.getProductos().add(p);</span>
-<span class="fc" id="L133">		}catch(Exception e){</span>
-<span class="fc" id="L134">				System.out.println(&quot;Error al realizar la compra no existe ese usuario&quot;);</span>
+<span class="fc" id="L201">			u=pm.getObjectById(Usuario.class, email);</span>
+<span class="fc" id="L202">			u.getProductos().add(p);</span>
+<span class="fc" id="L203">		}catch(Exception e){</span>
+<span class="fc" id="L204">				System.out.println(&quot;Error al realizar la compra no existe ese usuario&quot;);</span>
 		}finally {
-<span class="fc" id="L136">			pm.close();</span>
+<span class="fc" id="L206">			pm.close();</span>
 		}
-<span class="fc" id="L138">	}</span>
+<span class="fc" id="L208">	}</span>
 
 
 	public Producto getProducto(int x) {
-<span class="fc" id="L142">		PersistenceManager pm=pmf.getPersistenceManager();</span>
-<span class="fc" id="L143">		Producto p=null;</span>
+<span class="fc" id="L212">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="fc" id="L213">		Producto p=null;</span>
 		try {
-<span class="fc" id="L145">			p=pm.getObjectById(Producto.class,x);</span>
-<span class="fc" id="L146">		}catch(Exception e) {</span>
-<span class="fc" id="L147">			System.out.println(&quot;* Error el producto no existe *&quot;);</span>
+<span class="fc" id="L215">			p=pm.getObjectById(Producto.class,x);</span>
+<span class="fc" id="L216">		}catch(Exception e) {</span>
+<span class="fc" id="L217">			System.out.println(&quot;* Error el producto no existe *&quot;);</span>
 		}finally {
-<span class="fc" id="L149">			pm.close();</span>
+<span class="fc" id="L219">			pm.close();</span>
 		}
-<span class="fc" id="L151">		return p;</span>
+<span class="fc" id="L221">		return p;</span>
 		
 	}
 	
 
 	public List&lt;Producto&gt; getProductos() {
-<span class="fc" id="L157">		PersistenceManager pm=pmf.getPersistenceManager();</span>
-<span class="fc" id="L158">		List&lt;Producto&gt; p=new ArrayList&lt;Producto&gt;();</span>
+<span class="fc" id="L227">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="fc" id="L228">		List&lt;Producto&gt; p=new ArrayList&lt;Producto&gt;();</span>
 		try {
-<span class="fc" id="L160">			p=productDao.getProductos();</span>
-<span class="fc" id="L161">		}catch(Exception e) {</span>
-<span class="fc" id="L162">			System.out.println(&quot;* Error el producto no existe *&quot;);</span>
+<span class="fc" id="L230">			p=productDao.getProductos();</span>
+<span class="fc" id="L231">		}catch(Exception e) {</span>
+<span class="fc" id="L232">			System.out.println(&quot;* Error el producto no existe *&quot;);</span>
 		}finally {
-<span class="fc" id="L164">			pm.close();</span>
+<span class="fc" id="L234">			pm.close();</span>
 		}
-<span class="fc" id="L166">		return p;</span>
+<span class="fc" id="L236">		return p;</span>
 		
 	}
 	
 	public List&lt;ProductoOrdenador&gt; getProductosOrdenador() {
-<span class="fc" id="L171">		PersistenceManager pm=pmf.getPersistenceManager();</span>
-<span class="fc" id="L172">		List&lt;ProductoOrdenador&gt; p=new ArrayList&lt;ProductoOrdenador&gt;();</span>
+<span class="fc" id="L241">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="fc" id="L242">		List&lt;ProductoOrdenador&gt; p=new ArrayList&lt;ProductoOrdenador&gt;();</span>
 		try {
-<span class="fc" id="L174">			p=productDao.getProductosOrdenador();</span>
-<span class="fc" id="L175">		}catch(Exception e) {</span>
-<span class="fc" id="L176">			System.out.println(&quot;* Error el producto no existe *S&quot;);</span>
+<span class="fc" id="L244">			p=productDao.getProductosOrdenador();</span>
+<span class="fc" id="L245">		}catch(Exception e) {</span>
+<span class="fc" id="L246">			System.out.println(&quot;* Error el producto no existe *S&quot;);</span>
 		}finally {
-<span class="fc" id="L178">			pm.close();</span>
+<span class="fc" id="L248">			pm.close();</span>
 		}
-<span class="fc" id="L180">		return p;</span>
+<span class="fc" id="L250">		return p;</span>
 		
 	}
 	
 	
 	public List&lt;ProductoOrdenador&gt; getProductosOrdenadorEnVenta() {
-<span class="fc" id="L186">		PersistenceManager pm=pmf.getPersistenceManager();</span>
-<span class="fc" id="L187">		List&lt;ProductoOrdenador&gt; p=new ArrayList&lt;ProductoOrdenador&gt;();</span>
+<span class="fc" id="L256">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="fc" id="L257">		List&lt;ProductoOrdenador&gt; p=new ArrayList&lt;ProductoOrdenador&gt;();</span>
 		try {
-<span class="fc" id="L189">			p=productDao.getProductosOrdenadorEnVenta();</span>
-<span class="fc" id="L190">		}catch(Exception e) {</span>
-<span class="fc" id="L191">			System.out.println(&quot;* Error el producto no existe *S&quot;);</span>
+<span class="fc" id="L259">			p=productDao.getProductosOrdenadorEnVenta();</span>
+<span class="fc bfc" id="L260" title="All 2 branches covered.">			for (ProductoOrdenador prod:p) {</span>
+<span class="fc" id="L261">				System.out.println(prod.getNombre());</span>
+<span class="fc" id="L262">			}</span>
+<span class="fc" id="L263">		}catch(Exception e) {</span>
+<span class="fc" id="L264">			System.out.println(&quot;* Error el producto no existe *S&quot;);</span>
 		}finally {
-<span class="fc" id="L193">			pm.close();</span>
+<span class="fc" id="L266">			pm.close();</span>
 		}
-<span class="fc" id="L195">		return p;</span>
+<span class="fc" id="L268">		return p;</span>
 		
 	}
 	
 	public List&lt;ProductoVehiculo&gt; getProductosVehiculos() {
-<span class="fc" id="L200">		PersistenceManager pm=pmf.getPersistenceManager();</span>
-<span class="fc" id="L201">		List&lt;ProductoVehiculo&gt; p=new ArrayList&lt;ProductoVehiculo&gt;();</span>
+<span class="fc" id="L273">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="fc" id="L274">		List&lt;ProductoVehiculo&gt; p=new ArrayList&lt;ProductoVehiculo&gt;();</span>
 		try {
-<span class="fc" id="L203">			p=productDao.getProductosVehiculos();</span>
-<span class="fc" id="L204">		}catch(Exception e) {</span>
-<span class="fc" id="L205">			System.out.println(&quot;* Error el producto no existe *S&quot;);</span>
+<span class="fc" id="L276">			p=productDao.getProductosVehiculos();</span>
+<span class="fc" id="L277">		}catch(Exception e) {</span>
+<span class="fc" id="L278">			System.out.println(&quot;* Error el producto no existe *S&quot;);</span>
 		}finally {
-<span class="fc" id="L207">			pm.close();</span>
+<span class="fc" id="L280">			pm.close();</span>
 		}
-<span class="fc" id="L209">		return p;</span>
+<span class="fc" id="L282">		return p;</span>
 		
 	}
 	
 	public List&lt;ProductoVehiculo&gt; getProductosVehiculosEnVenta() {
-<span class="fc" id="L214">		PersistenceManager pm=pmf.getPersistenceManager();</span>
-<span class="fc" id="L215">		List&lt;ProductoVehiculo&gt; p=new ArrayList&lt;ProductoVehiculo&gt;();</span>
+<span class="fc" id="L287">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="fc" id="L288">		List&lt;ProductoVehiculo&gt; p=new ArrayList&lt;ProductoVehiculo&gt;();</span>
 		try {
-<span class="fc" id="L217">			p=productDao.getProductosVehiculosEnVenta();</span>
-<span class="fc" id="L218">		}catch(Exception e) {</span>
-<span class="fc" id="L219">			System.out.println(&quot;* Error el producto no existe *S&quot;);</span>
+<span class="fc" id="L290">			p=productDao.getProductosVehiculosEnVenta();</span>
+<span class="fc" id="L291">		}catch(Exception e) {</span>
+<span class="fc" id="L292">			System.out.println(&quot;* Error el producto no existe *S&quot;);</span>
 		}finally {
-<span class="fc" id="L221">			pm.close();</span>
+<span class="fc" id="L294">			pm.close();</span>
 		}
-<span class="fc" id="L223">		return p;</span>
+<span class="fc" id="L296">		return p;</span>
 		
 	}
 	
 	public Usuario getUsuario(String email) {
-<span class="fc" id="L228">		return usuarioDao.getUsuario(email);</span>
+<span class="fc" id="L301">		return usuarioDao.getUsuario(email);</span>
 	}
+
+
+
+	public List&lt;ProductoOrdenador&gt; getProductosOrdenadorFavoritos(String x) {
+<span class="nc" id="L307">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="nc" id="L308">		List&lt;ProductoOrdenador&gt;po= new ArrayList&lt;ProductoOrdenador&gt;();</span>
+<span class="nc" id="L309">		Usuario u= null;</span>
+		try {	
+<span class="nc" id="L311">			u=pm.getObjectById(Usuario.class, x);</span>
+<span class="nc bnc" id="L312" title="All 2 branches missed.">			for(Producto p:u.getProductosFavoritos()) {</span>
+<span class="nc bnc" id="L313" title="All 2 branches missed.">				if (p instanceof ProductoOrdenador) {</span>
+<span class="nc" id="L314">					ProductoOrdenador prod=(ProductoOrdenador)p;</span>
+<span class="nc" id="L315">					po.add(prod);</span>
+				}
+<span class="nc" id="L317">			}</span>
+<span class="nc" id="L318">		}catch(Exception e){</span>
+<span class="nc" id="L319">				System.out.println(&quot;Error al realizar la compra no existe ese usuario&quot;);</span>
+		}finally {
+<span class="nc" id="L321">			pm.close();</span>
+		}
+<span class="nc" id="L323">		return po;</span>
+	}
+	
+	
+	public List&lt;ProductoVehiculo&gt; getProductosVehiculoFavoritos(String x) {
+<span class="nc" id="L328">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="nc" id="L329">		List&lt;ProductoVehiculo&gt;po= new ArrayList&lt;ProductoVehiculo&gt;();</span>
+<span class="nc" id="L330">		Usuario u= null;</span>
+		try {	
+<span class="nc" id="L332">			u=pm.getObjectById(Usuario.class, x);</span>
+<span class="nc bnc" id="L333" title="All 2 branches missed.">			for(Producto p:u.getProductosFavoritos()) {</span>
+<span class="nc bnc" id="L334" title="All 2 branches missed.">				if (p instanceof ProductoVehiculo) {</span>
+<span class="nc" id="L335">					ProductoVehiculo prod=(ProductoVehiculo)p;</span>
+<span class="nc" id="L336">					po.add(prod);</span>
+				}
+<span class="nc" id="L338">			}</span>
+<span class="nc" id="L339">		}catch(Exception e){</span>
+<span class="nc" id="L340">				System.out.println(&quot;Error al realizar la compra no existe ese usuario&quot;);</span>
+		}finally {
+<span class="nc" id="L342">			pm.close();</span>
+		}
+<span class="nc" id="L344">		return po;</span>
+	}
+
+
+	public int getNumVentas(String x) {
+<span class="nc" id="L349">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="nc" id="L350">		Usuario u= null;</span>
+<span class="nc" id="L351">		int contador=0;</span>
+		try {	
+<span class="nc" id="L353">			u=pm.getObjectById(Usuario.class, x);</span>
+<span class="nc bnc" id="L354" title="All 2 branches missed.">			for(Producto p:u.getProductos()) {</span>
+<span class="nc" id="L355">				System.out.println(p + &quot;Es producto&quot;);</span>
+<span class="nc bnc" id="L356" title="All 2 branches missed.">				if (p.isVendido()) {</span>
+<span class="nc" id="L357">					contador++;</span>
+				}
+<span class="nc" id="L359">			}</span>
+<span class="nc" id="L360">		}catch(Exception e){</span>
+<span class="nc" id="L361">				System.out.println(&quot;Error al realizar la compra no existe ese usuario&quot;);</span>
+		}finally {
+<span class="nc" id="L363">			pm.close();</span>
+		}
+<span class="nc" id="L365">		return contador;</span>
+	}
+
+
+	public List&lt;Mensaje&gt; getMensajesEnviados(String x) {
+<span class="nc" id="L370">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="nc" id="L371">		List&lt;Mensaje&gt;men= new ArrayList&lt;Mensaje&gt;();</span>
+<span class="nc" id="L372">		Usuario u= null;</span>
+		try {	
+<span class="nc" id="L374">			u=pm.getObjectById(Usuario.class, x);</span>
+<span class="nc" id="L375">			men= u.getMensajesEnviados();</span>
+<span class="nc" id="L376">		}catch(Exception e){</span>
+<span class="nc" id="L377">				System.out.println(&quot;Error al realizar la compra no existe ese usuario&quot;);</span>
+		}finally {
+<span class="nc" id="L379">			pm.close();</span>
+		}
+<span class="nc" id="L381">		return men;</span>
+	}
+	
+	public List&lt;Mensaje&gt; getMensajesRecibidos(String x) {
+<span class="nc" id="L385">		PersistenceManager pm=pmf.getPersistenceManager();</span>
+<span class="nc" id="L386">		List&lt;Mensaje&gt;men= new ArrayList&lt;Mensaje&gt;();</span>
+<span class="nc" id="L387">		Usuario u= null;</span>
+		try {	
+<span class="nc" id="L389">			u=pm.getObjectById(Usuario.class, x);</span>
+<span class="nc" id="L390">			men= u.getMensajesRecibidos();</span>
+<span class="nc" id="L391">		}catch(Exception e){</span>
+<span class="nc" id="L392">				System.out.println(&quot;Error al realizar la compra no existe ese usuario&quot;);</span>
+		}finally {
+<span class="nc" id="L394">			pm.close();</span>
+		}
+<span class="nc" id="L396">		return men;</span>
+	}
+	
+
 	
 	
 	
@@ -235,4 +405,4 @@ public class VentasService {
 	
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

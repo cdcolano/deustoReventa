@@ -93,7 +93,7 @@ public class ProductoDAO implements IProductoDAO{
 		 * By default only 1 level is retrieved from the db so if we wish to fetch more
 		 * than one level, we must indicate it
 		 */
-		pm.getFetchPlan().setMaxFetchDepth(3);
+	
 
 		Transaction tx = pm.currentTransaction();
 		List<ProductoOrdenador> productos = new ArrayList<>();
@@ -130,7 +130,7 @@ public class ProductoDAO implements IProductoDAO{
 		 * By default only 1 level is retrieved from the db so if we wish to fetch more
 		 * than one level, we must indicate it
 		 */
-		pm.getFetchPlan().setMaxFetchDepth(3);
+		
 
 		Transaction tx = pm.currentTransaction();
 		List<ProductoOrdenador> productos = new ArrayList<ProductoOrdenador	>();
@@ -188,7 +188,6 @@ public class ProductoDAO implements IProductoDAO{
 		 * By default only 1 level is retrieved from the db so if we wish to fetch more
 		 * than one level, we must indicate it
 		 */
-		pm.getFetchPlan().setMaxFetchDepth(3);
 
 		Transaction tx = pm.currentTransaction();
 		List<ProductoVehiculo> productos = new ArrayList<>();
@@ -223,7 +222,7 @@ public class ProductoDAO implements IProductoDAO{
 		 * By default only 1 level is retrieved from the db so if we wish to fetch more
 		 * than one level, we must indicate it
 		 */
-		pm.getFetchPlan().setMaxFetchDepth(3);
+
 
 		Transaction tx = pm.currentTransaction();
 		List<ProductoVehiculo> productos = new ArrayList<ProductoVehiculo>();
@@ -236,22 +235,22 @@ public class ProductoDAO implements IProductoDAO{
 
 			for (ProductoVehiculo p : extent) {
 				if(!(p.isReservado() || p.isVendido())) {
-				ProductoVehiculo p1=new ProductoVehiculo();
-				productos.add(p1);
-				p1.setNombre(p.getNombre());
-				p1.setCategoria(p.getCategoria());
-				p1.setId(p.getId());
-				p1.setFechaPubli(p.getFechaPubli());
-				p1.setPrecioSalida(p.getPrecioSalida());
-				p1.setOfertasRecibidas(p.getOfertasRecibidas());
-				p1.setReservado(p.isReservado());
-				p1.setVendido(p.isVendido());
-				p1.setEmailVendedor(p.getEmailVendedor());
-				p1.setKilometros(p.getKilometros());
-				p1.setCaballos(p.getCaballos());
-				p1.setAnyoFabri(p.getAnyoFabri());
-				p1.setMarca(p.getMarca());
-				p1.setModelo(p.getModelo());
+					ProductoVehiculo p1=new ProductoVehiculo();
+					productos.add(p1);
+					p1.setNombre(p.getNombre());
+					p1.setCategoria(p.getCategoria());
+					p1.setId(p.getId());
+					p1.setFechaPubli(p.getFechaPubli());
+					p1.setPrecioSalida(p.getPrecioSalida());
+					p1.setOfertasRecibidas(p.getOfertasRecibidas());
+					p1.setReservado(p.isReservado());
+					p1.setVendido(p.isVendido());
+					p1.setEmailVendedor(p.getEmailVendedor());
+					p1.setKilometros(p.getKilometros());
+					p1.setCaballos(p.getCaballos());
+					p1.setAnyoFabri(p.getAnyoFabri());
+					p1.setMarca(p.getMarca());
+					p1.setModelo(p.getModelo());
 				}
 			}
 

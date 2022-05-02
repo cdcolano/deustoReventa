@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VentanaLogin.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">VentanaLogin.java</span></div><h1>VentanaLogin.java</h1><pre class="source lang-java linenums">package client.gui;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VentanaLogin.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">client.gui</a> &gt; <span class="el_source">VentanaLogin.java</span></div><h1>VentanaLogin.java</h1><pre class="source lang-java linenums">package client.gui;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -119,71 +119,72 @@ public class VentanaLogin extends JFrame {
 <span class="nc" id="L119">					boolean valido=logIn(email, password, lError);</span>
 <span class="nc bnc" id="L120" title="All 2 branches missed.">					if (valido) {</span>
 <span class="nc" id="L121">						VentanaCompras v= new VentanaCompras(VentanaLogin.this.cliente, VentanaLogin.this.webTarget, email);</span>
-<span class="nc" id="L122">						VentanaLogin.this.dispose();</span>
+<span class="nc" id="L122">						VentanaChat v1 = new VentanaChat(VentanaLogin.this.cliente,VentanaLogin.this.webTarget,email);</span>
+<span class="nc" id="L123">						VentanaLogin.this.dispose();</span>
 					}
-<span class="nc" id="L124">				}catch(Exception ex) {</span>
-<span class="nc" id="L125">					ex.printStackTrace();</span>
-<span class="nc" id="L126">				}</span>
-<span class="nc" id="L127">			}</span>
+<span class="nc" id="L125">				}catch(Exception ex) {</span>
+<span class="nc" id="L126">					ex.printStackTrace();</span>
+<span class="nc" id="L127">				}</span>
+<span class="nc" id="L128">			}</span>
 		});
-<span class="nc" id="L129">		setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L130">		setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
 		
-<span class="nc" id="L131">		contentPane.add(pNorte, BorderLayout.NORTH);</span>
-<span class="nc" id="L132">		contentPane.add(pCentro, BorderLayout.CENTER);</span>
+<span class="nc" id="L132">		contentPane.add(pNorte, BorderLayout.NORTH);</span>
+<span class="nc" id="L133">		contentPane.add(pCentro, BorderLayout.CENTER);</span>
 		
-<span class="nc" id="L134">		contentPane.add(pSur);</span>
+<span class="nc" id="L135">		contentPane.add(pSur);</span>
 		
-<span class="nc" id="L136">		setVisible(true);</span>
-<span class="nc" id="L137">		this.pack();</span>
-<span class="nc" id="L138">		setLocationRelativeTo(null);</span>
+<span class="nc" id="L137">		setVisible(true);</span>
+<span class="nc" id="L138">		this.pack();</span>
+<span class="nc" id="L139">		setLocationRelativeTo(null);</span>
 		
 		
-<span class="nc" id="L141">	}</span>
+<span class="nc" id="L142">	}</span>
 	
 	
 	public boolean logIn(String email, String password, JLabel lError) throws ReventaException {
 		try {
-<span class="nc" id="L146">			WebTarget webTarget=this.webTarget.path(&quot;/reventa/logIn&quot;);</span>
-<span class="nc" id="L147">			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
-<span class="nc" id="L148">			Usuario u=new Usuario();</span>
-<span class="nc" id="L149">			u.setEmail(email);</span>
-<span class="nc" id="L150">			u.setPassword(password);</span>
-<span class="nc" id="L151">			System.out.println(webTarget.getUri());</span>
-<span class="nc" id="L152">			Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));</span>
+<span class="nc" id="L147">			WebTarget webTarget=this.webTarget.path(&quot;/reventa/logIn&quot;);</span>
+<span class="nc" id="L148">			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
+<span class="nc" id="L149">			Usuario u=new Usuario();</span>
+<span class="nc" id="L150">			u.setEmail(email);</span>
+<span class="nc" id="L151">			u.setPassword(password);</span>
+<span class="nc" id="L152">			System.out.println(webTarget.getUri());</span>
+<span class="nc" id="L153">			Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));</span>
 			
-<span class="nc bnc" id="L154" title="All 2 branches missed.">			if (response.getStatus() != Status.OK.getStatusCode()) {</span>
-<span class="nc" id="L155">				throw new ReventaException(&quot;&quot; + response.getStatus());</span>
+<span class="nc bnc" id="L155" title="All 2 branches missed.">			if (response.getStatus() != Status.OK.getStatusCode()) {</span>
+<span class="nc" id="L156">				throw new ReventaException(&quot;&quot; + response.getStatus());</span>
 			}
-<span class="nc" id="L157">			boolean logIn=response.readEntity(boolean.class);</span>
-<span class="nc bnc" id="L158" title="All 2 branches missed.">			if (!logIn) {</span>
-<span class="nc" id="L159">				lError.setText(&quot;Email o contraseña incorrectos&quot;);</span>
-<span class="nc" id="L160">				this.setLocationRelativeTo(null);</span>
-<span class="nc" id="L161">				this.pack();</span>
+<span class="nc" id="L158">			boolean logIn=response.readEntity(boolean.class);</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">			if (!logIn) {</span>
+<span class="nc" id="L160">				lError.setText(&quot;Email o contraseña incorrectos&quot;);</span>
+<span class="nc" id="L161">				this.setLocationRelativeTo(null);</span>
+<span class="nc" id="L162">				this.pack();</span>
 				
 			}
-<span class="nc" id="L164">			return logIn;</span>
-<span class="nc" id="L165">		}catch(Exception e) {</span>
-<span class="nc" id="L166">			lError.setText(&quot;Algo ha fallado al realizar el LogIn&quot;);</span>
-<span class="nc" id="L167">			System.out.println(&quot;* Error &quot; + e.getMessage() +&quot;*&quot;);</span>
-<span class="nc" id="L168">			this.pack();</span>
-<span class="nc" id="L169">			this.setLocationRelativeTo(null);</span>
-<span class="nc" id="L170">			return false;</span>
+<span class="nc" id="L165">			return logIn;</span>
+<span class="nc" id="L166">		}catch(Exception e) {</span>
+<span class="nc" id="L167">			lError.setText(&quot;Algo ha fallado al realizar el LogIn&quot;);</span>
+<span class="nc" id="L168">			System.out.println(&quot;* Error &quot; + e.getMessage() +&quot;*&quot;);</span>
+<span class="nc" id="L169">			this.pack();</span>
+<span class="nc" id="L170">			this.setLocationRelativeTo(null);</span>
+<span class="nc" id="L171">			return false;</span>
 		}
 	}
 	
 	
 	public Usuario getUsuario(String email)throws ReventaException {
-<span class="nc" id="L176">		WebTarget webTarget = this.webTarget.path(&quot;collector/getUsuario/&quot;+ email);</span>
-<span class="nc" id="L177">		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
-<span class="nc" id="L178">		Response response = invocationBuilder.get();</span>
-<span class="nc bnc" id="L179" title="All 2 branches missed.">		if (response.getStatus() == Status.OK.getStatusCode()) {</span>
-<span class="nc" id="L180">			Usuario u = response.readEntity(Usuario.class);</span>
-<span class="nc" id="L181">			return u;</span>
+<span class="nc" id="L177">		WebTarget webTarget = this.webTarget.path(&quot;collector/getUsuario/&quot;+ email);</span>
+<span class="nc" id="L178">		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
+<span class="nc" id="L179">		Response response = invocationBuilder.get();</span>
+<span class="nc bnc" id="L180" title="All 2 branches missed.">		if (response.getStatus() == Status.OK.getStatusCode()) {</span>
+<span class="nc" id="L181">			Usuario u = response.readEntity(Usuario.class);</span>
+<span class="nc" id="L182">			return u;</span>
 		} else {
-<span class="nc" id="L183">			throw new ReventaException(&quot;&quot; + response.getStatus());</span>
+<span class="nc" id="L184">			throw new ReventaException(&quot;&quot; + response.getStatus());</span>
 		}
 	}
 		
 
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

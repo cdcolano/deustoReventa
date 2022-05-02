@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"dao"},{"l":"serialization"},{"l":"service"},{"l":"util"}];updateSearchResults();
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"client.controller"},{"l":"dao"},{"l":"serialization"},{"l":"service"},{"l":"util"}];updateSearchResults();

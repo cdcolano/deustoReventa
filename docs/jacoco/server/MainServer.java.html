@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainServer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">server</a> &gt; <span class="el_source">MainServer.java</span></div><h1>MainServer.java</h1><pre class="source lang-java linenums">package server;
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MainServer.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">server</a> &gt; <span class="el_source">MainServer.java</span></div><h1>MainServer.java</h1><pre class="source lang-java linenums">package server;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -6,44 +6,84 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
 
-public class MainServer implements Runnable{
-	
-	private Client client;
-	private WebTarget webTarget;
-	
-	private Thread thread;
-<span class="nc" id="L15">	private final AtomicBoolean running=new AtomicBoolean(false);</span>
-	
-<span class="nc" id="L17">	public MainServer(String hostname, String port) {</span>
-<span class="nc" id="L18">			client=ClientBuilder.newClient();</span>
-<span class="nc" id="L19">			webTarget = client.target(String.format(&quot;http://%s:%s/rests&quot;, hostname, port));</span>
-			
-<span class="nc" id="L21">			thread = new Thread(this);</span>
-<span class="nc" id="L22">			thread.start();</span>
-<span class="nc" id="L23">	}</span>
-	
-	public void run() {
-<span class="nc" id="L26">		running.set(true);</span>
-<span class="nc bnc" id="L27" title="All 2 branches missed.">		while(running.get()) {</span>
-			try { 
-<span class="nc" id="L29">				Thread.sleep(2000);</span>
-<span class="nc" id="L30">				System.out.println(&quot;Obtaining data from server...&quot;);</span>
-<span class="nc" id="L31">            } catch (InterruptedException e){ </span>
-<span class="nc" id="L32">                Thread.currentThread().interrupt();</span>
-<span class="nc" id="L33">                System.out.println(&quot;Thread was interrupted, Failed to complete operation&quot;);</span>
-<span class="nc" id="L34">            }</span>
-		}
-<span class="nc" id="L36">	}</span>
-	
-	public void stop() {
-<span class="nc" id="L39">		this.running.set(false);</span>
-<span class="nc" id="L40">	}</span>
+import serialization.Categoria;
+import serialization.Producto;
+import serialization.ProductoOrdenador;
+import serialization.ProductoVehiculo;
+import serialization.Tarjeta;
+import serialization.Usuario;
+import service.VentasService;
+
+<span class="nc" id="L17">public class MainServer{</span>
 	
 	public static void main(String []args) {
-<span class="nc" id="L43">		String hostname = args[0];</span>
-<span class="nc" id="L44">		String port = args[1];</span>
+<span class="nc" id="L20">		VentasService vs= new VentasService();</span>
+<span class="nc" id="L21">		Categoria c1= new Categoria();</span>
+<span class="nc" id="L22">		c1.setId(1);</span>
+<span class="nc" id="L23">		c1.setNombre(&quot;ordenadores&quot;);</span>
 		
-<span class="nc" id="L46">		MainServer ms=new MainServer(hostname, port);</span>
-<span class="nc" id="L47">	}</span>
+<span class="nc" id="L25">		Categoria c2= new Categoria();</span>
+<span class="nc" id="L26">		c2.setId(2);</span>
+<span class="nc" id="L27">		c2.setNombre(&quot;vehiculos&quot;);</span>
+		
+<span class="nc" id="L29">		vs.getCategoriaDao().storeCategoria(c1);</span>
+<span class="nc" id="L30">		vs.getCategoriaDao().storeCategoria(c2);</span>
+		
+		
+<span class="nc" id="L33">		Tarjeta t1= new Tarjeta();</span>
+<span class="nc" id="L34">		t1.setAnyoVencimiento(2023);</span>
+<span class="nc" id="L35">		t1.setMesVencimiento(5);</span>
+<span class="nc" id="L36">		t1.setCodigoSecreto(279);</span>
+<span class="nc" id="L37">		t1.setNombre(&quot;6739M&quot;);</span>
+<span class="nc" id="L38">		Usuario u1=new Usuario();</span>
+<span class="nc" id="L39">		u1.setEmail(&quot;u@gmail.com&quot;);</span>
+<span class="nc" id="L40">		u1.setPassword(&quot;u&quot;);</span>
+<span class="nc" id="L41">		u1.setTarjeta(t1);</span>
+<span class="nc" id="L42">		vs.registro(u1);</span>
+		
+		
+<span class="nc" id="L45">		Tarjeta t2= new Tarjeta();</span>
+<span class="nc" id="L46">		t2.setAnyoVencimiento(2024);</span>
+<span class="nc" id="L47">		t2.setMesVencimiento(5);</span>
+<span class="nc" id="L48">		t2.setCodigoSecreto(270);</span>
+<span class="nc" id="L49">		t2.setNombre(&quot;6839M&quot;);</span>
+<span class="nc" id="L50">		Usuario u2=new Usuario();</span>
+<span class="nc" id="L51">		u2.setEmail(&quot;a@gmail.com&quot;);</span>
+<span class="nc" id="L52">		u2.setPassword(&quot;a&quot;);</span>
+<span class="nc" id="L53">		u2.setTarjeta(t2);</span>
+<span class="nc" id="L54">		vs.registro(u2);</span>
+		
+<span class="nc" id="L56">		ProductoOrdenador p1= new ProductoOrdenador();</span>
+<span class="nc" id="L57">		p1.setPrecioSalida(400);</span>
+<span class="nc" id="L58">		p1.setNombre(&quot;acer&quot;);</span>
+<span class="nc" id="L59">		p1.setCategoria(c1);</span>
+		
+<span class="nc" id="L61">		ProductoVehiculo p2=new ProductoVehiculo();</span>
+<span class="nc" id="L62">		p2.setPrecioSalida(10000);</span>
+<span class="nc" id="L63">		p2.setNombre(&quot;golf&quot;);</span>
+<span class="nc" id="L64">		p2.setCategoria(c2);</span>
+		
+<span class="nc" id="L66">		ProductoOrdenador p3= new ProductoOrdenador();</span>
+<span class="nc" id="L67">		p3.setPrecioSalida(200);</span>
+<span class="nc" id="L68">		p3.setNombre(&quot;hp&quot;);</span>
+<span class="nc" id="L69">		p3.setCategoria(c1);</span>
+<span class="nc" id="L70">		ProductoVehiculo p4= new ProductoVehiculo();</span>
+<span class="nc" id="L71">		p4.setPrecioSalida(12000);</span>
+<span class="nc" id="L72">		p4.setNombre(&quot;ibiza&quot;);</span>
+<span class="nc" id="L73">		p4.setCategoria(c2);</span>
+		
+		
+<span class="nc" id="L76">		p1.setEmailVendedor(u1.getEmail());</span>
+<span class="nc" id="L77">		p2.setEmailVendedor(u1.getEmail());</span>
+<span class="nc" id="L78">		p3.setEmailVendedor(u2.getEmail());</span>
+<span class="nc" id="L79">		p4.setEmailVendedor(u2.getEmail());</span>
+		
+<span class="nc" id="L81">		vs.ponerALaVenta(u1.getEmail(), p1);</span>
+<span class="nc" id="L82">		vs.ponerALaVenta(u1.getEmail(), p2);</span>
+<span class="nc" id="L83">		vs.ponerALaVenta(u2.getEmail(), p3);</span>
+<span class="nc" id="L84">		vs.ponerALaVenta(u2.getEmail(), p4);</span>
+		
+		
+<span class="nc" id="L87">	}</span>
 }
-</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
