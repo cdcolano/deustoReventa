@@ -123,7 +123,7 @@ public class VentasService {
 		}
 	}
 	
-<<<<<<< HEAD
+
 	public void addProductoFav(int id, String email) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm=pmf.getPersistenceManager();
@@ -131,16 +131,6 @@ public class VentasService {
 		try {
 			u=pm.getObjectById(Usuario.class, email);
 			Producto p=pm.getObjectById(Producto.class,id);
-=======
-	public void addProductoFav(Producto p, String email) {
-		// TODO Auto-generated method stub
-		PersistenceManager pm=pmf.getPersistenceManager();
-		Usuario u= null;
-	//	Producto p=null;
-		try {
-			u=pm.getObjectById(Usuario.class, email);
-			//p=pm.getObjectById(Producto.class, id);
->>>>>>> e2ffe0e9a047b5059e1aaac2724afd99ea816553
 			u.getProductosFavoritos().add(p);
 			//tengo que meter en una lista todos 
 		}catch(Exception e){
@@ -312,7 +302,7 @@ public class VentasService {
 		return usuarioDao.getUsuario(email);
 	}
 
-<<<<<<< HEAD
+
 
 	public List<ProductoOrdenador> getProductosOrdenadorFavoritos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
@@ -375,9 +365,7 @@ public class VentasService {
 		}
 		return contador;
 	}
-=======
-	
->>>>>>> e2ffe0e9a047b5059e1aaac2724afd99ea816553
+
 	
 	
 	
