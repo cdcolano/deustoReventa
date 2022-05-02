@@ -22,6 +22,7 @@ import dao.UsuarioDAO;
 import serialization.Categoria;
 import serialization.Compra;
 import serialization.Mensaje;
+import serialization.ProductoOrdenador;
 import serialization.Usuario;
 import util.ReventaException;
 
@@ -39,18 +40,8 @@ public class ChatController {
 		this.email = email;
 		this.uDao = uDao;
 	}
-	public Usuario getUsuario(String email)throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/getUsuario/"+ email);
-		System.out.println(webTarget.getUri());
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response response = invocationBuilder.get();
-		if (response.getStatus() == Status.OK.getStatusCode()) {
-			Usuario u = response.readEntity(Usuario.class);
-			return u;
-		} else {
-			throw new ReventaException("" + response.getStatus());
-		}	
-	}
+
+	
 	public void enviar(String email1, String email2, Mensaje m) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/enviar/"+email1+"/"+email2);
 		System.out.println(email1);
@@ -138,28 +129,17 @@ public class ChatController {
 	}*/
 	
 	public List<Mensaje> getMensajesRecibidos(String email){
-		List<Mensaje> lMRecibidos = new ArrayList<>();
-		try {
-			Usuario u = getUsuario(email);
-			lMRecibidos = u.getMensajesRecibidos();
-			lMRecibidos.sort(Comparator.comparing(Mensaje::getFecha).reversed());
-		} catch (ReventaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		WebTarget webTarget = this.webTarget.path("reventa/mensajesRecibidos/"+email );
+		List<Mensaje>lMRecibidos = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Mensaje>>() {
+	     } );
 		return lMRecibidos;
 	}
+	
 	public List<Mensaje> getMensajesEnviados(String email){
-		List<Mensaje> lMEnviados = new ArrayList<>();
-		try {
-			Usuario u = getUsuario(email);
-			lMEnviados = u.getMensajesEnviados();
-			lMEnviados.sort(Comparator.comparing(Mensaje::getFecha).reversed());
-		} catch (ReventaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		return lMEnviados;
+		WebTarget webTarget = this.webTarget.path("reventa/mensajesEnviados/"+email );
+		List<Mensaje>lMRecibidos = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Mensaje>>() {
+	     } );
+		return lMRecibidos;
 	}
 	public List<String> getEmailUsuarios(){
 		List<String> listaEmail = new ArrayList<>();

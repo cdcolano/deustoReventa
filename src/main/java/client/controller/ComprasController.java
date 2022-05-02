@@ -128,6 +128,7 @@ public class ComprasController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
+					System.out.println(p.getId());
 					comprar(ComprasController.this.email,p.getId(),p.getPrecioSalida());
 					pCentro.removeAll();
 					productos.remove(p);

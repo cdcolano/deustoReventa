@@ -23,6 +23,7 @@ import serialization.Usuario;
 import service.VentasService;
 
 import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
 @Path("/reventa")
@@ -54,6 +55,19 @@ public class ReventaServer {
 		return Response.ok().build();
 	}
 	
+	@GET
+	@Path("/mensajesRecibidos/{x}")
+	public List<Mensaje> getMensajesRecibidos(@PathParam("x") String x){
+		 List<Mensaje>mensajes=vs.getMensajesRecibidos(x);
+		 return mensajes;
+	}
+	
+	@GET
+	@Path("/mensajesEnviados/{x}")
+	public List<Mensaje> getMensajesEnviados(@PathParam("x") String x){
+		 List<Mensaje>mensajes=vs.getMensajesEnviados(x);
+		 return mensajes;
+	}
 	
 	
 	@POST
@@ -187,18 +201,6 @@ public class ReventaServer {
 	}
 	
 	
-	@GET
-	@Path("/mensajesRecibidos/{x}")
-	public List<Mensaje> getMensajesRec(@PathParam("x") String x) {
-		List<Mensaje> mensajes = vs.getUsuario(x).getMensajesRecibidos();
-		return mensajes;
-	}
-	@GET
-	@Path("/mensajesEnviados/{x}")
-	public List<Mensaje> getMensajesEnv(@PathParam("x") String x){
-		List<Mensaje> mensajes = vs.getUsuario(x).getMensajesEnviados();
-		return mensajes;
-	}
 	
 
 	

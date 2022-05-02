@@ -101,11 +101,9 @@ public class VentasService {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
 		Producto p=null;
-		Usuario uVendedor=null;
 		try {	
 			u=pm.getObjectById(Usuario.class, email);
 			p=pm.getObjectById(Producto.class, idProducto);
-			uVendedor=pm.getObjectById(Usuario.class,email);
 			Compra c= new Compra();
 			c.setProducto(p);
 			c.setPrecio(precio);
@@ -117,6 +115,7 @@ public class VentasService {
 				System.out.println("Error al realizar la compra no existe ese usuario");
 			}else {
 				System.out.println("Error al realizar la compra no existe producto");
+				System.out.println(e.getMessage());
 			}
 		}finally {
 			pm.close();
@@ -365,6 +364,38 @@ public class VentasService {
 		}
 		return contador;
 	}
+
+
+	public List<Mensaje> getMensajesEnviados(String x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<Mensaje>men= new ArrayList<Mensaje>();
+		Usuario u= null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			men= u.getMensajesEnviados();
+		}catch(Exception e){
+				System.out.println("Error al realizar la compra no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return men;
+	}
+	
+	public List<Mensaje> getMensajesRecibidos(String x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<Mensaje>men= new ArrayList<Mensaje>();
+		Usuario u= null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			men= u.getMensajesRecibidos();
+		}catch(Exception e){
+				System.out.println("Error al realizar la compra no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return men;
+	}
+	
 
 	
 	
