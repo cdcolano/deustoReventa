@@ -116,15 +116,12 @@ public class ComprasController {
 	}
 	
 	public Usuario getUsuario(String email)throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("collector/getUsuario/"+ email);
+		WebTarget webTarget = this.webTarget.path("reventa/getUsuario/"+ email);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.get();
 		if (response.getStatus() == Status.OK.getStatusCode()) {
 			Usuario u = response.readEntity(Usuario.class);
 			return u;
-			
-			
-			
 			
 		} else {
 			throw new ReventaException("" + response.getStatus());

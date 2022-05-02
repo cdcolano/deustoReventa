@@ -50,7 +50,7 @@ public class MainServer{
 		Usuario u2=new Usuario();
 		u2.setEmail("a@gmail.com");
 		u2.setPassword("a");
-	//	u2.setTarjeta(t2);
+		u2.setTarjeta(t2);
 		vs.registro(u2);
 		
 		ProductoOrdenador p1= new ProductoOrdenador();

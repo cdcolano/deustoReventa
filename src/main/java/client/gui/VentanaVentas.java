@@ -1,4 +1,4 @@
-/*package client.gui;
+package client.gui;
 
 import javax.swing.JTable;
 
@@ -7,9 +7,9 @@ public class VentanaVentas {
 	private JTable ventasTable;
 	
 	// crear la ventana
-	
-	ventasTable = new JTable();
-	add(new JScrollPane(launchesJTable), BorderLayout.CENTER);
+	public VentanaVentas() {
+		ventasTable = new JTable();
+	//add(new JScrollPane(launchesJTable), BorderLayout.CENTER);
 
 		
 		ventasTable.getColumnModel().getColumn(0).setMinWidth(60);
@@ -24,4 +24,3 @@ public class VentanaVentas {
 	
 
 }
-*/

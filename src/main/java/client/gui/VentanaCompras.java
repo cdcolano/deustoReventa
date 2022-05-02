@@ -84,6 +84,7 @@ public class VentanaCompras extends JFrame{
 					}
 					else if (seleccion.compareTo("Favoritos")==0) {
 						controller.mostrarFavoritos(pCentro, email);
+						revalidate();
 					}
 				}
 			}
