@@ -17,6 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import client.gui.VentanaProducto;
+import dao.UsuarioDAO;
 import serialization.Categoria;
 import serialization.Mensaje;
 import serialization.Usuario;
@@ -55,7 +56,7 @@ public class ChatController {
 		return lMensajesRecibidos;
 	}*/
 	
-	public List<Mensaje> getConversacion(String emailEmisor, String emailReceptor){
+	/*public List<Mensaje> getConversacion(String emailEmisor, String emailReceptor){
 		List<Mensaje> lConversacionRecibido= new ArrayList<Mensaje>();
 		try {
 			Usuario emisor = getUsuario(emailEmisor);
@@ -76,20 +77,21 @@ public class ChatController {
 			e.printStackTrace();
 		}
 		return lConversacionRecibido;
-	}
-	public List<Mensaje> getListaEntera(String email1, String email2){
+	}*/
+	/*public List<Mensaje> getListaEntera(String email1, String email2){
 		List<Mensaje> lm1 = new ArrayList<>();
 		List<Mensaje> lm2 = new ArrayList<>();
 		lm1= getConversacion(email1, email2);
 		lm2= getConversacion(email2, email1);
-		lm1.addAll(lm2);
+		lm1.addAll(lm2);	
 		
 		lm1.sort(Comparator.comparing(Mensaje::getFecha));
 		
 		return lm1;
 		
-	}
-	public void cargarPane(JTextPane pane, StyledDocument doc, List<Mensaje> lm, String email) {
+	}*/
+	
+	/*public void cargarPane(JTextPane pane, StyledDocument doc, List<Mensaje> lm, String email) {
 		Usuario u;
 		try {
 			u = getUsuario(email);
@@ -110,7 +112,33 @@ public class ChatController {
 			e.printStackTrace();
 		}
 		
+	}*/
+	
+	public List<Mensaje> getMensajesRecibidos(String email){
+		List<Mensaje> lMRecibidos = new ArrayList<>();
+		try {
+			Usuario u = getUsuario(email);
+			lMRecibidos = u.getMensajesRecibidos();
+			lMRecibidos.sort(Comparator.comparing(Mensaje::getFecha));
+		} catch (ReventaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lMRecibidos;
 	}
+	public List<Mensaje> getMensajesEnviados(String email){
+		List<Mensaje> lMEnviados = new ArrayList<>();
+		try {
+			Usuario u = getUsuario(email);
+			lMEnviados = u.getMensajesEnviados();
+			lMEnviados.sort(Comparator.comparing(Mensaje::getFecha));
+		} catch (ReventaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return lMEnviados;
+	}
+
 
 	
 	
