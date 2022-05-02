@@ -170,8 +170,9 @@ public class VentasService {
 				System.out.println("Error al seleccionar el usuario para guardarlo en los usuarios que te gustan");
 			}else {
 				System.out.println("Error al guardar el usuario como me gusta");
-
-	
+			}
+		}
+	}
 	
 	public void enviarMensaje(String email1, String email2, String contenido, long fecha) {
 		PersistenceManager pm = pmf.getPersistenceManager();
