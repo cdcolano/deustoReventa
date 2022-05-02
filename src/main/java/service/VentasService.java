@@ -187,6 +187,9 @@ public class VentasService {
 		List<ProductoOrdenador> p=new ArrayList<ProductoOrdenador>();
 		try {
 			p=productDao.getProductosOrdenadorEnVenta();
+			for (ProductoOrdenador prod:p) {
+				System.out.println(prod.getNombre());
+			}
 		}catch(Exception e) {
 			System.out.println("* Error el producto no existe *S");
 		}finally {
