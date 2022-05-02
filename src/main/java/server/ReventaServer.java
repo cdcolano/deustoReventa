@@ -46,6 +46,16 @@ public class ReventaServer {
 	}
 	
 	@POST
+	@Path("/enviar/{x}/{y}")
+	public Response addMensaje(Mensaje m,@PathParam("x") String x,@PathParam("y") String y){
+		vs.enviarMensaje(x, y, m.getContenido(), m.getFecha());
+		System.out.println("*Message sent*");
+		return Response.ok().build();
+	}
+	
+	
+	
+	@POST
 	@Path("/logIn")
 	public Response logIn(Usuario u) {
 		boolean logIn=vs.logIn(u.getEmail(), u.getPassword());

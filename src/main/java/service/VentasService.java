@@ -123,6 +123,36 @@ public class VentasService {
 		}
 	}
 	
+	public void enviarMensaje(String email1, String email2, String contenido, long fecha) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		System.out.println(email1);
+		System.out.println(email2);
+		Usuario u1 = null;
+		Usuario u2 = null;
+		try {
+			u1=pm.getObjectById(Usuario.class, email1);
+			u2=pm.getObjectById(Usuario.class, email2);
+			System.out.println("ENTRO");
+			Mensaje m = new Mensaje();
+			m.setContenido(contenido);
+			m.setFecha(fecha);
+			u1.getMensajesEnviados().add(m);
+			u2.getMensajesRecibidos().add(m);
+		}catch(Exception e) {
+			if(u1== null) {
+				System.out.println("Error al enviar mensaje, el usuario emisor no existe");
+			}
+			else if(u2==null) {
+				System.out.println("Error al enviar mensaje, el usuario receptor no existe");
+			}
+			else {
+				System.out.println("Error al enviar el mensaje");
+			}
+		}finally {
+			pm.close();
+		}
+	}
+	
 	
 	public void ponerALaVenta(String email, Producto p) {
 		PersistenceManager pm=pmf.getPersistenceManager();

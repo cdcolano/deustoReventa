@@ -119,6 +119,7 @@ public class VentanaLogin extends JFrame {
 					boolean valido=logIn(email, password, lError);
 					if (valido) {
 						VentanaCompras v= new VentanaCompras(VentanaLogin.this.cliente, VentanaLogin.this.webTarget, email);
+						VentanaChat v1 = new VentanaChat(VentanaLogin.this.cliente,VentanaLogin.this.webTarget,email);
 						VentanaLogin.this.dispose();
 					}
 				}catch(Exception ex) {
