@@ -155,7 +155,7 @@ public class VentasService {
 		
 	}
 	
-<<<<<<< HEAD
+
 	
 	public void addUsuarioFav(String email2 , String email) {
 		PersistenceManager pm=pmf.getPersistenceManager();
@@ -170,24 +170,8 @@ public class VentasService {
 				System.out.println("Error al seleccionar el usuario para guardarlo en los usuarios que te gustan");
 			}else {
 				System.out.println("Error al guardar el usuario como me gusta");
-=======
-	public void addUsuarioFav(Usuario u, String email) {
-		PersistenceManager pm=pmf.getPersistenceManager();
-		Producto p = null;
-		try {
-			p = pm.getObjectById(Producto.class, email);
-		}catch(Exception e) {
-			if(p==null) {
-				System.out.println("Error al seleccionar el producto para guardarlo en FAV");
-			}else {
-				System.out.println("Error al guardar el producto como FAV");
->>>>>>> e2ffe0e9a047b5059e1aaac2724afd99ea816553
-			}
-		}finally {
-			pm.close();
-		}
-		
-	}
+
+	
 	
 	public void enviarMensaje(String email1, String email2, String contenido, long fecha) {
 		PersistenceManager pm = pmf.getPersistenceManager();
