@@ -89,21 +89,8 @@ public class ReventaServer {
 		System.out.println("*Producto puesto a la venta*");
 		return Response.ok().build();
 	}
-	
-	@POST
-	@Path("/anadirFav/{x}")
-	public Response addProductoFav(Producto p, @PathParam("x") String email ) {
-		vs.addProductoFav(p, email);
-		System.out.println("*Producto añadido*");
-		return Response.ok().build();
-	}
-	@POST
-	@Path("/anadirUsuarioFav")
-	public Response addUsuarioFav(Usuario u, @PathParam("x") String email ) {
-		vs.addUsuarioFav(u, email);
-		System.out.println("*Usuario añadido*");
-		return Response.ok().build();
-	}
+
+
 	@GET
 	@Path("/getProducto/{x}")
 	public Response getProducto(@PathParam("x") int x) {
