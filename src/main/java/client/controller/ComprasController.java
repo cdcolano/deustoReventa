@@ -7,9 +7,11 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
@@ -17,6 +19,8 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
+
+import org.datanucleus.enhancer.methods.GetObjectId;
 
 import serialization.Compra;
 import serialization.Producto;
@@ -70,7 +74,7 @@ public class ComprasController {
 	     } );
 		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/venta");
 		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
-	     } );
+	    } );
 		List<Producto>lProductos= new ArrayList<>();
 		lProductos.addAll(lProductosOrdenador);
 		lProductos.addAll(lProductosVehiculo);
@@ -89,8 +93,24 @@ public class ComprasController {
 		}
 	}
 	
+	public List<Producto> getProductosFavoritos() throws ReventaException{
+		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/favoritos/"+ email);
+		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
+	     } );
+		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/favoritos/"+ email);
+		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
+	    } );
+		List<Producto>lProductos= new ArrayList<>();
+		lProductos.addAll(lProductosOrdenador);
+		lProductos.addAll(lProductosVehiculo);
+		return lProductos;
+	}
+	
+	
 	public void crearPanel(Producto p, JPanel pCentro) {
 		this.prod=p;
+		JPanel pContenido= new JPanel();
+		pContenido.setLayout(new BoxLayout(pContenido, BoxLayout.Y_AXIS));
 		JPanel pProducto= new JPanel();
 		pProducto.add(new JLabel (p.getNombre()));
 		pProducto.add(new JLabel(""+ p.getPrecioSalida()+ "€"));
@@ -100,9 +120,13 @@ public class ComprasController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try {
-					comprar(ComprasController.this.email,ComprasController.this.prod.getId(),ComprasController.this.prod.getPrecioSalida());
+					comprar(ComprasController.this.email,p.getId(),p.getPrecioSalida());
 					pCentro.removeAll();
-					ComprasController.this.setProductos(getProductos());
+					productos.remove(p);
+					pCentro.removeAll();
+					for (Producto p1: productos) {
+						crearPanel(p1, pCentro);
+					}
 					pCentro.revalidate();
 					
 				} catch (ReventaException e1) {
@@ -111,16 +135,69 @@ public class ComprasController {
 			}
 			
 		});
-		pProducto.add(button);
-		pCentro.add(pProducto);
+		JButton bMeGusta = new JButton("Añadir a favoritos");
+		JButton bUsuarioFav = new JButton("Me gusta");
+		
+		bMeGusta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					anadirFav(p,email)	;				//ComprasController.this.();
+										
+				} catch (ReventaException e1) {
+					System.out.println(e1.getMessage());
+				}
+			}
+			
+		});
+		bUsuarioFav.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					anadirUsuarioFav(p.getEmailVendedor(),email);				//ComprasController.this.();
+										
+				} catch (ReventaException e1) {
+					System.out.println(e1.getMessage());
+				}
+			}
+			
+		});
+		pContenido.add(pProducto);
+		
+		pContenido.add(button);
+		pContenido.add(bMeGusta);
+		pContenido.add(bUsuarioFav);
+		JScrollPane jsp= new JScrollPane(pContenido);
+		pCentro.add(jsp);
+		pCentro.revalidate();
+		pCentro.repaint();
 	}
 	
-	public Usuario getUsuario(String email)throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/getUsuario/"+ email);
+	public void anadirFav(Producto p, String email) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/anadirFav/"+ email);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(p.getId(), MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
+	public void anadirUsuarioFav(String email2, String email) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/anadirUsuarioFav/"+ email);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(email2, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
+	
+	public int getVentas(String email)throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/numVentas/"+ email);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.get();
 		if (response.getStatus() == Status.OK.getStatusCode()) {
-			Usuario u = response.readEntity(Usuario.class);
+			int u = response.readEntity(Integer.class);
 			return u;
 			
 		} else {
@@ -133,9 +210,11 @@ public class ComprasController {
 			   @Override
 			   public int compare(Producto p1,Producto p2) {
 				   try {
-					   Usuario u1=getUsuario(p1.getEmailVendedor());
-					   Usuario u2=getUsuario(p2.getEmailVendedor());
-					   return u1.getProductosVendidos().size()-u2.getProductosVendidos().size();
+					   Integer u1=getVentas(p1.getEmailVendedor());
+					   Integer u2=getVentas(p2.getEmailVendedor());
+					   System.out.println(u1 + " " +p1.getEmailVendedor());
+					   System.out.println(u2+ " " + p2.getEmailVendedor());
+					   return u1.compareTo(u2);
 				   }
 					catch(Exception exc) {
 						System.out.println("*ERROR * " + exc.getMessage());
@@ -160,16 +239,11 @@ public class ComprasController {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
 			   public int compare(Producto p1,Producto p2) {
-				   try {
+				   
 		               Date Pdate = new Date(p1.getFechaPubli());
 		               Date Qdate= new Date(p2.getFechaPubli());
 					   return Pdate.compareTo(Qdate);
-				   }
-					catch(Exception exc) {
-						System.out.println("*ERROR * " + exc.getMessage());
-						return 0;
-					}
-			     //TODO return 1 if rhs should be before lhs 
+				 //TODO return 1 if rhs should be before lhs 
 			     //     return -1 if lhs should be before rhs
 			     //     return 0 otherwise (meaning the order stays the same)
 			     }
@@ -212,10 +286,15 @@ public class ComprasController {
 	
 	public void mostrarFavoritos(JPanel pCentro, String email) {
 		try {
-			Usuario u=getUsuario(email);
-			for (Producto p: u.getProductosFavoritos()) {
+			List<Producto>productos= getProductosFavoritos();
+			System.out.println("Se estan haciendo los favoritos");
+			pCentro.removeAll();
+			for (Producto p: productos) {
+				System.out.println("fav");
 				crearPanel(p, pCentro);
 			}
+			pCentro.revalidate();
+			pCentro.repaint();
 		} catch (ReventaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

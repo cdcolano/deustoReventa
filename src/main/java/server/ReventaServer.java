@@ -126,6 +126,26 @@ public class ReventaServer {
 	}
 	
 	@GET
+	@Path("/productosOrdenador/favoritos/{x}")
+	public List<ProductoOrdenador> getProductosOrdenadorFavoritos(@PathParam("x") String x) {
+		 List<ProductoOrdenador>prod=vs.getProductosOrdenadorFavoritos(x);
+		 return prod;
+	}
+	
+	@GET
+	@Path("/productosVehiculo/favoritos/{x}")
+	public List<ProductoVehiculo> getProductosVehiculoFavoritos(@PathParam("x") String x) {
+		 List<ProductoVehiculo>prod=vs.getProductosVehiculoFavoritos(x);
+		 return prod;
+	}
+	
+	@GET
+	@Path("/numVentas/{x}")
+	public int getNumVentas(@PathParam("x") String x) {
+		return vs.getNumVentas(x);
+	}
+	
+	@GET
 	@Path("/categorias")
 	public List<Categoria> getCategorias() {
 		 List<Categoria>categorias=vs.getCategorias();
@@ -147,6 +167,24 @@ public class ReventaServer {
 		Usuario usuario=vs.getUsuario(x);
 		return Response.ok(usuario).build();
 	}
+	
+	@POST
+	@Path("/anadirFav/{x}")
+	public Response addProductoFav(int id, @PathParam("x") String email ) {
+		vs.addProductoFav(id, email);
+		System.out.println("*Producto añadido*");
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/anadirUsuarioFav/{x}")
+	public Response addUsuarioFav(String email2, @PathParam("x") String email ) {
+		vs.addUsuarioFav(email2, email);
+		System.out.println("*Usuario añadido*");
+		return Response.ok().build();
+	}
+	
+	
 	@GET
 	@Path("/mensajesRecibidos/{x}")
 	public List<Mensaje> getMensajesRec(@PathParam("x") String x) {

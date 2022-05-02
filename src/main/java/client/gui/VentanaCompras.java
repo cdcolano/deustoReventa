@@ -96,17 +96,6 @@ public class VentanaCompras extends JFrame{
 		getContentPane().add(pCentro,BorderLayout.CENTER);
 		JPanel pVender= new JPanel();
 		JButton bVender= new JButton("Vender");
-		JButton bMeGusta = new JButton("Me Gusta");
-		bMeGusta.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				VentanaProducto vR= new VentanaProducto(client, VentanaCompras.this.webTarget,VentanaCompras.this.email);
-				VentanaCompras.this.dispose();
-				
-			}
-			
-		});
 		bVender.addActionListener(new ActionListener() {
 
 			@Override
@@ -119,7 +108,6 @@ public class VentanaCompras extends JFrame{
 		});
 		
 		pVender.add(bVender);
-		pVender.add(bMeGusta);
 		getContentPane().add(pVender, BorderLayout.SOUTH);
 		this.pack();
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -2,9 +2,6 @@ package service;
 
 
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import javax.jdo.JDOHelper;
 import javax.jdo.JDOUserException;
 import javax.jdo.PersistenceManager;
@@ -104,13 +101,16 @@ public class VentasService {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
 		Producto p=null;
+		Usuario uVendedor=null;
 		try {	
 			u=pm.getObjectById(Usuario.class, email);
 			p=pm.getObjectById(Producto.class, idProducto);
+			uVendedor=pm.getObjectById(Usuario.class,email);
 			Compra c= new Compra();
 			c.setProducto(p);
 			c.setPrecio(precio);
 			u.getCompras().add(c);
+			//uVendedor.getProductosVendidos().add(p);
 			p.setVendido(true);
 		}catch(Exception e){
 			if (u==null) {
@@ -121,6 +121,48 @@ public class VentasService {
 		}finally {
 			pm.close();
 		}
+	}
+	
+	public void addProductoFav(int id, String email) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Usuario u= null;
+		try {
+			u=pm.getObjectById(Usuario.class, email);
+			Producto p=pm.getObjectById(Producto.class,id);
+			u.getProductosFavoritos().add(p);
+			//tengo que meter en una lista todos 
+		}catch(Exception e){
+			if (u==null) {
+				System.out.println("Error al seleccionar el producto para guardarlo en FAV");
+			}else {
+				System.out.println("Error al guardar el producto como FAV");
+			}
+		}finally {
+			pm.close();
+		}
+		
+	}
+	
+	
+	public void addUsuarioFav(String email2 , String email) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Usuario u1 = null;
+		Usuario u2 = null;
+		try {
+			u1 = pm.getObjectById(Usuario.class, email);
+			u2 = pm.getObjectById(Usuario.class, email2);
+			u1.getVendedoresLike().add(u2);
+		}catch(Exception e) {
+			if(u1==null) {
+				System.out.println("Error al seleccionar el usuario para guardarlo en los usuarios que te gustan");
+			}else {
+				System.out.println("Error al guardar el usuario como me gusta");
+			}
+		}finally {
+			pm.close();
+		}
+		
 	}
 	
 	public void enviarMensaje(String email1, String email2, String contenido, long fecha) {
@@ -259,6 +301,69 @@ public class VentasService {
 	
 	public Usuario getUsuario(String email) {
 		return usuarioDao.getUsuario(email);
+	}
+
+
+	public List<ProductoOrdenador> getProductosOrdenadorFavoritos(String x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoOrdenador>po= new ArrayList<ProductoOrdenador>();
+		Usuario u= null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			for(Producto p:u.getProductosFavoritos()) {
+				if (p instanceof ProductoOrdenador) {
+					ProductoOrdenador prod=(ProductoOrdenador)p;
+					po.add(prod);
+				}
+			}
+		}catch(Exception e){
+				System.out.println("Error al realizar la compra no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return po;
+	}
+	
+	
+	public List<ProductoVehiculo> getProductosVehiculoFavoritos(String x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoVehiculo>po= new ArrayList<ProductoVehiculo>();
+		Usuario u= null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			for(Producto p:u.getProductosFavoritos()) {
+				if (p instanceof ProductoVehiculo) {
+					ProductoVehiculo prod=(ProductoVehiculo)p;
+					po.add(prod);
+				}
+			}
+		}catch(Exception e){
+				System.out.println("Error al realizar la compra no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return po;
+	}
+
+
+	public int getNumVentas(String x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Usuario u= null;
+		int contador=0;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			for(Producto p:u.getProductos()) {
+				System.out.println(p + "Es producto");
+				if (p.isVendido()) {
+					contador++;
+				}
+			}
+		}catch(Exception e){
+				System.out.println("Error al realizar la compra no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return contador;
 	}
 	
 	

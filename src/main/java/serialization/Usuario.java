@@ -25,6 +25,7 @@ public class Usuario {
 	
 	
 	@Persistent(defaultFetchGroup = "true",dependentElement = "true")
+	@Join
 	private List<Producto>productos;
 	
 	@Persistent(defaultFetchGroup = "true",  dependentElement = "true")
