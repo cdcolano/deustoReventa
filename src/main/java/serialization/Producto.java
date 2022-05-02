@@ -118,11 +118,7 @@ public class Producto {
 		this.emailVendedor = emailVendedor;
 	}
 	
-	public Producto clone() {
-		Producto p1= new Producto();
-		p1.setNombre(nombre);
-		return p1;
-	}
+	
 
 	
 

@@ -27,6 +27,7 @@ import dao.ProductoDAO;
 import dao.UsuarioDAO;
 import serialization.Categoria;
 import serialization.Compra;
+import serialization.Mensaje;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
@@ -93,6 +94,33 @@ public class ServiceTest {
 		assertEquals(vs.getCategorias().size(), 1);
 	}
 	
+	
+
+	
+	@Test
+	public void testEnviarMensajes(){
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class, "a")).thenReturn(u);
+		when(pm.getObjectById(Usuario.class, "c")).thenReturn(null);
+		when(pm.getObjectById(Usuario.class, "c")).thenThrow(JDOUserException.class);
+		Usuario u2= new Usuario();
+		u2.setEmail("b");
+		when(pm.getObjectById(Usuario.class, "b")).thenReturn(u2);
+		int mensajesEnviadosA=u.getMensajesEnviados().size();
+		int mensajesRecibidosB=u2.getMensajesRecibidos().size();
+		vs.enviarMensaje(u.getEmail(),u2.getEmail(),"hola",1);
+		assertEquals(mensajesEnviadosA+1, u.getMensajesEnviados().size());
+		assertEquals(mensajesRecibidosB+1, u2.getMensajesRecibidos().size());
+		try {
+			vs.enviarMensaje("c",u2.getEmail(),"hola",1);
+			vs.enviarMensaje(u.getEmail(),"c","hola",1);
+			assertTrue(true);
+		}catch(Exception e) {
+			assertTrue(false);
+		}
+		
+	}
+	
 	@Test
 	public void testRegistro() {
 		when(usuarioDao.getUsuario("a")).thenReturn(u);
@@ -101,6 +129,25 @@ public class ServiceTest {
 		u1.setEmail("b");
 		assertFalse(vs.registro(u));
 		assertTrue(vs.registro(u1));
+	}
+	
+	
+	@Test
+	public void testNumVentas() {
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class, "a")).thenReturn(u);
+		when(pm.getObjectById(Usuario.class, "c")).thenReturn(null);
+		when(pm.getObjectById(Usuario.class, "c")).thenThrow(JDOUserException.class);
+		
+		p.setVendido(true);
+		Producto p2= new Producto();
+		p2.setVendido(false);
+		u.getProductos().add(p2);
+		u.getProductos().add(p);
+		int n=vs.getNumVentas("a");
+		int c=vs.getNumVentas("c");
+		assertEquals(c, 0);
+		assertEquals(n, 1);
 	}
 	
 	@Test

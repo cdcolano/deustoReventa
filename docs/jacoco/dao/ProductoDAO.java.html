@@ -109,8 +109,8 @@ public class ProductoDAO implements IProductoDAO{
 <span class="fc" id="L109">			}</span>
 
 <span class="fc" id="L111">			tx.commit();</span>
-<span class="nc" id="L112">		} catch (Exception ex) {</span>
-<span class="nc" id="L113">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
+<span class="fc" id="L112">		} catch (Exception ex) {</span>
+<span class="fc" id="L113">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
 		} finally {
 <span class="pc bpc" id="L115" title="2 of 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
 <span class="fc" id="L116">				tx.rollback();</span>
@@ -165,8 +165,8 @@ public class ProductoDAO implements IProductoDAO{
 <span class="fc" id="L165">			}</span>
 
 <span class="fc" id="L167">			tx.commit();</span>
-<span class="nc" id="L168">		} catch (Exception ex) {</span>
-<span class="nc" id="L169">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
+<span class="fc" id="L168">		} catch (Exception ex) {</span>
+<span class="fc" id="L169">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
 		} finally {
 <span class="pc bpc" id="L171" title="2 of 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
 <span class="fc" id="L172">				tx.rollback();</span>

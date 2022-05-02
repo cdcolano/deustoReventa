@@ -83,7 +83,10 @@ import service.VentasService;
 <span class="nc" id="L83">		vs.ponerALaVenta(u2.getEmail(), p3);</span>
 <span class="nc" id="L84">		vs.ponerALaVenta(u2.getEmail(), p4);</span>
 		
+<span class="nc" id="L86">		vs.enviarMensaje(u1.getEmail(), u2.getEmail(), &quot;hola&quot;, System.currentTimeMillis());</span>
+<span class="nc" id="L87">		vs.enviarMensaje(u2.getEmail(), u1.getEmail(), &quot;hola&quot;, System.currentTimeMillis());</span>
+<span class="nc" id="L88">		vs.enviarMensaje(u1.getEmail(), u2.getEmail(), &quot;que tal?&quot;, System.currentTimeMillis());</span>
 		
-<span class="nc" id="L87">	}</span>
+<span class="nc" id="L90">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -185,9 +185,6 @@ public class VentasService {
 			else if(u2==null) {
 				System.out.println("Error al enviar mensaje, el usuario receptor no existe");
 			}
-			else {
-				System.out.println("Error al enviar el mensaje");
-			}
 		}finally {
 			pm.close();
 		}

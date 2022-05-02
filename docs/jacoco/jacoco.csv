@@ -6,7 +6,7 @@ deustoReventaDOREST,serialization,Usuario,0,221,0,0,0,67,0,29,0,29
 deustoReventaDOREST,serialization,Mensaje,0,24,0,0,0,10,0,7,0,7
 deustoReventaDOREST,serialization,ProductoVehiculo,0,38,0,0,0,16,0,11,0,11
 deustoReventaDOREST,serialization,Categoria,0,20,0,0,0,8,0,6,0,6
-deustoReventaDOREST,serialization,Producto,10,98,0,0,3,40,1,20,1,20
+deustoReventaDOREST,serialization,Producto,0,98,0,0,0,40,0,20,0,20
 deustoReventaDOREST,serialization,Oferta,0,31,0,0,0,13,0,9,0,9
 deustoReventaDOREST,client.controller,ChatController,111,53,4,0,18,9,4,3,2,3
 deustoReventaDOREST,client.controller,ComprasController.new GenericType() {...},6,0,0,0,1,0,1,0,1,0
@@ -26,7 +26,7 @@ deustoReventaDOREST,client.controller,ComprasController.new Comparator() {...},2
 deustoReventaDOREST,client.controller,ChatController.new GenericType() {...},0,6,0,0,0,1,0,1,0,1
 deustoReventaDOREST,client.controller,ChatController.new GenericType() {...},6,0,0,0,1,0,1,0,1,0
 deustoReventaDOREST,client.controller,LoginController,146,0,6,0,29,0,6,0,3,0
-deustoReventaDOREST,server,MainServer,190,0,0,0,55,0,2,0,2,0
+deustoReventaDOREST,server,MainServer,214,0,0,0,58,0,2,0,2,0
 deustoReventaDOREST,server,ReventaServer,216,0,0,0,56,0,22,0,22,0
 deustoReventaDOREST,client.gui,VentanaCompras,134,0,2,0,34,0,2,0,1,0
 deustoReventaDOREST,client.gui,VentanaRegistro.new ActionListener() {...},89,0,0,0,19,0,2,0,2,0
@@ -45,8 +45,8 @@ deustoReventaDOREST,client.gui,VentanaProducto.new ActionListener() {...},204,0,
 deustoReventaDOREST,client.gui,VentanaProducto.new ItemListener() {...},133,0,4,0,20,0,4,0,2,0
 deustoReventaDOREST,client.gui,VentanaLogin.new ActionListener() {...},57,0,2,0,12,0,3,0,2,0
 deustoReventaDOREST,client.main,MainCliente,35,0,0,0,7,0,2,0,2,0
-deustoReventaDOREST,dao,ProductoDAO,24,501,13,31,4,133,13,18,0,9
+deustoReventaDOREST,dao,ProductoDAO,0,525,13,31,0,137,13,18,0,9
 deustoReventaDOREST,dao,UsuarioDAO,0,161,3,7,0,45,3,9,0,7
 deustoReventaDOREST,dao,CategoriaDAO,0,126,3,7,0,36,3,8,0,6
 deustoReventaDOREST,util,ReventaException,0,4,0,0,0,2,0,1,0,1
-deustoReventaDOREST,service,VentasService,336,311,20,10,101,102,18,26,8,21
+deustoReventaDOREST,service,VentasService,220,423,13,17,67,135,13,31,6,23
