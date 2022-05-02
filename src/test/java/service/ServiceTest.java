@@ -223,6 +223,148 @@ public class ServiceTest {
 		
 	}
 	
+	public List<ProductoVehiculo> getProductosVehiculoFavoritos(String x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoVehiculo>po= new ArrayList<ProductoVehiculo>();
+		Usuario u= null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			for(Producto p:u.getProductosFavoritos()) {
+				if (p instanceof ProductoVehiculo) {
+					ProductoVehiculo prod=(ProductoVehiculo)p;
+					po.add(prod);
+				}
+			}
+		}catch(Exception e){
+				System.out.println("Error al realizar la compra no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return po;
+	}
+	
+	@Test
+	public void testGetProductosOrdenadorFavoritos() {
+		ProductoOrdenador p= new ProductoOrdenador();
+		p.setId(2);
+		u.getProductosFavoritos().add(p);
+		u.getProductosFavoritos().add(this.p);
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class,"a")).thenReturn(u);
+		when(pm.getObjectById(Usuario.class,"c")).thenReturn(null);
+		when(pm.getObjectById(Usuario.class,"c")).thenThrow(JDOUserException.class);
+		List<ProductoOrdenador>prods=vs.getProductosOrdenadorFavoritos("a");
+		assertEquals(prods.size(),1);
+		List<ProductoOrdenador>prods2=vs.getProductosOrdenadorFavoritos("c");
+	}
+	
+	@Test
+	public void testGetProductosVehiculoFavoritos() {
+		ProductoVehiculo p= new ProductoVehiculo();
+		p.setId(2);
+		u.getProductosFavoritos().add(p);
+		u.getProductosFavoritos().add(this.p);
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class,"a")).thenReturn(u);
+		when(pm.getObjectById(Usuario.class,"c")).thenReturn(null);
+		when(pm.getObjectById(Usuario.class,"c")).thenThrow(JDOUserException.class);
+		List<ProductoVehiculo>prods=vs.getProductosVehiculoFavoritos("a");
+		assertEquals(prods.size(),1);
+		List<ProductoVehiculo>prods2=vs.getProductosVehiculoFavoritos("c");
+	}
+	
+	@Test
+	public void testAddProductoFav() {
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class, "a")).thenReturn(u);
+		when(pm.getObjectById(Usuario.class, "b")).thenThrow(JDOUserException.class);
+		when(pm.getObjectById(Producto.class, 1)).thenReturn(p);
+		when(pm.getObjectById(Producto.class, 2)).thenThrow(JDOUserException.class);
+		int sizeU=u.getProductosFavoritos().size();
+		vs.addProductoFav( 1, "a");
+		assertEquals(sizeU+1, u.getProductosFavoritos().size());
+		try{
+		vs.addProductoFav(1,"b");
+		vs.addProductoFav(2,"a");
+		}catch(Exception ex) {
+			assertTrue(false);
+		}
+	}
+	
+	public List<Mensaje> getMensajesEnviados(String x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<Mensaje>men= new ArrayList<Mensaje>();
+		Usuario u= null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			men= u.getMensajesEnviados();
+		}catch(Exception e){
+				System.out.println("Error al realizar la compra no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return men;
+	}
+	
+	@Test
+	public void testGetMensajesEnviados() {
+		Mensaje m= new Mensaje();
+		m.setId(1);
+		u.getMensajesEnviados().add(m);
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class,"a")).thenReturn(u);
+		when(pm.getObjectById(Usuario.class,"c")).thenReturn(null);
+		when(pm.getObjectById(Usuario.class,"c")).thenThrow(JDOUserException.class);
+		List<Mensaje>men=vs.getMensajesEnviados("a");
+		assertEquals(men.size(),1);
+		try {
+			List<Mensaje>men2=vs.getMensajesEnviados("c");
+		}catch(Exception e) {
+			assertTrue(false);
+		}
+	}
+	
+	@Test
+	public void testGetMensajesRecibidos() {
+		Mensaje m= new Mensaje();
+		m.setId(1);
+		u.getMensajesRecibidos().add(m);
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class,"a")).thenReturn(u);
+		when(pm.getObjectById(Usuario.class,"c")).thenReturn(null);
+		when(pm.getObjectById(Usuario.class,"c")).thenThrow(JDOUserException.class);
+		List<Mensaje>men=vs.getMensajesRecibidos("a");
+		assertEquals(men.size(),1);
+		try {
+			List<Mensaje>men2=vs.getMensajesRecibidos("c");
+		}catch(Exception e) {
+			assertTrue(false);
+		}
+	}
+	
+	
+
+	
+	@Test
+	public void testAddUsuarioFav() {
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class, "a")).thenReturn(u);
+		Usuario u2= new Usuario();
+		u2.setEmail("b");
+		when(pm.getObjectById(Usuario.class, "b")).thenReturn(u2);
+		when(pm.getObjectById(Usuario.class, "c")).thenReturn(null);
+		when(pm.getObjectById(Usuario.class, "c")).thenThrow(JDOUserException.class);
+		
+		int sizeU=u.getVendedoresLike().size();
+		vs.addUsuarioFav("b","a");
+		assertEquals(sizeU+1, u.getVendedoresLike().size());
+		try {
+			vs.addUsuarioFav("c", "a");
+			vs.addUsuarioFav("a","c");
+		}catch(Exception ex) {
+			assertTrue(false);
+		}
+	}
 	
 	@Test
 	public void testGetProductosOrdenadorEnVenta() {
