@@ -123,6 +123,7 @@ public class VentasService {
 		}
 	}
 	
+<<<<<<< HEAD
 	public void addProductoFav(int id, String email) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm=pmf.getPersistenceManager();
@@ -130,6 +131,16 @@ public class VentasService {
 		try {
 			u=pm.getObjectById(Usuario.class, email);
 			Producto p=pm.getObjectById(Producto.class,id);
+=======
+	public void addProductoFav(Producto p, String email) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Usuario u= null;
+	//	Producto p=null;
+		try {
+			u=pm.getObjectById(Usuario.class, email);
+			//p=pm.getObjectById(Producto.class, id);
+>>>>>>> e2ffe0e9a047b5059e1aaac2724afd99ea816553
 			u.getProductosFavoritos().add(p);
 			//tengo que meter en una lista todos 
 		}catch(Exception e){
@@ -144,6 +155,7 @@ public class VentasService {
 		
 	}
 	
+<<<<<<< HEAD
 	
 	public void addUsuarioFav(String email2 , String email) {
 		PersistenceManager pm=pmf.getPersistenceManager();
@@ -158,6 +170,18 @@ public class VentasService {
 				System.out.println("Error al seleccionar el usuario para guardarlo en los usuarios que te gustan");
 			}else {
 				System.out.println("Error al guardar el usuario como me gusta");
+=======
+	public void addUsuarioFav(Usuario u, String email) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Producto p = null;
+		try {
+			p = pm.getObjectById(Producto.class, email);
+		}catch(Exception e) {
+			if(p==null) {
+				System.out.println("Error al seleccionar el producto para guardarlo en FAV");
+			}else {
+				System.out.println("Error al guardar el producto como FAV");
+>>>>>>> e2ffe0e9a047b5059e1aaac2724afd99ea816553
 			}
 		}finally {
 			pm.close();
@@ -303,6 +327,7 @@ public class VentasService {
 		return usuarioDao.getUsuario(email);
 	}
 
+<<<<<<< HEAD
 
 	public List<ProductoOrdenador> getProductosOrdenadorFavoritos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
@@ -365,6 +390,9 @@ public class VentasService {
 		}
 		return contador;
 	}
+=======
+	
+>>>>>>> e2ffe0e9a047b5059e1aaac2724afd99ea816553
 	
 	
 	

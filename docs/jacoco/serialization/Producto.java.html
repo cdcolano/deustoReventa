@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Producto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">serialization</a> &gt; <span class="el_source">Producto.java</span></div><h1>Producto.java</h1><pre class="source lang-java linenums">package serialization;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.jdo.annotations.Join;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+import javax.jdo.annotations.IdGeneratorStrategy;
+import javax.jdo.annotations.Inheritance;
+import javax.jdo.annotations.InheritanceStrategy;
+
+@PersistenceCapable(detachable = &quot;true&quot;)
+@Inheritance(strategy = InheritanceStrategy.NEW_TABLE)
+public class Producto {
+	
+	@PrimaryKey
+	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
+	private int id;
+	private double precioSalida;
+	private String nombre;
+	private long fechaPubli;
+	
+	@Persistent(defaultFetchGroup = &quot;true&quot;)
+	private Categoria categoria;
+	
+
+	@Persistent(defaultFetchGroup = &quot;true&quot;, dependentElement = &quot;true&quot;)
+	@Join
+	private List&lt;Oferta&gt;ofertasRecibidas;//se consigue a través del producto
+	
+	//@Persistent(defaultFetchGroup = &quot;true&quot;)
+
+	private boolean reservado;
+	private boolean vendido;
+	private String emailVendedor;
+	
+<span class="fc" id="L40">	public Producto(double precioSalida, String nombre, Categoria c) {</span>
+<span class="fc" id="L41">		vendido=false;</span>
+<span class="fc" id="L42">		reservado=false;</span>
+<span class="fc" id="L43">		this.categoria=c;</span>
+<span class="fc" id="L44">		this.nombre=nombre;</span>
+<span class="fc" id="L45">		this.precioSalida=precioSalida;</span>
+<span class="fc" id="L46">		this.fechaPubli=System.currentTimeMillis();</span>
+<span class="fc" id="L47">		ofertasRecibidas=new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L48">	}</span>
+	
+<span class="fc" id="L50">	public Producto() {</span>
+<span class="fc" id="L51">		vendido=false;</span>
+<span class="fc" id="L52">		reservado=false;</span>
+<span class="fc" id="L53">		}</span>
+	
+	public double getPrecioSalida() {
+<span class="fc" id="L56">		return precioSalida;</span>
+	}
+	public void setPrecioSalida(double precioSalida) {
+<span class="fc" id="L59">		this.precioSalida = precioSalida;</span>
+<span class="fc" id="L60">	}</span>
+	public String getNombre() {
+<span class="fc" id="L62">		return nombre;</span>
+	}
+	public void setNombre(String nombre) {
+<span class="fc" id="L65">		this.nombre = nombre;</span>
+<span class="fc" id="L66">	}</span>
+	public long getFechaPubli() {
+<span class="fc" id="L68">		return fechaPubli;</span>
+	}
+	public void setFechaPubli(long fechaPubli) {
+<span class="fc" id="L71">		this.fechaPubli = fechaPubli;</span>
+<span class="fc" id="L72">	}</span>
+	
+	public boolean isReservado() {
+<span class="fc" id="L75">		return reservado;</span>
+	}
+	public void setReservado(boolean reservado) {
+<span class="fc" id="L78">		this.reservado = reservado;</span>
+<span class="fc" id="L79">	}</span>
+
+	public int getId() {
+<span class="fc" id="L82">		return id;</span>
+	}
+
+	public void setId(int id) {
+<span class="fc" id="L86">		this.id = id;</span>
+<span class="fc" id="L87">	}</span>
+	
+	public boolean isVendido() {
+<span class="fc" id="L90">		return vendido;</span>
+	}
+	public void setVendido(boolean vendido) {
+<span class="fc" id="L93">		this.vendido = vendido;</span>
+<span class="fc" id="L94">	}</span>
+	
+
+	public Categoria getCategoria() {
+<span class="fc" id="L98">		return categoria;</span>
+	}
+
+	public void setCategoria(Categoria categoria) {
+<span class="fc" id="L102">		this.categoria = categoria;</span>
+<span class="fc" id="L103">	}</span>
+
+	public List&lt;Oferta&gt; getOfertasRecibidas() {
+<span class="fc" id="L106">		return ofertasRecibidas;</span>
+	}
+
+	public void setOfertasRecibidas(List&lt;Oferta&gt; ofertasRecibidas) {
+<span class="fc" id="L110">		this.ofertasRecibidas = ofertasRecibidas;</span>
+<span class="fc" id="L111">	}</span>
+
+	public String getEmailVendedor() {
+<span class="fc" id="L114">		return emailVendedor;</span>
+	}
+
+	public void setEmailVendedor(String emailVendedor) {
+<span class="fc" id="L118">		this.emailVendedor = emailVendedor;</span>
+<span class="fc" id="L119">	}</span>
+
+	
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

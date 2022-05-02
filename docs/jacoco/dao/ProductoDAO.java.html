@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ProductoDAO.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">dao</a> &gt; <span class="el_source">ProductoDAO.java</span></div><h1>ProductoDAO.java</h1><pre class="source lang-java linenums">package dao;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.jdo.Extent;
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
+import javax.jdo.Transaction;
+
+
+import serialization.Producto;
+import serialization.ProductoOrdenador;
+import serialization.ProductoVehiculo;
+import serialization.Usuario;
+
+
+public class ProductoDAO implements IProductoDAO{
+
+	private PersistenceManagerFactory pmf;
+
+<span class="fc" id="L24">	public ProductoDAO() {</span>
+		// TODO Auto-generated constructor stub
+<span class="fc" id="L26">		pmf = JDOHelper.getPersistenceManagerFactory(&quot;datanucleus.properties&quot;);</span>
+<span class="fc" id="L27">	}</span>
+	
+	public void storeProducto(Producto producto) {
+<span class="nc" id="L30">		this.storeObject(producto);</span>
+<span class="nc" id="L31">	}</span>
+	
+	private void storeObject(Object object) {
+<span class="nc" id="L34">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+<span class="nc" id="L35">		Transaction tx = pm.currentTransaction();</span>
+
+		try {
+<span class="nc" id="L38">			tx.begin();</span>
+<span class="nc" id="L39">			System.out.println(&quot;   * Storing an Producto: &quot; + object);</span>
+<span class="nc" id="L40">			pm.makePersistent(object);</span>
+<span class="nc" id="L41">			tx.commit();</span>
+<span class="nc" id="L42">		} catch (Exception ex) {</span>
+<span class="nc" id="L43">			System.out.println(&quot;   $ Error storing an object: &quot; + ex.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L45" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L46">				tx.rollback();</span>
+			}
+
+<span class="nc" id="L49">			pm.close();</span>
+		}
+<span class="nc" id="L51">	}</span>
+	
+	public void deleteAllProductos() {
+<span class="nc" id="L54">		System.out.println(&quot;- Cleaning the DB...&quot;);</span>
+<span class="nc" id="L55">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+<span class="nc" id="L56">		Transaction tx = pm.currentTransaction();</span>
+		try {
+<span class="nc" id="L58">			tx.begin();</span>
+			
+			// Getting ready for removing objects - Remove Relationships between User and other things
+<span class="nc" id="L61">			Extent&lt;Producto&gt; extentU = pm.getExtent(Producto.class, true);</span>
+			
+		
+			// Updating the database so changes are considered before commit
+<span class="nc" id="L65">			pm.flush();</span>
+
+			// Deleting All Products - Copies in Books will be deleted due to 'delete on cascade'
+<span class="nc" id="L68">			Query&lt;Producto&gt; query2 = pm.newQuery(Producto.class);</span>
+<span class="nc" id="L69">			System.out.println(&quot; * '&quot; + query2.deletePersistentAll() + &quot;' products deleted from the DB.&quot;);</span>
+
+<span class="nc" id="L71">			tx.commit();</span>
+<span class="nc" id="L72">		} catch (Exception ex) {</span>
+<span class="nc" id="L73">			System.err.println(&quot; $ Error cleaning the DB: &quot; + ex.getMessage());</span>
+<span class="nc" id="L74">			ex.printStackTrace();</span>
+		} finally {
+<span class="nc bnc" id="L76" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L77">				tx.rollback();</span>
+			}
+
+<span class="nc bnc" id="L80" title="All 4 branches missed.">			if (pm != null &amp;&amp; !pm.isClosed()) {</span>
+<span class="nc" id="L81">				pm.close();</span>
+			}
+		}
+<span class="nc" id="L84">	}</span>
+	
+	public List&lt;Producto&gt; getProductos() {
+<span class="nc" id="L87">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+<span class="nc" id="L92">		pm.getFetchPlan().setMaxFetchDepth(3);</span>
+
+<span class="nc" id="L94">		Transaction tx = pm.currentTransaction();</span>
+<span class="nc" id="L95">		List&lt;Producto&gt; productos = new ArrayList&lt;&gt;();</span>
+
+		try {
+<span class="nc" id="L98">			System.out.println(&quot;   * Retrieving an Extent for Products.&quot;);</span>
+
+<span class="nc" id="L100">			tx.begin();</span>
+<span class="nc" id="L101">			Extent&lt;Producto&gt; extent = pm.getExtent(Producto.class, true);</span>
+
+<span class="nc bnc" id="L103" title="All 2 branches missed.">			for (Producto p : extent) {</span>
+<span class="nc" id="L104">				productos.add(p);</span>
+<span class="nc" id="L105">			}</span>
+
+<span class="nc" id="L107">			tx.commit();</span>
+<span class="nc" id="L108">		} catch (Exception ex) {</span>
+<span class="nc" id="L109">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L111" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L112">				tx.rollback();</span>
+			}
+
+<span class="nc" id="L115">			pm.close();</span>
+		}
+
+<span class="nc" id="L118">		return productos;</span>
+	}
+	
+	
+	public List&lt;ProductoOrdenador&gt; getProductosOrdenador() {
+<span class="nc" id="L123">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+<span class="nc" id="L128">		pm.getFetchPlan().setMaxFetchDepth(3);</span>
+
+<span class="nc" id="L130">		Transaction tx = pm.currentTransaction();</span>
+<span class="nc" id="L131">		List&lt;ProductoOrdenador&gt; productos = new ArrayList&lt;&gt;();</span>
+
+		try {
+<span class="nc" id="L134">			System.out.println(&quot;   * Retrieving an Extent for Products.&quot;);</span>
+
+<span class="nc" id="L136">			tx.begin();</span>
+<span class="nc" id="L137">			Extent&lt;ProductoOrdenador&gt; extent = pm.getExtent(ProductoOrdenador.class, true);</span>
+
+<span class="nc bnc" id="L139" title="All 2 branches missed.">			for (ProductoOrdenador p : extent) {</span>
+<span class="nc" id="L140">				productos.add(p);</span>
+<span class="nc" id="L141">			}</span>
+
+<span class="nc" id="L143">			tx.commit();</span>
+<span class="nc" id="L144">		} catch (Exception ex) {</span>
+<span class="nc" id="L145">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L147" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L148">				tx.rollback();</span>
+			}
+
+<span class="nc" id="L151">			pm.close();</span>
+		}
+
+<span class="nc" id="L154">		return productos;</span>
+	}
+	
+	
+	
+	public List&lt;ProductoOrdenador&gt; getProductosOrdenadorEnVenta() {
+<span class="nc" id="L160">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+<span class="nc" id="L165">		pm.getFetchPlan().setMaxFetchDepth(3);</span>
+
+<span class="nc" id="L167">		Transaction tx = pm.currentTransaction();</span>
+<span class="nc" id="L168">		List&lt;ProductoOrdenador&gt; productos = new ArrayList&lt;&gt;();</span>
+
+		try {
+<span class="nc" id="L171">			System.out.println(&quot;   * Retrieving an Extent for Products.&quot;);</span>
+
+<span class="nc" id="L173">			tx.begin();</span>
+<span class="nc" id="L174">			Extent&lt;ProductoOrdenador&gt; extent = pm.getExtent(ProductoOrdenador.class, true);</span>
+
+<span class="nc bnc" id="L176" title="All 2 branches missed.">			for (ProductoOrdenador p : extent) {</span>
+<span class="nc bnc" id="L177" title="All 4 branches missed.">				if (!(p.isReservado()||p.isVendido()))</span>
+<span class="nc" id="L178">				productos.add(p);</span>
+<span class="nc" id="L179">			}</span>
+
+<span class="nc" id="L181">			tx.commit();</span>
+<span class="nc" id="L182">		} catch (Exception ex) {</span>
+<span class="nc" id="L183">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L185" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L186">				tx.rollback();</span>
+			}
+
+<span class="nc" id="L189">			pm.close();</span>
+		}
+
+<span class="nc" id="L192">		return productos;</span>
+	}
+	
+	
+	public List&lt;ProductoVehiculo&gt; getProductosVehiculos() {
+<span class="nc" id="L197">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+<span class="nc" id="L202">		pm.getFetchPlan().setMaxFetchDepth(3);</span>
+
+<span class="nc" id="L204">		Transaction tx = pm.currentTransaction();</span>
+<span class="nc" id="L205">		List&lt;ProductoVehiculo&gt; productos = new ArrayList&lt;&gt;();</span>
+
+		try {
+<span class="nc" id="L208">			System.out.println(&quot;   * Retrieving an Extent for Products.&quot;);</span>
+
+<span class="nc" id="L210">			tx.begin();</span>
+<span class="nc" id="L211">			Extent&lt;ProductoVehiculo&gt; extent = pm.getExtent(ProductoVehiculo.class, true);</span>
+
+<span class="nc bnc" id="L213" title="All 2 branches missed.">			for (ProductoVehiculo p : extent) {</span>
+<span class="nc" id="L214">				productos.add(p);</span>
+<span class="nc" id="L215">			}</span>
+
+<span class="nc" id="L217">			tx.commit();</span>
+<span class="nc" id="L218">		} catch (Exception ex) {</span>
+<span class="nc" id="L219">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L221" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L222">				tx.rollback();</span>
+			}
+
+<span class="nc" id="L225">			pm.close();</span>
+		}
+
+<span class="nc" id="L228">		return productos;</span>
+	}
+	
+	public List&lt;ProductoVehiculo&gt; getProductosVehiculosEnVenta() {
+<span class="nc" id="L232">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+<span class="nc" id="L237">		pm.getFetchPlan().setMaxFetchDepth(3);</span>
+
+<span class="nc" id="L239">		Transaction tx = pm.currentTransaction();</span>
+<span class="nc" id="L240">		List&lt;ProductoVehiculo&gt; productos = new ArrayList&lt;&gt;();</span>
+
+		try {
+<span class="nc" id="L243">			System.out.println(&quot;   * Retrieving an Extent for Products.&quot;);</span>
+
+<span class="nc" id="L245">			tx.begin();</span>
+<span class="nc" id="L246">			Extent&lt;ProductoVehiculo&gt; extent = pm.getExtent(ProductoVehiculo.class, true);</span>
+
+<span class="nc bnc" id="L248" title="All 2 branches missed.">			for (ProductoVehiculo p : extent) {</span>
+<span class="nc bnc" id="L249" title="All 4 branches missed.">				if(!(p.isReservado() || p.isVendido()))</span>
+<span class="nc" id="L250">				productos.add(p);</span>
+<span class="nc" id="L251">			}</span>
+
+<span class="nc" id="L253">			tx.commit();</span>
+<span class="nc" id="L254">		} catch (Exception ex) {</span>
+<span class="nc" id="L255">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L257" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L258">				tx.rollback();</span>
+			}
+
+<span class="nc" id="L261">			pm.close();</span>
+		}
+
+<span class="nc" id="L264">		return productos;</span>
+	}
+	
+	
+	
+	public List&lt;Producto&gt; getProductosVendidos() {
+<span class="nc" id="L270">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+<span class="nc" id="L275">		pm.getFetchPlan().setMaxFetchDepth(3);</span>
+
+<span class="nc" id="L277">		Transaction tx = pm.currentTransaction();</span>
+<span class="nc" id="L278">		List&lt;Producto&gt; productos = new ArrayList&lt;&gt;();</span>
+
+		try {
+<span class="nc" id="L281">			System.out.println(&quot;   * Retrieving an Extent for Products.&quot;);</span>
+
+<span class="nc" id="L283">			tx.begin();</span>
+<span class="nc" id="L284">			Extent&lt;Producto&gt; extent = pm.getExtent(Producto.class, true);</span>
+
+<span class="nc bnc" id="L286" title="All 2 branches missed.">			for (Producto p : extent) {</span>
+<span class="nc bnc" id="L287" title="All 2 branches missed.">				if (p.isVendido()) productos.add(p);</span>
+<span class="nc" id="L288">			}</span>
+
+<span class="nc" id="L290">			tx.commit();</span>
+<span class="nc" id="L291">		} catch (Exception ex) {</span>
+<span class="nc" id="L292">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L294" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L295">				tx.rollback();</span>
+			}
+
+<span class="nc" id="L298">			pm.close();</span>
+		}
+
+<span class="nc" id="L301">		return productos;</span>
+	}
+	
+	
+
+	public void updateProducto(Producto prod) {
+<span class="nc" id="L307">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+<span class="nc" id="L308">		Transaction tx = pm.currentTransaction();</span>
+
+		try {
+<span class="nc" id="L311">			tx.begin();</span>
+<span class="nc" id="L312">			pm.makePersistent(prod);</span>
+<span class="nc" id="L313">			tx.commit();</span>
+<span class="nc" id="L314">		} catch (Exception ex) {</span>
+<span class="nc" id="L315">			System.out.println(&quot;   $ Error updating: &quot; + ex.getMessage());</span>
+		} finally {
+<span class="nc bnc" id="L317" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L318">				tx.rollback();</span>
+			}
+
+<span class="nc" id="L321">			pm.close();</span>
+		}
+<span class="nc" id="L323">	}</span>
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

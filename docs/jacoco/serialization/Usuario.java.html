@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Usuario.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">serialization</a> &gt; <span class="el_source">Usuario.java</span></div><h1>Usuario.java</h1><pre class="source lang-java linenums">package serialization;
+import static org.mockito.Mockito.never;
+
+import java.util.*;
+
+import javax.jdo.annotations.Join;
+import javax.jdo.annotations.PersistenceCapable;
+import javax.jdo.annotations.Persistent;
+import javax.jdo.annotations.PrimaryKey;
+
+
+@PersistenceCapable(detachable = &quot;true&quot;)
+public class Usuario {
+	
+	@PrimaryKey
+	private String email;
+	private String password;
+	private Tarjeta tarjeta;
+	private int denuncias;
+	
+	
+	private List&lt;Producto&gt; productosEnVenta;
+	
+	private List&lt;Producto&gt;productosVendidos;
+	
+	
+	@Persistent(defaultFetchGroup = &quot;true&quot;,dependentElement = &quot;true&quot;)
+	private List&lt;Producto&gt;productos;
+	
+	@Persistent(defaultFetchGroup = &quot;true&quot;,  dependentElement = &quot;true&quot;)
+	@Join
+	private List&lt;Compra&gt;compras;
+	
+	
+	@Persistent(defaultFetchGroup = &quot;true&quot;)
+	@Join
+	private List&lt;Mensaje&gt;mensajesRecibidos;
+	
+	@Persistent(defaultFetchGroup = &quot;true&quot;)
+	@Join
+	private List&lt;Mensaje&gt;mensajesEnviados;
+	
+	
+	@Persistent(defaultFetchGroup = &quot;true&quot;,  dependentElement = &quot;true&quot;)
+	@Join
+	private List&lt;Producto&gt;productosFavoritos;
+
+	
+	@Persistent(defaultFetchGroup = &quot;true&quot;,  dependentElement = &quot;true&quot;)
+	@Join
+	private List&lt;Usuario&gt;vendedoresLike;//esta es asi seguro
+	
+	
+	
+	@Persistent(defaultFetchGroup = &quot;true&quot;, dependentElement = &quot;true&quot;)
+	@Join
+	private List&lt;Oferta&gt;ofertasEnviadas;
+	
+<span class="fc" id="L59">	public Usuario() {</span>
+<span class="fc" id="L60">		productosVendidos= new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L61">		productosEnVenta= new ArrayList&lt;Producto&gt;();</span>
+<span class="fc" id="L62">		mensajesRecibidos=new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L63">		mensajesEnviados= new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L64">		productosFavoritos= new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L65">		productos= new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L66">		compras= new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L67">		vendedoresLike= new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L68">		ofertasEnviadas= new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L69">	}</span>
+	
+	public String getEmail() {
+<span class="fc" id="L72">		return email;</span>
+	}
+	public void setEmail(String email) {
+<span class="fc" id="L75">		this.email = email;</span>
+<span class="fc" id="L76">	}</span>
+	public String getPassword() {
+<span class="fc" id="L78">		return password;</span>
+	}
+	public void setPassword(String password) {
+<span class="fc" id="L81">		this.password = password;</span>
+<span class="fc" id="L82">	}</span>
+	public List&lt;Producto&gt; getProductosEnVenta() {
+<span class="fc" id="L84">		return productosEnVenta;</span>
+	}
+	
+	public void addProductoEnVenta(Producto p) {
+<span class="fc" id="L88">		productosEnVenta.add(p);</span>
+<span class="fc" id="L89">	}</span>
+	
+	public void setProductosEnVenta(List&lt;Producto&gt; productosEnVenta) {
+<span class="fc" id="L92">		this.productosEnVenta = productosEnVenta;</span>
+<span class="fc" id="L93">	}</span>
+	public List&lt;Producto&gt; getProductosVendidos() {
+<span class="fc" id="L95">		return productosVendidos;</span>
+	}
+	public void setProductosVendidos(List&lt;Producto&gt; productosVendidos) {
+<span class="fc" id="L98">		this.productosVendidos = productosVendidos;</span>
+<span class="fc" id="L99">	}</span>
+	public List&lt;Mensaje&gt; getMensajesRecibidos() {
+<span class="fc" id="L101">		return mensajesRecibidos;</span>
+	}
+	public void setMensajesRecibidos(List&lt;Mensaje&gt; mensajesRecibidos) {
+<span class="fc" id="L104">		this.mensajesRecibidos = mensajesRecibidos;</span>
+<span class="fc" id="L105">	}</span>
+	public List&lt;Mensaje&gt; getMensajesEnviados() {
+<span class="fc" id="L107">		return mensajesEnviados;</span>
+	}
+	public void setMensajesEnviados(List&lt;Mensaje&gt; mensajesEnviados) {
+<span class="fc" id="L110">		this.mensajesEnviados = mensajesEnviados;</span>
+<span class="fc" id="L111">	}</span>
+	public List&lt;Producto&gt; getProductosFavoritos() {
+<span class="fc" id="L113">		return productosFavoritos;</span>
+	}
+	public void setProductosFavoritos(List&lt;Producto&gt; productosFavoritos) {
+<span class="fc" id="L116">		this.productosFavoritos = productosFavoritos;</span>
+<span class="fc" id="L117">	}</span>
+
+	public int getDenuncias() {
+<span class="fc" id="L120">		return denuncias;</span>
+	}
+	public void setDenuncias(int denuncias) {
+<span class="fc" id="L123">		this.denuncias = denuncias;</span>
+<span class="fc" id="L124">	}</span>
+	public List&lt;Usuario&gt; getVendedoresLike() {
+<span class="fc" id="L126">		return vendedoresLike;</span>
+	}
+	public void setVendedoresLike(List&lt;Usuario&gt; vendedoresLike) {
+<span class="fc" id="L129">		this.vendedoresLike = vendedoresLike;</span>
+<span class="fc" id="L130">	}</span>
+
+	public List&lt;Oferta&gt; getOfertasEnviadas() {
+<span class="fc" id="L133">		return ofertasEnviadas;</span>
+	}
+
+	public void setOfertasEnviadas(List&lt;Oferta&gt; ofertasEnviadas) {
+<span class="fc" id="L137">		this.ofertasEnviadas = ofertasEnviadas;</span>
+<span class="fc" id="L138">	}</span>
+
+	public Tarjeta getTarjeta() {
+<span class="fc" id="L141">		return tarjeta;</span>
+	}
+
+	public void setTarjeta(Tarjeta tarjeta) {
+<span class="fc" id="L145">		this.tarjeta = tarjeta;</span>
+<span class="fc" id="L146">	}</span>
+
+	public List&lt;Compra&gt; getCompras() {
+<span class="fc" id="L149">		return compras;</span>
+	}
+
+	public void setCompras(List&lt;Compra&gt; compras) {
+<span class="fc" id="L153">		this.compras = compras;</span>
+<span class="fc" id="L154">	}</span>
+
+	public List&lt;Producto&gt; getProductos() {
+<span class="fc" id="L157">		return productos;</span>
+	}
+
+	public void setProductos(List&lt;Producto&gt; productos) {
+<span class="fc" id="L161">		this.productos = productos;</span>
+<span class="fc" id="L162">	}</span>
+	
+	public Usuario clone() {
+<span class="fc" id="L165">		Usuario u= new Usuario();</span>
+<span class="fc" id="L166">		u.setTarjeta(this.tarjeta);</span>
+<span class="fc" id="L167">		u.getCompras().addAll(compras);</span>
+<span class="fc" id="L168">		u.getMensajesEnviados().addAll(mensajesEnviados);</span>
+<span class="fc" id="L169">		u.getMensajesRecibidos().addAll(mensajesRecibidos);</span>
+<span class="fc" id="L170">		u.getOfertasEnviadas().addAll(ofertasEnviadas);</span>
+<span class="fc" id="L171">		u.getProductosEnVenta().addAll(productosEnVenta);</span>
+<span class="fc" id="L172">		u.getProductos().addAll(productos);</span>
+<span class="fc" id="L173">		u.getProductosFavoritos().addAll(productosFavoritos);</span>
+<span class="fc" id="L174">		u.getProductosVendidos().addAll(productosVendidos);</span>
+<span class="fc" id="L175">		u.getVendedoresLike().addAll(vendedoresLike);</span>
+		
+<span class="fc" id="L177">		u.setEmail(this.email);</span>
+<span class="fc" id="L178">		u.setDenuncias(denuncias);</span>
+<span class="fc" id="L179">		u.setPassword(password);</span>
+<span class="fc" id="L180">		return u;</span>
+		
+	}
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

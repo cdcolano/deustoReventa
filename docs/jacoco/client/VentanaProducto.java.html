@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>VentanaProducto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">deustoReventaDOREST</a> &gt; <a href="index.source.html" class="el_package">client</a> &gt; <span class="el_source">VentanaProducto.java</span></div><h1>VentanaProducto.java</h1><pre class="source lang-java linenums">package client;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
+import serialization.Categoria;
+import serialization.Producto;
+import serialization.ProductoOrdenador;
+import serialization.ProductoVehiculo;
+import serialization.Usuario;
+import util.ReventaException;
+import javax.swing.*;
+import javax.swing.text.AttributeSet.ColorAttribute;
+
+import java.awt.*;
+
+public class VentanaProducto extends JFrame{
+	private Client client;
+	private WebTarget webTarget;
+	private JPanel pCambiante;
+	private JTextField tfNombre;
+	private JTextField tfPrecio;
+	private JTextField tfRam;
+	private JTextField tfGrafica;
+	private JTextField tfMemoria;
+	private JComboBox&lt;Categoria&gt;cbCategoria;
+	private JTextField tfCpu;
+	private JTextField tfPlacaBase;
+	private JTextField tfKilometros;
+	private JTextField tfCaballos;
+	private JTextField tfAnyo;
+	private JLabel lError;
+	private JPanel pCategoria;
+	private JPanel pNombre;
+	private JPanel pPrecio;
+	private JPanel pRam;
+	private JPanel pMemoria;
+	private JPanel pCpu;
+	private JPanel pPlacaBase;
+	private JPanel pGrafica;
+	private JPanel pKilometros;
+	private JPanel pCaballos;
+	private JPanel pAnyo;
+	private JPanel pMarca;
+	private JPanel pModelo;
+	private String email;
+	private JTextField tfMarca;
+	private JTextField tfModelo;
+	
+<span class="nc" id="L64">	public VentanaProducto(Client c, WebTarget webTarget, String email) {</span>
+		try {
+<span class="nc" id="L66">			client=c;</span>
+<span class="nc" id="L67">			this.webTarget=webTarget;</span>
+<span class="nc" id="L68">			pCambiante= new JPanel();</span>
+<span class="nc" id="L69">			pCambiante.setLayout(new BoxLayout(pCambiante, BoxLayout.Y_AXIS));</span>
+<span class="nc" id="L70">			List&lt;Categoria&gt;categorias=getCategoria();</span>
+<span class="nc" id="L71">			this.email=email;</span>
+<span class="nc" id="L72">			DefaultComboBoxModel&lt;Categoria&gt; mCategorias= new DefaultComboBoxModel&lt;&gt;();</span>
+<span class="nc" id="L73">			mCategorias.addAll(categorias);</span>
+			
+<span class="nc" id="L75">			cbCategoria= new JComboBox&lt;&gt;(mCategorias);</span>
+			
+<span class="nc" id="L77">			JLabel lCategoria= new JLabel(&quot;Seleccione una categoria &quot;);</span>
+<span class="nc" id="L78">			pCategoria= new JPanel();</span>
+<span class="nc" id="L79">			pCategoria.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L80">			pCategoria.add(lCategoria);</span>
+<span class="nc" id="L81">			pCategoria.add(cbCategoria);</span>
+<span class="nc" id="L82">			cbCategoria.setSelectedIndex(0);</span>
+			
+<span class="nc" id="L84">			pNombre= new JPanel();</span>
+<span class="nc" id="L85">			pNombre.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L86">			tfNombre= new JTextField(20);</span>
+<span class="nc" id="L87">			JLabel lNombre= new JLabel(&quot;Nombre del producto: &quot;);</span>
+<span class="nc" id="L88">			pNombre.add(lNombre);</span>
+<span class="nc" id="L89">			pNombre.add(tfNombre);</span>
+			
+<span class="nc" id="L91">			pPrecio= new JPanel();</span>
+<span class="nc" id="L92">			pPrecio.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L93">			tfPrecio= new JTextField(20);</span>
+<span class="nc" id="L94">			JLabel lPrecio= new JLabel(&quot;Precio: &quot;);</span>
+<span class="nc" id="L95">			pPrecio.add(lPrecio);</span>
+<span class="nc" id="L96">			pPrecio.add(tfPrecio);</span>
+			
+			
+<span class="nc" id="L99">			pRam= new JPanel();</span>
+<span class="nc" id="L100">			pRam.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L101">			tfRam= new JTextField(20);</span>
+<span class="nc" id="L102">			JLabel lRam= new JLabel(&quot;Memoria RAM: &quot;);</span>
+<span class="nc" id="L103">			pRam.add(lRam);</span>
+<span class="nc" id="L104">			pRam.add(tfRam);</span>
+			
+			
+<span class="nc" id="L107">			pMemoria= new JPanel();</span>
+<span class="nc" id="L108">			pMemoria.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L109">			tfMemoria= new JTextField(20);</span>
+<span class="nc" id="L110">			JLabel lMemoria= new JLabel(&quot;Memoria Secundaria: &quot;);</span>
+<span class="nc" id="L111">			pMemoria.add(lMemoria);</span>
+<span class="nc" id="L112">			pMemoria.add(tfMemoria);</span>
+			
+			
+<span class="nc" id="L115">			pCpu= new JPanel();</span>
+<span class="nc" id="L116">			pCpu.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L117">			tfCpu=new JTextField(20);</span>
+<span class="nc" id="L118">			JLabel lCpu= new JLabel(&quot;CPU: &quot;);</span>
+<span class="nc" id="L119">			pCpu.add(lCpu);</span>
+<span class="nc" id="L120">			pCpu.add(tfCpu);</span>
+			
+<span class="nc" id="L122">			pPlacaBase= new JPanel();</span>
+<span class="nc" id="L123">			pPlacaBase.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L124">			tfPlacaBase=new JTextField(20);</span>
+<span class="nc" id="L125">			JLabel lPlacaBase= new JLabel(&quot;Placa Base: &quot;);</span>
+<span class="nc" id="L126">			pPlacaBase.add(lPlacaBase);</span>
+<span class="nc" id="L127">			pPlacaBase.add(tfPlacaBase);</span>
+			
+			
+<span class="nc" id="L130">			pGrafica= new JPanel();</span>
+<span class="nc" id="L131">			pGrafica.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L132">			tfGrafica= new JTextField(20);</span>
+<span class="nc" id="L133">			JLabel lGrafica= new JLabel(&quot;Tarjeta Gráfica: &quot;);</span>
+<span class="nc" id="L134">			pGrafica.add(lGrafica);</span>
+<span class="nc" id="L135">			pGrafica.add(tfGrafica);</span>
+			
+<span class="nc" id="L137">			pKilometros= new JPanel();</span>
+<span class="nc" id="L138">			pKilometros.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L139">			tfKilometros= new JTextField(20);</span>
+<span class="nc" id="L140">			JLabel lKilometros= new JLabel(&quot;KM : &quot;);</span>
+<span class="nc" id="L141">			pKilometros.add(lKilometros);</span>
+<span class="nc" id="L142">			pKilometros.add(tfKilometros);</span>
+
+<span class="nc" id="L144">			pCaballos= new JPanel();</span>
+<span class="nc" id="L145">			pCaballos.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L146">			tfCaballos= new JTextField(20);</span>
+<span class="nc" id="L147">			JLabel lCaballos= new JLabel(&quot;CV : &quot;);</span>
+<span class="nc" id="L148">			pCaballos.add(lCaballos);</span>
+<span class="nc" id="L149">			pCaballos.add(tfCaballos);</span>
+			
+<span class="nc" id="L151">			pAnyo= new JPanel();</span>
+<span class="nc" id="L152">			pAnyo.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L153">			tfAnyo= new JTextField(20);</span>
+<span class="nc" id="L154">			JLabel lAnyo= new JLabel(&quot;Año de fabricacion: &quot;);</span>
+<span class="nc" id="L155">			pAnyo.add(lAnyo);</span>
+<span class="nc" id="L156">			pAnyo.add(tfAnyo);</span>
+			
+<span class="nc" id="L158">			pMarca= new JPanel();</span>
+<span class="nc" id="L159">			pMarca.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L160">			 tfMarca= new JTextField(20);</span>
+<span class="nc" id="L161">			JLabel lMarca= new JLabel(&quot;Marca: &quot;);</span>
+<span class="nc" id="L162">			pMarca.add(lMarca);</span>
+<span class="nc" id="L163">			pMarca.add(tfMarca);</span>
+			
+<span class="nc" id="L165">			pModelo= new JPanel();</span>
+<span class="nc" id="L166">			pModelo.setLayout(new FlowLayout(FlowLayout.LEFT));</span>
+<span class="nc" id="L167">			 tfModelo= new JTextField(20);</span>
+<span class="nc" id="L168">			JLabel lModelo= new JLabel(&quot;Tarjeta Gráfica: &quot;);</span>
+<span class="nc" id="L169">			pModelo.add(lModelo);</span>
+<span class="nc" id="L170">			pModelo.add(tfModelo);</span>
+		
+<span class="nc" id="L172">			lError= new JLabel();</span>
+<span class="nc" id="L173">			lError.setForeground(Color.RED);</span>
+			
+<span class="nc" id="L175">			pCambiante.add(pCategoria);</span>
+<span class="nc" id="L176">			pCambiante.add(pNombre);</span>
+<span class="nc" id="L177">			pCambiante.add(pPrecio);</span>
+	
+<span class="nc" id="L179">			pCambiante.add(pRam);</span>
+<span class="nc" id="L180">			pCambiante.add(pGrafica);</span>
+<span class="nc" id="L181">			pCambiante.add(pPlacaBase);</span>
+<span class="nc" id="L182">			pCambiante.add(pCpu);</span>
+<span class="nc" id="L183">			pCambiante.add(pMemoria);</span>
+			
+<span class="nc" id="L185">			JButton bCrear= new JButton(&quot;Crear&quot;);</span>
+<span class="nc" id="L186">			JPanel pCrear=new JPanel();</span>
+<span class="nc" id="L187">			pCrear.add(bCrear);</span>
+<span class="nc" id="L188">			bCrear.addActionListener(new ActionListener()</span>
+<span class="nc" id="L189">		     {</span>
+		         public void actionPerformed (ActionEvent e)
+		         {
+<span class="nc" id="L192">		            String nombre=tfNombre.getText();</span>
+<span class="nc" id="L193">		            Categoria c=(Categoria)cbCategoria.getSelectedItem();</span>
+<span class="nc bnc" id="L194" title="All 2 branches missed.">		            if(c.getId()==1) {</span>
+<span class="nc" id="L195">		            	ProductoOrdenador p=new ProductoOrdenador();</span>
+<span class="nc" id="L196">		            	p.setNombre(nombre);</span>
+<span class="nc" id="L197">		            	p.setCategoria(c);</span>
+		            	try {
+<span class="nc" id="L199">			            	double precio=Double.parseDouble(tfPrecio.getText());</span>
+<span class="nc" id="L200">			            	p.setPrecioSalida(precio);</span>
+<span class="nc" id="L201">			            }catch(NumberFormatException ex) {</span>
+<span class="nc" id="L202">			            	lError.setText(&quot;El formato del precio no es adecuado&quot;);</span>
+<span class="nc" id="L203">			            	return;</span>
+<span class="nc" id="L204">			            }</span>
+<span class="nc" id="L205">		            	p.setCpu(tfCpu.getText());</span>
+<span class="nc" id="L206">		            	p.setGrafica(tfGrafica.getText());</span>
+		            	try {
+<span class="nc" id="L208">			            	int memoria=Integer.parseInt(tfMemoria.getText());</span>
+<span class="nc" id="L209">			            	p.setMemoria(memoria);</span>
+<span class="nc" id="L210">			            }catch(NumberFormatException ex) {</span>
+<span class="nc" id="L211">			            	lError.setText(&quot;El formato de la memoria no es adecuado&quot;);</span>
+<span class="nc" id="L212">			            	return;</span>
+<span class="nc" id="L213">			            }</span>
+<span class="nc" id="L214">		            	p.setPlacaBase(tfPlacaBase.getText());</span>
+		            	try {
+<span class="nc" id="L216">			            	int ram=Integer.parseInt(tfRam.getText());</span>
+<span class="nc" id="L217">			            	p.setRam(ram);</span>
+<span class="nc" id="L218">			            }catch(NumberFormatException ex) {</span>
+<span class="nc" id="L219">			            	lError.setText(&quot;El formato de la ram no es adecuado&quot;);</span>
+<span class="nc" id="L220">			            	return;</span>
+<span class="nc" id="L221">			            }</span>
+<span class="nc" id="L222">			           addProductoOrdenador(p);</span>
+<span class="nc bnc" id="L223" title="All 2 branches missed.">		            }else if(c.getId()==2) {</span>
+<span class="nc" id="L224">			            	ProductoVehiculo p=new ProductoVehiculo();</span>
+<span class="nc" id="L225">			            	p.setNombre(nombre);</span>
+<span class="nc" id="L226">			            	p.setCategoria(c);</span>
+			            	try {
+<span class="nc" id="L228">				            	double precio=Double.parseDouble(tfPrecio.getText());</span>
+<span class="nc" id="L229">				            	p.setPrecioSalida(precio);</span>
+<span class="nc" id="L230">				            }catch(NumberFormatException ex) {</span>
+<span class="nc" id="L231">				            	lError.setText(&quot;El formato del precio no es adecuado&quot;);</span>
+<span class="nc" id="L232">				            	return;</span>
+<span class="nc" id="L233">				            }</span>
+<span class="nc" id="L234">			            	p.setMarca(tfMarca.getText());</span>
+<span class="nc" id="L235">			            	p.setModelo(tfModelo.getText());</span>
+			            	try {
+<span class="nc" id="L237">				            	int km=Integer.parseInt(tfKilometros.getText());</span>
+<span class="nc" id="L238">				            	p.setKilometros(km);</span>
+<span class="nc" id="L239">				            }catch(NumberFormatException ex) {</span>
+<span class="nc" id="L240">				            	lError.setText(&quot;El formato de los km no es adecuado&quot;);</span>
+<span class="nc" id="L241">				            	return;</span>
+<span class="nc" id="L242">				            }</span>
+			            	try {
+<span class="nc" id="L244">				            	int cv=Integer.parseInt(tfCaballos.getText());</span>
+<span class="nc" id="L245">				            	p.setCaballos(cv);</span>
+<span class="nc" id="L246">				            }catch(NumberFormatException ex) {</span>
+<span class="nc" id="L247">				            	lError.setText(&quot;El formato de los cv no es adecuado&quot;);</span>
+<span class="nc" id="L248">				            	return;</span>
+<span class="nc" id="L249">				            }</span>
+			            	try {
+<span class="nc" id="L251">				            	int anyo=Integer.parseInt(tfAnyo.getText());</span>
+<span class="nc" id="L252">				            	p.setAnyoFabri(anyo);</span>
+<span class="nc" id="L253">				            }catch(NumberFormatException ex) {</span>
+<span class="nc" id="L254">				            	lError.setText(&quot;El formato del año de fabricacion no es adecuado&quot;);</span>
+<span class="nc" id="L255">				            	return;</span>
+<span class="nc" id="L256">				            }</span>
+<span class="nc" id="L257">				           addProductoVehiculo(p);</span>
+		            }
+		            
+		         
+<span class="nc" id="L261">		      }</span>
+		    });
+			
+<span class="nc" id="L264">			getContentPane().add(lError,BorderLayout.NORTH);</span>
+<span class="nc" id="L265">			getContentPane().add(pCambiante,BorderLayout.CENTER);</span>
+<span class="nc" id="L266">			getContentPane().add(pCrear,BorderLayout.SOUTH);</span>
+			
+<span class="nc" id="L268">			setLocationRelativeTo(null);</span>
+<span class="nc" id="L269">			this.pack();</span>
+<span class="nc" id="L270">			setDefaultCloseOperation(DISPOSE_ON_CLOSE);</span>
+<span class="nc" id="L271">			setVisible(true);</span>
+			
+			
+			
+<span class="nc" id="L275">			cbCategoria.addItemListener (new ItemListener () {</span>
+
+				@Override
+				public void itemStateChanged(ItemEvent e) {
+<span class="nc bnc" id="L279" title="All 2 branches missed.">					if(e.getStateChange()==ItemEvent.SELECTED) {</span>
+<span class="nc" id="L280">						pCambiante.removeAll();</span>
+<span class="nc" id="L281">						pCambiante.add(pCategoria);</span>
+<span class="nc" id="L282">						pCambiante.add(pNombre);</span>
+<span class="nc" id="L283">						pCambiante.add(pPrecio);</span>
+<span class="nc bnc" id="L284" title="All 2 branches missed.">						if (cbCategoria.getSelectedIndex()==0) {</span>
+<span class="nc" id="L285">							pCambiante.add(pRam);</span>
+<span class="nc" id="L286">							pCambiante.add(pGrafica);</span>
+<span class="nc" id="L287">							pCambiante.add(pPlacaBase);</span>
+<span class="nc" id="L288">							pCambiante.add(pCpu);</span>
+<span class="nc" id="L289">							pCambiante.add(pMemoria);</span>
+							
+						}else {
+<span class="nc" id="L292">							pCambiante.add(pModelo);</span>
+<span class="nc" id="L293">							pCambiante.add(pModelo);</span>
+<span class="nc" id="L294">							pCambiante.add(pKilometros);</span>
+<span class="nc" id="L295">							pCambiante.add(pAnyo);</span>
+<span class="nc" id="L296">							pCambiante.add(pCaballos);</span>
+						}
+<span class="nc" id="L298">						pCambiante.revalidate();</span>
+<span class="nc" id="L299">						pCambiante.repaint();</span>
+					}
+					
+<span class="nc" id="L302">				}</span>
+			});
+			
+<span class="nc" id="L305">		}catch(Exception e) {</span>
+<span class="nc" id="L306">			System.out.println(&quot;*Error al recopilar las categorias* &quot; + e.getMessage());</span>
+<span class="nc" id="L307">		}</span>
+<span class="nc" id="L308">	}</span>
+	
+	
+	
+	//necesito un getCategorias()
+	public List&lt;Categoria&gt; getCategoria() throws ReventaException{
+<span class="nc" id="L314">		WebTarget webTarget = this.webTarget.path(&quot;reventa/categorias&quot;);</span>
+<span class="nc" id="L315">		List&lt;Categoria&gt;lCategorias = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType&lt;List&lt;Categoria&gt;&gt;() {</span>
+	     } );
+		
+<span class="nc" id="L318">		return lCategorias;</span>
+	}
+	
+	public void addProductoOrdenador(Producto p) {
+		try {
+<span class="nc" id="L323">			WebTarget webTarget=this.webTarget.path(&quot;reventa/saleOrdenador&quot;);</span>
+<span class="nc" id="L324">			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
+<span class="nc" id="L325">			System.out.println(webTarget.getUri());</span>
+<span class="nc" id="L326">			p.setEmailVendedor(email);</span>
+<span class="nc" id="L327">			Response response = invocationBuilder.post(Entity.entity(p, MediaType.APPLICATION_JSON));</span>
+<span class="nc" id="L328">			System.out.println(response.getStatus());</span>
+<span class="nc" id="L329">		}catch(Exception e) {</span>
+			//lError.setText(&quot;Ha ocurrido un error al conectar con el servidor&quot;);
+<span class="nc" id="L331">			System.out.println(e.getMessage());</span>
+<span class="nc" id="L332">		}</span>
+<span class="nc" id="L333">	}</span>
+	
+	public void addProductoVehiculo(Producto p) {
+		try {
+<span class="nc" id="L337">			WebTarget webTarget=this.webTarget.path(&quot;reventa/saleVehiculo&quot;);</span>
+<span class="nc" id="L338">			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
+<span class="nc" id="L339">			System.out.println(webTarget.getUri());</span>
+<span class="nc" id="L340">			p.setEmailVendedor(email);</span>
+<span class="nc" id="L341">			Response response = invocationBuilder.post(Entity.entity(p, MediaType.APPLICATION_JSON));</span>
+<span class="nc" id="L342">			System.out.println(response.getStatus());</span>
+<span class="nc" id="L343">		}catch(Exception e) {</span>
+			//lError.setText(&quot;Ha ocurrido un error al conectar con el servidor&quot;);
+<span class="nc" id="L345">			System.out.println(e.getMessage());</span>
+<span class="nc" id="L346">		}</span>
+<span class="nc" id="L347">	}</span>
+	
+	
+	public void registrar(Usuario u) throws ReventaException {
+<span class="nc" id="L351">		WebTarget webTarget = this.webTarget.path(&quot;reventa/registro&quot;);</span>
+<span class="nc" id="L352">		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
+<span class="nc" id="L353">		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));</span>
+<span class="nc bnc" id="L354" title="All 2 branches missed.">		if (response.getStatus() != Status.OK.getStatusCode()) {</span>
+<span class="nc" id="L355">			throw new ReventaException(&quot;&quot; + response.getStatus());</span>
+		}
+<span class="nc" id="L357">	}</span>
+	
+	
+	
+	
+	public Usuario getUsuario(String email)throws ReventaException {
+<span class="nc" id="L363">		WebTarget webTarget = this.webTarget.path(&quot;reventa/getUsuario/&quot;+ email);</span>
+<span class="nc" id="L364">		System.out.println(webTarget.getUri());</span>
+<span class="nc" id="L365">		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
+<span class="nc" id="L366">		Response response = invocationBuilder.get();</span>
+<span class="nc bnc" id="L367" title="All 2 branches missed.">		if (response.getStatus() == Status.OK.getStatusCode()) {</span>
+<span class="nc" id="L368">			Usuario u = response.readEntity(Usuario.class);</span>
+<span class="nc" id="L369">			return u;</span>
+		} else {
+<span class="nc" id="L371">			throw new ReventaException(&quot;&quot; + response.getStatus());</span>
+		}
+	}
+	
+
+	
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>

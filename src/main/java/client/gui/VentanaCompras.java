@@ -106,7 +106,6 @@ public class VentanaCompras extends JFrame{
 			}
 			
 		});
-		
 		pVender.add(bVender);
 		getContentPane().add(pVender, BorderLayout.SOUTH);
 		this.pack();

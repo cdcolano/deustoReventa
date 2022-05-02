@@ -31,9 +31,9 @@ import util.ReventaException;
 
 public class ComprasController {
 	private WebTarget webTarget;
-	private String email;
+	private String email,nombre;
 	private Producto prod;
-	private List<Producto>productos;
+	private List<Producto>productos,productosFav;
 	
 	
 	
@@ -54,7 +54,22 @@ public class ComprasController {
 			throw new ReventaException("" + response.getStatus());
 		}
 	}
-	
+	public void anadirFav(Producto p, String email) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/anadirFav/"+ email);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(p, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
+	public void anadirUsuarioFav(Usuario u, String email) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/anadirUsuarioFav/"+ email);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
 	public List<Producto> getProductos() throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador");
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
@@ -115,6 +130,36 @@ public class ComprasController {
 		pProducto.add(new JLabel (p.getNombre()));
 		pProducto.add(new JLabel(""+ p.getPrecioSalida()+ "€"));
 		JButton button= new JButton("Comprar");
+		JButton bMeGusta = new JButton("Me Gusta");
+		JButton bUsuarioFav = new JButton("Usuario FAV");
+		
+		bMeGusta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					anadirFav(p,email)	;				//ComprasController.this.();
+										
+				} catch (ReventaException e1) {
+					System.out.println(e1.getMessage());
+				}
+			}
+			
+		});
+		bUsuarioFav.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Usuario u=getUsuario(p.getEmailVendedor());
+					anadirUsuarioFav(u,email);				//ComprasController.this.();
+										
+				} catch (ReventaException e1) {
+					System.out.println(e1.getMessage());
+				}
+			}
+			
+		});
 		button.addActionListener(new ActionListener() {
 
 			@Override
@@ -135,6 +180,7 @@ public class ComprasController {
 			}
 			
 		});
+
 		JButton bMeGusta = new JButton("Añadir a favoritos");
 		JButton bUsuarioFav = new JButton("Me gusta");
 		
@@ -173,6 +219,7 @@ public class ComprasController {
 		pCentro.add(jsp);
 		pCentro.revalidate();
 		pCentro.repaint();
+
 	}
 	
 	public void anadirFav(Producto p, String email) throws ReventaException {
@@ -306,4 +353,5 @@ public class ComprasController {
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
 	}
+	
 }
