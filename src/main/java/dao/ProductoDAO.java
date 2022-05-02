@@ -89,7 +89,6 @@ public class ProductoDAO implements IProductoDAO{
 		 * By default only 1 level is retrieved from the db so if we wish to fetch more
 		 * than one level, we must indicate it
 		 */
-		pm.getFetchPlan().setMaxFetchDepth(3);
 
 		Transaction tx = pm.currentTransaction();
 		List<Producto> productos = new ArrayList<>();
@@ -101,6 +100,7 @@ public class ProductoDAO implements IProductoDAO{
 			Extent<Producto> extent = pm.getExtent(Producto.class, true);
 
 			for (Producto p : extent) {
+				System.out.println(p.getPrecioSalida());
 				productos.add(p);
 			}
 
@@ -165,7 +165,7 @@ public class ProductoDAO implements IProductoDAO{
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
 		Transaction tx = pm.currentTransaction();
-		List<ProductoOrdenador> productos = new ArrayList<>();
+		List<ProductoOrdenador> productos = new ArrayList<ProductoOrdenador	>();
 
 		try {
 			System.out.println("   * Retrieving an Extent for Products.");
@@ -174,8 +174,26 @@ public class ProductoDAO implements IProductoDAO{
 			Extent<ProductoOrdenador> extent = pm.getExtent(ProductoOrdenador.class, true);
 
 			for (ProductoOrdenador p : extent) {
-				if (!(p.isReservado()||p.isVendido()))
-				productos.add(p);
+				System.out.println(p.getNombre());
+				if (!(p.isReservado()||p.isVendido())) {
+					ProductoOrdenador p1=new ProductoOrdenador();
+					System.out.println("Se añade");
+					productos.add(p1);
+					p1.setNombre(p.getNombre());
+					p1.setCategoria(p.getCategoria());
+					p1.setId(p.getId());
+					p1.setFechaPubli(p.getFechaPubli());
+					p1.setPrecioSalida(p.getPrecioSalida());
+					p1.setOfertasRecibidas(p.getOfertasRecibidas());
+					p1.setReservado(p.isReservado());
+					p1.setVendido(p.isVendido());
+					p1.setEmailVendedor(p.getEmailVendedor());
+					p1.setCpu(p.getCpu());
+					p1.setMemoria(p.getMemoria());
+					p1.setGrafica(p1.getGrafica());
+					p1.setRam(p.getRam());
+					p1.setPlacaBase(p.getPlacaBase());
+				}
 			}
 
 			tx.commit();
@@ -187,6 +205,9 @@ public class ProductoDAO implements IProductoDAO{
 			}
 
 			pm.close();
+		}
+		for (ProductoOrdenador p1:productos) {
+			System.out.println(p1.getNombre());
 		}
 
 		return productos;
@@ -237,7 +258,7 @@ public class ProductoDAO implements IProductoDAO{
 		pm.getFetchPlan().setMaxFetchDepth(3);
 
 		Transaction tx = pm.currentTransaction();
-		List<ProductoVehiculo> productos = new ArrayList<>();
+		List<ProductoVehiculo> productos = new ArrayList<ProductoVehiculo>();
 
 		try {
 			System.out.println("   * Retrieving an Extent for Products.");
@@ -246,8 +267,24 @@ public class ProductoDAO implements IProductoDAO{
 			Extent<ProductoVehiculo> extent = pm.getExtent(ProductoVehiculo.class, true);
 
 			for (ProductoVehiculo p : extent) {
-				if(!(p.isReservado() || p.isVendido()))
-				productos.add(p);
+				if(!(p.isReservado() || p.isVendido())) {
+				ProductoVehiculo p1=new ProductoVehiculo();
+				productos.add(p1);
+				p1.setNombre(p.getNombre());
+				p1.setCategoria(p.getCategoria());
+				p1.setId(p.getId());
+				p1.setFechaPubli(p.getFechaPubli());
+				p1.setPrecioSalida(p.getPrecioSalida());
+				p1.setOfertasRecibidas(p.getOfertasRecibidas());
+				p1.setReservado(p.isReservado());
+				p1.setVendido(p.isVendido());
+				p1.setEmailVendedor(p.getEmailVendedor());
+				p1.setKilometros(p.getKilometros());
+				p1.setCaballos(p.getCaballos());
+				p1.setAnyoFabri(p.getAnyoFabri());
+				p1.setMarca(p.getMarca());
+				p1.setModelo(p.getModelo());
+				}
 			}
 
 			tx.commit();
