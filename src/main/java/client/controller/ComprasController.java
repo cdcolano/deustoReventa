@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 package client.controller;
 
 import java.awt.event.ActionEvent;
@@ -356,3 +356,4 @@ public class ComprasController {
 	}
 	
 }
+>>>>>>> d2886c40339a6474ba65fb08ae75c8770c204ae9
