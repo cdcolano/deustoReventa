@@ -142,7 +142,7 @@ public class ChatController {
 		try {
 			Usuario u = getUsuario(email);
 			lMRecibidos = u.getMensajesRecibidos();
-			lMRecibidos.sort(Comparator.comparing(Mensaje::getFecha));
+			lMRecibidos.sort(Comparator.comparing(Mensaje::getFecha).reversed());
 		} catch (ReventaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -154,7 +154,7 @@ public class ChatController {
 		try {
 			Usuario u = getUsuario(email);
 			lMEnviados = u.getMensajesEnviados();
-			lMEnviados.sort(Comparator.comparing(Mensaje::getFecha));
+			lMEnviados.sort(Comparator.comparing(Mensaje::getFecha).reversed());
 		} catch (ReventaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
