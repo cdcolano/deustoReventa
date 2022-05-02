@@ -123,6 +123,45 @@ public class VentasService {
 		}
 	}
 	
+	public void addProductoFav(Producto p, String email) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Usuario u= null;
+	//	Producto p=null;
+		try {
+			u=pm.getObjectById(Usuario.class, email);
+			//p=pm.getObjectById(Producto.class, id);
+			u.getProductosFavoritos().add(p);
+			//tengo que meter en una lista todos 
+		}catch(Exception e){
+			if (u==null) {
+				System.out.println("Error al seleccionar el producto para guardarlo en FAV");
+			}else {
+				System.out.println("Error al guardar el producto como FAV");
+			}
+		}finally {
+			pm.close();
+		}
+		
+	}
+	
+	public void addUsuarioFav(Usuario u, String email) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Producto p = null;
+		try {
+			p = pm.getObjectById(Producto.class, email);
+		}catch(Exception e) {
+			if(p==null) {
+				System.out.println("Error al seleccionar el producto para guardarlo en FAV");
+			}else {
+				System.out.println("Error al guardar el producto como FAV");
+			}
+		}finally {
+			pm.close();
+		}
+		
+	}
+	
 	public void enviarMensaje(String email1, String email2, String contenido, long fecha) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Usuario u1 = null;
@@ -249,6 +288,8 @@ public class VentasService {
 	public Usuario getUsuario(String email) {
 		return usuarioDao.getUsuario(email);
 	}
+
+	
 	
 	
 	

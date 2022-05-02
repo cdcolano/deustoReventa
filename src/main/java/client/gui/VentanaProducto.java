@@ -57,7 +57,7 @@ public class VentanaProducto extends JFrame{
 	private JPanel pAnyo;
 	private JPanel pMarca;
 	private JPanel pModelo;
-	private String email;
+	private String email,nombre;
 	private JTextField tfMarca;
 	private JTextField tfModelo;
 	
@@ -254,7 +254,7 @@ public class VentanaProducto extends JFrame{
 				            	lError.setText("El formato del año de fabricacion no es adecuado");
 				            	return;
 				            }
-				           addProductoVehiculo(p);
+				           addProductoVehiculo(p);       
 		            }
 		            
 		         
@@ -345,7 +345,7 @@ public class VentanaProducto extends JFrame{
 			System.out.println(e.getMessage());
 		}
 	}
-	
+
 	
 	public void registrar(Usuario u) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/registro");
