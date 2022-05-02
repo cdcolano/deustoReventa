@@ -3,8 +3,10 @@
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,98 +37,120 @@ public class VentanaChat extends JFrame {
 	private WebTarget webTarget;
 	private JPanel panelCentro,panelSur,panelEnviados,panelRecibidos;
 	private JTextField mensaje;
-	private DefaultListModel lm1, lm2;
-	private JList enviados, recibidos;
+	private JTextArea enviados, recibidos;
 	private JTextPane campoChat,campoChat1;
 	private JButton botonEnviar;
 	private JComboBox comboUsuarios;
+	private JScrollPane scroll,scroll1;
 	private static VentanaChat v1;
 	private ChatController cc;
 	private UsuarioDAO udao;
 	
 	
 	
-<span class="nc" id="L49">	public VentanaChat(Client c, WebTarget wt, String email1) {</span>
-<span class="nc" id="L50">		this.client=c;</span>
-<span class="nc" id="L51">		this.em1=email1;</span>
-<span class="nc" id="L52">		udao = new UsuarioDAO();</span>
-<span class="nc" id="L53">		webTarget= wt;</span>
-<span class="nc" id="L54">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
-<span class="nc" id="L55">		setBounds(100,100,450,300);</span>
-<span class="nc" id="L56">		cc = new ChatController(wt,email1,udao);</span>
-<span class="nc" id="L57">		v1=this;</span>
-<span class="nc" id="L58">		v1.setTitle(&quot;&quot;);</span>
-		
-<span class="nc" id="L60">		comboUsuarios = new JComboBox();</span>
-<span class="nc" id="L61">		lm1 = new DefaultListModel();</span>
-<span class="nc" id="L62">		lm2 = new DefaultListModel();</span>
-		
-<span class="nc" id="L64">		List&lt;String&gt; usuariosMails = cc.getEmailUsuarios();</span>
-<span class="nc" id="L65">		List&lt;Mensaje&gt; enviadosM = cc.getMensajesEnviados(email1);</span>
-<span class="nc" id="L66">		List&lt;Mensaje&gt; recibidosM = cc.getMensajesRecibidos(email1);</span>
-		
-<span class="nc bnc" id="L68" title="All 2 branches missed.">		for(String a : usuariosMails) {</span>
-<span class="nc" id="L69">			comboUsuarios.addItem(a);</span>
-<span class="nc" id="L70">		}</span>
-<span class="nc bnc" id="L71" title="All 2 branches missed.">		for(Mensaje m: enviadosM) {</span>
-<span class="nc" id="L72">			lm1.addElement(m.getContenido());</span>
-<span class="nc" id="L73">		}</span>
-<span class="nc bnc" id="L74" title="All 2 branches missed.">		for(Mensaje m1: recibidosM) {</span>
-<span class="nc" id="L75">			lm2.addElement(m1.getContenido());</span>
-<span class="nc" id="L76">		}</span>
-		
-<span class="nc" id="L78">		recibidos = new JList(lm2);</span>
-<span class="nc" id="L79">		enviados = new JList(lm1);</span>
+<span class="nc" id="L51">	public VentanaChat(Client c, WebTarget wt, String email1) {</span>
+<span class="nc" id="L52">		this.client=c;</span>
+<span class="nc" id="L53">		this.em1=email1;</span>
+<span class="nc" id="L54">		udao = new UsuarioDAO();</span>
+<span class="nc" id="L55">		webTarget= wt;</span>
+<span class="nc" id="L56">		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span>
+<span class="nc" id="L57">		setBounds(100,100,450,300);</span>
+<span class="nc" id="L58">		cc = new ChatController(wt,email1,udao);</span>
+<span class="nc" id="L59">		v1=this;</span>
+<span class="nc" id="L60">		v1.setTitle(&quot;&quot;);</span>
+<span class="nc" id="L61">		v1.setLayout( new GridLayout(2,0));</span>
 		
 		
-<span class="nc" id="L82">		panelCentro= new JPanel();</span>
-<span class="nc" id="L83">		panelCentro.setLayout(new GridLayout());</span>
-<span class="nc" id="L84">		panelSur = new JPanel();</span>
-<span class="nc" id="L85">		panelSur.setLayout(new GridLayout());</span>
+<span class="nc" id="L64">		comboUsuarios = new JComboBox();</span>
+<span class="nc" id="L65">		enviados = new JTextArea();</span>
+<span class="nc" id="L66">		recibidos = new JTextArea();</span>
+<span class="nc" id="L67">		enviados.setEditable(false);</span>
+<span class="nc" id="L68">		recibidos.setEditable(false);</span>
 		
-<span class="nc" id="L87">		panelEnviados = new JPanel();</span>
-<span class="nc" id="L88">		panelEnviados.setLayout(new GridLayout());</span>
-<span class="nc" id="L89">		panelEnviados.add(enviados);</span>
+<span class="nc" id="L70">		scroll = new JScrollPane(enviados);</span>
+<span class="nc" id="L71">		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);</span>
+<span class="nc" id="L72">		Dimension dm = new Dimension(150,150);</span>
+<span class="nc" id="L73">		scroll.setPreferredSize(dm);</span>
 		
-<span class="nc" id="L91">		panelRecibidos = new JPanel();</span>
-<span class="nc" id="L92">		panelRecibidos.setLayout(new GridLayout());</span>
-<span class="nc" id="L93">		panelRecibidos.add(recibidos);</span>
+<span class="nc" id="L75">		scroll1 = new JScrollPane(recibidos);</span>
+<span class="nc" id="L76">		scroll1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);</span>
+<span class="nc" id="L77">		scroll1.setPreferredSize(dm);</span>
+		
+<span class="nc" id="L79">		List&lt;String&gt; usuariosMails = cc.getEmailUsuarios();</span>
+<span class="nc" id="L80">		List&lt;Mensaje&gt; enviadosM = cc.getMensajesEnviados(email1);</span>
+<span class="nc" id="L81">		List&lt;Mensaje&gt; recibidosM = cc.getMensajesRecibidos(email1);</span>
+		
+<span class="nc bnc" id="L83" title="All 2 branches missed.">		for(String a : usuariosMails) {</span>
+<span class="nc" id="L84">			comboUsuarios.addItem(a);</span>
+<span class="nc" id="L85">		}</span>
+<span class="nc bnc" id="L86" title="All 2 branches missed.">		for(Mensaje m: enviadosM) {</span>
+<span class="nc" id="L87">			Date date = new Date(m.getFecha());</span>
+<span class="nc" id="L88">			SimpleDateFormat df = new SimpleDateFormat(&quot;dd/MM/yy HH:mm&quot;);</span>
+<span class="nc" id="L89">			String p = df.format(date);</span>
+<span class="nc" id="L90">			enviados.append(m.getContenido() +&quot; - &quot;+ p + &quot;\n&quot;);</span>
+<span class="nc" id="L91">		}</span>
+<span class="nc bnc" id="L92" title="All 2 branches missed.">		for(Mensaje m1: recibidosM) {</span>
+<span class="nc" id="L93">			Date date = new Date(m1.getFecha());</span>
+<span class="nc" id="L94">			SimpleDateFormat df = new SimpleDateFormat(&quot;dd/MM/yy HH:mm&quot;);</span>
+<span class="nc" id="L95">			String p = df.format(date);</span>
+<span class="nc" id="L96">			recibidos.append(m1.getContenido() +&quot; - &quot;+ p + &quot;\n&quot; );</span>
+<span class="nc" id="L97">		}</span>
+		
+		
+		
+		
+<span class="nc" id="L102">		panelCentro= new JPanel();</span>
+<span class="nc" id="L103">		panelCentro.setLayout(new GridLayout(0,2));</span>
+<span class="nc" id="L104">		panelSur = new JPanel();</span>
+<span class="nc" id="L105">		panelSur.setLayout(new GridBagLayout());</span>
+		
+<span class="nc" id="L107">		panelEnviados = new JPanel();</span>
+		//panelEnviados.setLayout(new GridLayout());
+<span class="nc" id="L109">		panelEnviados.add(scroll);</span>
+		//panelEnviados.add(enviados);
+		
+<span class="nc" id="L112">		panelRecibidos = new JPanel();</span>
+		//panelRecibidos.setLayout(new GridLayout());
+<span class="nc" id="L114">		panelRecibidos.add(scroll1);</span>
+		//panelRecibidos.add(recibidos);
 	
 		
-<span class="nc" id="L96">		mensaje = new JTextField(20);</span>
-<span class="nc" id="L97">		botonEnviar = new JButton(&quot;ENVIAR&quot;);</span>
-<span class="nc" id="L98">		botonEnviar.addActionListener(new ActionListener()</span>
-<span class="nc" id="L99">		{</span>
+<span class="nc" id="L118">		mensaje = new JTextField(20);</span>
+<span class="nc" id="L119">		botonEnviar = new JButton(&quot;ENVIAR&quot;);</span>
+<span class="nc" id="L120">		botonEnviar.addActionListener(new ActionListener()</span>
+<span class="nc" id="L121">		{</span>
 			public void actionPerformed (ActionEvent e) {
-<span class="nc" id="L101">				Mensaje m = new Mensaje();</span>
-<span class="nc" id="L102">				m.setContenido(mensaje.getText());</span>
-<span class="nc" id="L103">				Date fecha = new Date();</span>
-<span class="nc" id="L104">				long milliseconds = fecha.getTime();</span>
-<span class="nc" id="L105">				m.setFecha(milliseconds);</span>
+<span class="nc" id="L123">				Mensaje m = new Mensaje();</span>
+<span class="nc" id="L124">				m.setContenido(mensaje.getText());</span>
+<span class="nc" id="L125">				Date fecha = new Date();</span>
+<span class="nc" id="L126">				long milliseconds = fecha.getTime();</span>
+<span class="nc" id="L127">				m.setFecha(milliseconds);</span>
 				try {
-<span class="nc" id="L107">					cc.enviar(email1, comboUsuarios.getSelectedItem().toString(), m);</span>
-<span class="nc" id="L108">				} catch (ReventaException e1) {</span>
+<span class="nc" id="L129">					cc.enviar(email1, comboUsuarios.getSelectedItem().toString(), m);</span>
+<span class="nc" id="L130">				} catch (ReventaException e1) {</span>
 					// TODO Auto-generated catch block
-<span class="nc" id="L110">					e1.printStackTrace();</span>
-<span class="nc" id="L111">				}</span>
-<span class="nc" id="L112">				lm1.addElement(mensaje.getText());</span>
-<span class="nc" id="L113">				v1.pack();</span>
-<span class="nc" id="L114">			}</span>
+<span class="nc" id="L132">					e1.printStackTrace();</span>
+<span class="nc" id="L133">				}</span>
+<span class="nc" id="L134">				SimpleDateFormat df = new SimpleDateFormat(&quot;dd/MM/yy HH:mm&quot;);</span>
+<span class="nc" id="L135">				String p = df.format(fecha);</span>
+<span class="nc" id="L136">				enviados.append(mensaje.getText()+&quot; - &quot;+ p +&quot;\n&quot;);</span>
+<span class="nc" id="L137">				v1.pack();</span>
+<span class="nc" id="L138">			}</span>
 		});
 	
 		
-<span class="nc" id="L118">		panelCentro.add(panelEnviados);</span>
-<span class="nc" id="L119">		panelCentro.add(panelRecibidos);</span>
+<span class="nc" id="L142">		panelCentro.add(panelEnviados);</span>
+<span class="nc" id="L143">		panelCentro.add(panelRecibidos);</span>
 		
-<span class="nc" id="L121">		panelSur.add(mensaje);</span>
-<span class="nc" id="L122">		panelSur.add(comboUsuarios);</span>
-<span class="nc" id="L123">		panelSur.add(botonEnviar);</span>
-<span class="nc" id="L124">		v1.add(panelCentro);</span>
-<span class="nc" id="L125">		v1.add(panelSur);</span>
-<span class="nc" id="L126">		setLocationRelativeTo(null);</span>
-<span class="nc" id="L127">		this.pack();</span>
-<span class="nc" id="L128">		setVisible(true);</span>
-<span class="nc" id="L129">	}</span>
+<span class="nc" id="L145">		panelSur.add(mensaje);</span>
+<span class="nc" id="L146">		panelSur.add(comboUsuarios);</span>
+<span class="nc" id="L147">		panelSur.add(botonEnviar);</span>
+<span class="nc" id="L148">		v1.add(panelCentro);</span>
+<span class="nc" id="L149">		v1.add(panelSur);</span>
+<span class="nc" id="L150">		setLocationRelativeTo(null);</span>
+<span class="nc" id="L151">		this.pack();</span>
+<span class="nc" id="L152">		setVisible(true);</span>
+<span class="nc" id="L153">	}</span>
 
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

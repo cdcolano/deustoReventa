@@ -33,6 +33,12 @@ public class ReventaServer {
 	private VentasService vs;
 	
 	
+
+	public void setVs(VentasService vs) {
+		this.vs = vs;
+	}
+
+
 	public ReventaServer() {
 		vs= new VentasService();
 	}

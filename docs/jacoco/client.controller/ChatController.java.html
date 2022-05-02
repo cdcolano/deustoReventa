@@ -132,23 +132,25 @@ public class ChatController {
 <span class="fc" id="L132">		WebTarget webTarget = this.webTarget.path(&quot;reventa/mensajesRecibidos/&quot;+email );</span>
 <span class="fc" id="L133">		List&lt;Mensaje&gt;lMRecibidos = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType&lt;List&lt;Mensaje&gt;&gt;() {</span>
 	     } );
-<span class="fc" id="L135">		return lMRecibidos;</span>
+<span class="fc" id="L135">		lMRecibidos.sort(Comparator.comparing(Mensaje::getFecha).reversed());</span>
+<span class="fc" id="L136">		return lMRecibidos;</span>
 	}
 	
 	public List&lt;Mensaje&gt; getMensajesEnviados(String email){
-<span class="fc" id="L139">		WebTarget webTarget = this.webTarget.path(&quot;reventa/mensajesEnviados/&quot;+email );</span>
-<span class="nc" id="L140">		List&lt;Mensaje&gt;lMRecibidos = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType&lt;List&lt;Mensaje&gt;&gt;() {</span>
+<span class="nc" id="L140">		WebTarget webTarget = this.webTarget.path(&quot;reventa/mensajesEnviados/&quot;+email );</span>
+<span class="nc" id="L141">		List&lt;Mensaje&gt;lMEnviados= webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType&lt;List&lt;Mensaje&gt;&gt;() {</span>
 	     } );
-<span class="nc" id="L142">		return lMRecibidos;</span>
+<span class="nc" id="L143">		lMEnviados.sort(Comparator.comparing(Mensaje::getFecha).reversed());</span>
+<span class="nc" id="L144">		return lMEnviados;</span>
 	}
 	public List&lt;String&gt; getEmailUsuarios(){
-<span class="nc" id="L145">		List&lt;String&gt; listaEmail = new ArrayList&lt;&gt;();</span>
-<span class="nc" id="L146">		List&lt;Usuario&gt; lU = uDao.getUsuarios();</span>
+<span class="nc" id="L147">		List&lt;String&gt; listaEmail = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L148">		List&lt;Usuario&gt; lU = uDao.getUsuarios();</span>
 		
-<span class="nc bnc" id="L148" title="All 2 branches missed.">		for(int i = 0; i&lt;lU.size();i++) {</span>
-<span class="nc" id="L149">			listaEmail.add(lU.get(i).getEmail());</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">		for(int i = 0; i&lt;lU.size();i++) {</span>
+<span class="nc" id="L151">			listaEmail.add(lU.get(i).getEmail());</span>
 		}
-<span class="nc" id="L151">		return listaEmail;</span>
+<span class="nc" id="L153">		return listaEmail;</span>
 	}
 	
 
