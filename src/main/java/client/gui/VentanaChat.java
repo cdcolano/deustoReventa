@@ -3,8 +3,10 @@ package client.gui;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -35,11 +37,11 @@ public class VentanaChat extends JFrame {
 	private WebTarget webTarget;
 	private JPanel panelCentro,panelSur,panelEnviados,panelRecibidos;
 	private JTextField mensaje;
-	private DefaultListModel lm1, lm2;
-	private JList enviados, recibidos;
+	private JTextArea enviados, recibidos;
 	private JTextPane campoChat,campoChat1;
 	private JButton botonEnviar;
 	private JComboBox comboUsuarios;
+	private JScrollPane scroll,scroll1;
 	private static VentanaChat v1;
 	private ChatController cc;
 	private UsuarioDAO udao;
@@ -56,10 +58,23 @@ public class VentanaChat extends JFrame {
 		cc = new ChatController(wt,email1,udao);
 		v1=this;
 		v1.setTitle("");
+		v1.setLayout( new GridLayout(2,0));
+		
 		
 		comboUsuarios = new JComboBox();
-		lm1 = new DefaultListModel();
-		lm2 = new DefaultListModel();
+		enviados = new JTextArea();
+		recibidos = new JTextArea();
+		enviados.setEditable(false);
+		recibidos.setEditable(false);
+		
+		scroll = new JScrollPane(enviados);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		Dimension dm = new Dimension(150,150);
+		scroll.setPreferredSize(dm);
+		
+		scroll1 = new JScrollPane(recibidos);
+		scroll1.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+		scroll1.setPreferredSize(dm);
 		
 		List<String> usuariosMails = cc.getEmailUsuarios();
 		List<Mensaje> enviadosM = cc.getMensajesEnviados(email1);
@@ -69,28 +84,35 @@ public class VentanaChat extends JFrame {
 			comboUsuarios.addItem(a);
 		}
 		for(Mensaje m: enviadosM) {
-			lm1.addElement(m.getContenido());
+			Date date = new Date(m.getFecha());
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
+			String p = df.format(date);
+			enviados.append(m.getContenido() +" - "+ p + "\n");
 		}
 		for(Mensaje m1: recibidosM) {
-			lm2.addElement(m1.getContenido());
+			Date date = new Date(m1.getFecha());
+			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
+			String p = df.format(date);
+			recibidos.append(m1.getContenido() +" - "+ p + "\n" );
 		}
 		
-		recibidos = new JList(lm2);
-		enviados = new JList(lm1);
+		
 		
 		
 		panelCentro= new JPanel();
-		panelCentro.setLayout(new GridLayout());
+		panelCentro.setLayout(new GridLayout(0,2));
 		panelSur = new JPanel();
-		panelSur.setLayout(new GridLayout());
+		panelSur.setLayout(new GridBagLayout());
 		
 		panelEnviados = new JPanel();
-		panelEnviados.setLayout(new GridLayout());
-		panelEnviados.add(enviados);
+		//panelEnviados.setLayout(new GridLayout());
+		panelEnviados.add(scroll);
+		//panelEnviados.add(enviados);
 		
 		panelRecibidos = new JPanel();
-		panelRecibidos.setLayout(new GridLayout());
-		panelRecibidos.add(recibidos);
+		//panelRecibidos.setLayout(new GridLayout());
+		panelRecibidos.add(scroll1);
+		//panelRecibidos.add(recibidos);
 	
 		
 		mensaje = new JTextField(20);
@@ -109,7 +131,9 @@ public class VentanaChat extends JFrame {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				lm1.addElement(mensaje.getText());
+				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
+				String p = df.format(fecha);
+				enviados.append(mensaje.getText()+" - "+ p +"\n");
 				v1.pack();
 			}
 		});
