@@ -191,7 +191,7 @@ public class ReventaServer {
 	
 	@GET
 	@Path("/ventas/productoVehiculo/{x}")
-	public List<ProductoOrdenador> getVentasVehiculo(@PathParam("x") String x) {
+	public List<ProductoVehiculo> getVentasVehiculo(@PathParam("x") String x) {
 		List<ProductoVehiculo>lista=vs.getProductosVehiculoVendidos(x);
 		return lista;
 	}
