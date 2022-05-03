@@ -36,28 +36,34 @@ public class RegistroControllerTest {
 	
 	@Before
 	public void setUp() {
-		rc = new RegistroController();
+		rc = new RegistroController(webTarget);
 		u1 = new Usuario();
 		u1.setEmail("a");
 		u1.setPassword("a");
 		
 	}
 	
+	public void registrar(Usuario u) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/registro");
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
+	
 	@Test
 	public void testRegistrar() {
-		when(webTarget.path("/reventa/registro")).thenReturn(webTarget2);
+		when(webTarget.path("reventa/registro")).thenReturn(webTarget2);
 		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(builder);
 		when(builder.post(Entity.entity(u1, MediaType.APPLICATION_JSON))).thenReturn(response);
 		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
-		
 		try {
 			rc.registrar(u1);
-			//assertTrue(true);
-		}catch(Exception ex) {
-			System.out.println("Hola");
-			assertTrue(false);
+		} catch (ReventaException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		assertTrue(true);
 		/*when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
 		try {
 			rc.registrar(u1);

@@ -14,14 +14,18 @@ import dao.IUsuarioDAO;
 import dao.UsuarioDAO;
 import serialization.Mensaje;
 import serialization.Usuario;
+import util.ReventaException;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ChatControllerTest {
@@ -54,10 +58,12 @@ public class ChatControllerTest {
 		
 	}
 	
+	
 	@Test
-	public void testGetUsuario() {
-		
+	public void testEnviar() {
+	//no se puede hacer porque se crea un objeto dentro de el	
 	}
+	
 	
 	@Test
 	public void testGetMensajesRecibidos() {
@@ -89,7 +95,7 @@ public class ChatControllerTest {
 	}
 	@Test
 	public void testGetMensajesEnviados() {
-		when(webTarget1.path("reventa/mensajesRecibidos/a")).thenReturn(webTarget2);
+		when(webTarget1.path("reventa/mensajesEnviados/a")).thenReturn(webTarget2);
 		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(builder);
 		List<Mensaje> aM = new ArrayList<>();
 		when(builder.get(new GenericType<List<Mensaje>>() {})).thenReturn(aM);
@@ -111,8 +117,18 @@ public class ChatControllerTest {
 		
 		us1.setMensajesEnviados(aM);
 		//cc.getMensajesRecibidos(us1.getEmail());
-		listaFinal = cc.getMensajesRecibidos("a");
+		listaFinal = cc.getMensajesEnviados("a");
 		assertEquals(aM, listaFinal);
+	}
+	
+	@Test
+	public void testGetEmails() {
+		ArrayList<Usuario>usuarios= new ArrayList<>();
+		usuarios.add(us1);
+		usuarios.add(us2);
+		when(uDao.getUsuarios()).thenReturn(usuarios);
+		List<String>listaEmails=cc.getEmailUsuarios();
+		assertEquals(listaEmails.size(),usuarios.size());
 	}
 }
 

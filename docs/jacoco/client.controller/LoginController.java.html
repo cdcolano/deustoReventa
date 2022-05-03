@@ -3,6 +3,7 @@
 
 
 import javax.swing.JLabel;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
@@ -14,47 +15,54 @@ import client.gui.VentanaLogin;
 import serialization.Usuario;
 import util.ReventaException;
 
-<span class="nc" id="L17">public class LoginController {</span>
+public class LoginController {
 	private WebTarget webTarget;
+	private Client cliente;
+	
+	public LoginController(Client cliente, WebTarget webTarget) {
+<span class="fc" id="L23">		super();</span>
+<span class="fc" id="L24">		this.cliente = cliente;</span>
+<span class="fc" id="L25">		this.webTarget = webTarget;</span>
+<span class="fc" id="L26">	}</span>
 	
 	public boolean logIn(String email, String password, JLabel lError, VentanaLogin vl) throws ReventaException {
 		try {
-<span class="nc" id="L22">			WebTarget webTarget=this.webTarget.path(&quot;/reventa/logIn&quot;);</span>
-<span class="nc" id="L23">			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
-<span class="nc" id="L24">			Usuario u=new Usuario();</span>
-<span class="nc" id="L25">			u.setEmail(email);</span>
-<span class="nc" id="L26">			u.setPassword(password);</span>
-<span class="nc" id="L27">			System.out.println(webTarget.getUri());</span>
-<span class="nc" id="L28">			Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));</span>
+<span class="fc" id="L30">			WebTarget webTarget=this.webTarget.path(&quot;/reventa/logIn&quot;);</span>
+<span class="fc" id="L31">			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
+<span class="fc" id="L32">			Usuario u=new Usuario();</span>
+<span class="fc" id="L33">			u.setEmail(email);</span>
+<span class="fc" id="L34">			u.setPassword(password);</span>
+<span class="fc" id="L35">			System.out.println(webTarget.getUri());</span>
+<span class="fc" id="L36">			Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));</span>
 
-<span class="nc bnc" id="L30" title="All 2 branches missed.">			if (response.getStatus() != Status.OK.getStatusCode()) {</span>
-<span class="nc" id="L31">				throw new ReventaException(&quot;&quot; + response.getStatus());</span>
+<span class="nc bnc" id="L38" title="All 2 branches missed.">			if (response.getStatus() != Status.OK.getStatusCode()) {</span>
+<span class="nc" id="L39">				throw new ReventaException(&quot;&quot; + response.getStatus());</span>
 			}
-<span class="nc" id="L33">			boolean logIn=response.readEntity(boolean.class);</span>
-<span class="nc bnc" id="L34" title="All 2 branches missed.">			if (!logIn) {</span>
-<span class="nc" id="L35">				lError.setText(&quot;Email o contraseña incorrectos&quot;);</span>
-<span class="nc" id="L36">				vl.setLocationRelativeTo(null);</span>
-<span class="nc" id="L37">				vl.pack();</span>
+<span class="nc" id="L41">			boolean logIn=response.readEntity(boolean.class);</span>
+<span class="nc bnc" id="L42" title="All 2 branches missed.">			if (!logIn) {</span>
+<span class="nc" id="L43">				lError.setText(&quot;Email o contraseña incorrectos&quot;);</span>
+<span class="nc" id="L44">				vl.setLocationRelativeTo(null);</span>
+<span class="nc" id="L45">				vl.pack();</span>
 				
 			}
-<span class="nc" id="L40">			return logIn;</span>
-<span class="nc" id="L41">		}catch(Exception e) {</span>
-<span class="nc" id="L42">			lError.setText(&quot;Algo ha fallado al realizar el LogIn&quot;);</span>
-<span class="nc" id="L43">			System.out.println(&quot;* Error &quot; + e.getMessage() +&quot;*&quot;);</span>
-<span class="nc" id="L44">			vl.pack();</span>
-<span class="nc" id="L45">			vl.setLocationRelativeTo(null);</span>
-<span class="nc" id="L46">			return false;</span>
+<span class="nc" id="L48">			return logIn;</span>
+<span class="fc" id="L49">		}catch(Exception e) {</span>
+<span class="fc" id="L50">			lError.setText(&quot;Algo ha fallado al realizar el LogIn&quot;);</span>
+<span class="fc" id="L51">			System.out.println(&quot;* Error &quot; + e.getMessage() +&quot;*&quot;);</span>
+<span class="fc" id="L52">			vl.pack();</span>
+<span class="fc" id="L53">			vl.setLocationRelativeTo(null);</span>
+<span class="fc" id="L54">			return false;</span>
 		}
 	}
 	public Usuario getUsuario(String email)throws ReventaException {
-<span class="nc" id="L50">		WebTarget webTarget = this.webTarget.path(&quot;collector/getUsuario/&quot;+ email);</span>
-<span class="nc" id="L51">		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
-<span class="nc" id="L52">		Response response = invocationBuilder.get();</span>
-<span class="nc bnc" id="L53" title="All 2 branches missed.">		if (response.getStatus() == Status.OK.getStatusCode()) {</span>
-<span class="nc" id="L54">			Usuario u = response.readEntity(Usuario.class);</span>
-<span class="nc" id="L55">			return u;</span>
+<span class="fc" id="L58">		WebTarget webTarget = this.webTarget.path(&quot;collector/getUsuario/&quot;+ email);</span>
+<span class="fc" id="L59">		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
+<span class="fc" id="L60">		Response response = invocationBuilder.get();</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">		if (response.getStatus() == Status.OK.getStatusCode()) {</span>
+<span class="fc" id="L62">			Usuario u = response.readEntity(Usuario.class);</span>
+<span class="fc" id="L63">			return u;</span>
 		} else {
-<span class="nc" id="L57">			throw new ReventaException(&quot;&quot; + response.getStatus());</span>
+<span class="fc" id="L65">			throw new ReventaException(&quot;&quot; + response.getStatus());</span>
 		}
 	}
 }

@@ -9,7 +9,7 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 @PersistenceCapable(detachable = &quot;true&quot;)
-<span class="fc" id="L12">public class Categoria {</span>
+<span class="nc" id="L12">public class Categoria {</span>
 	
 	@PrimaryKey
 	@Persistent(valueStrategy=IdGeneratorStrategy.INCREMENT)
@@ -17,24 +17,24 @@ import javax.jdo.annotations.PrimaryKey;
 	private String nombre;
 	
 	public int getId() {
-<span class="fc" id="L20">		return id;</span>
+<span class="nc" id="L20">		return id;</span>
 	}
 	public void setId(int id) {
-<span class="fc" id="L23">		this.id = id;</span>
-<span class="fc" id="L24">	}</span>
+<span class="nc" id="L23">		this.id = id;</span>
+<span class="nc" id="L24">	}</span>
 	public String getNombre() {
-<span class="fc" id="L26">		return nombre;</span>
+<span class="nc" id="L26">		return nombre;</span>
 	}
 	public void setNombre(String nombre) {
-<span class="fc" id="L29">		this.nombre = nombre;</span>
-<span class="fc" id="L30">	}</span>
+<span class="nc" id="L29">		this.nombre = nombre;</span>
+<span class="nc" id="L30">	}</span>
 	
 	@Persistent(defaultFetchGroup = &quot;true&quot;, mappedBy=&quot;categoria&quot;,  dependentElement = &quot;true&quot;)
 	@Join
 	private List&lt;Producto&gt;productos;//se consigue a través del producto
 	
 	public String toString() {
-<span class="fc" id="L37">		return nombre;</span>
+<span class="nc" id="L37">		return nombre;</span>
 	}
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

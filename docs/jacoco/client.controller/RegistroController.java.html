@@ -11,17 +11,20 @@ import javax.ws.rs.client.Entity;
 import serialization.Usuario;
 import util.ReventaException;
 
-<span class="nc" id="L14">public class RegistroController {</span>
+public class RegistroController {
 	private WebTarget webTarget;
 	
+<span class="fc" id="L17">	public RegistroController(WebTarget webTarget) {</span>
+<span class="fc" id="L18">		this.webTarget=webTarget;</span>
+<span class="fc" id="L19">	}</span>
 	
 	public void registrar(Usuario u) throws ReventaException {
-<span class="nc" id="L19">		WebTarget webTarget = this.webTarget.path(&quot;reventa/registro&quot;);</span>
-<span class="nc" id="L20">		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
-<span class="nc" id="L21">		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));</span>
-<span class="nc bnc" id="L22" title="All 2 branches missed.">		if (response.getStatus() != Status.OK.getStatusCode()) {</span>
-<span class="nc" id="L23">			throw new ReventaException(&quot;&quot; + response.getStatus());</span>
+<span class="fc" id="L22">		WebTarget webTarget = this.webTarget.path(&quot;reventa/registro&quot;);</span>
+<span class="fc" id="L23">		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);</span>
+<span class="fc" id="L24">		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));</span>
+<span class="pc bpc" id="L25" title="1 of 2 branches missed.">		if (response.getStatus() != Status.OK.getStatusCode()) {</span>
+<span class="nc" id="L26">			throw new ReventaException(&quot;&quot; + response.getStatus());</span>
 		}
-<span class="nc" id="L25">	}</span>
+<span class="fc" id="L28">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

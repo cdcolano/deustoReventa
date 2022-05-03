@@ -137,11 +137,11 @@ public class ChatController {
 	}
 	
 	public List&lt;Mensaje&gt; getMensajesEnviados(String email){
-<span class="nc" id="L140">		WebTarget webTarget = this.webTarget.path(&quot;reventa/mensajesEnviados/&quot;+email );</span>
-<span class="nc" id="L141">		List&lt;Mensaje&gt;lMEnviados= webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType&lt;List&lt;Mensaje&gt;&gt;() {</span>
+<span class="fc" id="L140">		WebTarget webTarget = this.webTarget.path(&quot;reventa/mensajesEnviados/&quot;+email );</span>
+<span class="fc" id="L141">		List&lt;Mensaje&gt;lMEnviados= webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType&lt;List&lt;Mensaje&gt;&gt;() {</span>
 	     } );
-<span class="nc" id="L143">		lMEnviados.sort(Comparator.comparing(Mensaje::getFecha).reversed());</span>
-<span class="nc" id="L144">		return lMEnviados;</span>
+<span class="fc" id="L143">		lMEnviados.sort(Comparator.comparing(Mensaje::getFecha).reversed());</span>
+<span class="fc" id="L144">		return lMEnviados;</span>
 	}
 	public List&lt;String&gt; getEmailUsuarios(){
 <span class="nc" id="L147">		List&lt;String&gt; listaEmail = new ArrayList&lt;&gt;();</span>

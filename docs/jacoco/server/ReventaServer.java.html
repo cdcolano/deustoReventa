@@ -35,175 +35,175 @@ public class ReventaServer {
 	
 
 	public void setVs(VentasService vs) {
-<span class="fc" id="L38">		this.vs = vs;</span>
-<span class="fc" id="L39">	}</span>
+<span class="nc" id="L38">		this.vs = vs;</span>
+<span class="nc" id="L39">	}</span>
 
 
-<span class="fc" id="L42">	public ReventaServer() {</span>
-<span class="fc" id="L43">		vs= new VentasService();</span>
-<span class="fc" id="L44">	}</span>
+<span class="nc" id="L42">	public ReventaServer() {</span>
+<span class="nc" id="L43">		vs= new VentasService();</span>
+<span class="nc" id="L44">	}</span>
 	
 	
 	@POST
 	@Path(&quot;/comprar/{x}/{y}&quot;)
 	public Response addCompra(Compra c, @PathParam(&quot;x&quot;) String x, @PathParam(&quot;y&quot;) int idProd) {
-<span class="fc" id="L50">		vs.comprarProducto(x, idProd,c.getPrecio());</span>
-<span class="fc" id="L51">		System.out.println(&quot;*Received purchase*&quot;);</span>
-<span class="fc" id="L52">		return Response.ok().build();</span>
+<span class="nc" id="L50">		vs.comprarProducto(x, idProd,c.getPrecio());</span>
+<span class="nc" id="L51">		System.out.println(&quot;*Received purchase*&quot;);</span>
+<span class="nc" id="L52">		return Response.ok().build();</span>
 	}
 	
 	
 	@POST
 	@Path(&quot;/enviar/{x}/{y}&quot;)
 	public Response addMensaje(Mensaje m,@PathParam(&quot;x&quot;) String x,@PathParam(&quot;y&quot;) String y){
-<span class="fc" id="L59">		vs.enviarMensaje(x, y, m.getContenido(), m.getFecha());</span>
-<span class="fc" id="L60">		System.out.println(&quot;*Message sent*&quot;);</span>
-<span class="fc" id="L61">		return Response.ok().build();</span>
+<span class="nc" id="L59">		vs.enviarMensaje(x, y, m.getContenido(), m.getFecha());</span>
+<span class="nc" id="L60">		System.out.println(&quot;*Message sent*&quot;);</span>
+<span class="nc" id="L61">		return Response.ok().build();</span>
 	}
 	
 	@GET
 	@Path(&quot;/mensajesRecibidos/{x}&quot;)
 	public List&lt;Mensaje&gt; getMensajesRecibidos(@PathParam(&quot;x&quot;) String x){
-<span class="fc" id="L67">		 List&lt;Mensaje&gt;mensajes=vs.getMensajesRecibidos(x);</span>
-<span class="fc" id="L68">		 return mensajes;</span>
+<span class="nc" id="L67">		 List&lt;Mensaje&gt;mensajes=vs.getMensajesRecibidos(x);</span>
+<span class="nc" id="L68">		 return mensajes;</span>
 	}
 	
 	@GET
 	@Path(&quot;/mensajesEnviados/{x}&quot;)
 	public List&lt;Mensaje&gt; getMensajesEnviados(@PathParam(&quot;x&quot;) String x){
-<span class="fc" id="L74">		 List&lt;Mensaje&gt;mensajes=vs.getMensajesEnviados(x);</span>
-<span class="fc" id="L75">		 return mensajes;</span>
+<span class="nc" id="L74">		 List&lt;Mensaje&gt;mensajes=vs.getMensajesEnviados(x);</span>
+<span class="nc" id="L75">		 return mensajes;</span>
 	}
 	
 	
 	@POST
 	@Path(&quot;/logIn&quot;)
 	public Response logIn(Usuario u) {
-<span class="fc" id="L82">		boolean logIn=vs.logIn(u.getEmail(), u.getPassword());</span>
-<span class="fc" id="L83">		System.out.println(&quot;*Realized logIn*&quot;);</span>
-<span class="fc" id="L84">		Response r=Response.ok(logIn).build();</span>
-<span class="fc" id="L85">		System.out.println(r.getEntity());</span>
-<span class="fc" id="L86">		return Response.ok(logIn).build();</span>
+<span class="nc" id="L82">		boolean logIn=vs.logIn(u.getEmail(), u.getPassword());</span>
+<span class="nc" id="L83">		System.out.println(&quot;*Realized logIn*&quot;);</span>
+<span class="nc" id="L84">		Response r=Response.ok(logIn).build();</span>
+<span class="nc" id="L85">		System.out.println(r.getEntity());</span>
+<span class="nc" id="L86">		return Response.ok(logIn).build();</span>
 	}
 	
 	@POST
 	@Path(&quot;/registro&quot;)
 	public Response registro(Usuario u) {
-<span class="fc" id="L92">		boolean registro=vs.registro(u);</span>
-<span class="fc" id="L93">		System.out.println(&quot;*Realizando registro*&quot;);</span>
-<span class="fc" id="L94">		return Response.ok(registro).build();</span>
+<span class="nc" id="L92">		boolean registro=vs.registro(u);</span>
+<span class="nc" id="L93">		System.out.println(&quot;*Realizando registro*&quot;);</span>
+<span class="nc" id="L94">		return Response.ok(registro).build();</span>
 	}
 	
 	@POST
 	@Path(&quot;/saleOrdenador&quot;)
 	public Response addProductoOrdenador(ProductoOrdenador p) {
-<span class="fc" id="L100">		vs.ponerALaVenta(p.getEmailVendedor(),p);</span>
-<span class="fc" id="L101">		System.out.println(&quot;*Producto puesto a la venta*&quot;);</span>
-<span class="fc" id="L102">		return Response.ok().build();</span>
+<span class="nc" id="L100">		vs.ponerALaVenta(p.getEmailVendedor(),p);</span>
+<span class="nc" id="L101">		System.out.println(&quot;*Producto puesto a la venta*&quot;);</span>
+<span class="nc" id="L102">		return Response.ok().build();</span>
 	}
 	
 	@POST
 	@Path(&quot;/saleVehiculo&quot;)
 	public Response addProductoVehiculo(ProductoVehiculo p) {
-<span class="fc" id="L108">		vs.ponerALaVenta(p.getEmailVendedor(),p);</span>
-<span class="fc" id="L109">		System.out.println(&quot;*Producto puesto a la venta*&quot;);</span>
-<span class="fc" id="L110">		return Response.ok().build();</span>
+<span class="nc" id="L108">		vs.ponerALaVenta(p.getEmailVendedor(),p);</span>
+<span class="nc" id="L109">		System.out.println(&quot;*Producto puesto a la venta*&quot;);</span>
+<span class="nc" id="L110">		return Response.ok().build();</span>
 	}
 
 
 	@GET
 	@Path(&quot;/getProducto/{x}&quot;)
 	public Response getProducto(@PathParam(&quot;x&quot;) int x) {
-<span class="fc" id="L117">		Producto producto=vs.getProducto(x);</span>
-<span class="fc" id="L118">		return Response.ok(producto).build();</span>
+<span class="nc" id="L117">		Producto producto=vs.getProducto(x);</span>
+<span class="nc" id="L118">		return Response.ok(producto).build();</span>
 	}
 	
 	@GET
 	@Path(&quot;/productosOrdenador&quot;)
 	public List&lt;ProductoOrdenador&gt; getProductosOrdenador() {
-<span class="fc" id="L124">		 List&lt;ProductoOrdenador&gt;prod=vs.getProductosOrdenador();</span>
-<span class="fc" id="L125">		 return prod;</span>
+<span class="nc" id="L124">		 List&lt;ProductoOrdenador&gt;prod=vs.getProductosOrdenador();</span>
+<span class="nc" id="L125">		 return prod;</span>
 	}
 	
 	@GET
 	@Path(&quot;/productosVehiculo&quot;)
 	public List&lt;ProductoVehiculo&gt; getProductosVehiculo() {
-<span class="fc" id="L131">		 List&lt;ProductoVehiculo&gt;prod=vs.getProductosVehiculos();</span>
-<span class="fc" id="L132">		 return prod;</span>
+<span class="nc" id="L131">		 List&lt;ProductoVehiculo&gt;prod=vs.getProductosVehiculos();</span>
+<span class="nc" id="L132">		 return prod;</span>
 	}
 	
 	
 	@GET
 	@Path(&quot;/productosOrdenador/venta&quot;)
 	public List&lt;ProductoOrdenador&gt; getProductosOrdenadorEnVenta() {
-<span class="fc" id="L139">		 List&lt;ProductoOrdenador&gt;prod=vs.getProductosOrdenadorEnVenta();</span>
-<span class="fc" id="L140">		 return prod;</span>
+<span class="nc" id="L139">		 List&lt;ProductoOrdenador&gt;prod=vs.getProductosOrdenadorEnVenta();</span>
+<span class="nc" id="L140">		 return prod;</span>
 	}
 	
 	@GET
 	@Path(&quot;/productosVehiculo/venta&quot;)
 	public List&lt;ProductoVehiculo&gt; getProductosVehiculoEnVenta() {
-<span class="fc" id="L146">		 List&lt;ProductoVehiculo&gt;prod=vs.getProductosVehiculosEnVenta();</span>
-<span class="fc" id="L147">		 return prod;</span>
+<span class="nc" id="L146">		 List&lt;ProductoVehiculo&gt;prod=vs.getProductosVehiculosEnVenta();</span>
+<span class="nc" id="L147">		 return prod;</span>
 	}
 	
 	@GET
 	@Path(&quot;/productosOrdenador/favoritos/{x}&quot;)
 	public List&lt;ProductoOrdenador&gt; getProductosOrdenadorFavoritos(@PathParam(&quot;x&quot;) String x) {
-<span class="fc" id="L153">		 List&lt;ProductoOrdenador&gt;prod=vs.getProductosOrdenadorFavoritos(x);</span>
-<span class="fc" id="L154">		 return prod;</span>
+<span class="nc" id="L153">		 List&lt;ProductoOrdenador&gt;prod=vs.getProductosOrdenadorFavoritos(x);</span>
+<span class="nc" id="L154">		 return prod;</span>
 	}
 	
 	@GET
 	@Path(&quot;/productosVehiculo/favoritos/{x}&quot;)
 	public List&lt;ProductoVehiculo&gt; getProductosVehiculoFavoritos(@PathParam(&quot;x&quot;) String x) {
-<span class="fc" id="L160">		 List&lt;ProductoVehiculo&gt;prod=vs.getProductosVehiculoFavoritos(x);</span>
-<span class="fc" id="L161">		 return prod;</span>
+<span class="nc" id="L160">		 List&lt;ProductoVehiculo&gt;prod=vs.getProductosVehiculoFavoritos(x);</span>
+<span class="nc" id="L161">		 return prod;</span>
 	}
 	
 	@GET
 	@Path(&quot;/numVentas/{x}&quot;)
 	public int getNumVentas(@PathParam(&quot;x&quot;) String x) {
-<span class="fc" id="L167">		return vs.getNumVentas(x);</span>
+<span class="nc" id="L167">		return vs.getNumVentas(x);</span>
 	}
 	
 	@GET
 	@Path(&quot;/categorias&quot;)
 	public List&lt;Categoria&gt; getCategorias() {
-<span class="fc" id="L173">		 List&lt;Categoria&gt;categorias=vs.getCategorias();</span>
-<span class="fc" id="L174">		 return categorias;</span>
+<span class="nc" id="L173">		 List&lt;Categoria&gt;categorias=vs.getCategorias();</span>
+<span class="nc" id="L174">		 return categorias;</span>
 	}
 	
 	@GET
 	@Path(&quot;/getUsuario/{x}&quot;)
 	public Response getUsuario(@PathParam(&quot;x&quot;) String x) {
-<span class="fc" id="L180">		System.out.println(x);</span>
-<span class="fc" id="L181">		Usuario usuario=vs.getUsuario(x);</span>
-<span class="fc" id="L182">		return Response.ok(usuario).build();</span>
+<span class="nc" id="L180">		System.out.println(x);</span>
+<span class="nc" id="L181">		Usuario usuario=vs.getUsuario(x);</span>
+<span class="nc" id="L182">		return Response.ok(usuario).build();</span>
 	}
 	
 	@GET
 	@Path(&quot;/ventas/{x}&quot;)
 	public Response getVentas(@PathParam(&quot;x&quot;) String x) {
-<span class="fc" id="L188">		System.out.println(x);</span>
-<span class="fc" id="L189">		Usuario usuario=vs.getUsuario(x);</span>
-<span class="fc" id="L190">		return Response.ok(usuario).build();</span>
+<span class="nc" id="L188">		System.out.println(x);</span>
+<span class="nc" id="L189">		Usuario usuario=vs.getUsuario(x);</span>
+<span class="nc" id="L190">		return Response.ok(usuario).build();</span>
 	}
 	
 	@POST
 	@Path(&quot;/anadirFav/{x}&quot;)
 	public Response addProductoFav(int id, @PathParam(&quot;x&quot;) String email ) {
-<span class="fc" id="L196">		vs.addProductoFav(id, email);</span>
-<span class="fc" id="L197">		System.out.println(&quot;*Producto añadido*&quot;);</span>
-<span class="fc" id="L198">		return Response.ok().build();</span>
+<span class="nc" id="L196">		vs.addProductoFav(id, email);</span>
+<span class="nc" id="L197">		System.out.println(&quot;*Producto añadido*&quot;);</span>
+<span class="nc" id="L198">		return Response.ok().build();</span>
 	}
 	
 	@POST
 	@Path(&quot;/anadirUsuarioFav/{x}&quot;)
 	public Response addUsuarioFav(String email2, @PathParam(&quot;x&quot;) String email ) {
-<span class="fc" id="L204">		vs.addUsuarioFav(email2, email);</span>
-<span class="fc" id="L205">		System.out.println(&quot;*Usuario añadido*&quot;);</span>
-<span class="fc" id="L206">		return Response.ok().build();</span>
+<span class="nc" id="L204">		vs.addUsuarioFav(email2, email);</span>
+<span class="nc" id="L205">		System.out.println(&quot;*Usuario añadido*&quot;);</span>
+<span class="nc" id="L206">		return Response.ok().build();</span>
 	}
 	
 	

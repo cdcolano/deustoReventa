@@ -14,6 +14,9 @@ import util.ReventaException;
 public class RegistroController {
 	private WebTarget webTarget;
 	
+	public RegistroController(WebTarget webTarget) {
+		this.webTarget=webTarget;
+	}
 	
 	public void registrar(Usuario u) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/registro");

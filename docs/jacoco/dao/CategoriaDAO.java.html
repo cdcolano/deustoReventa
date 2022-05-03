@@ -18,76 +18,76 @@ public class CategoriaDAO implements ICategoriaDAO {
 	
 	private PersistenceManagerFactory pmf;
 
-<span class="fc" id="L21">	public CategoriaDAO() {</span>
+<span class="nc" id="L21">	public CategoriaDAO() {</span>
 		// TODO Auto-generated constructor stub
-<span class="fc" id="L23">		pmf = JDOHelper.getPersistenceManagerFactory(&quot;datanucleus.properties&quot;);</span>
-<span class="fc" id="L24">	}</span>
+<span class="nc" id="L23">		pmf = JDOHelper.getPersistenceManagerFactory(&quot;datanucleus.properties&quot;);</span>
+<span class="nc" id="L24">	}</span>
 	
 	public void storeCategoria(Categoria categoria) {
-<span class="fc" id="L27">		this.storeObject(categoria);</span>
-<span class="fc" id="L28">	}</span>
+<span class="nc" id="L27">		this.storeObject(categoria);</span>
+<span class="nc" id="L28">	}</span>
 	
 	private void storeObject(Object object) {
-<span class="fc" id="L31">		PersistenceManager pm = pmf.getPersistenceManager();</span>
-<span class="fc" id="L32">		Transaction tx = pm.currentTransaction();</span>
+<span class="nc" id="L31">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+<span class="nc" id="L32">		Transaction tx = pm.currentTransaction();</span>
 
 		try {
-<span class="fc" id="L35">			tx.begin();</span>
-<span class="fc" id="L36">			System.out.println(&quot;   * Storing an object: &quot; + object);</span>
-<span class="fc" id="L37">			pm.makePersistent(object);</span>
-<span class="fc" id="L38">			tx.commit();</span>
-<span class="fc" id="L39">		} catch (Exception ex) {</span>
-<span class="fc" id="L40">			System.out.println(&quot;   $ Error storing an object: &quot; + ex.getMessage());</span>
+<span class="nc" id="L35">			tx.begin();</span>
+<span class="nc" id="L36">			System.out.println(&quot;   * Storing an object: &quot; + object);</span>
+<span class="nc" id="L37">			pm.makePersistent(object);</span>
+<span class="nc" id="L38">			tx.commit();</span>
+<span class="nc" id="L39">		} catch (Exception ex) {</span>
+<span class="nc" id="L40">			System.out.println(&quot;   $ Error storing an object: &quot; + ex.getMessage());</span>
 		} finally {
-<span class="pc bpc" id="L42" title="1 of 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
-<span class="fc" id="L43">				tx.rollback();</span>
+<span class="nc bnc" id="L42" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L43">				tx.rollback();</span>
 			}
 
-<span class="fc" id="L46">			pm.close();</span>
+<span class="nc" id="L46">			pm.close();</span>
 		}
-<span class="fc" id="L48">	}</span>
+<span class="nc" id="L48">	}</span>
 	
 	public List&lt;Categoria&gt; getCategorias() {
-<span class="fc" id="L51">		PersistenceManager pm = pmf.getPersistenceManager();</span>
+<span class="nc" id="L51">		PersistenceManager pm = pmf.getPersistenceManager();</span>
 		/*
 		 * By default only 1 level is retrieved from the db so if we wish to fetch more
 		 * than one level, we must indicate it
 		 */
 		
 
-<span class="fc" id="L58">		Transaction tx = pm.currentTransaction();</span>
-<span class="fc" id="L59">		List&lt;Categoria&gt; categorias = new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L58">		Transaction tx = pm.currentTransaction();</span>
+<span class="nc" id="L59">		List&lt;Categoria&gt; categorias = new ArrayList&lt;&gt;();</span>
 
 		try {
-<span class="fc" id="L62">			System.out.println(&quot;   * Retrieving an Extent for Products.&quot;);</span>
+<span class="nc" id="L62">			System.out.println(&quot;   * Retrieving an Extent for Products.&quot;);</span>
 
-<span class="fc" id="L64">			tx.begin();</span>
-<span class="fc" id="L65">			Extent&lt;Categoria&gt; extent = pm.getExtent(Categoria.class, true);</span>
+<span class="nc" id="L64">			tx.begin();</span>
+<span class="nc" id="L65">			Extent&lt;Categoria&gt; extent = pm.getExtent(Categoria.class, true);</span>
 
-<span class="fc bfc" id="L67" title="All 2 branches covered.">			for (Categoria c : extent) {</span>
-<span class="fc" id="L68">				categorias.add(c);</span>
-<span class="fc" id="L69">			}</span>
+<span class="nc bnc" id="L67" title="All 2 branches missed.">			for (Categoria c : extent) {</span>
+<span class="nc" id="L68">				categorias.add(c);</span>
+<span class="nc" id="L69">			}</span>
 
-<span class="fc" id="L71">			tx.commit();</span>
-<span class="fc" id="L72">		} catch (Exception ex) {</span>
-<span class="fc" id="L73">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
+<span class="nc" id="L71">			tx.commit();</span>
+<span class="nc" id="L72">		} catch (Exception ex) {</span>
+<span class="nc" id="L73">			System.out.println(&quot;   $ Error retrieving an extent: &quot; + ex.getMessage());</span>
 		} finally {
-<span class="pc bpc" id="L75" title="2 of 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
-<span class="fc" id="L76">				tx.rollback();</span>
+<span class="nc bnc" id="L75" title="All 4 branches missed.">			if (tx != null &amp;&amp; tx.isActive()) {</span>
+<span class="nc" id="L76">				tx.rollback();</span>
 			}
 
-<span class="fc" id="L79">			pm.close();</span>
+<span class="nc" id="L79">			pm.close();</span>
 		}
 
-<span class="fc" id="L82">		return categorias;</span>
+<span class="nc" id="L82">		return categorias;</span>
 	}
 
 	public PersistenceManagerFactory getPmf() {
-<span class="fc" id="L86">		return pmf;</span>
+<span class="nc" id="L86">		return pmf;</span>
 	}
 
 	public void setPmf(PersistenceManagerFactory pmf) {
-<span class="fc" id="L90">		this.pmf = pmf;</span>
-<span class="fc" id="L91">	}</span>
+<span class="nc" id="L90">		this.pmf = pmf;</span>
+<span class="nc" id="L91">	}</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

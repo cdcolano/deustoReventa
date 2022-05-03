@@ -1,14 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-deustoReventaDOREST,serialization,ProductoOrdenador,0,38,0,0,0,16,0,11,0,11
-deustoReventaDOREST,serialization,Tarjeta,0,31,0,0,0,13,0,9,0,9
-deustoReventaDOREST,serialization,Compra,0,31,0,0,0,13,0,9,0,9
-deustoReventaDOREST,serialization,Usuario,0,221,0,0,0,67,0,29,0,29
-deustoReventaDOREST,serialization,Mensaje,0,24,0,0,0,10,0,7,0,7
-deustoReventaDOREST,serialization,ProductoVehiculo,0,38,0,0,0,16,0,11,0,11
-deustoReventaDOREST,serialization,Categoria,0,20,0,0,0,8,0,6,0,6
-deustoReventaDOREST,serialization,Producto,0,98,0,0,0,40,0,20,0,20
-deustoReventaDOREST,serialization,Oferta,0,31,0,0,0,13,0,9,0,9
-deustoReventaDOREST,client.controller,ChatController,128,46,4,0,20,9,5,2,3,2
+deustoReventaDOREST,client.controller,VentasController,82,0,2,0,20,0,4,0,3,0
+deustoReventaDOREST,client.controller,ChatController,94,80,4,0,16,13,4,3,2,3
 deustoReventaDOREST,client.controller,ComprasController.new GenericType() {...},6,0,0,0,1,0,1,0,1,0
 deustoReventaDOREST,client.controller,ComprasController.new GenericType() {...},6,0,0,0,1,0,1,0,1,0
 deustoReventaDOREST,client.controller,ComprasController.new GenericType() {...},6,0,0,0,1,0,1,0,1,0
@@ -19,34 +11,43 @@ deustoReventaDOREST,client.controller,ComprasController.new ActionListener() {..
 deustoReventaDOREST,client.controller,ComprasController.new ActionListener() {...},24,0,0,0,6,0,2,0,2,0
 deustoReventaDOREST,client.controller,ComprasController.new ActionListener() {...},25,0,0,0,6,0,2,0,2,0
 deustoReventaDOREST,client.controller,ComprasController,716,0,20,0,125,0,26,0,16,0
-deustoReventaDOREST,client.controller,RegistroController,42,0,2,0,7,0,3,0,2,0
+deustoReventaDOREST,client.controller,RegistroController,13,32,1,1,1,8,1,2,0,2
 deustoReventaDOREST,client.controller,ComprasController.new Comparator() {...},64,0,0,0,9,0,2,0,2,0
 deustoReventaDOREST,client.controller,ComprasController.new Comparator() {...},36,0,0,0,7,0,2,0,2,0
 deustoReventaDOREST,client.controller,ComprasController.new Comparator() {...},22,0,0,0,4,0,2,0,2,0
 deustoReventaDOREST,client.controller,ChatController.new GenericType() {...},0,6,0,0,0,1,0,1,0,1
-deustoReventaDOREST,client.controller,ChatController.new GenericType() {...},6,0,0,0,1,0,1,0,1,0
-deustoReventaDOREST,client.controller,LoginController,146,0,6,0,29,0,6,0,3,0
-deustoReventaDOREST,server,MainServer,0,214,0,0,0,58,0,2,0,2
-deustoReventaDOREST,server,ReventaServer,0,220,0,0,0,58,0,23,0,23
+deustoReventaDOREST,client.controller,ChatController.new GenericType() {...},0,6,0,0,0,1,0,1,0,1
+deustoReventaDOREST,client.controller,LoginController,36,116,4,2,8,24,2,4,0,3
+deustoReventaDOREST,serialization,ProductoOrdenador,38,0,0,0,16,0,11,0,11,0
+deustoReventaDOREST,serialization,Tarjeta,31,0,0,0,13,0,9,0,9,0
+deustoReventaDOREST,serialization,Compra,31,0,0,0,13,0,9,0,9,0
+deustoReventaDOREST,serialization,Usuario,157,64,0,0,48,19,24,5,24,5
+deustoReventaDOREST,serialization,Mensaje,10,14,0,0,4,6,3,4,3,4
+deustoReventaDOREST,serialization,ProductoVehiculo,38,0,0,0,16,0,11,0,11,0
+deustoReventaDOREST,serialization,Categoria,20,0,0,0,8,0,6,0,6,0
+deustoReventaDOREST,serialization,Producto,98,0,0,0,40,0,20,0,20,0
+deustoReventaDOREST,serialization,Oferta,31,0,0,0,13,0,9,0,9,0
+deustoReventaDOREST,server,MainServer,214,0,0,0,58,0,2,0,2,0
+deustoReventaDOREST,server,ReventaServer,220,0,0,0,58,0,23,0,23,0
 deustoReventaDOREST,client.gui,VentanaCompras,134,0,2,0,34,0,2,0,1,0
 deustoReventaDOREST,client.gui,VentanaRegistro.new ActionListener() {...},89,0,0,0,19,0,2,0,2,0
-deustoReventaDOREST,client.gui,VentanaVentasTableModel,65,0,5,0,14,0,9,0,5,0
-deustoReventaDOREST,client.gui,VentanaLogin,418,0,6,0,86,0,6,0,3,0
+deustoReventaDOREST,client.gui,VentanaLogin,143,275,6,0,28,58,5,1,2,1
 deustoReventaDOREST,client.gui,VentanaProducto,798,0,4,0,151,0,8,0,6,0
 deustoReventaDOREST,client.gui,VentanaRegistro,375,0,2,0,80,0,3,0,2,0
-deustoReventaDOREST,client.gui,VentanaVentas,43,0,0,0,8,0,1,0,1,0
+deustoReventaDOREST,client.gui,VentanaVentas,133,0,2,0,25,0,2,0,1,0
 deustoReventaDOREST,client.gui,VentanaCompras.new ActionListener() {...},23,0,0,0,4,0,2,0,2,0
 deustoReventaDOREST,client.gui,VentanaCompras.new ItemListener() {...},73,0,10,0,13,0,7,0,2,0
 deustoReventaDOREST,client.gui,VentanaChat.new ActionListener() {...},76,0,0,0,15,0,2,0,2,0
 deustoReventaDOREST,client.gui,VentanaChat,333,0,6,0,63,0,4,0,1,0
-deustoReventaDOREST,client.gui,VentanaLogin.new ActionListener() {...},17,0,0,0,4,0,2,0,2,0
+deustoReventaDOREST,client.gui,VentanaLogin.new ActionListener() {...},11,6,0,0,3,1,1,1,1,1
+deustoReventaDOREST,client.gui,VentanaVentas.new ActionListener() {...},11,0,0,0,3,0,2,0,2,0
 deustoReventaDOREST,client.gui,VentanaProducto.new GenericType() {...},6,0,0,0,1,0,1,0,1,0
 deustoReventaDOREST,client.gui,VentanaProducto.new ActionListener() {...},204,0,4,0,61,0,4,0,2,0
 deustoReventaDOREST,client.gui,VentanaProducto.new ItemListener() {...},133,0,4,0,20,0,4,0,2,0
-deustoReventaDOREST,client.gui,VentanaLogin.new ActionListener() {...},57,0,2,0,12,0,3,0,2,0
+deustoReventaDOREST,client.gui,VentanaLogin.new ActionListener() {...},51,6,2,0,11,1,2,1,1,1
 deustoReventaDOREST,client.main,MainCliente,35,0,0,0,7,0,2,0,2,0
-deustoReventaDOREST,dao,ProductoDAO,0,525,13,31,0,137,13,18,0,9
-deustoReventaDOREST,dao,UsuarioDAO,0,161,3,7,0,45,3,9,0,7
-deustoReventaDOREST,dao,CategoriaDAO,0,126,3,7,0,36,3,8,0,6
+deustoReventaDOREST,dao,ProductoDAO,525,0,44,0,137,0,31,0,9,0
+deustoReventaDOREST,dao,UsuarioDAO,161,0,10,0,45,0,12,0,7,0
+deustoReventaDOREST,dao,CategoriaDAO,126,0,10,0,36,0,11,0,6,0
 deustoReventaDOREST,util,ReventaException,0,4,0,0,0,2,0,1,0,1
-deustoReventaDOREST,service,VentasService,0,643,1,29,0,202,1,43,0,29
+deustoReventaDOREST,service,VentasService,643,0,30,0,202,0,44,0,29,0

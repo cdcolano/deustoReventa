@@ -37,86 +37,86 @@ public class Producto {
 	private boolean vendido;
 	private String emailVendedor;
 	
-<span class="fc" id="L40">	public Producto(double precioSalida, String nombre, Categoria c) {</span>
-<span class="fc" id="L41">		vendido=false;</span>
-<span class="fc" id="L42">		reservado=false;</span>
-<span class="fc" id="L43">		this.categoria=c;</span>
-<span class="fc" id="L44">		this.nombre=nombre;</span>
-<span class="fc" id="L45">		this.precioSalida=precioSalida;</span>
-<span class="fc" id="L46">		this.fechaPubli=System.currentTimeMillis();</span>
-<span class="fc" id="L47">		ofertasRecibidas=new ArrayList&lt;&gt;();</span>
-<span class="fc" id="L48">	}</span>
+<span class="nc" id="L40">	public Producto(double precioSalida, String nombre, Categoria c) {</span>
+<span class="nc" id="L41">		vendido=false;</span>
+<span class="nc" id="L42">		reservado=false;</span>
+<span class="nc" id="L43">		this.categoria=c;</span>
+<span class="nc" id="L44">		this.nombre=nombre;</span>
+<span class="nc" id="L45">		this.precioSalida=precioSalida;</span>
+<span class="nc" id="L46">		this.fechaPubli=System.currentTimeMillis();</span>
+<span class="nc" id="L47">		ofertasRecibidas=new ArrayList&lt;&gt;();</span>
+<span class="nc" id="L48">	}</span>
 	
-<span class="fc" id="L50">	public Producto() {</span>
-<span class="fc" id="L51">		vendido=false;</span>
-<span class="fc" id="L52">		reservado=false;</span>
-<span class="fc" id="L53">		}</span>
+<span class="nc" id="L50">	public Producto() {</span>
+<span class="nc" id="L51">		vendido=false;</span>
+<span class="nc" id="L52">		reservado=false;</span>
+<span class="nc" id="L53">		}</span>
 	
 	public double getPrecioSalida() {
-<span class="fc" id="L56">		return precioSalida;</span>
+<span class="nc" id="L56">		return precioSalida;</span>
 	}
 	public void setPrecioSalida(double precioSalida) {
-<span class="fc" id="L59">		this.precioSalida = precioSalida;</span>
-<span class="fc" id="L60">	}</span>
+<span class="nc" id="L59">		this.precioSalida = precioSalida;</span>
+<span class="nc" id="L60">	}</span>
 	public String getNombre() {
-<span class="fc" id="L62">		return nombre;</span>
+<span class="nc" id="L62">		return nombre;</span>
 	}
 	public void setNombre(String nombre) {
-<span class="fc" id="L65">		this.nombre = nombre;</span>
-<span class="fc" id="L66">	}</span>
+<span class="nc" id="L65">		this.nombre = nombre;</span>
+<span class="nc" id="L66">	}</span>
 	public long getFechaPubli() {
-<span class="fc" id="L68">		return fechaPubli;</span>
+<span class="nc" id="L68">		return fechaPubli;</span>
 	}
 	public void setFechaPubli(long fechaPubli) {
-<span class="fc" id="L71">		this.fechaPubli = fechaPubli;</span>
-<span class="fc" id="L72">	}</span>
+<span class="nc" id="L71">		this.fechaPubli = fechaPubli;</span>
+<span class="nc" id="L72">	}</span>
 	
 	public boolean isReservado() {
-<span class="fc" id="L75">		return reservado;</span>
+<span class="nc" id="L75">		return reservado;</span>
 	}
 	public void setReservado(boolean reservado) {
-<span class="fc" id="L78">		this.reservado = reservado;</span>
-<span class="fc" id="L79">	}</span>
+<span class="nc" id="L78">		this.reservado = reservado;</span>
+<span class="nc" id="L79">	}</span>
 
 	public int getId() {
-<span class="fc" id="L82">		return id;</span>
+<span class="nc" id="L82">		return id;</span>
 	}
 
 	public void setId(int id) {
-<span class="fc" id="L86">		this.id = id;</span>
-<span class="fc" id="L87">	}</span>
+<span class="nc" id="L86">		this.id = id;</span>
+<span class="nc" id="L87">	}</span>
 	
 	public boolean isVendido() {
-<span class="fc" id="L90">		return vendido;</span>
+<span class="nc" id="L90">		return vendido;</span>
 	}
 	public void setVendido(boolean vendido) {
-<span class="fc" id="L93">		this.vendido = vendido;</span>
-<span class="fc" id="L94">	}</span>
+<span class="nc" id="L93">		this.vendido = vendido;</span>
+<span class="nc" id="L94">	}</span>
 	
 
 	public Categoria getCategoria() {
-<span class="fc" id="L98">		return categoria;</span>
+<span class="nc" id="L98">		return categoria;</span>
 	}
 
 	public void setCategoria(Categoria categoria) {
-<span class="fc" id="L102">		this.categoria = categoria;</span>
-<span class="fc" id="L103">	}</span>
+<span class="nc" id="L102">		this.categoria = categoria;</span>
+<span class="nc" id="L103">	}</span>
 
 	public List&lt;Oferta&gt; getOfertasRecibidas() {
-<span class="fc" id="L106">		return ofertasRecibidas;</span>
+<span class="nc" id="L106">		return ofertasRecibidas;</span>
 	}
 
 	public void setOfertasRecibidas(List&lt;Oferta&gt; ofertasRecibidas) {
-<span class="fc" id="L110">		this.ofertasRecibidas = ofertasRecibidas;</span>
-<span class="fc" id="L111">	}</span>
+<span class="nc" id="L110">		this.ofertasRecibidas = ofertasRecibidas;</span>
+<span class="nc" id="L111">	}</span>
 
 	public String getEmailVendedor() {
-<span class="fc" id="L114">		return emailVendedor;</span>
+<span class="nc" id="L114">		return emailVendedor;</span>
 	}
 
 	public void setEmailVendedor(String emailVendedor) {
-<span class="fc" id="L118">		this.emailVendedor = emailVendedor;</span>
-<span class="fc" id="L119">	}</span>
+<span class="nc" id="L118">		this.emailVendedor = emailVendedor;</span>
+<span class="nc" id="L119">	}</span>
 	
 	
 

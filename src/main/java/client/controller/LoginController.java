@@ -3,6 +3,7 @@ package client.controller;
 
 
 import javax.swing.JLabel;
+import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
@@ -16,6 +17,13 @@ import util.ReventaException;
 
 public class LoginController {
 	private WebTarget webTarget;
+	private Client cliente;
+	
+	public LoginController(Client cliente, WebTarget webTarget) {
+		super();
+		this.cliente = cliente;
+		this.webTarget = webTarget;
+	}
 	
 	public boolean logIn(String email, String password, JLabel lError, VentanaLogin vl) throws ReventaException {
 		try {
