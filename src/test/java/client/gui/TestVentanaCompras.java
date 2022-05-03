@@ -45,6 +45,10 @@ public class TestVentanaCompras {
 		try {
 			when(cc.getProductosEnVenta()).thenReturn(listaPro);
 			VentanaCompras vs = new VentanaCompras(cc,cliente, webtarget, "j");
+			vs.dispose();
+			when(cc.getProductosEnVenta()).thenThrow(ReventaException.class);
+			VentanaCompras vs2 = new VentanaCompras(cc,cliente, webtarget, "j");
+			vs2.dispose();
 		} catch (Exception e1) {
 			assertTrue(false);
 		}
