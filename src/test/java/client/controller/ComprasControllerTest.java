@@ -3,12 +3,14 @@ package client.controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.JDOUserException;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
@@ -24,7 +26,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import dao.ProductoDAO;
+import dao.UsuarioDAO;
 import serialization.Categoria;
+import serialization.Compra;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
@@ -41,22 +46,36 @@ public class ComprasControllerTest {
 	private WebTarget webTarget3;
 	
 	Usuario u1;
+	Usuario u2;
 	Producto p1;
 	Categoria c1;
 	ComprasController cc;
+	ComprasController cc1;
+	Compra c;
 	
 	@Mock
 	private Invocation.Builder inv;
+	@Mock
+	private Invocation.Builder inv2;
 	@Mock
 	private Response response;
 	@Mock
 	Client cliente;
 	
+	JPanel panel;
+	
 	@Before
 	public void setUp() {
 		u1 = new Usuario();
+		
 		u1.setEmail("j");
-		u1.setPassword("a");
+		u1.setPassword("j");
+		
+		panel = new JPanel();
+		
+		u2 = new Usuario();
+		u2.setEmail("a");
+		u2.setPassword("a");
 		
 		c1 = new Categoria();
 		c1.setNombre("Cat1");
@@ -65,64 +84,225 @@ public class ComprasControllerTest {
 		p1.setNombre("producto");
 		p1.setId(1);
 		
-		cc = new ComprasController(webTarget,"j");
+		c= new Compra();
+		//c.setProducto(p1);
+		c.setPrecio(1.0);
 		
+		cc = new ComprasController(webTarget,"j");
+		cc1 = new ComprasController(webTarget2,"j");
+		
+	}
+	
+	public void comprar(String email, int idProducto, double precio) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/comprar/"+email +"/"+ idProducto);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Compra c= new Compra();
+		c.setPrecio(precio);
+		Response response = invocationBuilder.post(Entity.entity(c, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
 	}
 	
 	@Test
 	public void testComprar() {
-		when(webTarget.path("reventa/comprar/a/1")).thenReturn(webTarget2);
+		when(webTarget.path("reventa/comprar/j/1")).thenReturn(webTarget2);
 		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
-		when(inv.post(Entity.entity(c1, MediaType.APPLICATION_JSON))).thenReturn(response);
+		when(inv.post(Entity.entity(c, MediaType.APPLICATION_JSON))).thenReturn(response);
 		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
-		
 		
 		try {
 			cc.comprar("j", 1, 1.0);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			assertTrue(false);
+		}
+		
+		when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
+		try {
+			cc.comprar("j", 1, 1.0);
+		}catch(Exception ex) {
+			assertTrue(true);
+		}
+	}
+	
+	
+	@Test
+	public void testGetProductos() {
+		when(webTarget.path("reventa/productosOrdenador")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(webTarget.path("reventa/productosVehiculo")).thenReturn(webTarget3);
+		when(webTarget3.request(MediaType.APPLICATION_JSON)).thenReturn(inv2);
+		
+		List<ProductoOrdenador> lpo = new ArrayList<>();
+		when(inv.get( new GenericType<List<ProductoOrdenador>>() {})).thenReturn(lpo);
+		List<ProductoVehiculo> lpv = new ArrayList<>(); 
+		when(inv2.get( new GenericType<List<ProductoVehiculo>>() {})).thenReturn(lpv);
+		
+		List<Producto> listaFinal = new ArrayList<>();
+		
+		listaFinal.addAll(lpo);
+		listaFinal.addAll(lpv);
+		try {
+			assertEquals(listaFinal,cc.getProductos());
+		} catch (ReventaException e) {
+		}
+	}
+	
+	@Test
+	public void testGetProductosFavoritos() {
+		when(webTarget.path("reventa/productosOrdenador/favoritos/j")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(webTarget.path("reventa/productosVehiculo/favoritos/j")).thenReturn(webTarget3);
+		when(webTarget3.request(MediaType.APPLICATION_JSON)).thenReturn(inv2);
+		
+		List<ProductoOrdenador> lpo = new ArrayList<>();
+		when(inv.get( new GenericType<List<ProductoOrdenador>>() {})).thenReturn(lpo);
+		List<ProductoVehiculo> lpv = new ArrayList<>(); 
+		when(inv2.get( new GenericType<List<ProductoVehiculo>>() {})).thenReturn(lpv);
+		
+		List<Producto> listaFinal = new ArrayList<>();
+		
+		listaFinal.addAll(lpo);
+		listaFinal.addAll(lpv);
+		try {
+			assertEquals(listaFinal,cc.getProductosFavoritos());
+		} catch (ReventaException e) {
+		}
+	}
+	
+	@Test
+	public void testAnadirFav() {
+		when(webTarget.path("reventa/anadirFav/j")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(inv.post(Entity.entity(p1.getId(), MediaType.APPLICATION_JSON))).thenReturn(response);
+		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
+		
+		try {
+			cc.anadirFav(p1, "j");
+		}catch(ReventaException e){
+			e.printStackTrace();
+			assertTrue(false);
+		}
+		when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
+		try {
+			cc.anadirFav(p1, "j");
+		}catch(Exception ex) {
+			assertTrue(true);
+		}
+		
+	}
+	
+	@Test
+	public void testAnadirUsuarioFav() {
+		when(webTarget.path("reventa/anadirUsuarioFav/j")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(inv.post(Entity.entity("a", MediaType.APPLICATION_JSON))).thenReturn(response);
+		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
+		
+		try {
+			cc.anadirUsuarioFav("a", "j");
+		}catch(Exception e) {
+			assertTrue(false);
+		}
+		when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
+		try {
+			cc.anadirUsuarioFav("a", "j");
+		}catch(Exception e) {
+			assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void testAnadirUsuarioFav1() {
+		when(webTarget.path("reventa/anadirUsuarioFav/j")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(inv.post(Entity.entity(u2, MediaType.APPLICATION_JSON))).thenReturn(response);
+		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
+		
+		try {
+			cc.anadirUsuarioFav(u2, "j");
 		}catch(Exception ex) {
 			assertTrue(false);
 		}
 		when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
 		try {
-			cc.comprar("j", 1, 1.0);
-			assertFalse(true);
-		}catch(Exception ex) {
-			
+			cc.anadirUsuarioFav(u2, "j");
+		}catch(Exception e) {
+			assertTrue(true);
 		}
-	}
-	
-	@Test
-	public void testGetProductos() {
-		when(webTarget.path("reventa/productosOrdenador")).thenReturn(webTarget2);
-		when(webTarget.path("reventa/productosVehiculo")).thenReturn(webTarget3);
-		List<ProductoOrdenador> lpo = new ArrayList<>();
-		when(webTarget2.request(MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {})).thenReturn(lpo);
-		List<ProductoVehiculo> lpv = new ArrayList<>(); 
-		when(webTarget3.request(MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {})).thenReturn(lpv);
 		
 	}
-	@Test
-	public void testGetProductosEnVenta() {
-		when(webTarget.path("reventa/productosOrdenador/venta")).thenReturn(webTarget2);
-		when(webTarget.path("reventa/productosVehiculo/venta")).thenReturn(webTarget3);
-		List<ProductoOrdenador> lpo = new ArrayList<>();
-		when(webTarget2.request(MediaType.APPLICATION_JSON )).thenReturn(inv);
-		when(inv.get(new GenericType<List<ProductoOrdenador>>() {})).thenReturn(lpo);
-		List<ProductoVehiculo> lpv = new ArrayList<>(); 
-		when(webTarget3.request(MediaType.APPLICATION_JSON )).thenReturn(inv);
-		when(inv.get(new GenericType<List<ProductoVehiculo>>() {})).thenReturn(lpv);
 	
-		List<Producto> lp = new ArrayList<>();
-		lp.addAll(lpo);
-		lp.addAll(lpv);
+	@Test
+	public void testGetProducto() {
+		when(webTarget.path("collector/getProducto/1")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(inv.get()).thenReturn(response);
+		when(response.readEntity(Producto.class)).thenReturn(p1);
+		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
 		
 		try {
-			List<Producto> listaFinal = cc.getProductosEnVenta();
-			assertEquals(lp.size(), listaFinal.size());
+			assertEquals(cc.getProducto(1),p1);
 		} catch (ReventaException e) {
-			fail();
+			// TODO Auto-generated catch block
+			assertTrue(false);
 		}
-		
-		
+		when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
+		try {
+			cc.getProducto(1);
+			assertTrue(false);
+		}catch(Exception ex) {
+			assertTrue(true);
+		}
 	}
+	
+	@Test
+	public void testGetVentas() {
+		when(webTarget.path("reventa/numVentas/j")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(inv.get()).thenReturn(response);
+		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
+		int u = 0;
+		when(response.readEntity(Integer.class)).thenReturn(u);
+		
+		try {
+			assertEquals(cc.getVentas("j"),0);
+		}catch(Exception ex) {
+			assertTrue(false);
+		}
+		when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
+		try {
+			assertEquals(cc.getVentas("j"),0);
+			assertTrue(false);
+		}catch(Exception ex) {
+			assertTrue(true);
+		}
+	}
+	
+	@Test
+	public void testMostrarFavoritos() {
+		try {
+			cc.mostrarFavoritos(panel, "j");
+			assertTrue(false);
+		}catch(Exception e) {
+			assertTrue(true);
+		}
+	}
+
+	@Test
+	public void testCrearPanel() {
+		try {
+			cc.crearPanel(p1, panel);
+		}catch(Exception e) {
+			assertTrue(true);
+		}
+	}
+	/*@Test
+	public void testSetProductos() {
+		List<Producto> a = new ArrayList<>();
+		a.add(p1);
+		List<Producto> b = new ArrayList<>();
+		assertEquals(cc.setProductos(a),a);
+	}*/
 }
