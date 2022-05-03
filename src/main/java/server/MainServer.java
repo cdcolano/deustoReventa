@@ -57,20 +57,25 @@ public class MainServer{
 		p1.setPrecioSalida(400);
 		p1.setNombre("acer");
 		p1.setCategoria(c1);
+		p1.setFechaPubli(3000);
 		
 		ProductoVehiculo p2=new ProductoVehiculo();
 		p2.setPrecioSalida(10000);
 		p2.setNombre("golf");
 		p2.setCategoria(c2);
+		p2.setFechaPubli(2000);
 		
 		ProductoOrdenador p3= new ProductoOrdenador();
 		p3.setPrecioSalida(200);
 		p3.setNombre("hp");
 		p3.setCategoria(c1);
+		p3.setFechaPubli(1000);
+		
 		ProductoVehiculo p4= new ProductoVehiculo();
 		p4.setPrecioSalida(12000);
 		p4.setNombre("ibiza");
 		p4.setCategoria(c2);
+		p4.setFechaPubli(500);
 		
 		
 		p1.setEmailVendedor(u1.getEmail());
