@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 
+import client.controller.ProductoController;
 import serialization.Categoria;
 import serialization.Mensaje;
 import serialization.Usuario;
@@ -27,7 +28,7 @@ public class TestVentanaProducto {
 	@Mock
 	WebTarget webTarget;
 	@Mock
-	VentanaProducto vp;
+	ProductoController  pc;
 	@Mock
 	private Invocation.Builder builder;
 	
@@ -38,7 +39,7 @@ public class TestVentanaProducto {
 	@Test
 	public void test(){
 		try {
-			VentanaProducto vp = new VentanaProducto(cliente, webTarget, "u@gmail.com");
+			VentanaProducto vp = new VentanaProducto(pc,cliente, webTarget, "u@gmail.com");
 		}catch(Exception e) {
 			assertTrue(false);
 		}
