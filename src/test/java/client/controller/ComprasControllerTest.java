@@ -61,6 +61,8 @@ public class ComprasControllerTest {
 	@Mock
 	private Response response;
 	@Mock
+	private Response response2;
+	@Mock
 	Client cliente;
 	
 	JPanel panel;
@@ -316,19 +318,21 @@ public class ComprasControllerTest {
 		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
 		when(inv.get()).thenReturn(response);
 		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
+		when(webTarget.path("reventa/numVentas/b")).thenReturn(webTarget3);
+		when(webTarget3.request(MediaType.APPLICATION_JSON)).thenReturn(inv2);
+		when(inv2.get()).thenReturn(response2);
+		when(response2.getStatus()).thenReturn(Status.OK.getStatusCode());
+		when(response.readEntity(Integer.class)).thenReturn(1);
+		when(response2.readEntity(Integer.class)).thenReturn(2);
 		
 		List<Producto> lp = new ArrayList<>();
 		lp.add(p1);
+		p1.setEmailVendedor("j");
 		lp.add(p2);
+		p2.setEmailVendedor("b");
 		cc.setProductos(lp);
 		cc.ordenarPorVentas(panel);
-		
-		try {
-			assertTrue(cc.getVentas(lp.get(0).getEmailVendedor())>cc.getVentas(lp.get(1).getEmailVendedor()));
-		} catch (ReventaException e) {
-			// TODO Auto-generated catch block
-			fail();	
-		} 	
+		assertEquals(lp.get(0), p2);
 	}
 	/*@Test
 	public void testSetProductos() {
