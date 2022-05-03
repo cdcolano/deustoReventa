@@ -43,11 +43,11 @@ public class VentanaCompras extends JFrame{
 	private List<Producto> productos;
 	private ComprasController controller;
 	
-	public VentanaCompras(Client cliente, WebTarget webTarget, String email) {
+	public VentanaCompras(ComprasController cc,Client cliente, WebTarget webTarget, String email) {
 		this.client=cliente;
 		this.webTarget=webTarget;
 		this.email=email;
-		this.controller= new ComprasController(webTarget, email);
+		this.controller= cc;
 		JPanel pCentro= new JPanel();
 		pCentro.setLayout(new BoxLayout(pCentro, BoxLayout.Y_AXIS));
 		JComboBox<String>cbOrdenar= new JComboBox<>();

@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import client.controller.ComprasController;
 import client.controller.LoginController;
 import serialization.Compra;
 import serialization.Producto;
@@ -122,7 +123,7 @@ public class VentanaLogin extends JFrame {
 					String password=contraseina.getText();
 					boolean valido=lc.logIn(email, password, lError,v1);
 					if (valido) {
-						VentanaCompras v= new VentanaCompras(VentanaLogin.this.cliente, VentanaLogin.this.webTarget, email);
+						VentanaCompras v= new VentanaCompras(new ComprasController(webTarget, email),VentanaLogin.this.cliente, VentanaLogin.this.webTarget, email);
 						//VentanaChat v1 = new VentanaChat(VentanaLogin.this.cliente,VentanaLogin.this.webTarget,email);
 						VentanaLogin.this.dispose();
 					}

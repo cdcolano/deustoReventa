@@ -1,6 +1,7 @@
 package client.gui;
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -17,6 +18,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import client.controller.ComprasController;
 import serialization.Categoria;
 import serialization.Producto;
+import util.ReventaException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestVentanaCompras {
@@ -30,6 +32,7 @@ public class TestVentanaCompras {
 	
 	@Test
 	public void test() {
+		
 		Producto p = new Producto();
 		Categoria c = new Categoria();
 		c.setId(1);
@@ -38,11 +41,11 @@ public class TestVentanaCompras {
 		p.setCategoria(c);
 		List<Producto> listaPro = new ArrayList<>();
 		listaPro.add(p);
+		
 		try {
-			when(cc.getProductosFavoritos()).thenReturn(listaPro);
-			VentanaCompras vs = new VentanaCompras(cliente, webtarget, "");
+			when(cc.getProductosEnVenta()).thenReturn(listaPro);
+			VentanaCompras vs = new VentanaCompras(cc,cliente, webtarget, "j");
 		} catch (Exception e1) {
-			// TODO Auto-generated catch block
 			assertTrue(false);
 		}
 	}

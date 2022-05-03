@@ -20,6 +20,7 @@ import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 
+import client.controller.ComprasController;
 import client.controller.VentasController;
 import serialization.Producto;
 import util.ReventaException;
@@ -93,7 +94,7 @@ public class VentanaVentas extends JFrame {
 		btnCerrar.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaCompras vc= new VentanaCompras(c, wt, email);
+				VentanaCompras vc= new VentanaCompras(new ComprasController(webTarget,email),c, wt, email);
 				VentanaVentas.this.dispose();
 			}
 		});
