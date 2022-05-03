@@ -87,7 +87,7 @@ public class VentanaChat extends JFrame {
 			Date date = new Date(m.getFecha());
 			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
 			String p = df.format(date);
-			enviados.append(m.getContenido() +" - "+ p + "\n");
+			enviados.append(m.getContenido() +c+ p + "\n");
 		}
 		for(Mensaje m1: recibidosM) {
 			Date date = new Date(m1.getFecha());
@@ -133,7 +133,7 @@ public class VentanaChat extends JFrame {
 				}
 				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
 				String p = df.format(fecha);
-				enviados.append(mensaje.getText()+" - "+ p +"\n");
+				enviados.setText(mensaje.getText()+" - "+ p +"\n" + enviados.getText());
 				v1.pack();
 			}
 		});
