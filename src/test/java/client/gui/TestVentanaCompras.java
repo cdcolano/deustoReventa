@@ -7,6 +7,8 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JComboBox;
+import javax.swing.JPanel;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
@@ -48,11 +50,23 @@ public class TestVentanaCompras {
 			vs.dispose();
 			when(cc.getProductosEnVenta()).thenThrow(ReventaException.class);
 			VentanaCompras vs2 = new VentanaCompras(cc,cliente, webtarget, "j");
+			JComboBox<String> jc= new JComboBox<String>();
+			jc.addItem("Ordenar por Ventas del Vendedor");
+			jc.addItem("Ordenar por Fecha de Publicacion ascendente");
+			jc.addItem("Ordenar por Fecha de Publicacion descendente");
+			jc.addItem("Favoritos");
+			JPanel panel= new JPanel();
+			for (int i=0;i<4;i++) {
+				jc.setSelectedIndex(i);
+				vs2.itemStateChangedVentana(jc, panel, cc, "j", vs2);
+			}	
 			vs2.dispose();
 		} catch (Exception e1) {
 			assertTrue(false);
 		}
 	}
+	
+	
 	
 	
 

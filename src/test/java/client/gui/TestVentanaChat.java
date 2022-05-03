@@ -23,6 +23,7 @@ import client.controller.ComprasController;
 import dao.UsuarioDAO;
 import serialization.Mensaje;
 import serialization.Usuario;
+import util.ReventaException;
 
 @RunWith(MockitoJUnitRunner.class)
 public class TestVentanaChat {
@@ -38,15 +39,12 @@ public class TestVentanaChat {
 	@Mock
 	UsuarioDAO udao;
 	
-	VentanaChat vc;
 	
 	@Before
 	public void setUp() {
 		u1 = new Usuario();
 		u1.setEmail("j");
 		u1.setPassword("j");
-		
-		vc= new VentanaChat(cc, cliente, webTarget, "a");
 	}
 	
 	@Test
@@ -68,20 +66,21 @@ public class TestVentanaChat {
         when(cc.getEmailUsuarios()).thenReturn(emails);
 		try {
 			VentanaChat v= new VentanaChat(cc,cliente, webTarget, "j");
+			String email = "j";
+			JTextArea ta = new JTextArea();
+			JTextField tf = new JTextField();
+			VentanaChat vt = new VentanaChat(cc,cliente,webTarget,"j");
+			JComboBox jc = new JComboBox<>();
+			jc.addItem("a");
+			jc.setSelectedIndex(0);
+			v.enviarMensaje(email, ta, tf, v, jc, cc);
 		}catch(Exception e) {
-			assertTrue(true);
+			assertTrue(false);
 		}
 	}
 	@Test
 	public void testEnviarMensaje() {
-		String email = "j";
-		JTextArea ta = new JTextArea();
-		JTextField tf = new JTextField();
-		VentanaChat vt = new VentanaChat(cc,cliente,webTarget,"j");
-		JComboBox jc = new JComboBox<>();
-		ChatController cc = new ChatController(webTarget, email, udao);
 		
-		vc.enviarMensaje(email, ta, tf, vt, jc, cc);
 		
 		
 	}

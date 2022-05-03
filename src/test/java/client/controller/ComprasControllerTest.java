@@ -384,8 +384,9 @@ public class ComprasControllerTest {
 		listaFinal.addAll(lpv);
 		
 		cc.mostrarFavoritos(panel, "j");
-		
 		assertEquals(listaFinal.size(),panel.getComponents().length);
+		
+		
 		
 	}
 	/*@Test
