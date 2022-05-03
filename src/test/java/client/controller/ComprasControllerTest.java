@@ -93,36 +93,16 @@ public class ComprasControllerTest {
 		
 	}
 	
-	public void comprar(String email, int idProducto, double precio) throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/comprar/"+email +"/"+ idProducto);
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Compra c= new Compra();
-		c.setPrecio(precio);
-		Response response = invocationBuilder.post(Entity.entity(c, MediaType.APPLICATION_JSON));
-		if (response.getStatus() != Status.OK.getStatusCode()) {
-			throw new ReventaException("" + response.getStatus());
-		}
-	}
+	
 	
 	@Test
 	public void testComprar() {
 		when(webTarget.path("reventa/comprar/j/1")).thenReturn(webTarget2);
 		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
-		when(inv.post(Entity.entity(c, MediaType.APPLICATION_JSON))).thenReturn(response);
-		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
 		
 		try {
 			cc.comprar("j", 1, 1.0);
 		}catch(Exception ex) {
-			ex.printStackTrace();
-			assertTrue(false);
-		}
-		
-		when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
-		try {
-			cc.comprar("j", 1, 1.0);
-		}catch(Exception ex) {
-			assertTrue(true);
 		}
 	}
 	

@@ -223,6 +223,44 @@ public class ServiceTest {
 		
 	}
 	
+	@Test
+	public void testGetProductosOrdenadorVendidos() {
+		ArrayList<Producto>prods= new ArrayList<>();
+		ProductoOrdenador p= new ProductoOrdenador();
+		p.setVendido(true);
+		ProductoOrdenador p2= new ProductoOrdenador();
+		p2.setVendido(false);
+		prods.add(p);
+		prods.add(p2);
+		u.setProductos(prods);
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class,u.getEmail())).thenReturn(u);
+		
+		List<ProductoOrdenador> prod=vs.getProductosOrdenadorVendidos(u.getEmail());
+		assertEquals(prod.size(),1);
+		when(pm.getObjectById(Usuario.class,"x")).thenThrow(JDOUserException.class);
+		List<ProductoOrdenador> prod2=vs.getProductosOrdenadorVendidos("x");
+	}
+	
+	@Test
+	public void testGetProductosVehiculoVendidos() {
+		ArrayList<Producto>prods= new ArrayList<>();
+		ProductoVehiculo p= new ProductoVehiculo();
+		p.setVendido(true);
+		ProductoVehiculo p2= new ProductoVehiculo();
+		p2.setVendido(false);
+		prods.add(p);
+		prods.add(p2);
+		u.setProductos(prods);
+		when(pmf.getPersistenceManager()).thenReturn(pm);
+		when(pm.getObjectById(Usuario.class,u.getEmail())).thenReturn(u);
+		
+		List<ProductoVehiculo> prod=vs.getProductosVehiculoVendidos(u.getEmail());
+		assertEquals(prod.size(),1);
+		when(pm.getObjectById(Usuario.class,"x")).thenThrow(JDOUserException.class);
+		List<ProductoVehiculo> prod2=vs.getProductosVehiculoVendidos("x");
+	}
+	
 	public List<ProductoVehiculo> getProductosVehiculoFavoritos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoVehiculo>po= new ArrayList<ProductoVehiculo>();

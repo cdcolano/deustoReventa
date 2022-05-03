@@ -2,6 +2,7 @@ package client.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import javax.ws.rs.client.Entity;
@@ -60,9 +61,11 @@ public class RegistroControllerTest {
 		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
 		try {
 			rc.registrar(u1);
+			when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
+			rc.registrar(u1);
+			fail();
 		} catch (ReventaException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			assertTrue(true);
 		}
 		/*when(response.getStatus()).thenReturn(Status.BAD_REQUEST.getStatusCode());
 		try {
