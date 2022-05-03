@@ -297,11 +297,14 @@ public class ComprasControllerTest {
 
 	@Test
 	public void testCrearPanel() {
+		JPanel pn1 = new JPanel();
+		
 		try {
-			cc.crearPanel(p1, panel);
+			cc.crearPanel(p1, pn1);
 		}catch(Exception e) {
-			assertTrue(true);
+			fail();
 		}
+		assertEquals(pn1.getComponents().length,1);
 	}
 	/*@Test
 	public void testSetProductos() {
