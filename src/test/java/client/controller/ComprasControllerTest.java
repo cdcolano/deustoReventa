@@ -291,15 +291,6 @@ public class ComprasControllerTest {
 		}
 	}
 	
-	@Test
-	public void testMostrarFavoritos() {
-		try {
-			cc.mostrarFavoritos(panel, "j");
-			assertTrue(false);
-		}catch(Exception e) {
-			assertTrue(true);
-		}
-	}
 
 	@Test
 	public void testCrearPanel() {
@@ -359,6 +350,28 @@ public class ComprasControllerTest {
 		cc.setProductos(lp);
 		cc.ordenarPorFechaDesc(panel);
 		assertEquals(lp.get(0),p2);
+	}
+	@Test
+	public void testMostrarFavoritos() {
+		when(webTarget.path("reventa/productosOrdenador/favoritos/j")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(webTarget.path("reventa/productosVehiculo/favoritos/j")).thenReturn(webTarget3);
+		when(webTarget3.request(MediaType.APPLICATION_JSON)).thenReturn(inv2);
+		
+		List<ProductoOrdenador> lpo = new ArrayList<>();
+		when(inv.get( new GenericType<List<ProductoOrdenador>>() {})).thenReturn(lpo);
+		List<ProductoVehiculo> lpv = new ArrayList<>(); 
+		when(inv2.get( new GenericType<List<ProductoVehiculo>>() {})).thenReturn(lpv);
+		
+		List<Producto> listaFinal = new ArrayList<>();
+		
+		listaFinal.addAll(lpo);
+		listaFinal.addAll(lpv);
+		
+		cc.mostrarFavoritos(panel, "j");
+		
+		assertEquals(listaFinal.size(),panel.getComponents().length);
+		
 	}
 	/*@Test
 	public void testSetProductos() {
