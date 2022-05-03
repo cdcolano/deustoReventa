@@ -102,6 +102,7 @@ public class ProductoControllerTest {
 		when(webTarget.path("reventa/saleOrdenador")).thenReturn(webTarget2);
 		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
 		when(inv.post(Entity.entity(p1, MediaType.APPLICATION_JSON))).thenReturn(response);
+		
 		try {
 			pc.addProductoOrdenador(p1);
 			assertTrue(true);
@@ -113,10 +114,8 @@ public class ProductoControllerTest {
 	@Test
 	public void testAddProductoVehiculo() {
 		when(webTarget.path("reventa/saleVehiculo")).thenReturn(webTarget2);
-		//when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
-		
-		//ProductoVehiculo pv = new ProductoVehiculo();
-		//when(inv.post(Entity.entity(pv, MediaType.APPLICATION_JSON)));
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(inv.post(Entity.entity(p1, MediaType.APPLICATION_JSON))).thenReturn(response);
 		
 		try {
 			pc.addProductoVehiculo(p1);
