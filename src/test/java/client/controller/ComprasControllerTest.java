@@ -48,7 +48,7 @@ public class ComprasControllerTest {
 	
 	Usuario u1;
 	Usuario u2;
-	Producto p1;
+	Producto p1,p2;
 	Categoria c1;
 	ComprasController cc;
 	ComprasController cc1;
@@ -84,6 +84,10 @@ public class ComprasControllerTest {
 		p1.setCategoria(c1);
 		p1.setNombre("producto");
 		p1.setId(1);
+		p2 = new Producto();
+		p2.setCategoria(c1);
+		p2.setNombre("producto1");
+		p2.setId(2);
 		
 		c= new Compra();
 		//c.setProducto(p1);
@@ -305,6 +309,26 @@ public class ComprasControllerTest {
 			fail();
 		}
 		assertEquals(pn1.getComponents().length,1);
+	}
+	@Test
+	public void testOrdenarPorVentas() {
+		when(webTarget.path("reventa/numVentas/j")).thenReturn(webTarget2);
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(inv.get()).thenReturn(response);
+		when(response.getStatus()).thenReturn(Status.OK.getStatusCode());
+		
+		List<Producto> lp = new ArrayList<>();
+		lp.add(p1);
+		lp.add(p2);
+		cc.setProductos(lp);
+		cc.ordenarPorVentas(panel);
+		
+		try {
+			assertTrue(cc.getVentas(lp.get(0).getEmailVendedor())>cc.getVentas(lp.get(1).getEmailVendedor()));
+		} catch (ReventaException e) {
+			// TODO Auto-generated catch block
+			fail();	
+		} 	
 	}
 	/*@Test
 	public void testSetProductos() {
