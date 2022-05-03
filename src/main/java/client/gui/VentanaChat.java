@@ -48,14 +48,14 @@ public class VentanaChat extends JFrame {
 	
 	
 	
-	public VentanaChat(ChatController cc,Client c, WebTarget wt, String email1) {
+	public VentanaChat(Client c, WebTarget wt, String email1) {
 		this.client=c;
 		this.em1=email1;
-		this.cc=cc;
 		udao = new UsuarioDAO();
 		webTarget= wt;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);
+		cc = new ChatController(wt,email1,udao);
 		v1=this;
 		v1.setTitle("");
 		v1.setLayout( new GridLayout(2,0));
@@ -120,21 +120,7 @@ public class VentanaChat extends JFrame {
 		botonEnviar.addActionListener(new ActionListener()
 		{
 			public void actionPerformed (ActionEvent e) {
-				Mensaje m = new Mensaje();
-				m.setContenido(mensaje.getText());
-				Date fecha = new Date();
-				long milliseconds = fecha.getTime();
-				m.setFecha(milliseconds);
-				try {
-					cc.enviar(email1, comboUsuarios.getSelectedItem().toString(), m);
-				} catch (ReventaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
-				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
-				String p = df.format(fecha);
-				enviados.setText(mensaje.getText()+" - "+ p +"\n" + enviados.getText());
-				v1.pack();
+				enviarMensaje(email1,enviados,mensaje,v1,comboUsuarios,cc);
 			}
 		});
 	
@@ -150,6 +136,24 @@ public class VentanaChat extends JFrame {
 		setLocationRelativeTo(null);
 		this.pack();
 		setVisible(true);
+	}
+	
+	public void enviarMensaje(String email1, JTextArea ta, JTextField tf, VentanaChat vt, JComboBox jc, ChatController cac) {
+		Mensaje m = new Mensaje();
+		m.setContenido(tf.getText());
+		Date fecha = new Date();
+		long milliseconds = fecha.getTime();
+		m.setFecha(milliseconds);
+		try {
+			cac.enviar(email1, jc.getSelectedItem().toString(), m);
+		} catch (ReventaException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
+		String p = df.format(fecha);
+		ta.setText(tf.getText()+" - "+ p +"\n" + ta.getText());
+		vt.pack();
 	}
 
 }

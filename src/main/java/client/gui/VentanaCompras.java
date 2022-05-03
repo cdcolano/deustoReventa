@@ -21,11 +21,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
-import client.controller.ChatController;
 import client.controller.ComprasController;
 import client.controller.ProductoController;
 import client.controller.VentasController;
-import dao.UsuarioDAO;
 import serialization.Categoria;
 import serialization.Compra;
 import serialization.Producto;
@@ -44,12 +42,14 @@ public class VentanaCompras extends JFrame{
 	private String email;
 	private List<Producto> productos;
 	private ComprasController controller;
+	private static VentanaCompras v1;
 	
-	public VentanaCompras(ComprasController cc,Client cliente, WebTarget webTarget, String email) {
+	public VentanaCompras(Client cliente, WebTarget webTarget, String email) {
 		this.client=cliente;
 		this.webTarget=webTarget;
 		this.email=email;
-		this.controller= cc;
+		this.controller= new ComprasController(webTarget, email);
+		v1 = this;
 		JPanel pCentro= new JPanel();
 		pCentro.setLayout(new BoxLayout(pCentro, BoxLayout.Y_AXIS));
 		JComboBox<String>cbOrdenar= new JComboBox<>();
@@ -76,15 +76,29 @@ public class VentanaCompras extends JFrame{
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==ItemEvent.SELECTED) {
-					itemChanged(cbOrdenar, pCentro);
+					/*String seleccion=(String)cbOrdenar.getSelectedItem();
+					if (seleccion.compareTo("Ordenar por Ventas del Vendedor")==0) {
+						controller.ordenarPorVentas(pCentro);
+					}
+					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion ascendente")==0) {
+						controller.ordenarPorFechaAsc(pCentro);
+					}
+					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
+						controller.ordenarPorFechaDesc(pCentro);
+					}
+					else if (seleccion.compareTo("Favoritos")==0) {
+						controller.mostrarFavoritos(pCentro, email);
+						revalidate();
+					}*/
+					itemStateChangedVentana(cbOrdenar,pCentro,controller,email,v1);
 				}
 			}
 		});
 		
-		getContentPane().add(cbOrdenar, BorderLayout.NORTH);
+		v1.getContentPane().add(cbOrdenar, BorderLayout.NORTH);
 		
 	
-		getContentPane().add(pCentro,BorderLayout.CENTER);
+		v1.getContentPane().add(pCentro,BorderLayout.CENTER);
 		JPanel pVender= new JPanel();
 		JButton bVender= new JButton("Vender");
 		bVender.addActionListener(new ActionListener() {
@@ -92,7 +106,7 @@ public class VentanaCompras extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaProducto vR= new VentanaProducto(new ProductoController(webTarget, email),client, VentanaCompras.this.webTarget,VentanaCompras.this.email);
-				VentanaCompras.this.dispose();
+				v1.dispose();
 				
 			}
 			
@@ -104,7 +118,7 @@ public class VentanaCompras extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				VentanaVentas v=new VentanaVentas(new VentasController(webTarget, email), cliente, webTarget, email);
-				VentanaCompras.this.dispose();	
+				v1.dispose();	
 			}
 			
 		});
@@ -115,38 +129,37 @@ public class VentanaCompras extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaChat v= new VentanaChat(new ChatController(webTarget,email,new UsuarioDAO()),VentanaCompras.this.client, webTarget, email);
-				VentanaCompras.this.dispose();	
+				VentanaChat v= new VentanaChat(cliente, webTarget, email);
+				v1.dispose();	
 			}
 			
 		});
 		pVender.add(bMensajes);
-		getContentPane().add(pVender, BorderLayout.SOUTH);
+		v1.getContentPane().add(pVender, BorderLayout.SOUTH);
 		this.pack();
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setLocationRelativeTo(null);
+		v1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setLocationRelativeTo(null);
 		setVisible(true);
 		
 		//TODO desplegar todos los productos
 		//TODO coger el producto seleccionado
 	}
 	
-	
-	public void itemChanged(JComboBox<String>cbOrdenar, JPanel pCentro) {
-		String seleccion=(String)cbOrdenar.getSelectedItem();
+	public void itemStateChangedVentana(JComboBox<String> jc, JPanel pa, ComprasController cco, String mail, VentanaCompras vc) {
+		String seleccion=(String)jc.getSelectedItem();
 		if (seleccion.compareTo("Ordenar por Ventas del Vendedor")==0) {
-			controller.ordenarPorVentas(pCentro);
+			cco.ordenarPorVentas(pa);
 		}
 		else if (seleccion.compareTo("Ordenar por Fecha de Publicacion ascendente")==0) {
-			controller.ordenarPorFechaAsc(pCentro);
+			cco.ordenarPorFechaAsc(pa);
 		}
 		else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
-			controller.ordenarPorFechaDesc(pCentro);
+			cco.ordenarPorFechaDesc(pa);
 		}
 		else if (seleccion.compareTo("Favoritos")==0) {
-			controller.mostrarFavoritos(pCentro, email);
-			revalidate();
-		}
+			cco.mostrarFavoritos(pa, mail);
+			vc.revalidate();
+			}
 	}
 	
 
