@@ -32,6 +32,11 @@ _Despues crear las tablas en la base de datos_
 ```
 mvn datanucleus:schema-create
 ```
+
+_Rellenar Datos de prueba_
+```
+mvn exec:java -Pdatos
+```
 _Lanzar el servidor_
 
 ```
