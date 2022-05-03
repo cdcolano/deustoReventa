@@ -358,6 +358,8 @@ public class ComprasControllerTest {
 		when(webTarget.path("reventa/productosVehiculo/favoritos/j")).thenReturn(webTarget3);
 		when(webTarget3.request(MediaType.APPLICATION_JSON)).thenReturn(inv2);
 		
+		
+		
 		List<ProductoOrdenador> lpo = new ArrayList<>();
 		when(inv.get( new GenericType<List<ProductoOrdenador>>() {})).thenReturn(lpo);
 		List<ProductoVehiculo> lpv = new ArrayList<>(); 
