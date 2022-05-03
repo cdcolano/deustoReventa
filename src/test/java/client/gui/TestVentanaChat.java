@@ -30,7 +30,9 @@ public class TestVentanaChat {
 	WebTarget webTarget;
 	
 	Usuario u1;
+	@Mock
 	ChatController cc;
+	@Mock
 	UsuarioDAO udao;
 	
 	@Before
@@ -38,21 +40,27 @@ public class TestVentanaChat {
 		u1 = new Usuario();
 		u1.setEmail("j");
 		u1.setPassword("j");
-		udao = new UsuarioDAO();
-		cc = new ChatController(webTarget,"j",udao);
 	}
 	
 	@Test
 	public void TestVentana() {
 		
 		List<Mensaje> enviadosM = new ArrayList<>();
+		Mensaje m= new Mensaje();
+		m.setContenido("hola");
+		m.setFecha(System.currentTimeMillis());
+		m.setEnviado("j");
+		m.setRecibido("j");
+		enviadosM.add(m);
         List<Mensaje> recibidosM = new ArrayList<>();
-        
-        //when(cc.getMensajesEnviados("j")).thenReturn(enviadosM);
-        //when(cc.getMensajesRecibidos("j")).thenReturn(recibidosM);
-		
+        recibidosM.add(m);
+        ArrayList<String>emails= new ArrayList<>();
+        emails.add("j");
+        when(cc.getMensajesEnviados("j")).thenReturn(enviadosM);
+        when(cc.getMensajesRecibidos("j")).thenReturn(recibidosM);
+        when(cc.getEmailUsuarios()).thenReturn(emails);
 		try {
-			VentanaChat v= new VentanaChat(cliente, webTarget, "j");
+			VentanaChat v= new VentanaChat(cc,cliente, webTarget, "j");
 		}catch(Exception e) {
 			assertTrue(true);
 		}

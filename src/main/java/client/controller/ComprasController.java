@@ -272,15 +272,10 @@ public class ComprasController {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
 			   public int compare(Producto p1,Producto p2) {
-				   try {
 		               Date Pdate = new Date(p1.getFechaPubli());
 		               Date Qdate= new Date(p2.getFechaPubli());
 					   return Qdate.compareTo(Pdate);
-				   }
-					catch(Exception exc) {
-						System.out.println("*ERROR * " + exc.getMessage());
-						return 0;
-					}
+				   
 			     //TODO return 1 if rhs should be before lhs 
 			     //     return -1 if lhs should be before rhs
 			     //     return 0 otherwise (meaning the order stays the same)
