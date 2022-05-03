@@ -1,6 +1,7 @@
 package client.controller;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ import serialization.ProductoVehiculo;
 import serialization.Usuario;
 import util.ReventaException;
 
-public class VentanasServiceControllerTest {
+public class VentasControllerTest {
 	Usuario us1;
 	
 	Usuario us2;
@@ -39,6 +40,8 @@ public class VentanasServiceControllerTest {
 	UsuarioDAO uDao;
 	
 	ChatController cc;
+
+	private VentasController vs;
 	@Before
 	public void setUp() {
 		cc = new ChatController(webTarget1, "a",uDao);
@@ -50,23 +53,12 @@ public class VentanasServiceControllerTest {
 		
 		us2.setEmail("b");
 		us2.setPassword("b");
+		vs= new VentasController(webTarget1, "a");
 		
 	}
 	
 	
-public List<Producto>  getListaProductosVendidos(String email)throws ReventaException {
-	WebTarget webTarget = this.webTarget.path("reventa/ventas/productoOrdenador/"+email);
-	List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
-     } );
-	WebTarget webTarget2 = this.webTarget.path("reventa/ventas/productoVehiculo/"+email);
-	List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
-    } );
-	List<Producto>lProductos= new ArrayList<>();
-	lProductos.addAll(lProductosOrdenador);
-	lProductos.addAll(lProductosVehiculo);
-	return lProductos;
-}
-	
+
 	@Test
 	public void testProductosVendidos() {
 		when(webTarget1.path("reventa/ventas/productoOrdenador/a")).thenReturn(webTarget2);
@@ -76,28 +68,15 @@ public List<Producto>  getListaProductosVendidos(String email)throws ReventaExce
 		po.add(new ProductoOrdenador());
 		when(builder.get(new GenericType <List<ProductoOrdenador>>() {})).thenReturn(po);
 		ArrayList<ProductoVehiculo>pv= new ArrayList<>();
+		pv.add(new ProductoVehiculo());
 		when(builder.get(new GenericType <List<ProductoVehiculo>>() {})).thenReturn(pv);
-		List<Mensaje> aM = new ArrayList<>();
-		when(builder.get(new GenericType<List<Mensaje>>() {})).thenReturn(aM);
-		List<Mensaje> listaFinal = new ArrayList<>();
-		Mensaje m1 = new Mensaje();
-		Date fecha = new Date(0);
-		long fechaLong = 2;
-		m1.setFecha(fechaLong);
-		m1.setContenido("prueba 1");
 		
-		Mensaje m2 = new Mensaje();
-		Date fecha2 = new Date();
-		long fecha2Long = 1;
-		m2.setFecha(fecha2Long);
-		m2.setContenido("prueba 2");
-		
-		aM.add(m1);
-		aM.add(m2);
-		
-		us1.setMensajesEnviados(aM);
-		//cc.getMensajesRecibidos(us1.getEmail());
-		listaFinal = cc.getMensajesEnviados("a");
-		assertEquals(aM, listaFinal);
+		List<Producto> productos=new ArrayList<Producto>();
+		try {
+			productos = vs.getListaProductosVendidos("a");
+		} catch (ReventaException e) {
+			fail();
+		}
+		assertEquals(productos.size(), 2);
 	}
 }
