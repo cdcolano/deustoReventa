@@ -14,7 +14,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import client.controller.ProductoController;
 import serialization.Categoria;
@@ -22,6 +24,7 @@ import serialization.Mensaje;
 import serialization.Usuario;
 import util.ReventaException;
 
+@RunWith(MockitoJUnitRunner.class)
 public class TestVentanaProducto {
 	@Mock
 	Client cliente;
@@ -39,8 +42,17 @@ public class TestVentanaProducto {
 	@Test
 	public void test(){
 		try {
+			Categoria c= new Categoria();
+			c.setId(0);
+			c.setNombre("j");
+			ArrayList<Categoria>cat= new ArrayList<>();
+			cat.add(c);
+			when(pc.getCategoria()).thenReturn(cat);
 			VentanaProducto vp = new VentanaProducto(pc,cliente, webTarget, "u@gmail.com");
-		}catch(Exception e) {
+			vp.dispose();
+			when(pc.getCategoria()).thenThrow(ReventaException.class);
+			VentanaProducto vp2= new VentanaProducto(pc,cliente,webTarget,"j");
+		}catch(ReventaException e) {
 			assertTrue(false);
 		}
 	}

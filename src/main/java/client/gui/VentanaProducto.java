@@ -305,7 +305,7 @@ public class VentanaProducto extends JFrame{
 				}
 			});
 			
-		}catch(Exception e) {
+		}catch(ReventaException e) {
 			System.out.println("*Error al recopilar las categorias* " + e.getMessage());
 		}
 	}
