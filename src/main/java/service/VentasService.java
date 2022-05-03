@@ -392,6 +392,52 @@ public class VentasService {
 		}
 		return men;
 	}
+
+	
+	public List<ProductoOrdenador> getProductosOrdenadorVendidos(String x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoOrdenador>po= new ArrayList<ProductoOrdenador>();
+		Usuario u= null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			for(Producto p:u.getProductos()) {
+				if (p instanceof ProductoOrdenador) {
+					if(p.isVendido()) {
+						ProductoOrdenador prod=(ProductoOrdenador)p;
+						po.add(prod);
+					}
+				}
+			}
+		}catch(Exception e){
+				System.out.println("Error al realizar la compra no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return po;
+	}
+	
+
+	public List<ProductoVehiculo> getProductosVehiculoVendidos(String x) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoVehiculo>po= new ArrayList<ProductoVehiculo>();
+		Usuario u= null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			for(Producto p:u.getProductos()) {
+				if (p instanceof ProductoVehiculo) {
+					if(p.isVendido()) {
+						ProductoVehiculo prod=(ProductoVehiculo)p;
+						po.add(prod);
+					}
+				}
+			}
+		}catch(Exception e){
+				System.out.println("Error al realizar la compra no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return po;
+	}
 	
 
 	

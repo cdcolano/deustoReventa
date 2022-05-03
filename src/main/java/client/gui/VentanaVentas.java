@@ -40,6 +40,7 @@ public class VentanaVentas extends JFrame {
 		this.client=c;
 		this.em1=email;
 		this.webTarget=wt;
+		vcl=new VentasController(wt, email);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);

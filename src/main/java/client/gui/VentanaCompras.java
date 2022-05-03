@@ -107,6 +107,29 @@ public class VentanaCompras extends JFrame{
 			
 		});
 		pVender.add(bVender);
+		JButton bVentas= new JButton("Ventas");
+		bVentas.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaVentas v=new VentanaVentas(cliente, webTarget, email);
+				VentanaCompras.this.dispose();	
+			}
+			
+		});
+		pVender.add(bVentas);
+		
+		JButton bMensajes= new JButton("Mensajes");
+		bMensajes.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaChat v= new VentanaChat(cliente, webTarget, email);
+				VentanaCompras.this.dispose();	
+			}
+			
+		});
+		pVender.add(bMensajes);
 		getContentPane().add(pVender, BorderLayout.SOUTH);
 		this.pack();
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -183,11 +183,17 @@ public class ReventaServer {
 	}
 	
 	@GET
-	@Path("/ventas/{x}")
-	public Response getVentas(@PathParam("x") String x) {
-		System.out.println(x);
-		Usuario usuario=vs.getUsuario(x);
-		return Response.ok(usuario).build();
+	@Path("/ventas/productoOrdenador/{x}")
+	public List<ProductoOrdenador> getVentasOrdenador(@PathParam("x") String x) {
+		List<ProductoOrdenador>lista=vs.getProductosOrdenadorVendidos(x);
+		return lista;
+	}
+	
+	@GET
+	@Path("/ventas/productoVehiculo/{x}")
+	public List<ProductoOrdenador> getVentasVehiculo(@PathParam("x") String x) {
+		List<ProductoVehiculo>lista=vs.getProductosVehiculoVendidos(x);
+		return lista;
 	}
 	
 	@POST
