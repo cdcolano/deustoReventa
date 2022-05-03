@@ -3,6 +3,7 @@ package client.controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
@@ -235,6 +236,30 @@ public class ComprasControllerTest {
 		}catch(Exception ex) {
 			assertTrue(true);
 		}
+	}
+	@Test
+	public void testGetProductosEnVenta() {
+		when(webTarget.path("reventa/productosOrdenador/venta")).thenReturn(webTarget2);
+		when(webTarget.path("reventa/productosVehiculo/venta")).thenReturn(webTarget3);
+		List<ProductoOrdenador> lpo = new ArrayList<>();
+		when(webTarget2.request(MediaType.APPLICATION_JSON )).thenReturn(inv);
+		when(inv.get(new GenericType<List<ProductoOrdenador>>() {})).thenReturn(lpo);
+		List<ProductoVehiculo> lpv = new ArrayList<>(); 
+		when(webTarget3.request(MediaType.APPLICATION_JSON )).thenReturn(inv);
+		when(inv.get(new GenericType<List<ProductoVehiculo>>() {})).thenReturn(lpv);
+
+		List<Producto> lp = new ArrayList<>();
+		lp.addAll(lpo);
+		lp.addAll(lpv);
+
+		try {
+			List<Producto> listaFinal = cc.getProductosEnVenta();
+			assertEquals(lp.size(), listaFinal.size());
+		} catch (ReventaException e) {
+			fail();
+		}
+
+
 	}
 	
 	@Test
