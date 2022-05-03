@@ -14,6 +14,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import client.controller.RegistroController;
 import serialization.Compra;
 import serialization.Tarjeta;
 import serialization.Usuario;
@@ -26,12 +27,14 @@ public class VentanaRegistro extends JFrame{
 	private JLabel lError;
 	private WebTarget webTarget;
 	private Client client;
+	private RegistroController rc;
 	public VentanaRegistro(Client cliente, WebTarget wt) {
 		super();
 		JPanel pCentral=new JPanel();
 		pCentral.setLayout(new BoxLayout(pCentral, BoxLayout.Y_AXIS));
 		this.client=cliente;
 		this.webTarget=wt;
+		rc= new RegistroController(wt);
 		JPanel pContrasena= new JPanel();
 		JLabel lblContraseina = new JLabel("Contraseña: ");
 		pContrasena.add(lblContraseina);
@@ -116,7 +119,7 @@ public class VentanaRegistro extends JFrame{
 					t.setCodigoSecreto(Integer.parseInt(tfNumTar.getText()));
 					t.setMesVencimiento(Integer.parseInt(tfMesVen.getText()));
 					u.setTarjeta(t);
-					registrar(u);
+					rc.registrar(u);
 					VentanaRegistro.this.dispose();
 				}catch(NumberFormatException ex) {
 					lError.setText("Los campos codigo y año/mes de vencimiento de la tarjeta deben ser numericos");
@@ -138,12 +141,4 @@ public class VentanaRegistro extends JFrame{
 		setVisible(true);
 	}
 	
-	public void registrar(Usuario u) throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/registro");
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
-		if (response.getStatus() != Status.OK.getStatusCode()) {
-			throw new ReventaException("" + response.getStatus());
-		}
-	}
 }
