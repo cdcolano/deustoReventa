@@ -365,6 +365,19 @@ public class ComprasControllerTest {
 		
 		List<Producto> listaFinal = new ArrayList<>();
 		
+		ProductoOrdenador p3 = new ProductoOrdenador();
+		p3.setNombre("a");
+		p3.setPrecioSalida(100);
+		p3.setId(0);
+		p3.setEmailVendedor("j");
+		ProductoVehiculo p4 = new ProductoVehiculo();
+		p4.setNombre("b");
+		p4.setPrecioSalida(90);
+		p4.setId(1);
+		p4.setEmailVendedor("j");
+		lpo.add(p3);
+		lpv.add(p4);
+		
 		listaFinal.addAll(lpo);
 		listaFinal.addAll(lpv);
 		
