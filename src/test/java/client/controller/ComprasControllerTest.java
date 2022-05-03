@@ -334,6 +334,32 @@ public class ComprasControllerTest {
 		cc.ordenarPorVentas(panel);
 		assertEquals(lp.get(0), p2);
 	}
+	@Test
+	public void  testOrdenarPorFechaAsc() {
+		List<Producto> lp = new ArrayList<>();
+		p1.setEmailVendedor("j");
+		p1.setFechaPubli(0);
+		lp.add(p1);
+		p2.setEmailVendedor("b");
+		p2.setFechaPubli(1);
+		lp.add(p2);
+		cc.setProductos(lp);
+		cc.ordenarPorFechaAsc(panel);
+		assertEquals(lp.get(0),p1);
+	}
+	@Test
+	public void testOrdenarPorFechaDesc() {
+		List<Producto> lp = new ArrayList<>();
+		p1.setEmailVendedor("j");
+		p1.setFechaPubli(0);
+		lp.add(p1);
+		p2.setEmailVendedor("b");
+		p2.setFechaPubli(1);
+		lp.add(p2);
+		cc.setProductos(lp);
+		cc.ordenarPorFechaDesc(panel);
+		assertEquals(lp.get(0),p2);
+	}
 	/*@Test
 	public void testSetProductos() {
 		List<Producto> a = new ArrayList<>();
