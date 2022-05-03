@@ -225,7 +225,7 @@ public class ComprasController {
 					   Integer u2=getVentas(p2.getEmailVendedor());
 					   System.out.println(u1 + " " +p1.getEmailVendedor());
 					   System.out.println(u2+ " " + p2.getEmailVendedor());
-					   return u1.compareTo(u2);
+					   return u2.compareTo(u1);
 				   }
 					catch(Exception exc) {
 						System.out.println("*ERROR * " + exc.getMessage());
