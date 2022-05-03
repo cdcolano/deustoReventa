@@ -100,11 +100,8 @@ public class ProductoControllerTest {
 	@Test
 	public void testAddProductoOrdenador() {
 		when(webTarget.path("reventa/saleOrdenador")).thenReturn(webTarget2);
-		//when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
-		//ProductoOrdenador po = new ProductoOrdenador();
-		
-		//when(inv.post(Entity.entity(po, MediaType.APPLICATION_JSON)));
-		
+		when(webTarget2.request(MediaType.APPLICATION_JSON)).thenReturn(inv);
+		when(inv.post(Entity.entity(p1, MediaType.APPLICATION_JSON))).thenReturn(response);
 		try {
 			pc.addProductoOrdenador(p1);
 			assertTrue(true);
