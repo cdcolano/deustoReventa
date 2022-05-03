@@ -15,8 +15,13 @@ CREATE SCHEMA productsDB;
 
 CREATE USER 'spq'@'localhost' IDENTIFIED BY 'spq';
 GRANT ALL ON productsDB.* TO 'spq'@'localhost';
-
 ```
+
+_Despues lanzar los test unitarios_
+```
+mvn test
+```
+
 _Despues realizar el enhance_
 ```
 mvn datanucleus:enhance
@@ -26,6 +31,11 @@ mvn datanucleus:enhance
 _Despues crear las tablas en la base de datos_
 ```
 mvn datanucleus:schema-create
+```
+
+_Rellenar Datos de prueba_
+```
+mvn exec:java -Pdatos
 ```
 _Lanzar el servidor_
 
