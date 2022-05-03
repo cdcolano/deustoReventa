@@ -74,20 +74,7 @@ public class VentanaCompras extends JFrame{
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==ItemEvent.SELECTED) {
-					String seleccion=(String)cbOrdenar.getSelectedItem();
-					if (seleccion.compareTo("Ordenar por Ventas del Vendedor")==0) {
-						controller.ordenarPorVentas(pCentro);
-					}
-					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion ascendente")==0) {
-						controller.ordenarPorFechaAsc(pCentro);
-					}
-					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
-						controller.ordenarPorFechaDesc(pCentro);
-					}
-					else if (seleccion.compareTo("Favoritos")==0) {
-						controller.mostrarFavoritos(pCentro, email);
-						revalidate();
-					}
+					itemChanged(cbOrdenar, pCentro);
 				}
 			}
 		});
@@ -142,6 +129,23 @@ public class VentanaCompras extends JFrame{
 		//TODO coger el producto seleccionado
 	}
 	
+	
+	public void itemChanged(JComboBox<String>cbOrdenar, JPanel pCentro) {
+		String seleccion=(String)cbOrdenar.getSelectedItem();
+		if (seleccion.compareTo("Ordenar por Ventas del Vendedor")==0) {
+			controller.ordenarPorVentas(pCentro);
+		}
+		else if (seleccion.compareTo("Ordenar por Fecha de Publicacion ascendente")==0) {
+			controller.ordenarPorFechaAsc(pCentro);
+		}
+		else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
+			controller.ordenarPorFechaDesc(pCentro);
+		}
+		else if (seleccion.compareTo("Favoritos")==0) {
+			controller.mostrarFavoritos(pCentro, email);
+			revalidate();
+		}
+	}
 	
 
 
