@@ -56,21 +56,6 @@ public class TestVentanaProducto {
 			assertTrue(false);
 		}
 	}
-	/*@Test
-	public void getCategoria() {
-		when(webTarget.path("reventa/categorias")).thenReturn(webTarget);
-		when(webTarget.request(MediaType.APPLICATION_JSON)).thenReturn(builder);
-		List<Categoria> cat = new ArrayList<>();
-		when(builder.get(new GenericType<List<Categoria>>() {})).thenReturn(cat);
-		List<Categoria> listaFinal = new ArrayList<>();
-		Categoria c1 = new Categoria();
-		cat.add(c1);
-		try {
-			vp.getCategoria();
-			assertEquals(cat, listaFinal);
-		} catch (ReventaException e) {
-			// TODO Auto-generated catch block
-			fail();
-		}
-	}*/
+	
+	
 }
