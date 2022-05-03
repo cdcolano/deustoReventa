@@ -44,11 +44,11 @@ public class VentanaCompras extends JFrame{
 	private ComprasController controller;
 	private static VentanaCompras v1;
 	
-	public VentanaCompras(Client cliente, WebTarget webTarget, String email) {
+	public VentanaCompras(ComprasController cc, Client cliente, WebTarget webTarget, String email) {
 		this.client=cliente;
 		this.webTarget=webTarget;
 		this.email=email;
-		this.controller= new ComprasController(webTarget, email);
+		this.controller= cc;
 		v1 = this;
 		JPanel pCentro= new JPanel();
 		pCentro.setLayout(new BoxLayout(pCentro, BoxLayout.Y_AXIS));
