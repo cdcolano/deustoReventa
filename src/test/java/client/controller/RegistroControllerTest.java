@@ -43,14 +43,6 @@ public class RegistroControllerTest {
 		
 	}
 	
-	public void registrar(Usuario u) throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/registro");
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
-		if (response.getStatus() != Status.OK.getStatusCode()) {
-			throw new ReventaException("" + response.getStatus());
-		}
-	}
 	
 	@Test
 	public void testRegistrar() {

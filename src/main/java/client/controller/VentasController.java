@@ -28,15 +28,14 @@ public class VentasController {
 		this.webTarget = webTarget;
 		this.email = email;
 		
-		
 	}
 	
 		
-	public List<Producto>  getListaProductosVendidos(String email)throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/venta");
+	public List<Producto>  getListaProductosVendidos(String email) {
+		WebTarget webTarget = this.webTarget.path("reventa/ventas/productoOrdenador/"+ email);
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
 	     } );
-		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/venta");
+		WebTarget webTarget2 = this.webTarget.path("reventa/ventas/productoVehiculo/"+ email);
 		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
 	    } );
 		List<Producto>lProductos= new ArrayList<>();
