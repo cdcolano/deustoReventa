@@ -102,7 +102,7 @@ public class VentanaCompras extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaProducto vR= new VentanaProducto(new ProductoController(webTarget, email), VentanaCompras.this.webTarget,VentanaCompras.this.email);
+				VentanaProducto vR= new VentanaProducto(new ProductoController(webTarget, email),client, VentanaCompras.this.webTarget,VentanaCompras.this.email);
 				VentanaCompras.this.dispose();
 				
 			}
