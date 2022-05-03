@@ -110,8 +110,5 @@ public class VentanaVentas extends JFrame {
 		
 	}
 
-	public void setVc1(VentasController vc1) {
-		this.vc1 = vc1;
-	}	
 
 }
