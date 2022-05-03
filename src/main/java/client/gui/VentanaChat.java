@@ -48,14 +48,14 @@ public class VentanaChat extends JFrame {
 	
 	
 	
-	public VentanaChat(Client c, WebTarget wt, String email1) {
+	public VentanaChat(ChatController cc,Client c, WebTarget wt, String email1) {
 		this.client=c;
 		this.em1=email1;
+		this.cc=cc;
 		udao = new UsuarioDAO();
 		webTarget= wt;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);
-		cc = new ChatController(wt,email1,udao);
 		v1=this;
 		v1.setTitle("");
 		v1.setLayout( new GridLayout(2,0));

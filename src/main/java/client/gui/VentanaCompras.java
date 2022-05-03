@@ -21,9 +21,11 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import client.controller.ChatController;
 import client.controller.ComprasController;
 import client.controller.ProductoController;
 import client.controller.VentasController;
+import dao.UsuarioDAO;
 import serialization.Categoria;
 import serialization.Compra;
 import serialization.Producto;
@@ -113,7 +115,7 @@ public class VentanaCompras extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaChat v= new VentanaChat(cliente, webTarget, email);
+				VentanaChat v= new VentanaChat(new ChatController(webTarget,email,new UsuarioDAO()),VentanaCompras.this.client, webTarget, email);
 				VentanaCompras.this.dispose();	
 			}
 			
