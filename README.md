@@ -1,9 +1,5 @@
 # deustoReventa
-_Lo primero que hay que realizar es compilar el código_
 
-```
-mvn clean compile
-```
 ## Base de datos
 _Crear una base de datos llamada productsDB en MySQL y dar permisos al usuario por defecto_
 ```
@@ -15,6 +11,12 @@ CREATE SCHEMA productsDB;
 
 CREATE USER 'spq'@'localhost' IDENTIFIED BY 'spq';
 GRANT ALL ON productsDB.* TO 'spq'@'localhost';
+```
+
+_Lo primero que hay que realizar es compilar el código_
+
+```
+mvn clean compile
 ```
 
 _Despues lanzar los test unitarios_
