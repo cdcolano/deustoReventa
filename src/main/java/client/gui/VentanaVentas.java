@@ -39,12 +39,13 @@ public class VentanaVentas extends JFrame {
 
 	
 	
-	public VentanaVentas(Client c, WebTarget wt, String email) {
+	public VentanaVentas(VentasController vc, Client c, WebTarget wt, String email) {
 		
 		this.client=c;
 		this.em1=email;
 		this.webTarget=wt;
-		vc1=new VentasController(wt, email);
+		vc1=vc;
+		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);
@@ -108,8 +109,9 @@ public class VentanaVentas extends JFrame {
 
 		
 	}
-	
-	
-	
+
+	public void setVc1(VentasController vc1) {
+		this.vc1 = vc1;
+	}	
 
 }

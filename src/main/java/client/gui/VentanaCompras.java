@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import client.controller.ComprasController;
+import client.controller.VentasController;
 import serialization.Categoria;
 import serialization.Compra;
 import serialization.Producto;
@@ -112,7 +113,7 @@ public class VentanaCompras extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				VentanaVentas v=new VentanaVentas(cliente, webTarget, email);
+				VentanaVentas v=new VentanaVentas(new VentasController(webTarget, email), cliente, webTarget, email);
 				VentanaCompras.this.dispose();	
 			}
 			
