@@ -1,6 +1,7 @@
 package client.gui;
 
 import javax.swing.BoxLayout;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import client.controller.LoginController;
 import serialization.Compra;
 import serialization.Producto;
 import serialization.Usuario;
@@ -34,11 +36,13 @@ public class VentanaLogin extends JFrame {
 	private Client cliente;
 	private WebTarget webTarget;
 	private JLabel lError;
+	private LoginController lc;
 	
 	public VentanaLogin(Client cliente, WebTarget webTarget){
 		super();
 		this.cliente=cliente;
 		this.webTarget=webTarget;
+		this.lc = new LoginController(cliente, webTarget);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);
 		setLocationRelativeTo(null);
@@ -116,10 +120,10 @@ public class VentanaLogin extends JFrame {
 				try {
 					String email=usuario.getText();
 					String password=contraseina.getText();
-					boolean valido=logIn(email, password, lError);
+					boolean valido=lc.logIn(email, password, lError,v1);
 					if (valido) {
 						VentanaCompras v= new VentanaCompras(VentanaLogin.this.cliente, VentanaLogin.this.webTarget, email);
-					//	VentanaChat v1 = new VentanaChat(VentanaLogin.this.cliente,VentanaLogin.this.webTarget,email);
+						//VentanaChat v1 = new VentanaChat(VentanaLogin.this.cliente,VentanaLogin.this.webTarget,email);
 						VentanaLogin.this.dispose();
 					}
 				}catch(Exception ex) {
@@ -140,50 +144,4 @@ public class VentanaLogin extends JFrame {
 		
 		
 	}
-	
-	
-	public boolean logIn(String email, String password, JLabel lError) throws ReventaException {
-		try {
-			WebTarget webTarget=this.webTarget.path("/reventa/logIn");
-			Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-			Usuario u=new Usuario();
-			u.setEmail(email);
-			u.setPassword(password);
-			System.out.println(webTarget.getUri());
-			Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
-			
-			if (response.getStatus() != Status.OK.getStatusCode()) {
-				throw new ReventaException("" + response.getStatus());
-			}
-			boolean logIn=response.readEntity(boolean.class);
-			if (!logIn) {
-				lError.setText("Email o contraseña incorrectos");
-				this.setLocationRelativeTo(null);
-				this.pack();
-				
-			}
-			return logIn;
-		}catch(Exception e) {
-			lError.setText("Algo ha fallado al realizar el LogIn");
-			System.out.println("* Error " + e.getMessage() +"*");
-			this.pack();
-			this.setLocationRelativeTo(null);
-			return false;
-		}
-	}
-	
-	
-	public Usuario getUsuario(String email)throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("collector/getUsuario/"+ email);
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Response response = invocationBuilder.get();
-		if (response.getStatus() == Status.OK.getStatusCode()) {
-			Usuario u = response.readEntity(Usuario.class);
-			return u;
-		} else {
-			throw new ReventaException("" + response.getStatus());
-		}
-	}
-		
-
 }

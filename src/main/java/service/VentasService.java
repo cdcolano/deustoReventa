@@ -175,6 +175,8 @@ public class VentasService {
 			System.out.println("ENTRO");
 			Mensaje m = new Mensaje();
 			m.setContenido(contenido);
+			m.setEnviado(email1);
+			m.setRecibido(email2);
 			m.setFecha(fecha);
 			u1.getMensajesEnviados().add(m);
 			u2.getMensajesRecibidos().add(m);

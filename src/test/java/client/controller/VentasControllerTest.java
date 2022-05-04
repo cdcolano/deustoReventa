@@ -15,7 +15,9 @@ import javax.ws.rs.core.MediaType;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import dao.UsuarioDAO;
 import serialization.Mensaje;
@@ -25,6 +27,7 @@ import serialization.ProductoVehiculo;
 import serialization.Usuario;
 import util.ReventaException;
 
+@RunWith(MockitoJUnitRunner.class)
 public class VentasControllerTest {
 	Usuario us1;
 	

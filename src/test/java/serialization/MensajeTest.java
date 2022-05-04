@@ -29,6 +29,18 @@ public class MensajeTest {
 	}
 	
 	@Test
+	public void testEnviado() {
+		m.setEnviado("Prueba");
+		assertTrue(m.getEnviado().contentEquals("Prueba"));
+	}
+	
+	@Test
+	public void testRecibido() {
+		m.setRecibido("Prueba");
+		assertTrue(m.getRecibido().contentEquals("Prueba"));
+	}
+	
+	@Test
 	public void testPrecio() {
 		long f=System.currentTimeMillis();
 		m.setFecha(f);

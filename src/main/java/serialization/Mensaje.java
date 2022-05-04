@@ -15,11 +15,27 @@ public class Mensaje {
 	private int id;
 	private String contenido;
 	private long fecha;
+	private String enviado;
+	private String recibido;
 	
 	//@Persistent(defaultFetchGroup = "true")
 	//private Usuario enviador;
 	//@Persistent(defaultFetchGroup = "true")
 	//private Usuario receptor;
+	
+	public String getEnviado() {
+		return enviado;
+	}
+	public void setEnviado(String enviado) {
+		this.enviado = enviado;
+	}
+	
+	public String getRecibido() {
+		return recibido;
+	}
+	public void setRecibido(String recibido) {
+		this.recibido = recibido;
+	}
 	
 	public int getId() {
 		return id;
