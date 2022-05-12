@@ -57,6 +57,11 @@ public class MainServer{
 		p1.setPrecioSalida(400);
 		p1.setNombre("acer");
 		p1.setCategoria(c1);
+		p1.setCpu("i5");
+		p1.setPlacaBase("p1");
+		p1.setGrafica("gtx");
+		p1.setRam(8);
+		p1.setMemoria(256);
 		p1.setFechaPubli(3000);
 		
 		ProductoVehiculo p2=new ProductoVehiculo();
@@ -68,6 +73,11 @@ public class MainServer{
 		ProductoOrdenador p3= new ProductoOrdenador();
 		p3.setPrecioSalida(200);
 		p3.setNombre("hp");
+		p3.setCpu("i7");
+		p3.setPlacaBase("p2");
+		p3.setGrafica("gtx 630");
+		p3.setRam(16);
+		p3.setMemoria(512);
 		p3.setCategoria(c1);
 		p3.setFechaPubli(1000);
 		

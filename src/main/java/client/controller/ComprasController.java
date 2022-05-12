@@ -77,9 +77,7 @@ public class ComprasController {
 	}
 	
 	public List<Producto> getProductosEnVenta() throws ReventaException{
-		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/venta");
-		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
-	     } );
+		List<ProductoOrdenador>lProductosOrdenador = getProductosOrdenador();
 		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/venta");
 		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
 	    } );
@@ -179,8 +177,7 @@ public class ComprasController {
 		pContenido.add(button);
 		pContenido.add(bMeGusta);
 		pContenido.add(bUsuarioFav);
-		JScrollPane jsp= new JScrollPane(pContenido);
-		pCentro.add(jsp);
+		pCentro.add(pContenido);
 		pCentro.revalidate();
 		pCentro.repaint();
 
@@ -311,6 +308,163 @@ public class ComprasController {
 
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
+	}
+	
+	public List<ProductoOrdenador> getProductosOrdenador(){
+		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/venta");
+		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
+	     } );
+		return lProductosOrdenador;
+	}
+
+	public void seleccionarOrdenador(JPanel pa) {
+		pa.removeAll();
+		for (Producto p: productos) {
+			if (p instanceof ProductoOrdenador) {
+				crearPanel(p, pa);
+			}
+		}
+		pa.revalidate();
+	}
+
+	public void seleccionarVehiculo(JPanel pa) {
+		//List<ProductoVehiculo> productos= getProductosVehiculo();
+		pa.removeAll();
+		for (Producto p: productos) {
+			if (p instanceof ProductoVehiculo) {
+				crearPanel(p, pa);
+			}
+		}
+		pa.revalidate();
+	}
+
+	public List<ProductoVehiculo> getProductosVehiculo() {
+		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/venta");
+		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
+	    } );
+		return lProductosVehiculo;
+	}
+	
+	public void filtrarOrdenador(String cpu, String placaBase, String grafica, String ramMinima,
+			String ramMaxima, String memMinima, String memMaxima, JPanel pa) {
+			pa.removeAll();
+			ArrayList<Producto>filtrado= new ArrayList<>();
+			filtrado.addAll(productos);
+			for (int i=productos.size()-1;i>=0;i--) {
+				if(filtrado.get(i) instanceof ProductoOrdenador) {
+					ProductoOrdenador p=(ProductoOrdenador)filtrado.get(i);
+					if (!cpu.contentEquals("")) {
+						if (!cpu.contentEquals(p.getCpu())) {
+							filtrado.remove(i);
+						}
+					}
+					if (!placaBase.contentEquals("")) {
+						if (!placaBase.contentEquals(p.getPlacaBase())) {
+							filtrado.remove(i);
+						}
+					}
+					if (!grafica.contentEquals("")) {
+						if (!grafica.contentEquals(p.getGrafica())) {
+							filtrado.remove(i);
+						}
+					}
+					if (!ramMinima.contentEquals("")) {
+						int num=Integer.parseInt(ramMinima);
+						if (num<p.getRam()) {
+							filtrado.remove(i);
+						}
+					}
+					if (!ramMaxima.contentEquals("")) {
+						int num=Integer.parseInt(ramMaxima);
+						if (num>p.getRam()) {
+							filtrado.remove(i);
+						}
+					}
+					if (!memMinima.contentEquals("")) {
+						int num=Integer.parseInt(memMinima);
+						if (num<p.getMemoria()) {
+							filtrado.remove(i);
+						}
+					}
+					if (!memMaxima.contentEquals("")) {
+						int num=Integer.parseInt(memMaxima);
+						if (num>p.getMemoria()) {
+							filtrado.remove(i);
+						}
+					}
+				}else {
+					filtrado.remove(i);
+				}
+			}
+			for (Producto po:filtrado) {
+				crearPanel(po, pa);
+			}
+			pa.revalidate();
+	}
+	
+	
+	public void filtrarVehiculo(String modelo, String marca, String cvMin, String cvMax, String kmMin,
+			String kmMax, String anyoMin, String anyoMax,JPanel pa) {
+			pa.removeAll();
+			ArrayList<Producto>filtrado= new ArrayList<>();
+			filtrado.addAll(productos);
+			for (int i=productos.size()-1;i>=0;i--) {
+				if(filtrado.get(i) instanceof ProductoVehiculo) {
+					ProductoVehiculo p=(ProductoVehiculo)filtrado.get(i);
+					if (!modelo.contentEquals("")) {
+						if (!modelo.contentEquals(p.getModelo())) {
+							filtrado.remove(i);
+						}
+					}
+					if (!marca.contentEquals("")) {
+						if (!marca.contentEquals(p.getMarca())) {
+							filtrado.remove(i);
+						}
+					}
+					if (!cvMin.contentEquals("")) {
+						int num=Integer.parseInt(cvMin);
+						if (num<p.getCaballos()) {
+							filtrado.remove(i);
+						}
+					}
+					if (!cvMax.contentEquals("")) {
+						int num=Integer.parseInt(cvMax);
+						if (num>p.getCaballos()) {
+							filtrado.remove(i);
+						}
+					}
+					if (!kmMin.contentEquals("")) {
+						int num=Integer.parseInt(kmMin);
+						if (num<p.getKilometros()) {
+							filtrado.remove(i);
+						}
+					}
+					if (!kmMax.contentEquals("")) {
+						int num=Integer.parseInt(kmMax);
+						if (num>p.getKilometros()) {
+							filtrado.remove(i);
+						}
+					}
+					if (!anyoMin.contentEquals("")) {
+						int num=Integer.parseInt(anyoMin);
+						if (num<p.getAnyoFabri()) {
+							filtrado.remove(i);
+						}
+					}
+					if (!anyoMax.contentEquals("")) {
+						int num=Integer.parseInt(anyoMax);
+						if (num>p.getAnyoFabri()) {
+							filtrado.remove(i);
+						}
+					}
+				}else {
+					filtrado.remove(i);
+				}
+			}
+			for (Producto po:filtrado) {
+				crearPanel(po, pa);
+			}
+			pa.revalidate();
 	}
 	
 }
