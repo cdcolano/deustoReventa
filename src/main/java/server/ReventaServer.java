@@ -16,6 +16,7 @@ import javax.ws.rs.core.Response;
 import serialization.Categoria;
 import serialization.Compra;
 import serialization.Mensaje;
+import serialization.Oferta;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
@@ -49,6 +50,14 @@ public class ReventaServer {
 	public Response addCompra(Compra c, @PathParam("x") String x, @PathParam("y") int idProd) {
 		vs.comprarProducto(x, idProd,c.getPrecio());
 		System.out.println("*Received purchase*");
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/oferta/{x}/{y}")
+	public Response addOferta(Oferta o, @PathParam("x") String x, @PathParam("y") int idProd) {
+		vs.hacerOferta(x, idProd,o.getCantidad());
+		System.out.println("*Received offer*");
 		return Response.ok().build();
 	}
 	

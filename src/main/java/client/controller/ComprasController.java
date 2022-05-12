@@ -22,6 +22,7 @@ import javax.ws.rs.core.Response.Status;
 
 import org.datanucleus.enhancer.methods.GetObjectId;
 
+import client.gui.VentanaOferta;
 import serialization.Compra;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
@@ -143,7 +144,7 @@ public class ComprasController {
 			
 		});
 
-		JButton bMeGusta = new JButton("Añadir a favoritos");
+		JButton bMeGusta = new JButton("Anadir a favoritos");
 		JButton bUsuarioFav = new JButton("Me gusta");
 		
 		bMeGusta.addActionListener(new ActionListener() {
@@ -172,11 +173,24 @@ public class ComprasController {
 			}
 			
 		});
+		
+		JButton bOferta= new JButton("Oferta");
+		bOferta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaOferta v= new VentanaOferta(new OfertaController(webTarget, email, p.getId()), webTarget, email, p.getId());
+			}
+			
+		});
+		
+		
 		pContenido.add(pProducto);
 		
 		pContenido.add(button);
 		pContenido.add(bMeGusta);
 		pContenido.add(bUsuarioFav);
+		pContenido.add(bOferta);
 		pCentro.add(pContenido);
 		pCentro.revalidate();
 		pCentro.repaint();

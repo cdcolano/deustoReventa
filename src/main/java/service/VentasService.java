@@ -440,6 +440,33 @@ public class VentasService {
 		}
 		return po;
 	}
+
+
+	public void hacerOferta(String x, int idProd, double cantidad) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Usuario u= null;
+		Producto p=null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			p=pm.getObjectById(Producto.class, idProd);
+			Oferta o= new Oferta();
+			o.setCantidad(cantidad);
+			o.setFecha(System.currentTimeMillis());
+			u.getOfertasEnviadas().add(o);
+			p.getOfertasRecibidas().add(o);
+			//uVendedor.getProductosVendidos().add(p);
+		}catch(Exception e){
+			if (u==null) {
+				System.out.println("Error al realizar la oferta no existe ese usuario");
+			}else {
+				System.out.println("Error al realizar la oferta no existe producto");
+				System.out.println(e.getMessage());
+			}
+		}finally {
+			pm.close();
+		}
+		
+	}
 	
 
 	
