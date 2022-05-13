@@ -23,6 +23,8 @@ public class Usuario {
 	
 	private List<Producto>productosVendidos;
 	
+	private List<Reclamacion>reclamacionesHechas;
+	
 	
 	@Persistent(defaultFetchGroup = "true",dependentElement = "true")
 	@Join
