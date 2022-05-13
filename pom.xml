@@ -103,11 +103,11 @@
 			<version>1.7.25</version>
 			<scope>compile</scope>
 		</dependency> 
-		<dependency>
+		<!-- dependency>
 		    <groupId>org.apache.maven.plugins</groupId>
 		    <artifactId>maven-surefire-plugin</artifactId>
 		    <version>3.0.0-M5</version>
-		</dependency>
+		</dependency>  -->
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-core</artifactId>
@@ -178,6 +178,7 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.7.0</version>
+				<inherited>true</inherited>
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
@@ -216,7 +217,7 @@
 		        	<configurationFile>${doxygen.config.file}</configurationFile>
 		        </configuration>
 		     </plugin>
-            
+		
             
             <plugin>
 				<groupId>org.jacoco</groupId>
@@ -295,6 +296,35 @@
 					</execution>
 				</executions>
 			</plugin>
+			     
+		     <plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>3.0.0-M5</version>
+				<configuration>
+					<!-- excludedGroups>categories.IntegrationTest</excludedGroups> -->
+				</configuration>			 
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>prepare-package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>
+								${project.build.directory}/libs
+							</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+            
             
 		</plugins>
 	</build>
@@ -358,23 +388,21 @@
 			<build>
 				<plugins>
 					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>exec-maven-plugin</artifactId>
-						<version>1.2.1</version>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>2.22.0</version>
 						<configuration>
-							<mainClass>client.main.IntegrationTest</mainClass>
-							<arguments>
-								<argument>${server.hostname}</argument>
-								<argument>${server.port}</argument>
-								<argument>${demo.data}</argument>
-							</arguments>
-							<systemProperties>
-								<systemProperty>
-									<key>log4j.configuration</key>
-									<value>file:${config.files.dir}/log4j.properties</value>
-								</systemProperty>
-							</systemProperties>
+							<includes>
+								<include>**/*</include>
+							</includes>
+							<groups>categories.IntegrationTest</groups>
 						</configuration>
+						<executions>
+							<execution>
+								<goals>
+									<goal>test</goal> 
+								</goals>
+							</execution>
+						</executions>
 					</plugin>
 				</plugins>
 			</build>
