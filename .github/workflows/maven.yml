@@ -41,6 +41,8 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
+    - name: Run client
+      run: mvn exec:java -Pclient
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
     - name: Install graphviz
