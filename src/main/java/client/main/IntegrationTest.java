@@ -1,27 +1,48 @@
 package client.main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import client.controller.ChatController;
 import client.controller.ComprasController;
 import client.controller.LoginController;
 import client.controller.OfertaController;
 import client.controller.ProductoController;
+import client.controller.RegistroController;
+import client.controller.VentasController;
 import client.gui.VentanaLogin;
+import client.gui.VentanaOferta;
 import dao.UsuarioDAO;
 import serialization.Categoria;
+import serialization.Compra;
 import serialization.Mensaje;
+import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
+import serialization.Usuario;
 import util.ReventaException;
 
 public class IntegrationTest {
 	
-	public static void main(String[]args) {
+	public static void main(String[]args) throws ReventaException {
 		String hostname = args[0];
 		String port = args[1];
 		
@@ -41,6 +62,7 @@ public class IntegrationTest {
 			cc.enviar(email, "a@gmail.com", m);
 		}catch(ReventaException ex) {
 			ex.printStackTrace();
+			throw ex;
 		}
 		cc.getMensajesEnviados("u@gmail.com");
 		cc.getMensajesRecibidos("u@gmail.com");
@@ -50,6 +72,7 @@ public class IntegrationTest {
 			lc.logIn(email, "u", null, null);
 		}catch(ReventaException r) {
 			r.printStackTrace();
+			throw r;
 		}
 		
 		OfertaController of= new OfertaController(wt, email, 1);
@@ -58,6 +81,7 @@ public class IntegrationTest {
 		} catch (ReventaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		}
 		
 		ProductoController pc= new ProductoController(wt, email);
@@ -87,10 +111,38 @@ public class IntegrationTest {
 			pv.setModelo("tt");
 			pv.setPrecioSalida(200000);
 			pc.addProductoVehiculo(pv);
+			
+			ComprasController comprasController= new ComprasController(wt, email);
+			comprasController.anadirFav(pv, email);
+			comprasController.anadirUsuarioFav("a@gmail.com", email);
+			comprasController.comprar(email, 1, 100);
+			comprasController.getProductos();
+			List<Producto>productos=comprasController.getProductosEnVenta();
+			List<Producto>productosFavoritos=comprasController.getProductosFavoritos();
+			int ventas=comprasController.getVentas(email);
+			List<ProductoOrdenador>productosOrdenador= comprasController.getProductosOrdenador();
+			List<ProductoVehiculo>productosvehiculo=comprasController.getProductosVehiculo();
 		} catch (ReventaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw e;
 		}
+		
+		RegistroController rc= new RegistroController(wt);
+		Usuario u= new Usuario();
+		u.setEmail("c@gmail.com");
+		u.setPassword("c");
+		try {
+			rc.registrar(u);
+		} catch (ReventaException e) {
+			e.printStackTrace();
+			throw e;
+		}
+		
+		VentasController vc=new VentasController(wt, email);
+		vc.getListaProductosVendidos(email);
+		
+	
 		
 	}
 }
