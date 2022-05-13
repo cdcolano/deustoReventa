@@ -42,7 +42,7 @@ jobs:
       with:
         time: '10s'
     - name: Run client
-      run: mvn exec:java -Pclient
+      run: mvn exec:java -Pintegration
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
     - name: Install graphviz
