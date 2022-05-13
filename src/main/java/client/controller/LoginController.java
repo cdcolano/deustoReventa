@@ -40,7 +40,7 @@ public class LoginController {
 			}
 			boolean logIn=response.readEntity(boolean.class);
 			if (!logIn) {
-				lError.setText("Email o contraseña incorrectos");
+				lError.setText("Email o contrasena incorrectos");
 				vl.setLocationRelativeTo(null);
 				vl.pack();
 				

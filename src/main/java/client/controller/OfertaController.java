@@ -34,14 +34,4 @@ public class OfertaController {
 	}
 	
 	
-	public void comprar(String email, int idProducto, double precio) throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/comprar/"+email +"/"+ idProducto);
-		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
-		Compra c= new Compra();
-		c.setPrecio(precio);
-		Response response = invocationBuilder.post(Entity.entity(c, MediaType.APPLICATION_JSON));
-		if (response.getStatus() != Status.OK.getStatusCode()) {
-			throw new ReventaException("" + response.getStatus());
-		}
-	}
 }
