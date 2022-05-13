@@ -41,6 +41,8 @@ jobs:
       uses: jakejarvis/wait-action@master
       with:
         time: '10s'
+    - name: Data
+      run: mvn exec:java -Pdatos
     - name: Run client
       run: mvn exec:java -Pintegration
     - name: Install doxygen
