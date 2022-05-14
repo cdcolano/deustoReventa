@@ -13,16 +13,19 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import categories.GuiTest;
 import client.controller.ComprasController;
 import serialization.Categoria;
 import serialization.Producto;
 import util.ReventaException;
 
 @RunWith(MockitoJUnitRunner.class)
+@Category(GuiTest.class)
 public class TestVentanaCompras {
 	
 	@Mock

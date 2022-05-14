@@ -14,10 +14,12 @@ import javax.ws.rs.client.WebTarget;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import categories.GuiTest;
 import client.controller.ChatController;
 import client.controller.ComprasController;
 import dao.UsuarioDAO;
@@ -26,6 +28,7 @@ import serialization.Usuario;
 import util.ReventaException;
 
 @RunWith(MockitoJUnitRunner.class)
+@Category(GuiTest.class)
 public class TestVentanaChat {
 	
 	@Mock 

@@ -418,7 +418,15 @@
 							<includes>
 								<include>**/*</include>
 							</includes>
-							<excludedGroups>categories.IntegrationTest</excludedGroups>  
+							<excludedGroups>categories.IntegrationTest</excludedGroups>
+							<excludes>
+								<exclude>**/TestVentanaChat.java</exclude>
+								<exclude>**/TestVentanaCompras.java</exclude>
+								<exclude>**/TestVentanaLogin.java</exclude>
+								<exclude>**/TestVentanaProducto.java</exclude>
+								<exclude>**/TestVentanaRegistro.java</exclude>
+								<exclude>**/TestVentanaVentas.java</exclude>
+							</excludes>
 						</configuration>
 						<executions>
 							<execution>

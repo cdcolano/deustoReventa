@@ -6,8 +6,12 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.mockito.Mock;
 
+import categories.GuiTest;
+
+@Category(GuiTest.class)
 public class TestVentanaRegistro {
 	@Mock
 	Client cliente;

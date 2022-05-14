@@ -14,10 +14,12 @@ import javax.ws.rs.core.MediaType;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import categories.GuiTest;
 import client.controller.ProductoController;
 import serialization.Categoria;
 import serialization.Mensaje;
@@ -25,6 +27,7 @@ import serialization.Usuario;
 import util.ReventaException;
 
 @RunWith(MockitoJUnitRunner.class)
+@Category(GuiTest.class)
 public class TestVentanaProducto {
 	@Mock
 	Client cliente;
