@@ -20,6 +20,7 @@ import serialization.Oferta;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
+import serialization.Reclamacion;
 import serialization.Usuario;
 import service.VentasService;
 
@@ -218,6 +219,14 @@ public class ReventaServer {
 	public Response addUsuarioFav(String email2, @PathParam("x") String email ) {
 		vs.addUsuarioFav(email2, email);
 		System.out.println("*Usuario anradido*");
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/addReclamacion")
+	public Response addReclamacion(Reclamacion r, int importeReclamado) {
+		vs.addReclamacion(importeReclamado,r,r.getEmailComprador());
+		System.out.println("*Producto puesto a la venta*");
 		return Response.ok().build();
 	}
 	
