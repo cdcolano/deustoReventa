@@ -122,7 +122,63 @@ public class ProductoDAO implements IProductoDAO{
 		return productos;
 	}
 	
-	
+	public List<ProductoOrdenador> getProductosOrdenadorEnVentaConReservado(){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+		
+
+		Transaction tx = pm.currentTransaction();
+		List<ProductoOrdenador> productos = new ArrayList<ProductoOrdenador	>();
+
+		try {
+			System.out.println("   * Retrieving an Extent for Products.");
+
+			tx.begin();
+			Extent<ProductoOrdenador> extent = pm.getExtent(ProductoOrdenador.class, true);
+
+			for (ProductoOrdenador p : extent) {
+				System.out.println(p.getNombre());
+				if (!(p.isVendido())) {
+					ProductoOrdenador p1=new ProductoOrdenador();
+					System.out.println("Se añade");
+					productos.add(p1);
+					p1.setNombre(p.getNombre());
+					p1.setCategoria(p.getCategoria());
+					p1.setId(p.getId());
+					p1.setFechaPubli(p.getFechaPubli());
+					p1.setPrecioSalida(p.getPrecioSalida());
+					p1.setOfertasRecibidas(p.getOfertasRecibidas());
+					p1.setReservado(p.isReservado());
+					p1.setVendido(p.isVendido());
+					p1.setEmailVendedor(p.getEmailVendedor());
+					p1.setCpu(p.getCpu());
+					p1.setMemoria(p.getMemoria());
+					p1.setGrafica(p1.getGrafica());
+					p1.setRam(p.getRam());
+					p1.setPlacaBase(p.getPlacaBase());
+				}
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("   $ Error retrieving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+		for (ProductoOrdenador p1:productos) {
+			System.out.println(p1.getNombre());
+		}
+
+		return productos;
+
+	}
 	
 	public List<ProductoOrdenador> getProductosOrdenadorEnVenta() {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -200,6 +256,58 @@ public class ProductoDAO implements IProductoDAO{
 
 			for (ProductoVehiculo p : extent) {
 				productos.add(p);
+			}
+
+			tx.commit();
+		} catch (Exception ex) {
+			System.out.println("   $ Error retrieving an extent: " + ex.getMessage());
+		} finally {
+			if (tx != null && tx.isActive()) {
+				tx.rollback();
+			}
+
+			pm.close();
+		}
+
+		return productos;
+	}
+	
+	public List<ProductoVehiculo> getProductosVehiculosEnVentaConReservado(){
+		PersistenceManager pm = pmf.getPersistenceManager();
+		/*
+		 * By default only 1 level is retrieved from the db so if we wish to fetch more
+		 * than one level, we must indicate it
+		 */
+
+
+		Transaction tx = pm.currentTransaction();
+		List<ProductoVehiculo> productos = new ArrayList<ProductoVehiculo>();
+
+		try {
+			System.out.println("   * Retrieving an Extent for Products.");
+
+			tx.begin();
+			Extent<ProductoVehiculo> extent = pm.getExtent(ProductoVehiculo.class, true);
+
+			for (ProductoVehiculo p : extent) {
+				if(!(p.isVendido())) {
+					ProductoVehiculo p1=new ProductoVehiculo();
+					productos.add(p1);
+					p1.setNombre(p.getNombre());
+					p1.setCategoria(p.getCategoria());
+					p1.setId(p.getId());
+					p1.setFechaPubli(p.getFechaPubli());
+					p1.setPrecioSalida(p.getPrecioSalida());
+					p1.setOfertasRecibidas(p.getOfertasRecibidas());
+					p1.setReservado(p.isReservado());
+					p1.setVendido(p.isVendido());
+					p1.setEmailVendedor(p.getEmailVendedor());
+					p1.setKilometros(p.getKilometros());
+					p1.setCaballos(p.getCaballos());
+					p1.setAnyoFabri(p.getAnyoFabri());
+					p1.setMarca(p.getMarca());
+					p1.setModelo(p.getModelo());
+				}
 			}
 
 			tx.commit();

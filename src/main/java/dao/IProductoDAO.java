@@ -13,4 +13,6 @@ public interface IProductoDAO {
 	public List<ProductoOrdenador> getProductosOrdenador();
 	public List<ProductoOrdenador> getProductosOrdenadorEnVenta();
 	public List<ProductoVehiculo> getProductosVehiculosEnVenta();
+	public List<ProductoOrdenador> getProductosOrdenadorEnVentaConReservado();
+	public List<ProductoVehiculo> getProductosVehiculosEnVentaConReservado();
 }

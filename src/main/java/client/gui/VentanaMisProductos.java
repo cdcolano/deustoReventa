@@ -61,7 +61,7 @@ public class VentanaMisProductos extends JFrame {
 		cbOrdenar.addItem("Ordenar por Fecha de Publicacion descendente");
 		cbOrdenar.addItem("Favoritos");
 		try {
-		productos=controller.getProductosEnVenta();
+		productos=controller.getProductosEnVentaConReservado();
 		controller.setProductos(productos);
 		System.out.println(productos);
 		for (Producto p:productos) {

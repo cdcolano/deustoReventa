@@ -87,6 +87,17 @@ public class MisProductosController {
 		return lProductos;
 	}
 	
+	public List<Producto> getProductosEnVentaConReservado() throws ReventaException{
+		List<ProductoOrdenador>lProductosOrdenador = getProductosOrdenadorConReservado();
+		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/ventaReservado");
+		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
+	    } );
+		List<Producto>lProductos= new ArrayList<>();
+		lProductos.addAll(lProductosOrdenador);
+		lProductos.addAll(lProductosVehiculo);
+		return lProductos;
+	}
+	
 	public Producto getProducto(int idProducto)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("collector/getProducto/"+ idProducto);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -126,7 +137,7 @@ public class MisProductosController {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					reservar(p.getId());
-					pCentro.removeAll();
+					//pCentro.removeAll();
 					pCentro.revalidate();
 					pCentro.repaint();
 				} catch (ReventaException e1) {
@@ -321,6 +332,13 @@ public class MisProductosController {
 	
 	public List<ProductoOrdenador> getProductosOrdenador(){
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/venta");
+		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
+	     } );
+		return lProductosOrdenador;
+	}
+	
+	public List<ProductoOrdenador> getProductosOrdenadorConReservado(){
+		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/ventaReservado");
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
 	     } );
 		return lProductosOrdenador;

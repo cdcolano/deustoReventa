@@ -151,11 +151,26 @@ public class ReventaServer {
 	}
 	
 	@GET
+	@Path("/productosOrdenador/ventaReservado")
+	public List<ProductoOrdenador> getProductosOrdenadorEnVentaConReservado() {
+		 List<ProductoOrdenador>prod=vs.getProductosOrdenadorEnVentaConReservado();
+		 return prod;
+	}
+	
+	@GET
 	@Path("/productosVehiculo/venta")
 	public List<ProductoVehiculo> getProductosVehiculoEnVenta() {
 		 List<ProductoVehiculo>prod=vs.getProductosVehiculosEnVenta();
 		 return prod;
 	}
+	
+	@GET
+	@Path("/productosVehiculo/ventaReservado")
+	public List<ProductoVehiculo> getProductosVehiculoEnVentaConReservado() {
+		 List<ProductoVehiculo>prod=vs.getProductosVehiculosEnVentaConReservado();
+		 return prod;
+	}
+	
 	
 	@GET
 	@Path("/productosOrdenador/favoritos/{x}")

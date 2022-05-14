@@ -288,6 +288,24 @@ public class VentasService {
 		
 	}
 	
+	public List<ProductoOrdenador> getProductosOrdenadorEnVentaConReservado() {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoOrdenador> p=new ArrayList<ProductoOrdenador>();
+		try {
+			p=productDao.getProductosOrdenadorEnVentaConReservado();
+			for (ProductoOrdenador prod:p) {
+				System.out.println(prod.getNombre());
+			}
+		}catch(Exception e) {
+			System.out.println("* Error el producto no existe *S");
+		}finally {
+			pm.close();
+		}
+		return p;
+		
+	}
+	
+	
 	public List<ProductoVehiculo> getProductosVehiculos() {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoVehiculo> p=new ArrayList<ProductoVehiculo>();
@@ -316,10 +334,25 @@ public class VentasService {
 		
 	}
 	
+	public List<ProductoVehiculo> getProductosVehiculosEnVentaConReservado() {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		List<ProductoVehiculo> p=new ArrayList<ProductoVehiculo>();
+		try {
+			p=productDao.getProductosVehiculosEnVentaConReservado();
+		}catch(Exception e) {
+			System.out.println("* Error el producto no existe *S");
+		}finally {
+			pm.close();
+		}
+		return p;
+		
+	}
+	
 	public Usuario getUsuario(String email) {
 		return usuarioDao.getUsuario(email);
 	}
 
+	
 
 
 	public List<ProductoOrdenador> getProductosOrdenadorFavoritos(String x) {
