@@ -43,8 +43,8 @@ jobs:
         time: '10s'
     - name: Data
       run: mvn exec:java -Pdatos
-    - name: Run client
-      run: mvn exec:java -Pintegration
+    - name: Run Integration Test
+      run: mvn test -Pintegration
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
     - name: Install graphviz

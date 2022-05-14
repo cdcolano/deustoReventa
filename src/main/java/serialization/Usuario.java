@@ -23,6 +23,8 @@ public class Usuario {
 	
 	private List<Producto>productosVendidos;
 	
+	@Persistent(defaultFetchGroup = "true",dependentElement = "true")
+	@Join
 	private List<Reclamacion>reclamacionesHechas;
 	
 	
@@ -69,6 +71,7 @@ public class Usuario {
 		compras= new ArrayList<>();
 		vendedoresLike= new ArrayList<>();
 		ofertasEnviadas= new ArrayList<>();
+		reclamacionesHechas= new ArrayList<>();
 	}
 	
 	public String getEmail() {
@@ -117,6 +120,13 @@ public class Usuario {
 	}
 	public void setProductosFavoritos(List<Producto> productosFavoritos) {
 		this.productosFavoritos = productosFavoritos;
+	}
+	
+	public List<Reclamacion> getReclamacionesHechas() {
+		return reclamacionesHechas;
+	}
+	public void setReclamacionesHechas(List<Reclamacion> reclamacionesHechas) {
+		this.reclamacionesHechas = reclamacionesHechas;
 	}
 
 	public int getDenuncias() {
