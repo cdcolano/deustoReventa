@@ -223,8 +223,8 @@ public class ReventaServer {
 	}
 	
 	@POST
-	@Path("/addReclamacion")
-	public Response addReclamacion(Reclamacion r, int importeReclamado) {
+	@Path("/addReclamacion/{x}")
+	public Response addReclamacion(Reclamacion r, @PathParam("x") int importeReclamado) {
 		vs.addReclamacion(importeReclamado,r,r.getEmailComprador());
 		System.out.println("*Reclamacion añadida*");
 		return Response.ok().build();
