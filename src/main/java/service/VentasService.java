@@ -192,6 +192,26 @@ public class VentasService {
 		}
 	}
 	
+	public void reservar(int idProducto) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Producto p = null;
+		try {
+			p= pm.getObjectById(Producto.class,idProducto);
+			p.setReservado(true);
+		}catch(Exception e) {
+			System.out.println("El producto no existe");
+		}
+	}
+	public void desReservar(int idProducto) {
+		PersistenceManager pm = pmf.getPersistenceManager();
+		Producto p = null;
+		try {
+			p= pm.getObjectById(Producto.class,idProducto);
+			p.setReservado(false);
+		}catch(Exception e) {
+			System.out.println("El producto no existe");
+		}
+	}
 	
 	public void ponerALaVenta(String email, Producto p) {
 		PersistenceManager pm=pmf.getPersistenceManager();

@@ -230,6 +230,22 @@ public class ReventaServer {
 		return Response.ok().build();
 	}
 	
+
+	@POST
+	@Path("/reservar/{x}")
+	public Response reservarProducto(@PathParam("x") int idProducto) {
+		vs.reservar(idProducto);
+		System.out.println("Producto reservado");
+		return Response.ok().build();
+	}
+	
+	@POST
+	@Path("/desReservar/{x}")
+	public Response desReservarProducto(@PathParam("x") int idProducto) {
+		vs.desReservar(idProducto);
+		System.out.println("Producto desreservado");
+		return Response.ok().build();
+	}
 	
 	
 
