@@ -13,6 +13,9 @@ import javax.jdo.JDOUserException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
 
+import org.databene.contiperf.PerfTest;
+import org.databene.contiperf.Required;
+import org.databene.contiperf.junit.ContiPerfSuiteRunner;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,6 +28,7 @@ import dao.IProductoDAO;
 import dao.IUsuarioDAO;
 import dao.ProductoDAO;
 import dao.UsuarioDAO;
+import service.VentasService;
 import serialization.Categoria;
 import serialization.Compra;
 import serialization.Mensaje;
@@ -51,6 +55,7 @@ public class ServiceTest {
 	Usuario u;
 	Producto p;
 	Categoria c;
+	
 	@Before
 	public void setUp() {
 		vs= new VentasService();

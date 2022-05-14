@@ -217,7 +217,7 @@ public class ReventaServer {
 	@Path("/anadirUsuarioFav/{x}")
 	public Response addUsuarioFav(String email2, @PathParam("x") String email ) {
 		vs.addUsuarioFav(email2, email);
-		System.out.println("*Usuario añadido*");
+		System.out.println("*Usuario anradido*");
 		return Response.ok().build();
 	}
 	

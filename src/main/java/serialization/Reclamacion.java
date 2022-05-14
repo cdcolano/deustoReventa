@@ -35,4 +35,8 @@ public class Reclamacion {
 		this.contenido=contenido;
 		this.fecha = System.currentTimeMillis();
 	}
+	
+	public Reclamacion() {
+		
+	}
 }
