@@ -19,6 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import client.gui.VentanaMisProductos;
 import client.gui.VentanaOferta;
 import serialization.Compra;
 import serialization.Producto;
@@ -125,11 +126,14 @@ public class MisProductosController {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					reservar(p.getId());
+					pCentro.removeAll();
+					pCentro.revalidate();
+					pCentro.repaint();
 				} catch (ReventaException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				pCentro.revalidate();
+				
 			}
 		});
 		JButton bDesReservar = new JButton("Quitar reserva");

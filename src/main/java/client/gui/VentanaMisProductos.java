@@ -63,6 +63,7 @@ public class VentanaMisProductos extends JFrame {
 		try {
 		productos=controller.getProductosEnVenta();
 		controller.setProductos(productos);
+		System.out.println(productos);
 		for (Producto p:productos) {
 			if(p.getEmailVendedor().equals(email)) {
 				System.out.println("Entro");
@@ -79,72 +80,11 @@ public class VentanaMisProductos extends JFrame {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
 				if(e.getStateChange()==ItemEvent.SELECTED) {
-					/*String seleccion=(String)cbOrdenar.getSelectedItem();
-					if (seleccion.compareTo("Ordenar por Ventas del Vendedor")==0) {
-						controller.ordenarPorVentas(pCentro);
-					}
-					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion ascendente")==0) {
-						controller.ordenarPorFechaAsc(pCentro);
-					}
-					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
-						controller.ordenarPorFechaDesc(pCentro);
-					}
-					else if (seleccion.compareTo("Favoritos")==0) {
-						controller.mostrarFavoritos(pCentro, email);
-						revalidate();
-					}*/
 					itemStateChangedVentana(cbOrdenar,pCentro,controller,email,v1);
 				}
 			}
 		});
 		
-		
-		JComboBox<String>cbCategorias= new JComboBox<String>();
-		cbCategorias.addItem("Todas");
-		cbCategorias.addItem("Ordenador");
-		cbCategorias.addItem("Vehiculo");
-		JLabel lCategorias= new JLabel("Categoria: ");
-		pCategorias= new JPanel();
-		pCategorias.setLayout(new FlowLayout(FlowLayout.LEFT));
-		pCategorias.add(lCategorias);
-		pCategorias.add(cbCategorias);
-		pNorte= new JPanel();
-		pNorte.setLayout(new BorderLayout());
-		
-		JLabel lOrdenar= new JLabel("Ordenar: ");
-		pOrdenar= new JPanel();
-		pOrdenar.setLayout(new FlowLayout(FlowLayout.LEFT));
-		pOrdenar.add(lOrdenar);
-		pOrdenar.add(cbOrdenar);
-	
-		pNorte.add(pCategorias, BorderLayout.NORTH);
-		pNorte.add(pOrdenar, BorderLayout.CENTER);
-		
-		v1.getContentPane().add(pNorte, BorderLayout.NORTH);
-		
-		cbCategorias.addItemListener (new ItemListener () {
-
-			@Override
-			public void itemStateChanged(ItemEvent e) {
-				if(e.getStateChange()==ItemEvent.SELECTED) {
-					/*String seleccion=(String)cbOrdenar.getSelectedItem();
-					if (seleccion.compareTo("Ordenar por Ventas del Vendedor")==0) {
-						controller.ordenarPorVentas(pCentro);
-					}
-					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion ascendente")==0) {
-						controller.ordenarPorFechaAsc(pCentro);
-					}
-					else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
-						controller.ordenarPorFechaDesc(pCentro);
-					}
-					else if (seleccion.compareTo("Favoritos")==0) {
-						controller.mostrarFavoritos(pCentro, email);
-						revalidate();
-					}*/
-					itemStateChangedCategoria(cbCategorias,pCentro,controller,email,v1);
-				}
-			}
-		});
 		JScrollPane jsc= new JScrollPane(pCentro);
 	
 		v1.getContentPane().add(jsc,BorderLayout.CENTER);
@@ -183,7 +123,21 @@ public class VentanaMisProductos extends JFrame {
 			}
 			
 		});
+		
+		JButton bCerrar = new JButton("Cerrar");
+		bCerrar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				VentanaCompras v = new VentanaCompras(new ComprasController(webTarget, email),VentanaMisProductos.this.client,VentanaMisProductos.this.webTarget,email);
+				v1.dispose();
+			}
+			
+		});
+		
 		pVender.add(bMensajes);
+		pVender.add(bCerrar);
 		v1.getContentPane().add(pVender, BorderLayout.SOUTH);
 		this.pack();
 		v1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -324,6 +278,7 @@ public class VentanaMisProductos extends JFrame {
 			}
 			
 		});
+		
 		JPanel pBoton= new JPanel();
 		pBoton.setLayout(new FlowLayout(FlowLayout.CENTER));
 		pBoton.add(bFiltrar);

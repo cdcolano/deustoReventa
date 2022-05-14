@@ -23,6 +23,7 @@ import javax.ws.rs.core.Response.Status;
 
 import client.controller.ChatController;
 import client.controller.ComprasController;
+import client.controller.MisProductosController;
 import client.controller.ProductoController;
 import client.controller.VentasController;
 import dao.UsuarioDAO;
@@ -187,6 +188,19 @@ public class VentanaCompras extends JFrame{
 			
 		});
 		pVender.add(bMensajes);
+		
+		JButton bMisProductos = new JButton("Mis productos en venta");
+		bMisProductos.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				VentanaMisProductos v = new VentanaMisProductos(new MisProductosController(webTarget, email),cliente, webTarget, email);
+				v1.dispose();
+			}
+			
+		});
+		pVender.add(bMisProductos);
 		v1.getContentPane().add(pVender, BorderLayout.SOUTH);
 		this.pack();
 		v1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
