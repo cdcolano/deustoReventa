@@ -29,8 +29,8 @@ jobs:
       run: mysql -uroot -h127.0.0.1 < src/sql/deustoReventa.sql  
     - name: compile the code
       run: mvn clean compile
-    #- name: Test with Maven
-    #  run: mvn test
+    - name: Test with Maven
+      run: mvn test -Punit
     - name: Datanucleus enhance
       run: mvn datanucleus:enhance
     - name: Create Datanucleus schema
