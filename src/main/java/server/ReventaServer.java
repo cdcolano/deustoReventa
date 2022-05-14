@@ -226,7 +226,7 @@ public class ReventaServer {
 	@Path("/addReclamacion")
 	public Response addReclamacion(Reclamacion r, int importeReclamado) {
 		vs.addReclamacion(importeReclamado,r,r.getEmailComprador());
-		System.out.println("*Producto puesto a la venta*");
+		System.out.println("*Reclamacion añadida*");
 		return Response.ok().build();
 	}
 	

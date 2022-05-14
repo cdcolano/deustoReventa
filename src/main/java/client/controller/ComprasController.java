@@ -481,4 +481,13 @@ public class ComprasController {
 			pa.revalidate();
 	}
 	
+	public void addReclamacion(Usuario u, String email) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/addReclamacion");
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(u, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
+	
 }
