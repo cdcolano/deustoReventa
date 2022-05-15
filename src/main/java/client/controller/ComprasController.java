@@ -115,18 +115,7 @@ public class ComprasController {
 	}
 	
 	
-	public List<Producto>  getListaProductosComprados(String email)throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/compras/productoOrdenador/"+email);
-		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
-	     } );
-		WebTarget webTarget2 = this.webTarget.path("reventa/compras/productoVehiculo/"+email);
-		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
-	    } );
-		List<Producto>lProductos= new ArrayList<>();
-		lProductos.addAll(lProductosOrdenador);
-		lProductos.addAll(lProductosVehiculo);
-		return lProductos;
-	}
+	
 	
 	
 	

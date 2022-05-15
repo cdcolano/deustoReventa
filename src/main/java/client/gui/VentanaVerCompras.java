@@ -20,6 +20,7 @@ import javax.ws.rs.client.WebTarget;
 
 import client.controller.ComprasController;
 import client.controller.VentasController;
+import client.controller.VerComprasController;
 import serialization.Producto;
 import util.ReventaException;
 
@@ -31,16 +32,16 @@ public class VentanaVerCompras extends JFrame {
 	private String em1;
 	private WebTarget webTarget;
 
-	private ComprasController vc1;
+	private VerComprasController vc1;
 
 	
 	
-	public VentanaVerCompras(ComprasController cc, Client c, WebTarget wt, String email) {
+	public VentanaVerCompras(VerComprasController vcc, Client c, WebTarget wt, String email) {
 		
 		this.client=c;
 		this.em1=email;
 		this.webTarget=wt;
-		vc1=cc;
+		vc1=vcc;
 		
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
