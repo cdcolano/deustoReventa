@@ -61,4 +61,15 @@ public class VerComprasController {
 			throw new ReventaException("" + response.getStatus());
 		}
 	}
+
+	public void denunciar(Producto m) throws ReventaException {
+		// TODO Auto-generated method stub
+		WebTarget webTarget = this.webTarget.path("reventa/denunciar/"+ m.getEmailVendedor());
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.get();
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
+
 }

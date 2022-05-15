@@ -206,6 +206,13 @@ public class ReventaServer {
 		return vs.getProductosFavoritos(x);
 	}
 	
+	@GET
+	@Path("/denunciar/{x}")
+	public Response denunciar(@PathParam("x") String x) {
+		vs.denunciar(x);
+		return Response.ok().build();
+	}
+	
 	
 	@GET
 	@Path("/getUsuario/{x}")

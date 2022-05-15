@@ -59,6 +59,9 @@ public class VentanaVerCompras extends JFrame {
 			pCentro = new JPanel();
 			pCentro.setLayout(new BoxLayout(pCentro, BoxLayout.Y_AXIS));
 			for(Compra compra: compras) {
+				
+				
+				
 				Producto m=vc1.getPoducto(compra);
 				JPanel pDate= new JPanel();
 				JPanel pNombre= new JPanel();
@@ -71,6 +74,7 @@ public class VentanaVerCompras extends JFrame {
 				pNombre.setLayout(new FlowLayout( FlowLayout.CENTER));
 				pBotones.setLayout(new FlowLayout( FlowLayout.CENTER));
 				JButton reclamar = new JButton("Reclamar");
+				JButton btnDenuncia = new JButton("Denunciar");
 				Date date = new Date(m.getFechaPubli());
 				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
 				String p = df.format(date);
@@ -78,11 +82,24 @@ public class VentanaVerCompras extends JFrame {
 				pNombre.add(new JLabel(m.getNombre()));
 				pDinero.add(new JLabel(""+compra.getPrecio()));
 				pBotones.add(reclamar);
+				pBotones.add(btnDenuncia);
 				pProducto.add(pNombre);
 				pProducto.add(pDate);
 				pProducto.add(pDinero);
 				pProducto.add(pBotones);
 				pCentro.add(pProducto);
+				
+				btnDenuncia.addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						try {
+							vc1.denunciar(m);
+						} catch (ReventaException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				});
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -104,6 +121,8 @@ public class VentanaVerCompras extends JFrame {
 				VentanaVerCompras.this.dispose();
 			}
 		});
+		
+	
 		
 		getContentPane().add(jsp,BorderLayout.CENTER);
 		getContentPane().add(pSur,BorderLayout.SOUTH);

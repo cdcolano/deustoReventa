@@ -593,13 +593,19 @@ public class VentasService {
 		}
 		return compras;
 	}
-	
 
-	
-	
-	
-	
-	
-	
 
+	public void denunciar(String x) {
+		// TODO Auto-generated method stub
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Usuario u= null;
+		try {	
+			u=pm.getObjectById(Usuario.class, x);
+			u.setDenuncias(u.getDenuncias()+1);
+		}catch(Exception e){
+				System.out.println("Error al denunciar al usuario");
+		}finally {
+			pm.close();
+		}
+	}
 }
