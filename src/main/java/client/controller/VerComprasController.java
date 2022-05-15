@@ -3,11 +3,16 @@ package client.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import dao.UsuarioDAO;
+import serialization.Compra;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
@@ -26,16 +31,25 @@ public class VerComprasController {
 		this.email = email;
 	}
 	
-	public List<Producto>  getListaProductosComprados(String email)throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/compras/productoOrdenador/"+email);
-		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
+	public List<Compra>  getListaProductosComprados(String email)throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/compras/"+email);
+		List<Compra>lCompra = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Compra>>() {
 	     } );
-		WebTarget webTarget2 = this.webTarget.path("reventa/compras/productoVehiculo/"+email);
-		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
-	    } );
-		List<Producto>lProductos= new ArrayList<>();
-		lProductos.addAll(lProductosOrdenador);
-		lProductos.addAll(lProductosVehiculo);
-		return lProductos;
+		return lCompra;
+	}
+	
+	public Producto getPoducto(Compra c) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/getProducto/"+ c.getProducto());
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.get();
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+		if (c.getIdCat()==1) {
+			return response.readEntity(ProductoOrdenador.class);
+		}else {
+			System.out.println("Este es el id " +c.getIdCat());
+			return response.readEntity(ProductoVehiculo.class);
+		}
 	}
 }

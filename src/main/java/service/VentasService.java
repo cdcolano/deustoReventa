@@ -105,8 +105,13 @@ public class VentasService {
 			u=pm.getObjectById(Usuario.class, email);
 			p=pm.getObjectById(Producto.class, idProducto);
 			Compra c= new Compra();
-			c.setProducto(p);
+			c.setProducto(p.getId());
 			c.setPrecio(precio);
+			if (p instanceof ProductoOrdenador) {
+				c.setIdCat(1);
+			}else {
+				c.setId(2);
+			}
 			u.getCompras().add(c);
 			//uVendedor.getProductosVendidos().add(p);
 			p.setVendido(true);
@@ -532,6 +537,22 @@ public class VentasService {
 		}finally {
 			pm.close();
 		}
+	}
+
+
+	public List<Compra> getCompras(String email) {
+		PersistenceManager pm=pmf.getPersistenceManager();
+		Usuario u= null;
+		List<Compra>compras= new ArrayList<Compra>();
+		try {	
+			u=pm.getObjectById(Usuario.class, email);
+			return u.getCompras();
+		}catch(Exception e){
+				System.out.println("Error al realizar la Reclamacion no existe ese usuario");
+		}finally {
+			pm.close();
+		}
+		return compras;
 	}
 	
 

@@ -21,6 +21,7 @@ import javax.ws.rs.client.WebTarget;
 import client.controller.ComprasController;
 import client.controller.VentasController;
 import client.controller.VerComprasController;
+import serialization.Compra;
 import serialization.Producto;
 import util.ReventaException;
 
@@ -47,37 +48,41 @@ public class VentanaVerCompras extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);
 		
-		List<Producto> productoC=new ArrayList<Producto>();
+		List<Compra> compras=new ArrayList<Compra>();
 		try {
-			productoC = vc1.getListaProductosComprados(email);
+			compras = vc1.getListaProductosComprados(email);
 		} catch (ReventaException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
-		pCentro = new JPanel();
-		pCentro.setLayout(new BoxLayout(pCentro, BoxLayout.Y_AXIS));
-		for(Producto m: productoC) {
-			JPanel pDate= new JPanel();
-			JPanel pNombre= new JPanel();
-			JPanel pDinero= new JPanel();
-			JPanel pProducto= new JPanel();
-			pProducto.setLayout(new BoxLayout(pProducto, BoxLayout.Y_AXIS));
-			pDate.setLayout(new FlowLayout( FlowLayout.CENTER));
-			pDinero.setLayout(new FlowLayout( FlowLayout.CENTER));
-			pNombre.setLayout(new FlowLayout( FlowLayout.CENTER));
-			Date date = new Date(m.getFechaPubli());
-			SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
-			String p = df.format(date);
-			pDate.add(new JLabel(p));
-			pNombre.add(new JLabel(m.getNombre()));
-			pDinero.add(new JLabel(""+m.getPrecioSalida()));
-			pProducto.add(pNombre);
-			pProducto.add(pDate);
-			pProducto.add(pDinero);
-			pCentro.add(pProducto);
+		try {
+			pCentro = new JPanel();
+			pCentro.setLayout(new BoxLayout(pCentro, BoxLayout.Y_AXIS));
+			for(Compra compra: compras) {
+				Producto m=vc1.getPoducto(compra);
+				JPanel pDate= new JPanel();
+				JPanel pNombre= new JPanel();
+				JPanel pDinero= new JPanel();
+				JPanel pProducto= new JPanel();
+				pProducto.setLayout(new BoxLayout(pProducto, BoxLayout.Y_AXIS));
+				pDate.setLayout(new FlowLayout( FlowLayout.CENTER));
+				pDinero.setLayout(new FlowLayout( FlowLayout.CENTER));
+				pNombre.setLayout(new FlowLayout( FlowLayout.CENTER));
+				Date date = new Date(m.getFechaPubli());
+				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
+				String p = df.format(date);
+				pDate.add(new JLabel(p));
+				pNombre.add(new JLabel(m.getNombre()));
+				pDinero.add(new JLabel(""+compra.getPrecio()));
+				pProducto.add(pNombre);
+				pProducto.add(pDate);
+				pProducto.add(pDinero);
+				pCentro.add(pProducto);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
-		
+			
 		JScrollPane jsp= new JScrollPane(pCentro);
 		
 		

@@ -19,9 +19,12 @@ public class Compra {
 	//@Join
 	//private Usuario comprador;
 	
-	@Persistent(defaultFetchGroup = "true")
-	@Join
-	private Producto producto;
+	private int idCat;
+	
+	public void setIdCat(int idCat) {
+		this.idCat = idCat;
+	}
+	private int producto;
 	
 	public int getId() {
 		return id;
@@ -30,10 +33,10 @@ public class Compra {
 		this.id = id;
 	}
 	
-	public Producto getProducto() {
+	public int getProducto() {
 		return producto;
 	}
-	public void setProducto(Producto producto) {
+	public void setProducto(int producto) {
 		this.producto = producto;
 	}
 	public String getOpinion() {
@@ -54,5 +57,9 @@ public class Compra {
 //	public void setComprador(Usuario comprador) {
 //		this.comprador = comprador;
 //	}
+	public int getIdCat() {
+		// TODO Auto-generated method stub
+		return idCat;
+	}
 	
 }

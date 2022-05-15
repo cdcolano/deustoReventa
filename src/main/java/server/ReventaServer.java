@@ -263,6 +263,14 @@ public class ReventaServer {
 	}
 	
 	
+	@GET
+	@Path("/compras/{x}")
+	public List<Compra> getCompras(@PathParam("x") String email) {
+		return vs.getCompras(email);
+	}
+	
+	
+	
 
 	
 }
