@@ -155,6 +155,7 @@ public class MisProductosController {
 		
 		try {
 			int numFavoritos= getNumFavoritos(p.getId());
+			
 			JLabel lblFavoritos = new JLabel("Num favoritos: " + numFavoritos);
 			pProducto.add(lblFavoritos);
 		} catch (ReventaException e2) {
@@ -237,6 +238,18 @@ public class MisProductosController {
 	
 	public int getVentas(String email)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/numVentas/"+ email);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.get();
+		if (response.getStatus() == Status.OK.getStatusCode()) {
+			int u = response.readEntity(Integer.class);
+			return u;
+			
+		} else {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
+	public int getNumFavoritos(int id)throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/numFavoritos/"+ id);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.get();
 		if (response.getStatus() == Status.OK.getStatusCode()) {
