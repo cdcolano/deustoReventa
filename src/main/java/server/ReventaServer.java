@@ -201,7 +201,7 @@ public class ReventaServer {
 	
 
 	@GET
-	@Path("/numFavortios/{x}")
+	@Path("/numFavoritos/{x}")
 	public int getNumFavoritos(@PathParam("x") int x) {
 		return vs.getProductosFavoritos(x);
 	}
