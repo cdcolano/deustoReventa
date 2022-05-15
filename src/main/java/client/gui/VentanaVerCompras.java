@@ -64,19 +64,24 @@ public class VentanaVerCompras extends JFrame {
 				JPanel pNombre= new JPanel();
 				JPanel pDinero= new JPanel();
 				JPanel pProducto= new JPanel();
+				JPanel pBotones = new JPanel();
 				pProducto.setLayout(new BoxLayout(pProducto, BoxLayout.Y_AXIS));
 				pDate.setLayout(new FlowLayout( FlowLayout.CENTER));
 				pDinero.setLayout(new FlowLayout( FlowLayout.CENTER));
 				pNombre.setLayout(new FlowLayout( FlowLayout.CENTER));
+				pBotones.setLayout(new FlowLayout( FlowLayout.CENTER));
+				JButton reclamar = new JButton("Reclamar");
 				Date date = new Date(m.getFechaPubli());
 				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
 				String p = df.format(date);
 				pDate.add(new JLabel(p));
 				pNombre.add(new JLabel(m.getNombre()));
 				pDinero.add(new JLabel(""+compra.getPrecio()));
+				pBotones.add(reclamar);
 				pProducto.add(pNombre);
 				pProducto.add(pDate);
 				pProducto.add(pDinero);
+				pProducto.add(pBotones);
 				pCentro.add(pProducto);
 			}
 		}catch(Exception e) {
