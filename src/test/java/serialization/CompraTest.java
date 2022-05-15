@@ -46,8 +46,8 @@ public class CompraTest {
 	
 	@Test
 	public void testProducto() {
-		c.setProducto(producto);
-		assertTrue(c.getProducto().getNombre().contentEquals("acer"));
+		c.setProducto(1);
+		assertTrue(c.getProducto()==1);
 	}
 	
 }

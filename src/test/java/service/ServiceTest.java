@@ -167,7 +167,7 @@ public class ServiceTest {
 		vs.comprarProducto("a", 1, 100);
 		assertEquals(sizeU+1, u.getCompras().size());
 		assertEquals(u.getCompras().get(sizeU).getPrecio(), 100,0);
-		assertEquals(u.getCompras().get(sizeU).getProducto().getId(),1);
+		assertEquals(u.getCompras().get(sizeU).getProducto(),1);
 		assertTrue(p.isVendido());
 		
 		vs.comprarProducto("a", 3, 100);
