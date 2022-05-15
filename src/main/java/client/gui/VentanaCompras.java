@@ -26,6 +26,7 @@ import client.controller.ComprasController;
 import client.controller.MisProductosController;
 import client.controller.ProductoController;
 import client.controller.VentasController;
+import client.controller.VerComprasController;
 import dao.UsuarioDAO;
 import serialization.Categoria;
 import serialization.Compra;
@@ -197,9 +198,29 @@ public class VentanaCompras extends JFrame{
 				// TODO Auto-generated method stub
 				VentanaMisProductos v = new VentanaMisProductos(new MisProductosController(webTarget, email),cliente, webTarget, email);
 				v1.dispose();
+			}	
+		
+			
+		});
+		
+		
+		JButton bVerCompras= new JButton("Ver compras");
+		bVerCompras.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaVerCompras v=new VentanaVerCompras(new VerComprasController(webTarget, email), cliente, webTarget, email);
+				v1.dispose();	
 			}
 			
 		});
+		pVender.add(bVerCompras);
+		
+		
+		
+		
+		
+		
 		pVender.add(bMisProductos);
 		v1.getContentPane().add(pVender, BorderLayout.SOUTH);
 		this.pack();
