@@ -16,6 +16,7 @@ import serialization.Compra;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
+import serialization.Reclamacion;
 import util.ReventaException;
 
 public class VerComprasController {
@@ -50,6 +51,14 @@ public class VerComprasController {
 		}else {
 			System.out.println("Este es el id " +c.getIdCat());
 			return response.readEntity(ProductoVehiculo.class);
+		}
+	}
+	public void addReclamacion(Reclamacion r, int importeReclamado) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/addReclamacion"+ importeReclamado);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Response response = invocationBuilder.post(Entity.entity(r, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
 		}
 	}
 }
