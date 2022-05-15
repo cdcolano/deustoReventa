@@ -476,6 +476,45 @@ public class VentasService {
 		return po;
 	}
 	
+	/*public List<Producto> getProductosFavoritos(String x) {
+	PersistenceManager pm=pmf.getPersistenceManager();
+	List<Producto>p= new ArrayList<Producto>();
+	Usuario u= null;
+	try {	
+		u=pm.getObjectById(Usuario.class, x);
+		for(Producto pr:u.getProductosFavoritos()) {
+			Producto prod=(Producto)p;
+			p.add(prod);
+		}
+	}catch(Exception e){
+			System.out.println("Error! ese usuario no tiene favoritos");
+	}finally {
+		pm.close();
+	}
+	return p;
+}*/
+	public int getProductosFavoritos(int x){
+		PersistenceManager pm=pmf.getPersistenceManager();
+		int contador = 0;
+		Producto p= null;
+		try {
+			p=pm.getObjectById(Producto.class, x);
+			List<Usuario> usuarios = usuarioDao.getUsuarios();
+			for(Usuario u: usuarios) {
+				for(Producto p2: u.getProductosFavoritos()) {
+					if(p2.getId()==p.getId()) {
+						contador++;
+					}
+				}
+			}
+		}catch(Exception e){
+			System.out.println("Error! ese usuario no tiene favoritos");
+		}finally {
+			pm.close();
+		}
+		return contador;
+
+	}
 
 	public List<ProductoVehiculo> getProductosVehiculoVendidos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();

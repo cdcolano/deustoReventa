@@ -147,6 +147,21 @@ public class MisProductosController {
 				
 			}
 		});
+		
+		/*Producto sacarFavs = p.getEmailVendedor()
+		pProducto.add(new JLabel("Numero de veces guardado en favoritos: "));
+		pProducto.add(new JLabel(""+p.getEmailVendedor()));*/
+		
+		
+		try {
+			int numFavoritos= getNumFavoritos(p.getId());
+			JLabel lblFavoritos = new JLabel("Num favoritos: " + numFavoritos);
+			pProducto.add(lblFavoritos);
+		} catch (ReventaException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
+		
 		JButton bDesReservar = new JButton("Quitar reserva");
 		bDesReservar.addActionListener(new ActionListener() {
 

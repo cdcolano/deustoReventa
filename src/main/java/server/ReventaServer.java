@@ -199,6 +199,14 @@ public class ReventaServer {
 		 return categorias;
 	}
 	
+
+	@GET
+	@Path("/numFavortios/{x}")
+	public int getNumFavoritos(@PathParam("x") int x) {
+		return vs.getProductosFavoritos(x);
+	}
+	
+	
 	@GET
 	@Path("/getUsuario/{x}")
 	public Response getUsuario(@PathParam("x") String x) {
