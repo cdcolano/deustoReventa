@@ -24,6 +24,7 @@ import javax.ws.rs.core.Response.Status;
 import client.controller.ChatController;
 import client.controller.ComprasController;
 import client.controller.MisProductosController;
+import client.controller.OfertasController;
 import client.controller.ProductoController;
 import client.controller.VentasController;
 import client.controller.VerComprasController;
@@ -216,8 +217,18 @@ public class VentanaCompras extends JFrame{
 		});
 		pVender.add(bVerCompras);
 		
-		
-		
+		JButton bVerOfertas = new JButton("Ver ofertas");
+		bVerOfertas.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				VentanaOfertas vo = new VentanaOfertas(new OfertasController(webTarget,email),cliente,webTarget,email);
+				v1.dispose();
+			}
+			
+		});
+		pVender.add(bVerOfertas);
 		
 		
 		
