@@ -564,12 +564,11 @@ public class VentasService {
 		}
 		
 	}
-	public void addReclamacion(double importeReclamado, Reclamacion r, String email) {
+	public void addReclamacion(Reclamacion r, String email) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
 		try {	
 			u=pm.getObjectById(Usuario.class, email);
-			r.setImporteReclamado(importeReclamado);
 			u.getReclamacionesHechas().add(r);
 		}catch(Exception e){
 				System.out.println("Error al realizar la Reclamacion no existe ese usuario");

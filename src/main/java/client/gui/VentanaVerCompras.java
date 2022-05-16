@@ -123,13 +123,14 @@ public class VentanaVerCompras extends JFrame {
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						Reclamacion r = new Reclamacion(razon.getText(),compra.getPrecio());
-						/*
+						r.setEmailComprador("u@gmail.com");
+						
 						try {
-							vc1.addReclamacion(r, compra.getPrecio());
+							vc1.addReclamacion(r);
 						} catch (ReventaException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
-						}*/
+						}
 						
 					}
 					

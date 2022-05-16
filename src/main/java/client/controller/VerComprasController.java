@@ -53,8 +53,8 @@ public class VerComprasController {
 			return response.readEntity(ProductoVehiculo.class);
 		}
 	}
-	public void addReclamacion(Reclamacion r, double importeReclamado) throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/addReclamacion"+ importeReclamado);
+	public void addReclamacion(Reclamacion r) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/addReclamacion");
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.post(Entity.entity(r, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
