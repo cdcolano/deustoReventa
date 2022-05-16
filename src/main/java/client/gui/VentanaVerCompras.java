@@ -71,6 +71,8 @@ public class VentanaVerCompras extends JFrame {
 				JPanel pProducto= new JPanel();
 				JPanel pBotones = new JPanel();
 				JPanel pDerecha = new JPanel();
+				JPanel pAbajo = new JPanel();
+				JPanel pBotones2 = new JPanel();
 				pProducto.setLayout(new BoxLayout(pProducto, BoxLayout.Y_AXIS));
 				pDate.setLayout(new FlowLayout( FlowLayout.CENTER));
 				pDinero.setLayout(new FlowLayout( FlowLayout.CENTER));
@@ -78,8 +80,10 @@ public class VentanaVerCompras extends JFrame {
 				pBotones.setLayout(new FlowLayout( FlowLayout.CENTER));
 				pDerecha.setLayout(new FlowLayout( FlowLayout.CENTER));
 				JTextField razon = new JTextField(20);
+				JTextField opinion = new JTextField(20);
 				JButton reclamar = new JButton("Reclamar");
 				JButton btnDenuncia = new JButton("Denunciar");
+				JButton btnOpinion = new JButton("Dar Opinion");
 				Date date = new Date(m.getFechaPubli());
 				SimpleDateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm");
 				String p = df.format(date);
@@ -90,11 +94,16 @@ public class VentanaVerCompras extends JFrame {
 				pBotones.add(btnDenuncia);
 				pDerecha.add(new JLabel("Motivo de reclamcion:"));
 				pDerecha.add(razon);
+				pAbajo.add(new JLabel("Danos tu opinion:"));
+				pAbajo.add(opinion);
+				pBotones2.add(btnOpinion);
 				pProducto.add(pNombre);
 				pProducto.add(pDate);
 				pProducto.add(pDinero);
 				pProducto.add(pDerecha);
 				pProducto.add(pBotones);
+				pProducto.add(pAbajo);
+				pProducto.add(pBotones2);
 				pCentro.add(pProducto);
 				
 				
@@ -123,6 +132,19 @@ public class VentanaVerCompras extends JFrame {
 						}*/
 						
 					}
+					
+				});
+				btnOpinion.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						compra.setOpinion(opinion.getText());
+						opinion.setText("");
+						System.out.println(compra.getOpinion());
+						
+						
+					}
+					
 					
 				});
 			}
