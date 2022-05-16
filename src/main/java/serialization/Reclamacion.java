@@ -10,7 +10,7 @@ public class Reclamacion {
 	private int id;
 	private String contenido;
 	private long fecha;
-	private int importeReclamado;
+	private double importeReclamado;
 	private String emailComprador;
 	
 	public int getId() {
@@ -31,10 +31,10 @@ public class Reclamacion {
 	public void setFecha(long fecha) {
 		this.fecha=fecha;
 	}
-	public int getImporteReclamado() {
+	public double getImporteReclamado() {
 		return importeReclamado;
 	}
-	public void setImporteReclamado(int importeReclamado) {
+	public void setImporteReclamado(double importeReclamado) {
 		this.importeReclamado = importeReclamado;
 	}
 	public String getEmailComprador() {
@@ -44,7 +44,7 @@ public class Reclamacion {
 		this.emailComprador=emailComprador;
 	}
 	
-	public Reclamacion(String contenido,int importeReclamado) {
+	public Reclamacion(String contenido,double importeReclamado) {
 		this.contenido=contenido;
 		this.fecha = System.currentTimeMillis();
 		this.importeReclamado = importeReclamado;

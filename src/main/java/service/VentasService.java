@@ -564,7 +564,7 @@ public class VentasService {
 		}
 		
 	}
-	public void addReclamacion(int importeReclamado, Reclamacion r, String email) {
+	public void addReclamacion(double importeReclamado, Reclamacion r, String email) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
 		try {	

@@ -24,6 +24,7 @@ import client.controller.VentasController;
 import client.controller.VerComprasController;
 import serialization.Compra;
 import serialization.Producto;
+import serialization.Reclamacion;
 import util.ReventaException;
 
 public class VentanaVerCompras extends JFrame {
@@ -87,6 +88,7 @@ public class VentanaVerCompras extends JFrame {
 				pDinero.add(new JLabel(""+compra.getPrecio()));
 				pBotones.add(reclamar);
 				pBotones.add(btnDenuncia);
+				pDerecha.add(new JLabel("Motivo de reclamcion:"));
 				pDerecha.add(razon);
 				pProducto.add(pNombre);
 				pProducto.add(pDate);
@@ -111,7 +113,14 @@ public class VentanaVerCompras extends JFrame {
 
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						// TODO Auto-generated method stub
+						Reclamacion r = new Reclamacion(razon.getText(),compra.getPrecio());
+						/*
+						try {
+							vc1.addReclamacion(r, compra.getPrecio());
+						} catch (ReventaException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}*/
 						
 					}
 					
