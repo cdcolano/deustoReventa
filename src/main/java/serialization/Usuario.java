@@ -9,8 +9,10 @@ import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
 
+
 @PersistenceCapable(detachable = "true")
 public class Usuario {
+	
 	
 	@PrimaryKey
 	private String email;
@@ -74,6 +76,9 @@ public class Usuario {
 		reclamacionesHechas= new ArrayList<>();
 	}
 	
+	/**
+	 * @return email
+	 */
 	public String getEmail() {
 		return email;
 	}
