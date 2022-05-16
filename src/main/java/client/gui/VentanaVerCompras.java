@@ -15,6 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTextField;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
@@ -68,11 +69,14 @@ public class VentanaVerCompras extends JFrame {
 				JPanel pDinero= new JPanel();
 				JPanel pProducto= new JPanel();
 				JPanel pBotones = new JPanel();
+				JPanel pDerecha = new JPanel();
 				pProducto.setLayout(new BoxLayout(pProducto, BoxLayout.Y_AXIS));
 				pDate.setLayout(new FlowLayout( FlowLayout.CENTER));
 				pDinero.setLayout(new FlowLayout( FlowLayout.CENTER));
 				pNombre.setLayout(new FlowLayout( FlowLayout.CENTER));
 				pBotones.setLayout(new FlowLayout( FlowLayout.CENTER));
+				pDerecha.setLayout(new FlowLayout( FlowLayout.CENTER));
+				JTextField razon = new JTextField(20);
 				JButton reclamar = new JButton("Reclamar");
 				JButton btnDenuncia = new JButton("Denunciar");
 				Date date = new Date(m.getFechaPubli());
@@ -83,11 +87,14 @@ public class VentanaVerCompras extends JFrame {
 				pDinero.add(new JLabel(""+compra.getPrecio()));
 				pBotones.add(reclamar);
 				pBotones.add(btnDenuncia);
+				pDerecha.add(razon);
 				pProducto.add(pNombre);
 				pProducto.add(pDate);
 				pProducto.add(pDinero);
+				pProducto.add(pDerecha);
 				pProducto.add(pBotones);
 				pCentro.add(pProducto);
+				
 				
 				btnDenuncia.addActionListener(new ActionListener() {
 					@Override
@@ -99,6 +106,15 @@ public class VentanaVerCompras extends JFrame {
 							e1.printStackTrace();
 						}
 					}
+				});
+				reclamar.addActionListener(new ActionListener() {
+
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						// TODO Auto-generated method stub
+						
+					}
+					
 				});
 			}
 		}catch(Exception e) {
