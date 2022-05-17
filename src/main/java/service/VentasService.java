@@ -564,13 +564,14 @@ public class VentasService {
 		}
 		
 	}
-	public void addReclamacion(Reclamacion r, String email) {
+	public void addReclamacion(Reclamacion r) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
 		try {	
-			u=pm.getObjectById(Usuario.class, email);
+			u=pm.getObjectById(Usuario.class, r.getEmailComprador());
 			u.getReclamacionesHechas().add(r);
 		}catch(Exception e){
+				e.printStackTrace();
 				System.out.println("Error al realizar la Reclamacion no existe ese usuario");
 		}finally {
 			pm.close();
