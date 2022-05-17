@@ -262,10 +262,10 @@ public class VentanaCompras extends JFrame{
 			cco.mostrarFavoritos(pa, mail);
 			vc.revalidate();
 		}
-		else if (seleccion.compareTo("Ordenar por Precio de Publicacion ascendente")==0) {
+		else if (seleccion.compareTo("Ordenar por Precio ascendente")==0) {
 			cco.ordenarPorPrecioAsc(pa);
 		}
-		else if (seleccion.compareTo("Ordenar por PRecion de Publicacion descendente")==0) {
+		else if (seleccion.compareTo("Ordenar por Precio  descendente")==0) {
 			cco.ordenarPorPrecioDesc(pa);
 		}
 	}
