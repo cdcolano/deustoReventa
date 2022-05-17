@@ -283,6 +283,48 @@ public class ComprasController {
 		//TODO si no pCentro repaint
 	}
 	
+	public void ordenarPorPrecioAsc( JPanel pCentro) {
+		productos.sort(new Comparator<Producto>(){
+			   @Override
+			   public int compare(Producto p1,Producto p2) {
+				   
+		               Double precio = p1.getPrecioSalida();
+		               Double precio2= p2.getPrecioSalida();
+					   return precio.compareTo(precio2);
+				 //TODO return 1 if rhs should be before lhs 
+			     //     return -1 if lhs should be before rhs
+			     //     return 0 otherwise (meaning the order stays the same)
+			     }
+			 });
+		pCentro.removeAll();
+		for (Producto p:productos) {
+			crearPanel(p, pCentro);
+		}
+		pCentro.revalidate();
+		//TODO si no pCentro repaint
+	}
+	
+	public void ordenarPorPrecioDesc( JPanel pCentro) {
+		productos.sort(new Comparator<Producto>(){
+			   @Override
+			   public int compare(Producto p1,Producto p2) {
+				   
+		               Double precio = p1.getPrecioSalida();
+		               Double precio2= p2.getPrecioSalida();
+					   return precio2.compareTo(precio);
+				 //TODO return 1 if rhs should be before lhs 
+			     //     return -1 if lhs should be before rhs
+			     //     return 0 otherwise (meaning the order stays the same)
+			     }
+			 });
+		pCentro.removeAll();
+		for (Producto p:productos) {
+			crearPanel(p, pCentro);
+		}
+		pCentro.revalidate();
+		//TODO si no pCentro repaint
+	}
+	
 	
 	public void ordenarPorFechaDesc(JPanel pCentro) {
 		productos.sort(new Comparator<Producto>(){

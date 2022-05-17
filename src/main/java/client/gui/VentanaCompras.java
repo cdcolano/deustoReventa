@@ -66,6 +66,8 @@ public class VentanaCompras extends JFrame{
 		cbOrdenar.addItem("Ordenar por Ventas del Vendedor");
 		cbOrdenar.addItem("Ordenar por Fecha de Publicacion ascendente");
 		cbOrdenar.addItem("Ordenar por Fecha de Publicacion descendente");
+		cbOrdenar.addItem("Ordenar por Precio de Publicacion ascendente");
+		cbOrdenar.addItem("Ordenar por Precio de Publicacion descendente");
 		cbOrdenar.addItem("Favoritos");
 		try {
 			 productos=controller.getProductosEnVenta();
@@ -259,7 +261,13 @@ public class VentanaCompras extends JFrame{
 		else if (seleccion.compareTo("Favoritos")==0) {
 			cco.mostrarFavoritos(pa, mail);
 			vc.revalidate();
-			}
+		}
+		else if (seleccion.compareTo("Ordenar por Precio de Publicacion ascendente")==0) {
+			cco.ordenarPorPrecioAsc(pa);
+		}
+		else if (seleccion.compareTo("Ordenar por PRecion de Publicacion descendente")==0) {
+			cco.ordenarPorPrecioDesc(pa);
+		}
 	}
 	
 	public void itemStateChangedCategoria(JComboBox<String> jc, JPanel pa, ComprasController cco, String mail, VentanaCompras vc) {
