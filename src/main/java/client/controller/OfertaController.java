@@ -27,6 +27,7 @@ public class OfertaController {
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 		Oferta o= new Oferta();
 		o.setCantidad(oferta);
+		o.setEmailEmisor(email);
 		Response response = invocationBuilder.post(Entity.entity(o, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {
 			throw new ReventaException("" + response.getStatus());

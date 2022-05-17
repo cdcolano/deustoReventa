@@ -1,16 +1,20 @@
 package client.gui;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
+import client.controller.ComprasController;
 import client.controller.MisProductosController;
 import client.controller.OfertasController;
 import serialization.Oferta;
@@ -23,6 +27,7 @@ public class VentanaOfertas extends JFrame {
 	private WebTarget webTarget;
 	private String email;
 	private List<Producto> productos;
+	private List<Oferta> ofertas;
 	private List<Usuario> usuarios;
 	
 	private OfertasController controller;
@@ -41,12 +46,19 @@ public class VentanaOfertas extends JFrame {
 		
 		try {
 			 productos=controller.getProductosEnVentaConReservado();
+			 ofertas = new ArrayList<Oferta>();
+			 for(Producto p : productos) {
+				 for(Oferta o : p.getOfertasRecibidas()) {
+					 ofertas.add(o);
+				 }
+			 }
 			 controller.setProductos(productos);
+			 controller.setOfertas(ofertas);
 			
 			for (Producto p:productos) {
 				System.out.println(p.getOfertasRecibidas());
 				if(p.getEmailVendedor().equals(email)) {
-					controller.crearPanel(p, pCentro);
+					controller.crearPanel(p, pCentro,this);
 				}
 			}
 			
@@ -55,8 +67,20 @@ public class VentanaOfertas extends JFrame {
 			e1.printStackTrace();
 		}
 		JScrollPane jsc= new JScrollPane(pCentro);
-		
+		JButton bCerrar = new JButton("Volver atras");
+		bCerrar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				v1.dispose();
+				VentanaCompras v = new VentanaCompras(new ComprasController(webTarget, email),VentanaOfertas.this.client,VentanaOfertas.this.webTarget,email);
+			}
+		});
+		JPanel pSur = new JPanel();
+		pSur.add(bCerrar);
 		v1.getContentPane().add(jsc,BorderLayout.CENTER);
+		v1.getContentPane().add(pSur, BorderLayout.SOUTH);
 		v1.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setLocationRelativeTo(null);
 		v1.pack();

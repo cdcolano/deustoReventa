@@ -18,6 +18,7 @@ public class Oferta {
 	private double cantidad;
 	private long fecha;
 	private boolean estado;
+	private String emailEmisor;
 	
 //	@Persistent(defaultFetchGroup = "true")
 //	private Usuario ofertor;
@@ -48,6 +49,14 @@ public class Oferta {
 	}
 	public void setEstado(boolean estado) {
 		this.estado = estado;
+	}
+	
+	public String getEmailEmisor() {
+		return emailEmisor;
+	}
+	
+	public void setEmailEmisor(String emailEmisor) {
+		this.emailEmisor = emailEmisor;
 	}
 /*	public Usuario getOfertor() {
 		return ofertor;

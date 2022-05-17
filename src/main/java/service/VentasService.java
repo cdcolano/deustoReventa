@@ -548,6 +548,7 @@ public class VentasService {
 			p=pm.getObjectById(Producto.class, idProd);
 			Oferta o= new Oferta();
 			o.setCantidad(cantidad);
+			o.setEmailEmisor(x);
 			o.setFecha(System.currentTimeMillis());
 			u.getOfertasEnviadas().add(o);
 			p.getOfertasRecibidas().add(o);

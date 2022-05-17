@@ -10,10 +10,16 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
+import client.gui.VentanaOfertas;
+import serialization.Compra;
 import serialization.Oferta;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
@@ -24,11 +30,15 @@ public class OfertasController {
 	private WebTarget webTarget;
 	private String email;
 	private List<Producto>productos;
+	private List<Oferta> ofertas;
 	private Producto prod;
 	
 	
 	public void setProductos(List<Producto> productos) {
 		this.productos = productos;
+	}
+	public void setOfertas(List<Oferta> ofertas) {
+		this.ofertas = ofertas;
 	}
 	
 	public OfertasController(WebTarget webTarget, String email) {
@@ -55,7 +65,18 @@ public class OfertasController {
 		return lProductosOrdenador;
 	}
 	
-	public void crearPanel(Producto p, JPanel pCentro) {
+	public void comprar(String email, int idProducto, double precio) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/comprar/"+email +"/"+ idProducto);
+		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
+		Compra c= new Compra();
+		c.setPrecio(precio);
+		Response response = invocationBuilder.post(Entity.entity(c, MediaType.APPLICATION_JSON));
+		if (response.getStatus() != Status.OK.getStatusCode()) {
+			throw new ReventaException("" + response.getStatus());
+		}
+	}
+	
+	public void crearPanel(Producto p, JPanel pCentro, VentanaOfertas vo) {
 		this.prod=p;
 		JPanel pContenido= new JPanel();
 		pContenido.setLayout(new BoxLayout(pContenido, BoxLayout.Y_AXIS));
@@ -64,55 +85,33 @@ public class OfertasController {
 		pProducto.add(new JLabel("Precio salida: "+ p.getPrecioSalida()+ "€" + "\n"));
 		
 		for(Oferta o : p.getOfertasRecibidas()) {
-			pProducto.add(new JLabel ("Oferta recibida " + "\n"));
+			pProducto.add(new JLabel ("Oferta recibida:" + "\n"));
 			pProducto.add(new JLabel ("Cantidad: " +o.getCantidad()));
 			pProducto.add(new JLabel ("Fecha: " + new Date(o.getFecha())));
-			pProducto.add(new JButton("Aceptar"));
-			pProducto.add(new JButton("Rechazar" + "\n"));
-		}
-		/*JButton bReservar = new JButton("Reservar");
-		bReservar.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					reservar(p.getId());
-					//pCentro.removeAll();
-					pCentro.revalidate();
-					pCentro.repaint();
-				} catch (ReventaException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			JButton bAceptar = new JButton("Aceptar");
+			bAceptar.addActionListener(new ActionListener() {
+
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					// TODO Auto-generated method stub
+					try {
+						comprar(o.getEmailEmisor(), p.getId(), o.getCantidad());
+						productos.remove(p);
+						pCentro.removeAll();
+						pCentro.revalidate();
+						pCentro.repaint();
+						JLabel lGracias = new JLabel("Has aceptado la compra!");
+						pCentro.add(lGracias);
+						//vo.dispose();
+					} catch (ReventaException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
 				
-			}
-		});
-		JButton bDesReservar = new JButton("Quitar reserva");
-		bDesReservar.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent arg0) {
-				try {
-					desReservar(p.getId());
-				} catch (ReventaException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				pCentro.revalidate();
-			}
-			
-		});
-			
-		
-		
-		
-		pContenido.add(pProducto);*/
-		
-		/*if(p.isReservado()) {
-			pContenido.add(bDesReservar);
-		}
-		else {
-			pContenido.add(bReservar);
-		}*/
+			});
+			pProducto.add(bAceptar);
+		}		
 		pContenido.add(pProducto);
 		pCentro.add(pContenido);
 		pCentro.revalidate();
