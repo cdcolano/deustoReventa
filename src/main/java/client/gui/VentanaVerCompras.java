@@ -34,6 +34,7 @@ public class VentanaVerCompras extends JFrame {
 	private Client client;
 	private String em1;
 	private WebTarget webTarget;
+	private List<Compra> compras;
 
 	private VerComprasController vc1;
 
@@ -50,7 +51,7 @@ public class VentanaVerCompras extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100,100,450,300);
 		
-		List<Compra> compras=new ArrayList<Compra>();
+		//List<Compra> compras=new ArrayList<Compra>();
 		try {
 			compras = vc1.getListaProductosComprados(email);
 		} catch (ReventaException e1) {
@@ -124,13 +125,16 @@ public class VentanaVerCompras extends JFrame {
 					public void actionPerformed(ActionEvent e) {
 						Reclamacion r = new Reclamacion(razon.getText(),compra.getPrecio());
 						r.setEmailComprador(email);
+						razon.setText("El producto ha sido reclamado");
+						reclamar.setEnabled(false);
+						razon.setEditable(false);
 						try {
 							vc1.addReclamacion(r);
 						} catch (ReventaException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
-						
+						pProducto.revalidate();
 					}
 					
 				});
