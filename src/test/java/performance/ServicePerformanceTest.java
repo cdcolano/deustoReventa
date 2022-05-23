@@ -47,6 +47,7 @@ public class ServicePerformanceTest {
 	private Usuario u;
 	private Producto p;
 	private Categoria c;
+	private ProductoOrdenador po;
 	
 	@Rule public ContiPerfRule rule = new ContiPerfRule();
 	
@@ -65,6 +66,11 @@ public class ServicePerformanceTest {
 		c= new Categoria();
 		c.setId(1);
 		c.setNombre("ordenadores");
+		
+		po=new ProductoOrdenador();
+		po.setRam(8);
+		po.setCpu("intel i5");
+		
 	}
 	
 	@Test 
@@ -85,7 +91,13 @@ public class ServicePerformanceTest {
 		List<Categoria>cat=vs.getCategorias();
 		assertEquals(vs.getCategorias().size(), 2);
 	}
-	
+	@Test
+	@PerfTest(invocations = 400, threads = 8)
+    @Required(max = 2400, average = 200)
+	public void testGetProductosOrdenador() {
+		List<ProductoOrdenador> pos = vs.getProductosOrdenador();
+		assertEquals(vs.getProductosOrdenador().size(),3);
+	}
 	
 	
 	
