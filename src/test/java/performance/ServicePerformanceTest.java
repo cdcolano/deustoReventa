@@ -77,7 +77,14 @@ public class ServicePerformanceTest {
 		assertFalse(vs.logIn("b", "b"));
 	}
 	
-	
+	@Test
+	@PerfTest(invocations = 400, threads = 8)
+    @Required(max = 2400, average = 200)
+	public void testGetCategorias(){
+		ArrayList<Categoria>c=new ArrayList<>();
+		List<Categoria>cat=vs.getCategorias();
+		assertEquals(vs.getCategorias().size(), 2);
+	}
 	
 	
 	
