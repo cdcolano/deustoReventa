@@ -380,9 +380,9 @@ public class ReventaServer {
 	 * @return anadir una reclamacion
 	 */
 	@POST
-	@Path("/addReclamacion/")
-	public Response addReclamacion(Reclamacion r) {
-		vs.addReclamacion(r);
+	@Path("/addReclamacion/{x}")
+	public Response addReclamacion(Reclamacion r, @PathParam("x") int idCompra) {
+		vs.addReclamacion(r,idCompra);
 		System.out.println("*Reclamacion añadida*");
 		return Response.ok().build();
 	}

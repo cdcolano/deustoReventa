@@ -707,10 +707,13 @@ public class VentasService {
 	/** crear una reclamacion
 	 * @param r
 	 */
-	public void addReclamacion(Reclamacion r) {
+	public void addReclamacion(Reclamacion r, int idCompra) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
+		Compra c= null;
 		try {	
+			c=pm.getObjectById(Compra.class,idCompra);
+			c.setReclamado(true);
 			u=pm.getObjectById(Usuario.class, r.getEmailComprador());
 			u.getReclamacionesHechas().add(r);
 		}catch(Exception e){

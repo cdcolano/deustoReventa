@@ -72,8 +72,8 @@ public class VerComprasController {
 	 * @param r
 	 * @throws ReventaException
 	 */
-	public void addReclamacion(Reclamacion r) throws ReventaException {
-		WebTarget webTarget = this.webTarget.path("reventa/addReclamacion");
+	public void addReclamacion(Reclamacion r, int idCompra) throws ReventaException {
+		WebTarget webTarget = this.webTarget.path("reventa/addReclamacion/"+idCompra);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
 		Response response = invocationBuilder.post(Entity.entity(r, MediaType.APPLICATION_JSON));
 		if (response.getStatus() != Status.OK.getStatusCode()) {

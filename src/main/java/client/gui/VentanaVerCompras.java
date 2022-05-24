@@ -93,6 +93,11 @@ public class VentanaVerCompras extends JFrame {
 				JTextField razon = new JTextField(20);
 				JTextField opinion = new JTextField(20);
 				JButton reclamar = new JButton("Reclamar");
+				if(compra.getReclamado()==true) {
+					reclamar.setEnabled(false);
+					razon.setText("El producto ha sido reclamado");
+					razon.setEditable(false);
+				}
 				JButton btnDenuncia = new JButton("Denunciar");
 				JButton btnOpinion = new JButton("Dar Opinion");
 				Date date = new Date(m.getFechaPubli());
@@ -118,6 +123,8 @@ public class VentanaVerCompras extends JFrame {
 				pCentro.add(pProducto);
 				
 				
+				
+				
 				btnDenuncia.addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
@@ -138,8 +145,9 @@ public class VentanaVerCompras extends JFrame {
 						razon.setText("El producto ha sido reclamado");
 						reclamar.setEnabled(false);
 						razon.setEditable(false);
+						compra.setReclamado(true);
 						try {
-							vc1.addReclamacion(r);
+							vc1.addReclamacion(r,compra.getId());
 						} catch (ReventaException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

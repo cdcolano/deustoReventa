@@ -20,6 +20,7 @@ public class Compra {
 	private int id;
 	private String opinion;
 	private double precio;
+	private boolean reclamado;
 	
 	//@Persistent(defaultFetchGroup = "true")
 	//@Join
@@ -37,6 +38,7 @@ public class Compra {
 		this.idCat = idCat;
 	}
 	private int producto;
+	
 	
 	/**
 	 * 
@@ -115,6 +117,19 @@ public class Compra {
 	public int getIdCat() {
 		// TODO Auto-generated method stub
 		return idCat;
+	}
+	
+	/**
+	 * @return el booleano que indica si ha sido reclamado o no
+	 */
+	public boolean getReclamado() {
+		return reclamado;
+	}
+	/**
+	 * @param reclamado modifica el valor de reclamado
+	 */
+	public void setReclamado(boolean reclamado) {
+		this.reclamado=reclamado;
 	}
 	
 }
