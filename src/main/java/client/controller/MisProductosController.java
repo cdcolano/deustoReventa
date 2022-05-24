@@ -1,6 +1,7 @@
 package client.controller;
 
 import java.awt.event.ActionEvent;
+
 import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.util.ArrayList;
@@ -132,6 +133,7 @@ public class MisProductosController {
 				try {
 					reservar(p.getId());
 					//pCentro.removeAll();
+					bReservar.setEnabled(false);
 					pCentro.revalidate();
 					pCentro.repaint();
 				} catch (ReventaException e1) {
@@ -148,6 +150,9 @@ public class MisProductosController {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
 					desReservar(p.getId());
+					bDesReservar.setEnabled(false);
+					pCentro.revalidate();
+					pCentro.repaint();
 				} catch (ReventaException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
