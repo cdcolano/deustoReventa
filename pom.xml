@@ -214,7 +214,19 @@
 		        <artifactId>doxygen-maven-plugin</artifactId>
 		        <version>1.1.0</version>
 		        <configuration>
-		        	<configurationFile>${doxygen.config.file}</configurationFile>
+                            <!-- optimizeOutputJava>true</optimizeOutputJava>
+                       		<extractAll>true</extractAll>
+                            <extractStatic>true</extractStatic>
+                            <recursive>true</recursive>
+                            <recursive>true</recursive>
+                            <umlLook>true</umlLook>
+                            <haveGraph>built-in</haveGraph>
+                            <crossReference>true</crossReference>
+                            <generateLatex>true</generateLatex>
+                            <generateHtml>true</generateHtml>
+                            <inputDirectory>${basedir}/src/main/java</inputDirectory>
+                            <outputDirectory>${basedir}/target</outputDirectory>  -->
+		        	<!-- configurationFile>${doxygen.config.file}</configurationFile> -->
 		        </configuration>
 		     </plugin>
 		

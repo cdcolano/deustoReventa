@@ -31,6 +31,10 @@ import serialization.Reclamacion;
 import serialization.Usuario;
 import util.ReventaException;
 
+/**
+ * @author Carlos
+ *Clase que gestiona la logica de la ventana de compras
+ */
 public class ComprasController {
 	private WebTarget webTarget;
 	private String email,nombre;
@@ -46,6 +50,13 @@ public class ComprasController {
 		this.email = email;
 	}
 
+	/**Realiza la compra de un producto
+	 * @param email correo del usuario que realiza la compra
+	 * @param idProducto id del producto a comprar
+	 * @param precio por el cual se realiza la compra
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar
+	 * con el servidor
+	 */
 	public void comprar(String email, int idProducto, double precio) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/comprar/"+email +"/"+ idProducto);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -57,6 +68,11 @@ public class ComprasController {
 		}
 	}
 
+	/**Añade un usuario a la lista de usuarios que te gustan
+	 * @param u Usuario que añade a favoritos
+	 * @param email del usuario añadido a me gusta
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public void anadirUsuarioFav(Usuario u, String email) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/anadirUsuarioFav/"+ email);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -65,6 +81,10 @@ public class ComprasController {
 			throw new ReventaException("" + response.getStatus());
 		}
 	}
+	/**
+	 * @return devuelve una lista de productos registrados
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public List<Producto> getProductos() throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador");
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
@@ -78,6 +98,10 @@ public class ComprasController {
 		return lProductos;
 	}
 	
+	/**
+	 * @return devuelve una lista de productos registrados
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public List<Producto> getProductosEnVenta() throws ReventaException{
 		List<ProductoOrdenador>lProductosOrdenador = getProductosOrdenador();
 		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/venta");
@@ -89,6 +113,11 @@ public class ComprasController {
 		return lProductos;
 	}
 	
+	/** devuelve un producto a partir de su id
+	 * @param idProducto id del producto a devolver
+	 * @return Producto con el id introducido
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public Producto getProducto(int idProducto)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("collector/getProducto/"+ idProducto);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);

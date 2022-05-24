@@ -28,6 +28,18 @@ import util.ReventaException;
 
 
 
+/** Clase que implementa la logica de la ventana de Chat
+ * @author Carlos
+ *
+ */
+/**
+ * @author Carlos
+ *
+ */
+/**
+ * @author Carlos
+ *
+ */
 public class ChatController {
 	private WebTarget webTarget;
 	private String email;
@@ -42,6 +54,12 @@ public class ChatController {
 	}
 
 	
+	/**Envia un mensaje
+	 * @param email1 email del usuario que lo envia
+	 * @param email2 email del usuario que lo recibe
+	 * @param m Mensaje a enviar
+	 * @throws ReventaException en el caso de no poder conectar con el servidor
+	 */
 	public void enviar(String email1, String email2, Mensaje m) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/enviar/"+email1+"/"+email2);
 		System.out.println(email1);
@@ -128,6 +146,10 @@ public class ChatController {
 		
 	}*/
 	
+	/** 
+	 * @param email del usuario 
+	 * @return devuelve una lista con los mensajes recibidos de un usuario
+	 */
 	public List<Mensaje> getMensajesRecibidos(String email){
 		WebTarget webTarget = this.webTarget.path("reventa/mensajesRecibidos/"+email );
 		List<Mensaje>lMRecibidos = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Mensaje>>() {
@@ -136,6 +158,11 @@ public class ChatController {
 		return lMRecibidos;
 	}
 	
+	
+	/** 
+	 * @param email del usuario
+	 * @return devuelve una lista de los mensajes enviados de un usuario
+	 */
 	public List<Mensaje> getMensajesEnviados(String email){
 		WebTarget webTarget = this.webTarget.path("reventa/mensajesEnviados/"+email );
 		List<Mensaje>lMEnviados= webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Mensaje>>() {
@@ -145,6 +172,9 @@ public class ChatController {
 	}
 	
 	
+	/**
+	 * @return lista con todos los emails registrados
+	 */
 	public List<String> getEmailUsuarios(){
 		List<String> listaEmail = new ArrayList<>();
 		List<Usuario> lU = uDao.getUsuarios();
