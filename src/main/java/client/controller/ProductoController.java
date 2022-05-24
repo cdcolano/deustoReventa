@@ -15,6 +15,10 @@ import serialization.Producto;
 import serialization.Usuario;
 import util.ReventaException;
 
+/**Clase que gestiona la logica de la venta producto
+ * @author Carlos
+ *
+ */
 public class ProductoController {
 	private String email;
 	private WebTarget webTarget;
@@ -26,6 +30,10 @@ public class ProductoController {
 	
 	
 	//necesito un getCategorias()
+	/**
+	 * @return lista con las categorias registradas en la bd
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public List<Categoria> getCategoria() throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/categorias");
 		List<Categoria>lCategorias = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Categoria>>() {
@@ -34,6 +42,9 @@ public class ProductoController {
 		return lCategorias;
 	}
 	
+	/** Anade un producto ordenador
+	 * @param p Producto a anadir
+	 */
 	public void addProductoOrdenador(Producto p) {
 		try {
 			WebTarget webTarget=this.webTarget.path("reventa/saleOrdenador");
@@ -48,6 +59,9 @@ public class ProductoController {
 		}
 	}
 	
+	/**Anade un producto vehiculo
+	 * @param p Producto vehiculo a anadir
+	 */
 	public void addProductoVehiculo(Producto p) {
 		try {
 			WebTarget webTarget=this.webTarget.path("reventa/saleVehiculo");
@@ -63,6 +77,10 @@ public class ProductoController {
 	}
 
 	
+	/** Registra un usuario 
+	 * @param u usuario a registrar
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public void registrar(Usuario u) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/registro");
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);

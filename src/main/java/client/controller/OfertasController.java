@@ -26,6 +26,10 @@ import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
 import util.ReventaException;
 
+/**Clase que gestiona la logica de la ventana ofertas
+ * @author Carlos
+ *
+ */
 public class OfertasController {
 	private WebTarget webTarget;
 	private String email;
@@ -47,6 +51,10 @@ public class OfertasController {
 		this.email = email;
 	}
 	
+	/**
+	 * @return Devuelve productos en venta que no estan reservados
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public List<Producto> getProductosEnVentaConReservado() throws ReventaException{
 		List<ProductoOrdenador>lProductosOrdenador = getProductosOrdenadorConReservado();
 		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/ventaReservado");
@@ -58,6 +66,9 @@ public class OfertasController {
 		return lProductos;
 	}
 	
+	/**
+	 * @return Devuelve una lista con los productos ordenador que no estan reservados
+	 */
 	public List<ProductoOrdenador> getProductosOrdenadorConReservado(){
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/ventaReservado");
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
@@ -65,6 +76,12 @@ public class OfertasController {
 		return lProductosOrdenador;
 	}
 	
+	/** Realiza la compra de un producto
+	 * @param email del usuario que realiza la compra
+	 * @param idProducto id del producto que se compra
+	 * @param precio por el que se cierra la compra
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public void comprar(String email, int idProducto, double precio) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/comprar/"+email +"/"+ idProducto);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -76,6 +93,11 @@ public class OfertasController {
 		}
 	}
 	
+	/**Cra un panel para un producto
+	 * @param p Producto a anadir al panel
+	 * @param pCentro panel al que se anade el producto
+	 * @param vo ventana a la que se anade el panel
+	 */
 	public void crearPanel(Producto p, JPanel pCentro, VentanaOfertas vo) {
 		this.prod=p;
 		JPanel pContenido= new JPanel();
@@ -120,6 +142,10 @@ public class OfertasController {
 	}
 	
 	
+	/**
+	 * @return devuelve una lista con los productos en venta
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public List<Producto> getProductosEnVenta() throws ReventaException{
 		List<ProductoOrdenador>lProductosOrdenador = getProductosOrdenador();
 		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/venta");
@@ -131,6 +157,9 @@ public class OfertasController {
 		return lProductos;
 	}
 	
+	/**
+	 * @return devuelve una lista con los productos ordenador en venta
+	 */
 	public List<ProductoOrdenador> getProductosOrdenador(){
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/venta");
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {

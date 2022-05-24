@@ -28,6 +28,10 @@ import serialization.ProductoVehiculo;
 import serialization.Usuario;
 import util.ReventaException;
 
+/**Clase que gestiona la logica de la ventana Mis productos
+ * @author Carlos
+ *
+ */
 public class MisProductosController {
 
 	private WebTarget webTarget;
@@ -44,6 +48,10 @@ public class MisProductosController {
 		this.email = email;
 	}
 
+	/**Devuelve una lista con los productos
+	 * @return lista de productos
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public List<Producto> getProductos() throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador");
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
@@ -57,6 +65,10 @@ public class MisProductosController {
 		return lProductos;
 	}
 	
+	/**
+	 * @return devuelve una lista de productos en venta
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public List<Producto> getProductosEnVenta() throws ReventaException{
 		List<ProductoOrdenador>lProductosOrdenador = getProductosOrdenador();
 		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/venta");
@@ -68,6 +80,10 @@ public class MisProductosController {
 		return lProductos;
 	}
 	
+	/**devuelve los productos en venta que no estan reservados
+	 * @return lista de productos 
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public List<Producto> getProductosEnVentaConReservado() throws ReventaException{
 		List<ProductoOrdenador>lProductosOrdenador = getProductosOrdenadorConReservado();
 		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/ventaReservado");
@@ -79,6 +95,11 @@ public class MisProductosController {
 		return lProductos;
 	}
 	
+	/**Devuelve un producto dado su id
+	 * @param idProducto id del producto a devolver
+	 * @return Producto con el id introducido
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public Producto getProducto(int idProducto)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("collector/getProducto/"+ idProducto);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -93,6 +114,10 @@ public class MisProductosController {
 	
 	
 	
+	/**Crea un panel para un producto
+	 * @param p Producto para el que crear el panel
+	 * @param pCentro panel al que añadir el producto
+	 */
 	public void crearPanel(Producto p, JPanel pCentro) {
 		this.prod=p;
 		JPanel pContenido= new JPanel();
@@ -146,6 +171,10 @@ public class MisProductosController {
 
 	}
 	
+	/**Realiza la reserva de un producto
+	 * @param idProducto id del producto a reservar
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public void reservar(int idProducto) throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/reservar/"+idProducto);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -155,6 +184,10 @@ public class MisProductosController {
 		}
 	}
 	
+	/**Cancela la reserva de un producto
+	 * @param idProducto con la reserva a cancelar
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public void desReservar(int idProducto) throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/desReservar/"+idProducto);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -169,6 +202,9 @@ public class MisProductosController {
 		this.productos = productos;
 	}
 	
+	/**
+	 * @return lista de productos ordenador en venta
+	 */
 	public List<ProductoOrdenador> getProductosOrdenador(){
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/venta");
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
@@ -176,6 +212,9 @@ public class MisProductosController {
 		return lProductosOrdenador;
 	}
 	
+	/**
+	 * @return lista de productos ordenador que no estan reservados
+	 */
 	public List<ProductoOrdenador> getProductosOrdenadorConReservado(){
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/ventaReservado");
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
@@ -183,6 +222,9 @@ public class MisProductosController {
 		return lProductosOrdenador;
 	}
 
+	/**
+	 * @return lista de productos vehiculo en venta
+	 */
 	public List<ProductoVehiculo> getProductosVehiculo() {
 		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/venta");
 		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {

@@ -11,6 +11,10 @@ import serialization.Compra;
 import serialization.Oferta;
 import util.ReventaException;
 
+/**Clase que gestiona la logica de la ventana de oferta
+ * @author Carlos
+ *
+ */
 public class OfertaController {
 	private WebTarget webTarget;
 	private String email;
@@ -22,6 +26,12 @@ public class OfertaController {
 		this.id=id;
 	}
 
+	/**Añade una oferta a un producto
+	 * @param email del usuario que realiza la oferta
+	 * @param idProd id del producto al que se realiza la oferta
+	 * @param oferta cantidad que se ofrece
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public void addOferta(String email, int idProd, double oferta) throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/oferta/"+email +"/"+ idProd);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
