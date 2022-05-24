@@ -7,6 +7,10 @@ import javax.ws.rs.client.WebTarget;
 
 import client.gui.VentanaLogin;
 
+/** clase que lanza el cliente
+ * @author usuario
+ *
+ */
 public class MainCliente {
 	
 	public static void main(String[]args) {
