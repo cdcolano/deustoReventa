@@ -11,6 +11,11 @@ import javax.ws.rs.client.Entity;
 import serialization.Usuario;
 import util.ReventaException;
 
+/**
+ * lase que implementa la logica de la ventana de registro
+ * @author usuario
+ *
+ */
 public class RegistroController {
 	private WebTarget webTarget;
 	
@@ -18,6 +23,11 @@ public class RegistroController {
 		this.webTarget=webTarget;
 	}
 	
+	/**
+	 * registrar a un usuario
+	 * @param u
+	 * @throws ReventaException
+	 */
 	public void registrar(Usuario u) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/registro");
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
