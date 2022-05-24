@@ -17,6 +17,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import client.controller.ComprasController;
 import client.controller.ProductoController;
 import serialization.Categoria;
 import serialization.Producto;
@@ -269,6 +270,8 @@ public class VentanaProducto extends JFrame{
 				            }
 				           pc.addProductoVehiculo(p);       
 		            }
+		            dispose();
+		            VentanaCompras vc= new VentanaCompras(new ComprasController(webTarget,email),VentanaProducto.this.client, webTarget, email);
 		            
 		         
 		      }
