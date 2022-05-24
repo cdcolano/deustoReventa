@@ -17,6 +17,10 @@ import util.ReventaException;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
+/**lase que implementa la logica de la ventana de ventas
+ * @author usuario
+ *
+ */
 public class VentasController {
 	
 	private WebTarget webTarget;
@@ -32,6 +36,11 @@ public class VentasController {
 	}
 	
 		
+	/**
+	 * @param email
+	 * @return devuelve una lista de los productos vendidos
+	 * @throws ReventaException
+	 */
 	public List<Producto>  getListaProductosVendidos(String email)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/ventas/productoOrdenador/"+email);
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
