@@ -32,6 +32,10 @@ import serialization.Usuario;
 import service.VentasService;
 import util.ReventaException;
 
+/**Ventana donde se muestran los productos de un usuario
+ * @author Ander
+ *
+ */
 public class VentanaMisProductos extends JFrame {
 
 	private Client client;
@@ -46,6 +50,12 @@ public class VentanaMisProductos extends JFrame {
 	private JPanel pOrdenar;
 
 	
+	/**Metodo que construye la ventana de las compras de un usuario
+	 * @param cc controller para acceder a los metodos de la ventana
+	 * @param cliente el cliente de la aplicacion
+	 * @param webTarget para hacer las llamadas al server
+	 * @param email email del usuario
+	 */
 	public VentanaMisProductos(MisProductosController cc, Client cliente, WebTarget webTarget, String email) {
 		this.client=cliente;
 		this.webTarget=webTarget;

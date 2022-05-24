@@ -28,6 +28,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**Ventana que se encarga de realizar el login
+ * @author Ander
+ *
+ */
 public class VentanaLogin extends JFrame {
 	private JPanel contentPane, pSur, pNorte, pCentro;
 	private JButton login,cerrar,registrarse;
@@ -39,6 +43,10 @@ public class VentanaLogin extends JFrame {
 	private JLabel lError;
 	private LoginController lc;
 	
+	/**Metodo que construye la ventana del login
+	 * @param cliente el cliente de la aplicacion
+	 * @param webTarget para poder hacer las llamadas al servidor
+	 */
 	public VentanaLogin(Client cliente, WebTarget webTarget){
 		super();
 		this.cliente=cliente;

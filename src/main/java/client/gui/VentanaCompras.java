@@ -40,6 +40,10 @@ import javax.swing.*;
 import java.awt.*;
 
 
+/**Ventana donde se visualizan las compras
+ * @author Ander
+ *
+ */
 public class VentanaCompras extends JFrame{
 
 	private Client client;
@@ -53,6 +57,12 @@ public class VentanaCompras extends JFrame{
 	private JPanel pCategorias;
 	private JPanel pOrdenar;
 	
+	/**Metodo que construye la ventanaCompras
+	 * @param cc Controller de la ventana donde se almacenan los metodos necesarios
+	 * @param cliente cliente de la aplicacion
+	 * @param webTarget para poder hacer las llamadas al server
+	 * @param email email del usuario
+	 */
 	public VentanaCompras(ComprasController cc, Client cliente, WebTarget webTarget, String email) {
 		this.client=cliente;
 		this.webTarget=webTarget;
@@ -247,6 +257,13 @@ public class VentanaCompras extends JFrame{
 		//TODO coger el producto seleccionado
 	}
 	
+	/**Metodo que mira el valor del comboBox para adaptar la ventana
+	 * @param jc comboBox con las diferentes opciones para ordenar
+	 * @param pa panel que se actualiza
+	 * @param cco controller para acceder a los metodos que ordenan
+	 * @param mail email del usuario
+	 * @param vc la ventana en cuestion
+	 */
 	public void itemStateChangedVentana(JComboBox<String> jc, JPanel pa, ComprasController cco, String mail, VentanaCompras vc) {
 		String seleccion=(String)jc.getSelectedItem();
 		if (seleccion.compareTo("Ordenar por Ventas del Vendedor")==0) {
@@ -270,6 +287,13 @@ public class VentanaCompras extends JFrame{
 		}
 	}
 	
+	/** Metodo que mira el valor del comboBox y adapta el orden en funcion al valor
+	 * @param jc comboBox con las diferentes opciones
+	 * @param pa panel que se actualiza
+	 * @param cco controller para acceder a los metodos que ordenan
+	 * @param mail email del usuario
+	 * @param vc la ventana en cuestion
+	 */
 	public void itemStateChangedCategoria(JComboBox<String> jc, JPanel pa, ComprasController cco, String mail, VentanaCompras vc) {
 		String seleccion=(String)jc.getSelectedItem();
 		if (seleccion.compareTo("Todas")==0) {
@@ -292,11 +316,18 @@ public class VentanaCompras extends JFrame{
 		}
 	}
 	
+	/** Crea el panel norte
+	 * @param pCategorias panel de categorias que se añade al panel norte
+	 * @param pOrdenar panel ordenar que se añade al panel norte
+	 */
 	public void crearPNorte(JPanel pCategorias, JPanel pOrdenar) {
 		pNorte.add(pCategorias, BorderLayout.NORTH);
 		pNorte.add(pOrdenar, BorderLayout.CENTER);
 	}
 	
+	/**Metodo que genera los filtros para filtrar ordenadores en la ventana
+	 * 
+	 */
 	public void generaFiltrosOrdenador() {
 		JLabel lCpu= new JLabel("CPU: ");
 		JTextField tCpu= new JTextField(16);
@@ -393,6 +424,9 @@ public class VentanaCompras extends JFrame{
 		revalidate();
 	}
 	
+	/**metodo que genera los filtros para filtrar por vehiculo en la ventana
+	 * 
+	 */
 	public void generaFiltrosVehiculo() {
 		JLabel lMarca = new JLabel("Marca: ");
 		JTextField tMarca= new JTextField(16);

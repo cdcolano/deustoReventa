@@ -31,6 +31,10 @@ import serialization.Mensaje;
 import serialization.Usuario;
 import util.ReventaException;
 
+/**Ventana que se encarga de mostrar el chat del usuario
+ * @author Ander
+ *
+ */
 public class VentanaChat extends JFrame {
 	private Client client;
 	private String em1;
@@ -48,6 +52,12 @@ public class VentanaChat extends JFrame {
 	
 	
 	
+	/**Metodo que construye la ventana
+	 * @param cc controller de la ventana donde se almacenan los metodos necesarios
+	 * @param c el cliente de la aplicacion
+	 * @param wt WebTarget para hacer las llamadas al server
+	 * @param email1 email del usuario
+	 */
 	public VentanaChat(ChatController cc,Client c, WebTarget wt, String email1) {
 		this.client=c;
 		this.em1=email1;
@@ -138,6 +148,14 @@ public class VentanaChat extends JFrame {
 		setVisible(true);
 	}
 	
+	/**Metodo que envia el mensaje escrito al usuario indicado
+	 * @param email1 email del usuario
+	 * @param ta panel donde se muestran los mensajes
+	 * @param tf field donde se escribe el mensaje
+	 * @param vt la ventana en la que se crea
+	 * @param jc combobox para elegir el usuario al que se quiere enviar el mensaje
+	 * @param cac controller para acceder a los metodos de la ventana
+	 */
 	public void enviarMensaje(String email1, JTextArea ta, JTextField tf, VentanaChat vt, JComboBox jc, ChatController cac) {
 		Mensaje m = new Mensaje();
 		m.setContenido(tf.getText());

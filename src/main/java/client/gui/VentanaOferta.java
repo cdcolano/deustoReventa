@@ -13,10 +13,20 @@ import client.controller.OfertaController;
 import serialization.Producto;
 import util.ReventaException;
 
+/**Ventana donde se realizan las ofertas
+ * @author Ander
+ *
+ */
 public class VentanaOferta extends JFrame{
 	private double oferta;
 	private JTextField tPrecio;
 	
+	/**Metodo que construye la ventana donde se realizan las ofertas
+	 * @param oc controller para acceder a los metodos de la ventana
+	 * @param wt web target para hacer las llamadas al server
+	 * @param email el email de usuario
+	 * @param idProd el id del producto al que se quiere hacer la oferta
+	 */
 	public VentanaOferta(OfertaController oc,WebTarget wt, String email, int idProd) {
 		tPrecio= new JTextField(10);
 		JLabel lPrecio= new JLabel("Oferta: ");
@@ -64,6 +74,9 @@ public class VentanaOferta extends JFrame{
 		
 	}
 	
+	/**Metodo que acepta la oferta
+	 * 
+	 */
 	public void aceptar() {
 		try {
 			oferta=Double.parseDouble(tPrecio.getText());
