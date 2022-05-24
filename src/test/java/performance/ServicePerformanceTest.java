@@ -99,14 +99,8 @@ public class ServicePerformanceTest {
 		assertEquals(vs.getMensajesEnviados("a@gmail.com").size(),1);
 	}	
 	
+	
 	@Test
-	@PerfTest(invocations = 400, threads = 8)
-    @Required(max = 2400, average = 200)
-	public void testGetProductosVehiculo() {
-		List<ProductoVehiculo> pos = vs.getProductosVehiculos();
-		assertEquals(vs.getProductosVehiculos().size(),3);
-	}
-
 	@PerfTest(invocations = 400, threads = 8)
     @Required(max = 2400, average = 200)
 	public void testGetProductosVehiculoEnVenta() {
@@ -115,4 +109,11 @@ public class ServicePerformanceTest {
 	}
 	
 	
+	@Test
+	@PerfTest(invocations = 400, threads = 8)
+    @Required(max = 2400, average = 200)
+	public void testReservar() {
+		vs.reservar(1);
+		assertTrue(vs.getProducto(1).isReservado());
+	}
 }
