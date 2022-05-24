@@ -22,6 +22,7 @@ import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
 import serialization.Usuario;
+import service.VentasService;
 import util.ReventaException;
 
 @Category(IntegrationTest.class)
@@ -38,7 +39,6 @@ public class IntegrationTestController {
 			Client c= ClientBuilder.newClient();
 			WebTarget wt=c.target(String.format("http://%s:%s/rest", hostname, port));
 			String email="u@gmail.com";
-			
 			
 			ChatController cc= new ChatController(wt, email, new UsuarioDAO());
 			Mensaje m= new Mensaje();

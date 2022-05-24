@@ -84,13 +84,13 @@ public class ServicePerformanceTest {
 	}
 	
 	@Test
-	@PerfTest(invocations = 400, threads = 8)
-    @Required(max = 2400, average = 200)
+	@PerfTest(invocations = 1000, threads = 20)
+    @Required(max = 100000, average = 100000)
 	public void testGetCategorias(){
-		ArrayList<Categoria>c=new ArrayList<>();
 		List<Categoria>cat=vs.getCategorias();
 		assertEquals(vs.getCategorias().size(), 2);
 	}
+	
 	@Test
 	@PerfTest(invocations = 400, threads = 8)
     @Required(max = 2400, average = 200)
