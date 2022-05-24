@@ -141,10 +141,10 @@ public class VentasService {
 	
 
 	/**
-	 * Añade productos a favoritos
+	 * Anade productos a favoritos
 	 * @param id
 	 * @param email
-	 * @exception si no se puede añadir a favoritos
+	 * @exception si no se puede anadir a favoritos
 	 */
 	public void addProductoFav(int id, String email) {
 		// TODO Auto-generated method stub
@@ -170,7 +170,7 @@ public class VentasService {
 
 	
 	/**
-	 * Añade el ususario a favorito
+	 * Anade el ususario a favorito
 	 * @param email2
 	 * @param email
 	 * @exception error si no te deja añadir el usuario a favoritos
@@ -301,7 +301,7 @@ public class VentasService {
 	
 
 	/**
-	 * añade productos a la lista
+	 * anade productos a la lista
 	 * @return
 	 */
 	public List<Producto> getProductos() {
@@ -319,7 +319,7 @@ public class VentasService {
 	}
 	
 	/**
-	 * añade a la lista los productos ordenador
+	 * anade a la lista los productos ordenador
 	 * @exception si el producto no existe
 	 * @return
 	 */
@@ -339,7 +339,7 @@ public class VentasService {
 	
 	
 	/**
-	 * añade a la lista los productos ordenador en venta
+	 * anade a la lista los productos ordenador en venta
 	 * 
 	 * @exception si el producto no existe
 	 * @return
@@ -386,7 +386,7 @@ public class VentasService {
 	
 	
 	/**
-	 * añade los productos tipo vehiculo
+	 * anade los productos tipo vehiculo
 	 * @exception si el producto no existe
 	 * @return
 	 */
@@ -481,7 +481,7 @@ public class VentasService {
 	
 	
 	/**
-	 * coje los productos tipo vehiculo añadidos a favoritos
+	 * coje los productos tipo vehiculo anadidos a favoritos
 	 * @param x
 	 * @return
 	 * @exception si al realizar la compra el usuario no existe
@@ -647,7 +647,7 @@ public class VentasService {
 
 	/**
 	 * @param x
-	 * @return añade los productos vehiculos vendidos 
+	 * @return anade los productos vehiculos vendidos 
 	 */
 	public List<ProductoVehiculo> getProductosVehiculoVendidos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
