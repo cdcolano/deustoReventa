@@ -50,7 +50,7 @@ public class VentanaOferta extends JFrame{
 				} catch (ReventaException e1) {
 					e1.printStackTrace();
 				}
-				new VentanaCompras(new ComprasController(wt, email), null, wt, email);
+				dispose();
 			}
 			
 		});
@@ -59,7 +59,7 @@ public class VentanaOferta extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				new VentanaCompras(new ComprasController(wt, email),null, wt, email);
+				dispose();
 			}
 			
 		});
