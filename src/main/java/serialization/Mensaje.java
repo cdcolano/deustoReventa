@@ -8,6 +8,12 @@ import javax.jdo.annotations.PersistenceCapable;
 import javax.jdo.annotations.Persistent;
 import javax.jdo.annotations.PrimaryKey;
 
+/**
+ * 
+ * @author jonzp
+ * Clase compra
+ *
+ */
 @PersistenceCapable(detachable = "true")
 public class Mensaje {
 	@PrimaryKey
@@ -23,35 +29,85 @@ public class Mensaje {
 	//@Persistent(defaultFetchGroup = "true")
 	//private Usuario receptor;
 	
+	/**
+	 * 
+	 * @return email del usuario que ha enviado un mensaje
+	 * 
+	 */
 	public String getEnviado() {
 		return enviado;
 	}
+	/**
+	 * 
+	 * @param modifica email enviado 
+	 * 
+	 */
 	public void setEnviado(String enviado) {
 		this.enviado = enviado;
 	}
 	
+	/**
+	 * 
+	 * @return email del usuario que ha recibido un mensaje
+	 * 
+	 */
 	public String getRecibido() {
 		return recibido;
 	}
+	/**
+	 * 
+	 * @param modifica el email recibido 
+	 * 
+	 */
 	public void setRecibido(String recibido) {
 		this.recibido = recibido;
 	}
 	
+	/**
+	 * 
+	 * @return devuelve el id del mensaje
+	 * 
+	 */
 	public int getId() {
 		return id;
 	}
+	/**
+	 * 
+	 * @param modifica el id 
+	 * 
+	 */
 	public void setId(int id) {
 		this.id = id;
 	}
+	/**
+	 * 
+	 * @return devuelve el contenido
+	 * 
+	 */
 	public String getContenido() {
 		return contenido;
 	}
+	/**
+	 * 
+	 * @param modifica el contenido
+	 * 
+	 */
 	public void setContenido(String contenido) {
 		this.contenido = contenido;
 	}
+	/**
+	 * 
+	 * @return devuelve la fecha 
+	 * 
+	 */
 	public long getFecha() {
 		return fecha;
 	}
+	/**
+	 * 
+	 * @param modifica la fecha
+	 * 
+	 */
 	public void setFecha(long fecha) {
 		this.fecha = fecha;
 	}
