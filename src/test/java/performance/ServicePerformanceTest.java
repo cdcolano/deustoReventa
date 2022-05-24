@@ -12,6 +12,7 @@ import javax.jdo.JDOHelper;
 import javax.jdo.JDOUserException;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.ws.rs.core.Response;
 
 import org.databene.contiperf.PerfTest;
 import org.databene.contiperf.Required;
@@ -39,6 +40,7 @@ import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
 import serialization.Usuario;
+import server.ReventaServer;
 import service.VentasService;
 
 @Category(IntegrationTest.class)
@@ -48,13 +50,15 @@ public class ServicePerformanceTest {
 	private Producto p;
 	private Categoria c;
 	private ProductoOrdenador po;
+	private ReventaServer rs;
 	
 	@Rule public ContiPerfRule rule = new ContiPerfRule();
+	
 	
 	@Before
 	public void setUp() {
 		vs= new VentasService();
-		
+		rs= new ReventaServer();
 		u= new Usuario();
 		u.setEmail("u@gmail.com");
 		u.setPassword("u");
@@ -75,13 +79,11 @@ public class ServicePerformanceTest {
 	
 	@Test 
     @PerfTest(invocations = 1000, threads = 20)
-    @Required(max = 3000, average = 1500)
-	public void testLogIn() {	
-		assertTrue(vs.logIn("u@gmail.com", "u"));
-		assertFalse(vs.logIn(null, "a"));
-		assertFalse(vs.logIn("a", "b"));
-		assertFalse(vs.logIn("b", "b"));
+    @Required(max = 1200, average = 160)
+	public void testLogIn() {
+		assertEquals(Response.Status.OK.getStatusCode(),rs.logIn(u).getStatus());
 	}
+	
 	
 	
 	@Test
