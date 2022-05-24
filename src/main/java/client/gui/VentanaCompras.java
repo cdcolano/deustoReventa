@@ -272,6 +272,9 @@ public class VentanaCompras extends JFrame{
 		else if (seleccion.compareTo("Ordenar por Fecha de Publicacion ascendente")==0) {
 			cco.ordenarPorFechaAsc(pa);
 		}
+		else if (seleccion.compareTo("Sin orden")==0) {
+			cco.ordenarPorFechaAsc(pa);
+		}
 		else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
 			cco.ordenarPorFechaDesc(pa);
 		}
