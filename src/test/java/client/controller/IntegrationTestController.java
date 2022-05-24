@@ -133,7 +133,7 @@ public class IntegrationTestController {
 				ofc.addOferta(email, 21, 100);
 				assertEquals(vs.getUsuario(email).getOfertasEnviadas().size(),2);
 				VerComprasController vcc= new VerComprasController(wt, email);
-				vcc.addReclamacion(new Reclamacion("No me ha llegado", 100));
+				vcc.addReclamacion(new Reclamacion("No me ha llegado", 100),1);
 				vcc.denunciar(pv);
 				
 			} catch (ReventaException e) {
