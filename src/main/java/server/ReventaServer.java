@@ -157,7 +157,6 @@ public class ReventaServer {
 	@POST
 	@Path("/saleOrdenador")
 	public Response addProductoOrdenador(ProductoOrdenador p) {
-		p.setCategoria(vs.getCategorias().get(0));
 		vs.ponerALaVenta(p.getEmailVendedor(),p);
 		System.out.println("*Producto puesto a la venta*");
 		return Response.ok().build();
@@ -171,7 +170,6 @@ public class ReventaServer {
 	@POST
 	@Path("/saleVehiculo")
 	public Response addProductoVehiculo(ProductoVehiculo p) {
-		p.setCategoria(vs.getCategorias().get(1));
 		vs.ponerALaVenta(p.getEmailVendedor(),p);
 		System.out.println("*Producto puesto a la venta*");
 		return Response.ok().build();
