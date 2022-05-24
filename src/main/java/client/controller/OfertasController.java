@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
@@ -103,13 +104,16 @@ public class OfertasController {
 		JPanel pContenido= new JPanel();
 		pContenido.setLayout(new BoxLayout(pContenido, BoxLayout.Y_AXIS));
 		JPanel pProducto= new JPanel();
-		pProducto.add(new JLabel (p.getNombre() ));
-		pProducto.add(new JLabel("Precio salida: "+ p.getPrecioSalida()+ "€" + "\n"));
-		
+		pProducto.setLayout(new BoxLayout(pProducto, BoxLayout.Y_AXIS));
+		JPanel pBasico= new JPanel();
+		pBasico.add(new JLabel (p.getNombre() ));
+		pBasico.add(new JLabel("Precio salida: "+ p.getPrecioSalida()+ "Euros" + "\n"));
+		pProducto.add(pBasico);
 		for(Oferta o : p.getOfertasRecibidas()) {
-			pProducto.add(new JLabel ("Oferta recibida:" + "\n"));
-			pProducto.add(new JLabel ("Cantidad: " +o.getCantidad()));
-			pProducto.add(new JLabel ("Fecha: " + new Date(o.getFecha())));
+			JPanel pOferta= new JPanel();
+			pOferta.add(new JLabel ("Oferta recibida:" + "\n"));
+			pOferta.add(new JLabel ("Cantidad: " +o.getCantidad()));
+			pOferta.add(new JLabel ("Fecha: " + new Date(o.getFecha())));
 			JButton bAceptar = new JButton("Aceptar");
 			bAceptar.addActionListener(new ActionListener() {
 
@@ -132,8 +136,10 @@ public class OfertasController {
 				}
 				
 			});
-			pProducto.add(bAceptar);
-		}		
+			pOferta.add(bAceptar);
+			pProducto.add(pOferta);
+		}
+		pProducto.add(new JSeparator());
 		pContenido.add(pProducto);
 		pCentro.add(pContenido);
 		pCentro.revalidate();

@@ -14,32 +14,19 @@ import serialization.Categoria;
 import serialization.Usuario;
 
 
-/**Clase que crea un dao de Categoria
- * @author Ander
- *
- */
 public class CategoriaDAO implements ICategoriaDAO {
 	
 	private PersistenceManagerFactory pmf;
 
-	/**
-	 * Metodo que construye una CategoriaDao
-	 */
 	public CategoriaDAO() {
 		// TODO Auto-generated constructor stub
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 	}
 	
-	/**
-	 *Metodo que guarda una categoria en la Bd
-	 */
 	public void storeCategoria(Categoria categoria) {
 		this.storeObject(categoria);
 	}
 	
-	/**Metodo que guarda un objeto en BD
-	 * @param object objeto de cualquier clase
-	 */
 	private void storeObject(Object object) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -60,9 +47,6 @@ public class CategoriaDAO implements ICategoriaDAO {
 		}
 	}
 	
-	/**
-	 *Metodo que saca la lista de categorias
-	 */
 	public List<Categoria> getCategorias() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		/*
@@ -98,16 +82,10 @@ public class CategoriaDAO implements ICategoriaDAO {
 		return categorias;
 	}
 
-	/**Metodo get de persistenceManagerFactory
-	 * @return devuelve el persistenceManagerFatory
-	 */
 	public PersistenceManagerFactory getPmf() {
 		return pmf;
 	}
 
-	/**Metodo set de persistenceManagerFactory
-	 * @param pmf persistenceManagerFactory que se hace set
-	 */
 	public void setPmf(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
 	}

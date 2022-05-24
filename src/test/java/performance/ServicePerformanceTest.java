@@ -39,13 +39,11 @@ import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
 import serialization.Usuario;
-import server.ReventaServer;
 import service.VentasService;
 
 @Category(IntegrationTest.class)
 public class ServicePerformanceTest {
 	VentasService vs;
-	ReventaServer rs;
 	private Usuario u;
 	private Producto p;
 	private Categoria c;
@@ -85,14 +83,6 @@ public class ServicePerformanceTest {
 		assertFalse(vs.logIn("b", "b"));
 	}
 	
-	@Test
-	@PerfTest(invocations = 400, threads = 8)
-    @Required(max = 2400, average = 200)
-	public void testGetProductosVehiculoEnVenta() {
-		List<ProductoVehiculo> c = vs.getProductosVehiculosEnVenta();
-		assertEquals(vs.getProductosVehiculosEnVenta().size(),3);
-	}
-	
 	
 	@Test
 	@PerfTest(invocations = 400, threads = 8)
@@ -104,20 +94,10 @@ public class ServicePerformanceTest {
 	
 	@Test
 	@PerfTest(invocations = 400, threads = 8)
-    @Required(max = 2400, average = 200)
-	public void testGetProductosVehiculo() {
-		List<ProductoVehiculo> pos = vs.getProductosVehiculos();
-		assertEquals(vs.getProductosVehiculos().size(),3);
-	}
-	
-	@Test
-	@PerfTest(invocations = 400, threads = 8)
 	@Required(max = 2400, average = 200)
 	public void testGetMensajesEnviados() {
 		assertEquals(vs.getMensajesEnviados("a@gmail.com").size(),1);
 	}	
-	
-	
 	
 	
 	
