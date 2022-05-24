@@ -99,6 +99,13 @@ public class ServicePerformanceTest {
 		assertEquals(vs.getProductosOrdenador().size(),3);
 	}
 	
+	@Test
+	@PerfTest(invocations = 400, threads = 8)
+	@Required(max = 2400, average = 200)
+	public void testGetMensajesEnviados() {
+		assertEquals(vs.getMensajesEnviados("a@gmail.com").size(),1);
+	}	
+	
 	
 	
 }
