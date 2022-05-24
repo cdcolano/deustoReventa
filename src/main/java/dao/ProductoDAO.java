@@ -17,19 +17,32 @@ import serialization.ProductoVehiculo;
 import serialization.Usuario;
 
 
+/** Clase que crea un dao de Producto
+ * @author Jon Eguiluz
+ *
+ */
 public class ProductoDAO implements IProductoDAO{
 
 	private PersistenceManagerFactory pmf;
 
+	/**
+	 * Constructor de ProductoDAO
+	 */
 	public ProductoDAO() {
 		// TODO Auto-generated constructor stub
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 	}
 	
+	/**
+	 *Metodo para almacenar un producto en la BD
+	 */
 	public void storeProducto(Producto producto) {
 		this.storeObject(producto);
 	}
 	
+	/** Metodo que almacena un objeto en la BD
+	 * @param object objeto de cualquier clase a guardar en la BD
+	 */
 	private void storeObject(Object object) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -51,6 +64,9 @@ public class ProductoDAO implements IProductoDAO{
 	}
 	
 	
+	/**
+	 * Metodo que devuelve la lista de todos los productos de la BD
+	 */
 	public List<Producto> getProductos() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		/*
@@ -87,6 +103,9 @@ public class ProductoDAO implements IProductoDAO{
 	}
 	
 	
+	/**
+	 *Metodo que devuelve la lista de todos los productos de tipo ordenador de la BD
+	 */
 	public List<ProductoOrdenador> getProductosOrdenador() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		/*
@@ -122,6 +141,9 @@ public class ProductoDAO implements IProductoDAO{
 		return productos;
 	}
 	
+	/**
+	 * Metodo que devuelve una lista con todos los productos de tipo ordenador que estan a la venta en la BD (vendido != true) incluyendo los reservados 
+	 */
 	public List<ProductoOrdenador> getProductosOrdenadorEnVentaConReservado(){
 		PersistenceManager pm = pmf.getPersistenceManager();
 		/*
@@ -180,6 +202,9 @@ public class ProductoDAO implements IProductoDAO{
 
 	}
 	
+	/**
+	 *Metodo que devuelve una lista con todos los productos de tipo ordenador que estan a la venta en la BD (vendido != true)
+	 */
 	public List<ProductoOrdenador> getProductosOrdenadorEnVenta() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		/*
@@ -238,6 +263,9 @@ public class ProductoDAO implements IProductoDAO{
 	}
 	
 	
+	/**
+	 * Metodo que devuelve una lista con todos los productos de tipo vehiculo de la BD
+	 */
 	public List<ProductoVehiculo> getProductosVehiculos() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		/*
@@ -272,6 +300,9 @@ public class ProductoDAO implements IProductoDAO{
 		return productos;
 	}
 	
+	/**
+	 * Metodo que devuelve una lista con todos los productos de tipo vehiculo y en venta de la BD (vendido != true) incluyendo los reservados
+	 */
 	public List<ProductoVehiculo> getProductosVehiculosEnVentaConReservado(){
 		PersistenceManager pm = pmf.getPersistenceManager();
 		/*
@@ -324,6 +355,9 @@ public class ProductoDAO implements IProductoDAO{
 		return productos;
 	}
 	
+	/**
+	 * Metodo que devuelve una lista con todos los productos de tipo vehiculo y a la venta (vendido != true) de la BD
+	 */
 	public List<ProductoVehiculo> getProductosVehiculosEnVenta() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		/*
@@ -380,6 +414,9 @@ public class ProductoDAO implements IProductoDAO{
 	
 	
 
+	/** Setter del PersistenceManagerFactory
+	 * @param pmf2 Valor que queremos asignar con el setter
+	 */
 	public void setPmf(PersistenceManagerFactory pmf2) {
 		this.pmf=pmf2;
 	}

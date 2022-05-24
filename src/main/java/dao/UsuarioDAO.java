@@ -13,19 +13,32 @@ import javax.jdo.Transaction;
 import serialization.Categoria;
 import serialization.*;
 
+/**Clase que crea un dao de Usuario
+ * @author Jon Eguiluz
+ *
+ */
 public class UsuarioDAO implements IUsuarioDAO {
 	
 
 	private PersistenceManagerFactory pmf;
 
+	/**
+	 * Constructor de la clase
+	 */
 	public UsuarioDAO() {
 		pmf = JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 	}
 
+	/**
+	 * Metodo para almacenar un usuario en la BD
+	 */
 	public void storeUsuario(Usuario usuario) {
 		this.storeObject(usuario);
 	}
 
+	/** Metodo que almacena un objeto en la BD
+	 * @param object objeto de cualquier clase a guardar en la BD
+	 */
 	private void storeObject(Object object) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Transaction tx = pm.currentTransaction();
@@ -46,6 +59,9 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}
 	}
 
+	/**
+	 * Metodo que devuelve una lista con todos los usuarios de la BD
+	 */
 	public List<Usuario> getUsuarios() {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		/*
@@ -86,6 +102,8 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 
 
+	
+	
 	@SuppressWarnings("unchecked")
 /*	public List<Product> getProducts(String condition) {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -118,6 +136,10 @@ public class UsuarioDAO implements IUsuarioDAO {
 
 		return products;
 	}*/
+	
+	/**
+	 * Metodo que devuelve un objeto usuario de la BD a traves de su email
+	 */
 
 	public Usuario getUsuario(String email) {
 		PersistenceManager pm = pmf.getPersistenceManager();
@@ -198,10 +220,16 @@ public class UsuarioDAO implements IUsuarioDAO {
 		}
 	}*/
 	
+	/** getter del PersistanceManagerFactory
+	 * @return devuelve el PersistanceManagerFactory
+	 */
 	public PersistenceManagerFactory getPmf() {
 		return pmf;
 	}
 
+	/** setter del PersistanceManagerFactory
+	 * @param pmf recibe como parametro el valor a asignar al PersistanceManagerFactory
+	 */
 	public void setPmf(PersistenceManagerFactory pmf) {
 		this.pmf = pmf;
 	}
