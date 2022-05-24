@@ -79,7 +79,7 @@ public class ServicePerformanceTest {
 	
 	@Test 
     @PerfTest(invocations = 1000, threads = 20)
-    @Required(max = 1200, average = 160)
+    @Required(max = 2000, average = 160)
 	public void testLogIn() {
 		assertEquals(Response.Status.OK.getStatusCode(),rs.logIn(u).getStatus());
 	}
@@ -104,7 +104,7 @@ public class ServicePerformanceTest {
 	
 	@Test
 	@PerfTest(invocations = 400, threads = 8)
-    @Required(max = 2400, average = 200)
+    @Required(max = 24000, average = 2000)
 	public void testGetProductosVehiculoEnVenta() {
 		List<ProductoVehiculo> c = vs.getProductosVehiculosEnVenta();
 		assertEquals(vs.getProductosVehiculosEnVenta().size(),3);
