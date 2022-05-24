@@ -28,6 +28,10 @@ import util.ReventaException;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 
+/** Ventana que muestra las ventas realizadas por el vendedor que ha iniciado sesion
+ * @author Jon Eguiluz
+ *
+ */
 public class VentanaVentas extends JFrame {
 	
 	private JButton btnCerrar;
@@ -40,6 +44,12 @@ public class VentanaVentas extends JFrame {
 
 	
 	
+	/** Constructor de la ventana
+	 * @param vc controller de esta ventana donde se almacenan los metodos que se utilizan en esta
+	 * @param c el cliente de la aplicacion
+	 * @param wt para hacer llamadas al servidor
+	 * @param email email del usuario que ha iniciado sesion
+	 */
 	public VentanaVentas(VentasController vc, Client c, WebTarget wt, String email) {
 		
 		this.client=c;

@@ -22,6 +22,10 @@ import serialization.Producto;
 import serialization.Usuario;
 import util.ReventaException;
 
+/** Ventana que muestra ofertas de vendedor
+ * @author Jon Eguiluz
+ *
+ */
 public class VentanaOfertas extends JFrame {
 	private Client client;
 	private WebTarget webTarget;
@@ -35,6 +39,13 @@ public class VentanaOfertas extends JFrame {
 	private JPanel pNorte;
 	private JPanel pCentro;
 	
+	
+	/** Constructor de la ventana
+	 * @param oc controller de esta ventana donde se almacenan los metodos que se utilizan en esta
+	 * @param cliente el cliente de la aplicacion
+	 * @param webTarget para hacer llamadas al servidor
+	 * @param email email del usuario que ha iniciado sesion
+	 */
 	public VentanaOfertas(OfertasController oc, Client cliente, WebTarget webTarget, String email) {
 		this.controller= oc;
 		this.webTarget = webTarget;

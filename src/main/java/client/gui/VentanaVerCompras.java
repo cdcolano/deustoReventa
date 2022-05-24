@@ -27,6 +27,10 @@ import serialization.Producto;
 import serialization.Reclamacion;
 import util.ReventaException;
 
+/** Ventana que muestra las compras realizadas por el usuario que ha iniciado sesion
+ * @author Jon Eguiluz
+ *
+ */
 public class VentanaVerCompras extends JFrame {
 	
 	private JButton btnCerrar;
@@ -40,6 +44,12 @@ public class VentanaVerCompras extends JFrame {
 
 	
 	
+	/** Constructor de la ventana
+	 * @param vcc controller de esta ventana donde se almacenan los metodos que se utilizan en esta
+	 * @param c el cliente de la aplicacion
+	 * @param wt para hacer llamadas al servidor
+	 * @param email email del usuario que ha iniciado sesion
+	 */
 	public VentanaVerCompras(VerComprasController vcc, Client c, WebTarget wt, String email) {
 		
 		this.client=c;

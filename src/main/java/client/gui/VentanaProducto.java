@@ -29,6 +29,10 @@ import javax.swing.text.AttributeSet.ColorAttribute;
 
 import java.awt.*;
 
+/** Ventana para la puesta a la venta de productos
+ * @author Jon Eguiluz
+ *
+ */
 public class VentanaProducto extends JFrame{
 	private Client client;
 	private WebTarget webTarget;
@@ -63,6 +67,12 @@ public class VentanaProducto extends JFrame{
 	private JTextField tfModelo;
 	private ProductoController pc;
 	
+	/** Constructor de la ventana
+	 * @param pc controller de esta ventana donde se almacenan los metodos que se utilizan en esta
+	 * @param c el cliente de la aplicacion
+	 * @param webTarget para hacer llamadas al servidor
+	 * @param email email del usuario que ha iniciado sesion
+	 */
 	public VentanaProducto(ProductoController pc,Client c, WebTarget webTarget, String email) {
 		try {
 			client=c;

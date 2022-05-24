@@ -21,6 +21,10 @@ import serialization.Usuario;
 import util.ReventaException;
 import java.awt.*;
 
+/** Ventana para realizar el registro de nuevas cuentas
+ * @author Jon Eguiluz
+ *
+ */
 public class VentanaRegistro extends JFrame{
 	private JTextField tfEmail,tfNombreTar, tfNumTar,tfAnyoVen,tfMesVen;
 	private JPasswordField tfPassword;
@@ -28,6 +32,12 @@ public class VentanaRegistro extends JFrame{
 	private WebTarget webTarget;
 	private Client client;
 	private RegistroController rc;
+	
+	
+	/**Constructor de la ventana
+	 * @param cliente el cliente de la aplicacion
+	 * @param wt para hacer llamadas al servidor (webTarget)
+	 */
 	public VentanaRegistro(Client cliente, WebTarget wt) {
 		super();
 		JPanel pCentral=new JPanel();
