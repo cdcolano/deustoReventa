@@ -226,7 +226,7 @@
                             <generateHtml>true</generateHtml>
                             <inputDirectory>${basedir}/src/main/java</inputDirectory>
                             <outputDirectory>${basedir}/target</outputDirectory>  -->
-		        	<!-- configurationFile>${doxygen.config.file}</configurationFile> -->
+		        	<configurationFile>${doxygen.config.file}</configurationFile>
 		        </configuration>
 		     </plugin>
 		
