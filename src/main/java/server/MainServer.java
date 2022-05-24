@@ -1,5 +1,6 @@
 package server;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import javax.ws.rs.client.Client;
@@ -59,10 +60,12 @@ public class MainServer{
 		u2.setTarjeta(t2);
 		vs.registro(u2);
 		
+		List<Categoria>cat=vs.getCategorias();
+		
 		ProductoOrdenador p1= new ProductoOrdenador();
 		p1.setPrecioSalida(400);
 		p1.setNombre("acer");
-		p1.setCategoria(c1);
+		p1.setCategoria(cat.get(0));
 		p1.setCpu("i5");
 		p1.setPlacaBase("p1");
 		p1.setGrafica("gtx");
@@ -73,7 +76,7 @@ public class MainServer{
 		ProductoVehiculo p2=new ProductoVehiculo();
 		p2.setPrecioSalida(10000);
 		p2.setNombre("golf");
-		p2.setCategoria(c2);
+		p2.setCategoria(cat.get(1));
 		p2.setFechaPubli(2000);
 		
 		ProductoOrdenador p3= new ProductoOrdenador();
@@ -84,13 +87,13 @@ public class MainServer{
 		p3.setGrafica("gtx 630");
 		p3.setRam(16);
 		p3.setMemoria(512);
-		p3.setCategoria(c1);
+		p3.setCategoria(cat.get(0));
 		p3.setFechaPubli(1000);
 		
 		ProductoVehiculo p4= new ProductoVehiculo();
 		p4.setPrecioSalida(12000);
 		p4.setNombre("ibiza");
-		p4.setCategoria(c2);
+		p4.setCategoria(cat.get(1));
 		p4.setFechaPubli(500);
 		
 		

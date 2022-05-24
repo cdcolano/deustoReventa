@@ -68,9 +68,9 @@ public class ComprasController {
 		}
 	}
 
-	/**Añade un usuario a la lista de usuarios que te gustan
-	 * @param u Usuario que añade a favoritos
-	 * @param email del usuario añadido a me gusta
+	/**Anade un usuario a la lista de usuarios que te gustan
+	 * @param u Usuario que anade a favoritos
+	 * @param email del usuario anadido a me gusta
 	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
 	 */
 	public void anadirUsuarioFav(Usuario u, String email) throws ReventaException {
@@ -154,7 +154,7 @@ public class ComprasController {
 	
 	/**Crea el panel de la ventana para un producto
 	 * @param p Producto para el que crear el panel
-	 * @param pCentro JPanel al que añadir el producto
+	 * @param pCentro JPanel al que anadir el producto
 	 */
 	public void crearPanel(Producto p, JPanel pCentro) {
 		this.prod=p;
@@ -239,9 +239,9 @@ public class ComprasController {
 
 	}
 	
-	/** Añade un producto a favoritos
-	 * @param p Producto a añadir a productos favoritos
-	 * @param email del usuario que lo añade a favoritos
+	/** Anade un producto a favoritos
+	 * @param p Producto a anadir a productos favoritos
+	 * @param email del usuario que lo anade a favoritos
 	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
 	 */
 	public void anadirFav(Producto p, String email) throws ReventaException {
@@ -254,9 +254,9 @@ public class ComprasController {
 	}
 	
 	
-	/**Añade un usuario a la lista de usuarios que te gustan
-	 * @param email2 email del usuario a añadir  a la lista
-	 * @param email email del usuario que añade a la lista
+	/**Anade un usuario a la lista de usuarios que te gustan
+	 * @param email2 email del usuario a anadir  a la lista
+	 * @param email email del usuario que anade a la lista
 	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
 	 */
 	public void anadirUsuarioFav(String email2, String email) throws ReventaException {
@@ -568,7 +568,7 @@ public class ComprasController {
 	 * @param kmMax deseados, debe ser numerico
 	 * @param anyoMin deseado, debe ser numerico
 	 * @param anyoMax deseado, debe ser numerico
-	 * @param pa panel al que añadir los vehiculos
+	 * @param pa panel al que anadir los vehiculos
 	 */
 	public void filtrarVehiculo(String modelo, String marca, String cvMin, String cvMax, String kmMin,
 			String kmMax, String anyoMin, String anyoMax,JPanel pa) {

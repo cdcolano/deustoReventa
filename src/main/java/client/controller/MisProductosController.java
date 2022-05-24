@@ -116,7 +116,7 @@ public class MisProductosController {
 	
 	/**Crea un panel para un producto
 	 * @param p Producto para el que crear el panel
-	 * @param pCentro panel al que añadir el producto
+	 * @param pCentro panel al que anadir el producto
 	 */
 	public void crearPanel(Producto p, JPanel pCentro) {
 		this.prod=p;

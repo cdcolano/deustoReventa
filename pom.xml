@@ -18,7 +18,8 @@
 		<demo.data>${basedir}/src/main/resources/demoData.csv</demo.data>
 		<policy.file>${basedir}/security/java.policy</policy.file>
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
-		<doxygen.config.file>${basedir}/src/main/resources/Doxyfile</doxygen.config.file>
+		<doxygen.config.file>${project.basedir}/src/main/resources/Doxyfile</doxygen.config.file>
+		<doxygen.configurationFile>${project.basedir}/src/main/resources/DoxyfilePruebaB</doxygen.configurationFile>
 		<java.home.dir>C:\Program Files\Eclipse Foundation\jdk-17.0.0.35-hotspot</java.home.dir>
 	</properties>
 
@@ -213,21 +214,21 @@
 		        <groupId>com.soebes.maven.plugins</groupId>
 		        <artifactId>doxygen-maven-plugin</artifactId>
 		        <version>1.1.0</version>
-		        <configuration>
-                            <!-- optimizeOutputJava>true</optimizeOutputJava>
+		        <!-- configuration>
+                             optimizeOutputJava>true</optimizeOutputJava>
                        		<extractAll>true</extractAll>
                             <extractStatic>true</extractStatic>
                             <recursive>true</recursive>
                             <recursive>true</recursive>
                             <umlLook>true</umlLook>
-                            <haveGraph>built-in</haveGraph>
+                            <includeGraph>true</includeGraph>
                             <crossReference>true</crossReference>
                             <generateLatex>true</generateLatex>
                             <generateHtml>true</generateHtml>
                             <inputDirectory>${basedir}/src/main/java</inputDirectory>
-                            <outputDirectory>${basedir}/target</outputDirectory>  -->
-		        	<configurationFile>${doxygen.config.file}</configurationFile>
-		        </configuration>
+                            <outputDirectory>${basedir}/target</outputDirectory>  
+		        	<configurationFile>${doxygen.config.file}</configurationFile>  
+		        </configuration> -->
 		     </plugin>
 		
             

@@ -28,15 +28,7 @@ import util.ReventaException;
 
 
 
-/** Clase que implementa la logica de la ventana de Chat
- * @author Carlos
- *
- */
-/**
- * @author Carlos
- *
- */
-/**
+/** Clase que implementa la logica de la ventana de chat
  * @author Carlos
  *
  */

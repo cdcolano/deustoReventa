@@ -26,7 +26,7 @@ public class OfertaController {
 		this.id=id;
 	}
 
-	/**Añade una oferta a un producto
+	/**Anade una oferta a un producto
 	 * @param email del usuario que realiza la oferta
 	 * @param idProd id del producto al que se realiza la oferta
 	 * @param oferta cantidad que se ofrece
