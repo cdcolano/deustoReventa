@@ -14,6 +14,12 @@ import serialization.*;
 import java.util.*;
 
 
+/**
+ * clase que gestiona la logica de la aplicacion
+ * 
+ * @author usuario
+ *
+ */
 public class VentasService {
 	IProductoDAO productDao;
 	IUsuarioDAO	usuarioDao;
@@ -97,6 +103,12 @@ public class VentasService {
 		return false;	
 	}
 	
+	/**
+	 * compra un producto, si este existe
+	 * @param email
+	 * @param idProducto
+	 * @param precio
+	 */
 	public void comprarProducto(String email, int idProducto, double precio) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
@@ -128,6 +140,12 @@ public class VentasService {
 	}
 	
 
+	/**
+	 * Anade productos a favoritos
+	 * @param id
+	 * @param email
+	 * @exception si no se puede anadir a favoritos
+	 */
 	public void addProductoFav(int id, String email) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm=pmf.getPersistenceManager();
@@ -151,6 +169,12 @@ public class VentasService {
 	
 
 	
+	/**
+	 * Anade el ususario a favorito
+	 * @param email2
+	 * @param email
+	 * @exception error si no te deja añadir el usuario a favoritos
+	 */
 	public void addUsuarioFav(String email2 , String email) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u1 = null;
@@ -168,6 +192,14 @@ public class VentasService {
 		}
 	}
 	
+	/**
+	 * envia un mensaje
+	 * @param email1
+	 * @param email2
+	 * @param contenido
+	 * @param fecha
+	 * @exception si el mensaje no se envia o el mensaje no se recibe
+	 */
 	public void enviarMensaje(String email1, String email2, String contenido, long fecha) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		System.out.println(email1);
@@ -197,6 +229,11 @@ public class VentasService {
 		}
 	}
 	
+	/**
+	 * para reservar un producto
+	 * @param idProducto
+	 * @exception si el producto no existe
+	 */
 	public void reservar(int idProducto) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Producto p = null;
@@ -207,6 +244,11 @@ public class VentasService {
 			System.out.println("El producto no existe");
 		}
 	}
+	/**
+	 * quitar las reservas realizadas
+	 * @param idProducto
+	 * @exception si el producto no existe
+	 */
 	public void desReservar(int idProducto) {
 		PersistenceManager pm = pmf.getPersistenceManager();
 		Producto p = null;
@@ -218,6 +260,12 @@ public class VentasService {
 		}
 	}
 	
+	/**
+	 * poner a la venta un producto
+	 * @param email
+	 * @param p
+	 * @exception si al realizar la compra no existe el usuario
+	 */
 	public void ponerALaVenta(String email, Producto p) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
@@ -232,6 +280,11 @@ public class VentasService {
 	}
 
 
+	/**
+	 * coger un producto
+	 * @param x
+	 * @return
+	 */
 	public Producto getProducto(int x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Producto p=null;
@@ -247,6 +300,10 @@ public class VentasService {
 	}
 	
 
+	/**
+	 * anade productos a la lista
+	 * @return
+	 */
 	public List<Producto> getProductos() {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<Producto> p=new ArrayList<Producto>();
@@ -261,6 +318,11 @@ public class VentasService {
 		
 	}
 	
+	/**
+	 * anade a la lista los productos ordenador
+	 * @exception si el producto no existe
+	 * @return
+	 */
 	public List<ProductoOrdenador> getProductosOrdenador() {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoOrdenador> p=new ArrayList<ProductoOrdenador>();
@@ -276,6 +338,12 @@ public class VentasService {
 	}
 	
 	
+	/**
+	 * anade a la lista los productos ordenador en venta
+	 * 
+	 * @exception si el producto no existe
+	 * @return
+	 */
 	public List<ProductoOrdenador> getProductosOrdenadorEnVenta() {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoOrdenador> p=new ArrayList<ProductoOrdenador>();
@@ -293,6 +361,12 @@ public class VentasService {
 		
 	}
 	
+	/**
+	 * coje los productos ordenador que estan en venta y reservados
+	 * 
+	 * @exception si el producto no existe
+	 * @return
+	 */
 	public List<ProductoOrdenador> getProductosOrdenadorEnVentaConReservado() {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoOrdenador> p=new ArrayList<ProductoOrdenador>();
@@ -311,6 +385,11 @@ public class VentasService {
 	}
 	
 	
+	/**
+	 * anade los productos tipo vehiculo
+	 * @exception si el producto no existe
+	 * @return
+	 */
 	public List<ProductoVehiculo> getProductosVehiculos() {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoVehiculo> p=new ArrayList<ProductoVehiculo>();
@@ -325,6 +404,11 @@ public class VentasService {
 		
 	}
 	
+	/**
+	 * coje los productos vehiculo en venta
+	 * @exception si el producto no existe
+	 * @return
+	 */
 	public List<ProductoVehiculo> getProductosVehiculosEnVenta() {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoVehiculo> p=new ArrayList<ProductoVehiculo>();
@@ -339,6 +423,11 @@ public class VentasService {
 		
 	}
 	
+	/**
+	 * coje los productos en vehiculo en venta y reservados
+	 * @exception si el producto no existe
+	 * @return
+	 */
 	public List<ProductoVehiculo> getProductosVehiculosEnVentaConReservado() {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoVehiculo> p=new ArrayList<ProductoVehiculo>();
@@ -353,6 +442,10 @@ public class VentasService {
 		
 	}
 	
+	/** coje los usuarios con el email
+	 * @param email
+	 * @return
+	 */
 	public Usuario getUsuario(String email) {
 		return usuarioDao.getUsuario(email);
 	}
@@ -360,6 +453,12 @@ public class VentasService {
 	
 
 
+	/**
+	 * coje los productos ordenador que tienes en favoritos
+	 * @param x
+	 * @return
+	 * @exception si el usuario no existe al realizar la compra
+	 */
 	public List<ProductoOrdenador> getProductosOrdenadorFavoritos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoOrdenador>po= new ArrayList<ProductoOrdenador>();
@@ -381,6 +480,12 @@ public class VentasService {
 	}
 	
 	
+	/**
+	 * coje los productos tipo vehiculo anadidos a favoritos
+	 * @param x
+	 * @return
+	 * @exception si al realizar la compra el usuario no existe
+	 */
 	public List<ProductoVehiculo> getProductosVehiculoFavoritos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoVehiculo>po= new ArrayList<ProductoVehiculo>();
@@ -402,6 +507,11 @@ public class VentasService {
 	}
 
 
+	/**
+	 * cojer el numero de ventas relizadas
+	 * @param x
+	 * @return
+	 */
 	public int getNumVentas(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
@@ -423,6 +533,11 @@ public class VentasService {
 	}
 
 
+	/**
+	 * cojer los mensajes enviados
+	 * @param x
+	 * @return
+	 */
 	public List<Mensaje> getMensajesEnviados(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<Mensaje>men= new ArrayList<Mensaje>();
@@ -438,6 +553,11 @@ public class VentasService {
 		return men;
 	}
 	
+	/**
+	 * cojer los mensajes que se han recibido
+	 * @param x
+	 * @return
+	 */
 	public List<Mensaje> getMensajesRecibidos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<Mensaje>men= new ArrayList<Mensaje>();
@@ -454,6 +574,11 @@ public class VentasService {
 	}
 
 	
+	/**
+	 * coje los productos ordenador vendidos
+	 * @param x
+	 * @return
+	 */
 	public List<ProductoOrdenador> getProductosOrdenadorVendidos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoOrdenador>po= new ArrayList<ProductoOrdenador>();
@@ -493,6 +618,10 @@ public class VentasService {
 	}
 	return p;
 }*/
+	/** 
+	 * @param x
+	 * @return  cuenta los productos que hay en favoritos
+	 */
 	public int getProductosFavoritos(int x){
 		PersistenceManager pm=pmf.getPersistenceManager();
 		int contador = 0;
@@ -516,6 +645,10 @@ public class VentasService {
 
 	}
 
+	/**
+	 * @param x
+	 * @return anade los productos vehiculos vendidos 
+	 */
 	public List<ProductoVehiculo> getProductosVehiculoVendidos(String x) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		List<ProductoVehiculo>po= new ArrayList<ProductoVehiculo>();
@@ -539,6 +672,12 @@ public class VentasService {
 	}
 
 
+	/**
+	 * hace una oferta por un producto
+	 * @param x
+	 * @param idProd
+	 * @param cantidad
+	 */
 	public void hacerOferta(String x, int idProd, double cantidad) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
@@ -565,6 +704,9 @@ public class VentasService {
 		}
 		
 	}
+	/** crear una reclamacion
+	 * @param r
+	 */
 	public void addReclamacion(Reclamacion r) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
@@ -580,6 +722,10 @@ public class VentasService {
 	}
 
 
+	/**
+	 * @param email
+	 * @return las compras realizadas por cada usuario
+	 */
 	public List<Compra> getCompras(String email) {
 		PersistenceManager pm=pmf.getPersistenceManager();
 		Usuario u= null;
@@ -596,6 +742,10 @@ public class VentasService {
 	}
 
 
+	/**
+	 * Denunciar a un usuario
+	 * @param x
+	 */
 	public void denunciar(String x) {
 		// TODO Auto-generated method stub
 		PersistenceManager pm=pmf.getPersistenceManager();

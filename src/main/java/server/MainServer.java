@@ -14,6 +14,12 @@ import serialization.Tarjeta;
 import serialization.Usuario;
 import service.VentasService;
 
+/**
+ * 
+ * clase que añade datos de prueba
+ * @author usuario
+ *
+ */
 public class MainServer{
 	
 	public static void main(String []args) {

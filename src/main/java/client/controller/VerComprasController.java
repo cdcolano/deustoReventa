@@ -19,6 +19,10 @@ import serialization.ProductoVehiculo;
 import serialization.Reclamacion;
 import util.ReventaException;
 
+/** clase que implementa la logica de la ventana ver compras
+ * @author usuario
+ *
+ */
 public class VerComprasController {
 	
 	private WebTarget webTarget;
@@ -32,6 +36,11 @@ public class VerComprasController {
 		this.email = email;
 	}
 	
+	/**
+	 * @param email
+	 * @return lista de los productos comprados
+	 * @throws ReventaException
+	 */
 	public List<Compra>  getListaProductosComprados(String email)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/compras/"+email);
 		List<Compra>lCompra = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<Compra>>() {
@@ -39,6 +48,11 @@ public class VerComprasController {
 		return lCompra;
 	}
 	
+	/**
+	 * @param c
+	 * @return coje los productos
+	 * @throws ReventaException
+	 */
 	public Producto getPoducto(Compra c) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/getProducto/"+ c.getProducto());
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -53,6 +67,11 @@ public class VerComprasController {
 			return response.readEntity(ProductoVehiculo.class);
 		}
 	}
+	/**
+	 * anade una reclamacion
+	 * @param r
+	 * @throws ReventaException
+	 */
 	public void addReclamacion(Reclamacion r) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/addReclamacion");
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -62,6 +81,11 @@ public class VerComprasController {
 		}
 	}
 
+	/**
+	 * crear una denuncia
+	 * @param m
+	 * @throws ReventaException
+	 */
 	public void denunciar(Producto m) throws ReventaException {
 		// TODO Auto-generated method stub
 		WebTarget webTarget = this.webTarget.path("reventa/denunciar/"+ m.getEmailVendedor());

@@ -28,6 +28,11 @@ import javax.ws.rs.core.GenericEntity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
+/**
+ * Gestiona la parte servidora
+ * @author usuario
+ *
+ */
 @Path("/reventa")
 @Produces(MediaType.APPLICATION_JSON)
 public class ReventaServer {
@@ -46,6 +51,13 @@ public class ReventaServer {
 	}
 	
 	
+	/** 
+	 * Anade una compra
+	 * @param c
+	 * @param x
+	 * @param idProd
+	 * @return
+	 */
 	@POST
 	@Path("/comprar/{x}/{y}")
 	public Response addCompra(Compra c, @PathParam("x") String x, @PathParam("y") int idProd) {
@@ -54,6 +66,12 @@ public class ReventaServer {
 		return Response.ok().build();
 	}
 	
+	/**Anade una oferta 
+	 * @param o
+	 * @param x
+	 * @param idProd
+	 * @return
+	 */
 	@POST
 	@Path("/oferta/{x}/{y}")
 	public Response addOferta(Oferta o, @PathParam("x") String x, @PathParam("y") int idProd) {
@@ -63,6 +81,13 @@ public class ReventaServer {
 	}
 	
 	
+	/**
+	 * Anade un mensaje 
+	 * @param m
+	 * @param x
+	 * @param y
+	 * @return
+	 */
 	@POST
 	@Path("/enviar/{x}/{y}")
 	public Response addMensaje(Mensaje m,@PathParam("x") String x,@PathParam("y") String y){
@@ -71,6 +96,11 @@ public class ReventaServer {
 		return Response.ok().build();
 	}
 	
+	/**
+	 * coje los mensajes recibidos
+	 * @param x
+	 * @return
+	 */
 	@GET
 	@Path("/mensajesRecibidos/{x}")
 	public List<Mensaje> getMensajesRecibidos(@PathParam("x") String x){
@@ -78,6 +108,11 @@ public class ReventaServer {
 		 return mensajes;
 	}
 	
+	/**
+	 * coje los mensajes enviados
+	 * @param x
+	 * @return
+	 */
 	@GET
 	@Path("/mensajesEnviados/{x}")
 	public List<Mensaje> getMensajesEnviados(@PathParam("x") String x){
@@ -86,6 +121,11 @@ public class ReventaServer {
 	}
 	
 	
+	/** 
+	 * Devuelve el login del usuario
+	 * @param u
+	 * @return
+	 */
 	@POST
 	@Path("/logIn")
 	public Response logIn(Usuario u) {
@@ -96,6 +136,11 @@ public class ReventaServer {
 		return Response.ok(logIn).build();
 	}
 	
+	/**
+	 * Devuelve el registro realizado
+	 * @param u
+	 * @return
+	 */
 	@POST
 	@Path("/registro")
 	public Response registro(Usuario u) {
@@ -104,6 +149,11 @@ public class ReventaServer {
 		return Response.ok(registro).build();
 	}
 	
+	/**
+	 * Anadir producto ordenador a la venta
+	 * @param p
+	 * @return
+	 */
 	@POST
 	@Path("/saleOrdenador")
 	public Response addProductoOrdenador(ProductoOrdenador p) {
@@ -112,6 +162,11 @@ public class ReventaServer {
 		return Response.ok().build();
 	}
 	
+	/**
+	 * Anadir producto vehiculo a la venta
+	 * @param p
+	 * @return
+	 */
 	@POST
 	@Path("/saleVehiculo")
 	public Response addProductoVehiculo(ProductoVehiculo p) {
@@ -121,6 +176,11 @@ public class ReventaServer {
 	}
 
 
+	/**
+	 * Obtener un producto
+	 * @param x
+	 * @return
+	 */
 	@GET
 	@Path("/getProducto/{x}")
 	public Response getProducto(@PathParam("x") int x) {
@@ -128,6 +188,9 @@ public class ReventaServer {
 		return Response.ok(producto).build();
 	}
 	
+	/**
+	 * @return devuelve un producto ordenador
+	 */
 	@GET
 	@Path("/productosOrdenador")
 	public List<ProductoOrdenador> getProductosOrdenador() {
@@ -135,6 +198,9 @@ public class ReventaServer {
 		 return prod;
 	}
 	
+	/**
+	 * @return devuelve un producto vehiculo
+	 */
 	@GET
 	@Path("/productosVehiculo")
 	public List<ProductoVehiculo> getProductosVehiculo() {
@@ -143,6 +209,9 @@ public class ReventaServer {
 	}
 	
 	
+	/**
+	 * @return un producto ordenador a la venta
+	 */
 	@GET
 	@Path("/productosOrdenador/venta")
 	public List<ProductoOrdenador> getProductosOrdenadorEnVenta() {
@@ -150,6 +219,9 @@ public class ReventaServer {
 		 return prod;
 	}
 	
+	/**
+	 * @return producto ordenador reservado
+	 */
 	@GET
 	@Path("/productosOrdenador/ventaReservado")
 	public List<ProductoOrdenador> getProductosOrdenadorEnVentaConReservado() {
@@ -157,6 +229,9 @@ public class ReventaServer {
 		 return prod;
 	}
 	
+	/**
+	 * @return producto vehiculo a la venta
+	 */
 	@GET
 	@Path("/productosVehiculo/venta")
 	public List<ProductoVehiculo> getProductosVehiculoEnVenta() {
@@ -164,6 +239,9 @@ public class ReventaServer {
 		 return prod;
 	}
 	
+	/**
+	 * @return producto vehiculo reservado
+	 */
 	@GET
 	@Path("/productosVehiculo/ventaReservado")
 	public List<ProductoVehiculo> getProductosVehiculoEnVentaConReservado() {
@@ -172,6 +250,10 @@ public class ReventaServer {
 	}
 	
 	
+	/**
+	 * @param x
+	 * @return producto ordenador en favoritos
+	 */
 	@GET
 	@Path("/productosOrdenador/favoritos/{x}")
 	public List<ProductoOrdenador> getProductosOrdenadorFavoritos(@PathParam("x") String x) {
@@ -179,6 +261,10 @@ public class ReventaServer {
 		 return prod;
 	}
 	
+	/**
+	 * @param x
+	 * @return producto vehiculos en favoritos
+	 */
 	@GET
 	@Path("/productosVehiculo/favoritos/{x}")
 	public List<ProductoVehiculo> getProductosVehiculoFavoritos(@PathParam("x") String x) {
@@ -186,12 +272,19 @@ public class ReventaServer {
 		 return prod;
 	}
 	
+	/**
+	 * @param x
+	 * @return numero de ventas
+	 */
 	@GET
 	@Path("/numVentas/{x}")
 	public int getNumVentas(@PathParam("x") String x) {
 		return vs.getNumVentas(x);
 	}
 	
+	/**
+	 * @return las categorias
+	 */
 	@GET
 	@Path("/categorias")
 	public List<Categoria> getCategorias() {
@@ -200,12 +293,20 @@ public class ReventaServer {
 	}
 	
 
+	/**
+	 * @param x
+	 * @return productos favoritos
+	 */
 	@GET
 	@Path("/numFavoritos/{x}")
 	public int getNumFavoritos(@PathParam("x") int x) {
 		return vs.getProductosFavoritos(x);
 	}
 	
+	/**
+	 * @param x
+	 * @return denuncias realizadas
+	 */
 	@GET
 	@Path("/denunciar/{x}")
 	public Response denunciar(@PathParam("x") String x) {
@@ -214,6 +315,10 @@ public class ReventaServer {
 	}
 	
 	
+	/**
+	 * @param x
+	 * @return los usuarios
+	 */
 	@GET
 	@Path("/getUsuario/{x}")
 	public Response getUsuario(@PathParam("x") String x) {
@@ -222,6 +327,10 @@ public class ReventaServer {
 		return Response.ok(usuario).build();
 	}
 	
+	/**
+	 * @param x
+	 * @return lista productos ordenador vendidos
+	 */
 	@GET
 	@Path("/ventas/productoOrdenador/{x}")
 	public List<ProductoOrdenador> getVentasOrdenador(@PathParam("x") String x) {
@@ -229,6 +338,10 @@ public class ReventaServer {
 		return lista;
 	}
 	
+	/**
+	 * @param x
+	 * @return lista productos vehiculo vendidos
+	 */
 	@GET
 	@Path("/ventas/productoVehiculo/{x}")
 	public List<ProductoVehiculo> getVentasVehiculo(@PathParam("x") String x) {
@@ -236,6 +349,11 @@ public class ReventaServer {
 		return lista;
 	}
 	
+	/**
+	 * @param id
+	 * @param email
+	 * @return producto aniadido a favoritso
+	 */
 	@POST
 	@Path("/anadirFav/{x}")
 	public Response addProductoFav(int id, @PathParam("x") String email ) {
@@ -244,6 +362,11 @@ public class ReventaServer {
 		return Response.ok().build();
 	}
 	
+	/**
+	 * @param email2
+	 * @param email
+	 * @return usuario aniadido a favoritos
+	 */
 	@POST
 	@Path("/anadirUsuarioFav/{x}")
 	public Response addUsuarioFav(String email2, @PathParam("x") String email ) {
@@ -252,6 +375,10 @@ public class ReventaServer {
 		return Response.ok().build();
 	}
 	
+	/**
+	 * @param r
+	 * @return anadir una reclamacion
+	 */
 	@POST
 	@Path("/addReclamacion/")
 	public Response addReclamacion(Reclamacion r) {
@@ -261,6 +388,10 @@ public class ReventaServer {
 	}
 	
 
+	/**
+	 * @param idProducto
+	 * @return reservar un producto
+	 */
 	@POST
 	@Path("/reservar/{x}")
 	public Response reservarProducto(@PathParam("x") int idProducto) {
@@ -269,6 +400,10 @@ public class ReventaServer {
 		return Response.ok().build();
 	}
 	
+	/**
+	 * @param idProducto
+	 * @return quitar una serverva
+	 */
 	@POST
 	@Path("/desReservar/{x}")
 	public Response desReservarProducto(@PathParam("x") int idProducto) {
@@ -278,6 +413,10 @@ public class ReventaServer {
 	}
 	
 	
+	/**
+	 * @param email
+	 * @return compras realizadas pasandole el email
+	 */
 	@GET
 	@Path("/compras/{x}")
 	public List<Compra> getCompras(@PathParam("x") String email) {
