@@ -130,6 +130,10 @@ public class ComprasController {
 		}
 	}
 	
+	/** 
+	 * @return devuelve la lista de productos favoritos
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public List<Producto> getProductosFavoritos() throws ReventaException{
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/favoritos/"+ email);
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
@@ -148,6 +152,10 @@ public class ComprasController {
 	
 	
 	
+	/**Crea el panel de la ventana para un producto
+	 * @param p Producto para el que crear el panel
+	 * @param pCentro JPanel al que añadir el producto
+	 */
 	public void crearPanel(Producto p, JPanel pCentro) {
 		this.prod=p;
 		JPanel pContenido= new JPanel();
@@ -231,6 +239,11 @@ public class ComprasController {
 
 	}
 	
+	/** Añade un producto a favoritos
+	 * @param p Producto a añadir a productos favoritos
+	 * @param email del usuario que lo añade a favoritos
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public void anadirFav(Producto p, String email) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/anadirFav/"+ email);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -239,6 +252,13 @@ public class ComprasController {
 			throw new ReventaException("" + response.getStatus());
 		}
 	}
+	
+	
+	/**Añade un usuario a la lista de usuarios que te gustan
+	 * @param email2 email del usuario a añadir  a la lista
+	 * @param email email del usuario que añade a la lista
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public void anadirUsuarioFav(String email2, String email) throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/anadirUsuarioFav/"+ email);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -248,6 +268,11 @@ public class ComprasController {
 		}
 	}
 	
+	/** Devuelve el numero de las ventas de un usuario
+	 * @param email del usuario que ha realizado las ventas
+	 * @return numero de ventas
+	 * @throws ReventaException excepcion lanzada cuando no se puede conectar con el servidor
+	 */
 	public int getVentas(String email)throws ReventaException {
 		WebTarget webTarget = this.webTarget.path("reventa/numVentas/"+ email);
 		Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
@@ -261,6 +286,9 @@ public class ComprasController {
 		}
 	}
 	
+	/** Ordena un panel por numero de ventas
+	 * @param pCentro panel a ordenar
+	 */
 	public void ordenarPorVentas(JPanel pCentro) {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
@@ -291,6 +319,9 @@ public class ComprasController {
 	}
 	
 	
+	/**Ordena un panel por fecha ascendente
+	 * @param pCentro panel a ordenar
+	 */
 	public void ordenarPorFechaAsc( JPanel pCentro) {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
@@ -312,6 +343,9 @@ public class ComprasController {
 		//TODO si no pCentro repaint
 	}
 	
+	/**Ordena un panel por precio ascendente
+	 * @param pCentro panel a ordenar
+	 */
 	public void ordenarPorPrecioAsc( JPanel pCentro) {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
@@ -333,6 +367,9 @@ public class ComprasController {
 		//TODO si no pCentro repaint
 	}
 	
+	/**Ordena un panel por precio descendente
+	 * @param pCentro panel a ordenar
+	 */
 	public void ordenarPorPrecioDesc( JPanel pCentro) {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
@@ -355,6 +392,9 @@ public class ComprasController {
 	}
 	
 	
+	/**Ordena un panel por fecha descendente
+	 * @param pCentro panel a ordenar
+	 */
 	public void ordenarPorFechaDesc(JPanel pCentro) {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
@@ -377,6 +417,10 @@ public class ComprasController {
 	}
 	
 	
+	/**Muestra los favoritos de un usuario en un panel
+	 * @param pCentro panel en el que se muestra
+	 * @param email del usuario que tiene los productos en favoritos
+	 */
 	public void mostrarFavoritos(JPanel pCentro, String email) {
 		try {
 			List<Producto>productos= getProductosFavoritos();
@@ -400,6 +444,9 @@ public class ComprasController {
 		this.productos = productos;
 	}
 	
+	/**
+	 * @return lista con los productos ordenador en venta
+	 */
 	public List<ProductoOrdenador> getProductosOrdenador(){
 		WebTarget webTarget = this.webTarget.path("reventa/productosOrdenador/venta");
 		List<ProductoOrdenador>lProductosOrdenador = webTarget.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoOrdenador>>() {
@@ -407,6 +454,9 @@ public class ComprasController {
 		return lProductosOrdenador;
 	}
 
+	/**filtra unicamente los productos ordenador
+	 * @param pa Panel en el que se muestran
+	 */
 	public void seleccionarOrdenador(JPanel pa) {
 		pa.removeAll();
 		for (Producto p: productos) {
@@ -417,6 +467,9 @@ public class ComprasController {
 		pa.revalidate();
 	}
 
+	/**filtra unicamente los productos vehiculo
+	 * @param pa Panel en el que se muestran
+	 */
 	public void seleccionarVehiculo(JPanel pa) {
 		//List<ProductoVehiculo> productos= getProductosVehiculo();
 		pa.removeAll();
@@ -428,6 +481,9 @@ public class ComprasController {
 		pa.revalidate();
 	}
 
+	/**
+	 * @return devuelve una lista con los producto vehiculo en venta
+	 */
 	public List<ProductoVehiculo> getProductosVehiculo() {
 		WebTarget webTarget2 = this.webTarget.path("reventa/productosVehiculo/venta");
 		List<ProductoVehiculo>lProductosVehiculo = webTarget2.request( MediaType.APPLICATION_JSON ).get( new GenericType<List<ProductoVehiculo>>() {
@@ -435,6 +491,16 @@ public class ComprasController {
 		return lProductosVehiculo;
 	}
 	
+	/** Filtra en base a unas caracteristicas
+	 * @param cpu deseada
+	 * @param placaBase deseada
+	 * @param grafica deseada
+	 * @param ramMinima deseada, debe ser numerica
+	 * @param ramMaxima deseada, debe ser numerica
+	 * @param memMinima deseada, debe ser numerica
+	 * @param memMaxima deseada, debe ser numerica
+	 * @param pa panel en el que deben desplegarse los productos
+	 */
 	public void filtrarOrdenador(String cpu, String placaBase, String grafica, String ramMinima,
 			String ramMaxima, String memMinima, String memMaxima, JPanel pa) {
 			pa.removeAll();
@@ -493,6 +559,17 @@ public class ComprasController {
 	}
 	
 	
+	/** Filtra los productos vehiculos  
+	 * @param modelo deseado
+	 * @param marca deseada
+	 * @param cvMin deseados, debe ser numerico
+	 * @param cvMax deseados, debe ser numerico
+	 * @param kmMin deseados, debe ser numerico
+	 * @param kmMax deseados, debe ser numerico
+	 * @param anyoMin deseado, debe ser numerico
+	 * @param anyoMax deseado, debe ser numerico
+	 * @param pa panel al que añadir los vehiculos
+	 */
 	public void filtrarVehiculo(String modelo, String marca, String cvMin, String cvMax, String kmMin,
 			String kmMax, String anyoMin, String anyoMax,JPanel pa) {
 			pa.removeAll();
