@@ -60,6 +60,6 @@ jobs:
     - name: Push changes to wiki repo
       uses: ad-m/github-push-action@master
       with:
-        repository: https://github.com/cdcolano/deustoReventa.wiki    # specify the wiki repo and push the update.
+        repository: deustoReventa.wiki    # specify the wiki repo and push the update.
         github_token: ${{ secrets.GITHUB_TOKEN }}
 
