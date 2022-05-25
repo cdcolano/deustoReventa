@@ -88,7 +88,7 @@ public class ServicePerformanceTest {
 	
 	@Test
 	@PerfTest(invocations = 400, threads = 8)
-    @Required(max = 2400, average = 200)
+    @Required(max = 2600, average = 1000)
 	public void testGetProductosOrdenador() {
 		List<ProductoOrdenador> pos = vs.getProductosOrdenador();
 		assertEquals(vs.getProductosOrdenador().size(),3);
