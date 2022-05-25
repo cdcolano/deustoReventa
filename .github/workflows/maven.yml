@@ -46,11 +46,12 @@ jobs:
     - name: Run Integration Test
       run: mvn test -Pintegration
     - name: Install doxygen
-      run: sudo apt-get install -y doxygen
+      run: choco install doxygen.install
+      #run: sudo apt-get install -y doxygen
     - name: Install graphviz
       run: sudo apt-get install -y graphviz
-  #  - name: Generate documentation
-  #    run: mvn doxygen:report
+    - name: Generate documentation
+      run: mvn doxygen:report
     - name: generateReport
       uses: mattnotmitt/doxygen-action@v1.9.4
       with:
