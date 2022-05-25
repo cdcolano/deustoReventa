@@ -19,7 +19,7 @@
 		<policy.file>${basedir}/security/java.policy</policy.file>
 		<config.files.dir>${basedir}/src/main/resources</config.files.dir>
 		<doxygen.config.file>${project.basedir}/src/main/resources/Doxyfile</doxygen.config.file>
-		<doxygen.configurationFile>${project.basedir}/src/main/resources/DoxyfilePruebaGitB</doxygen.configurationFile>
+		<doxygen.configurationFile>${project.basedir}/src/main/resources/DoxyfilePruebaGit</doxygen.configurationFile>
 		<java.home.dir>C:\Program Files\Eclipse Foundation\jdk-17.0.0.35-hotspot</java.home.dir>
 	</properties>
 
