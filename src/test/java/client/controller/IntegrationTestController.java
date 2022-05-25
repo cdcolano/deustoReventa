@@ -7,6 +7,9 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.jdo.JDOHelper;
+import javax.jdo.PersistenceManager;
+import javax.jdo.PersistenceManagerFactory;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -30,7 +33,7 @@ import util.ReventaException;
 
 @Category(IntegrationTest.class)
 public class IntegrationTestController {
-
+	private PersistenceManagerFactory pmf;
 
 	
 
@@ -90,7 +93,9 @@ public class IntegrationTestController {
 				po.setPlacaBase("pb2");
 				po.setRam(16);
 				po.setPrecioSalida(400);
+				po.setId(11);
 				pc.addProductoOrdenador(po);
+				
 				
 				ProductoVehiculo pv= new ProductoVehiculo();
 				pv.setAnyoFabri(2008);
@@ -109,7 +114,7 @@ public class IntegrationTestController {
 				ComprasController comprasController= new ComprasController(wt, email);
 				comprasController.anadirFav(pv, email);
 				comprasController.anadirUsuarioFav("a@gmail.com", email);
-				comprasController.comprar(email, 1, 100);
+				comprasController.comprar(email, 21, 100);
 				comprasController.getProductos();
 				List<Producto>productos=comprasController.getProductosEnVenta();
 				assertEquals(productos.size(),5);
@@ -158,7 +163,38 @@ public class IntegrationTestController {
 		//	assertEquals(prodVen.size(), 1);
 			
 	    }
-
+	    
+	    @After
+	    public void limpiadoBd() {
+	    	pmf=JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
+	    	PersistenceManager pm=pmf.getPersistenceManager();
+	    	Usuario u=pm.getObjectById(Usuario.class,"u@gmail.com");
+	    	Producto p=pm.getObjectById(Producto.class,21);
+	    	Producto p2=pm.getObjectById(Producto.class,11);
+	    //	pm.deletePersistent(p);
+	    //	pm.deletePersistent(p2);
+	    	
+	    	for (int i=u.getOfertasEnviadas().size()-1;i>=0;i--) {
+	    		if (u.getOfertasEnviadas().get(i).getId()==11) {
+	    			u.getOfertasEnviadas().remove(i);
+	    		}
+	    	}
+	    	
+	    	for (int i=u.getCompras().size()-1;i>=0;i--) {
+	    		if (u.getCompras().get(i).getId()==1) {
+	    			u.getCompras().remove(i);
+	    		}
+	    	}
+	    	
+	    	
+	    	
+	    	//TODO borrar compra
+	    	//TODO borrar anadir usuario fav
+	    	//TODO borrar producto fav
+	    	//TODO eliminar oferta
+	    	//TODO eliminar reclamacion
+	    	//TODO eliminar denuncia
+	    }
 	    
 	    
 }
