@@ -51,12 +51,10 @@ jobs:
       run: sudo apt-get install -y graphviz
     - name: Generate documentation
       run: mvn doxygen:report
-    - name: Copy some information into docs folder
-      run: mvn validate
     - name: Publish on Github Pages
       uses: crazy-max/ghaction-github-pages@v2.3.0
       with:
-        build_dir: docs/doxygen/html
+        build_dir: target/doxygen/html
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
