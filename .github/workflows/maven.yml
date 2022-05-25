@@ -46,8 +46,9 @@ jobs:
     - name: Run Integration Test
       run: mvn test -Pintegration
     - name: Install doxygen
-      run: choco install doxygen.install
-      #run: sudo apt-get install -y doxygen
+      run: sudo apt-get install -y doxygen
+    - name: Convert doxyfile version
+      run: doxygen -u src/resources/DoxyfilePruebaB
     - name: Install graphviz
       run: sudo apt-get install -y graphviz
     - name: Generate documentation
