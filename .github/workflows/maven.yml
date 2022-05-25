@@ -52,12 +52,6 @@ jobs:
       run: sudo apt-get install -y graphviz
     - name: Generate documentation
       run: mvn doxygen:report
-    - name: generateReport
-      uses: mattnotmitt/doxygen-action@v1.9.4
-      with:
-         #working-directory: 'submodule/'
-         doxyfile-path: 'src/main/resources/DoxygenPruebaB'
-         enable-latex: true
     - name: Publish on Github Pages
       uses: crazy-max/ghaction-github-pages@v2.3.0
       with:
