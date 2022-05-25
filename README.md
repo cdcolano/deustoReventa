@@ -21,7 +21,7 @@ mvn clean compile
 
 _Despues lanzar los test unitarios_
 ```
-mvn test
+mvn test -Punit
 ```
 
 _Despues realizar el enhance_
@@ -45,8 +45,24 @@ _Lanzar el servidor_
 mvn jetty:run
 ```
 
+_Si se desea lanzar los test de integracion, sino saltar este paso_
+
+```
+mvn test -Pintegration
+```
+
 _Lanzar el cliente_
 
 ```
 mvn exec:java -Pclient
 ```
+
+_Para generar la documentacion_
+
+```
+mvn doxygen:report
+```
+```
+mvn validate
+```
+
