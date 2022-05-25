@@ -47,14 +47,6 @@ jobs:
       run: mvn test -Pintegration
     - name: Install doxygen
       run: sudo apt-get install -y doxygen
-    - name: Mover a resources
-      run: cd src/resources
-    - name: Convert doxyfile version
-      run: doxygen -u DoxyfilePruebaB
-    - name: Mover a src 
-      run: cd ..
-    - name: Mover a src 
-      run: cd ..
     - name: Install graphviz
       run: sudo apt-get install -y graphviz
     - name: Generate documentation
