@@ -68,7 +68,7 @@ public class Usuario {
 	/**
 	 * mensajes enviados por el usuairo
 	 */
-	@Persistent(defaultFetchGroup = "true")
+	@Persistent(defaultFetchGroup = "true", dependentElement = "true")
 	@Join
 	private List<Mensaje>mensajesEnviados;
 	
@@ -76,7 +76,7 @@ public class Usuario {
 	/**
 	 * productos FAV 
 	 */
-	@Persistent(defaultFetchGroup = "true",  dependentElement = "true")
+	@Persistent(defaultFetchGroup = "true")
 	@Join
 	private List<Producto>productosFavoritos;
 
@@ -84,7 +84,7 @@ public class Usuario {
 	/**
 	 *  FAV que recibe vendedor
 	 */
-	@Persistent(defaultFetchGroup = "true",  dependentElement = "true")
+	@Persistent(defaultFetchGroup = "true")
 	@Join
 	private List<Usuario>vendedoresLike;//esta es asi seguro
 	

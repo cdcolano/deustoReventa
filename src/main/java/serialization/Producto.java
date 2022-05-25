@@ -33,7 +33,8 @@ public class Producto {
 	private Categoria categoria;
 	
 
-	@Persistent(defaultFetchGroup = "true", dependentElement = "true")
+	//@Persistent(defaultFetchGroup = "true", dependentElement = "true")
+	@Persistent(defaultFetchGroup = "true")
 	@Join
 	private List<Oferta>ofertasRecibidas;//se consigue a través del producto
 	

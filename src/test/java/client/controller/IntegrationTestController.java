@@ -23,6 +23,7 @@ import categories.IntegrationTest;
 import dao.UsuarioDAO;
 import serialization.Categoria;
 import serialization.Mensaje;
+import serialization.Oferta;
 import serialization.Producto;
 import serialization.ProductoOrdenador;
 import serialization.ProductoVehiculo;
@@ -52,7 +53,7 @@ public class IntegrationTestController {
 			m.setEnviado(email);
 			m.setRecibido("a@gmail.com");
 			m.setFecha(System.currentTimeMillis());
-			m.setId(4);
+			m.setId(11);
 			try {
 				cc.enviar(email, "a@gmail.com", m);
 			}catch(ReventaException ex) {
@@ -108,8 +109,9 @@ public class IntegrationTestController {
 				pv.setModelo("tt");
 				pv.setNombre("Audi tt");
 				pv.setPrecioSalida(200000);
-				pc.addProductoVehiculo(pv);
 				pv.setId(21);
+				pc.addProductoVehiculo(pv);
+				
 				
 				ComprasController comprasController= new ComprasController(wt, email);
 				comprasController.anadirFav(pv, email);
@@ -123,9 +125,9 @@ public class IntegrationTestController {
 				int ventas=comprasController.getVentas(email);
 				assertEquals(ventas, 1);
 				List<ProductoOrdenador>productosOrdenador= comprasController.getProductosOrdenador();
-				assertEquals(productosOrdenador.size(), 2);
+				assertEquals(productosOrdenador.size(), 3);
 				List<ProductoVehiculo>productosVehiculo=comprasController.getProductosVehiculo();
-				assertEquals(productosVehiculo.size(), 3);
+				assertEquals(productosVehiculo.size(), 2);
 				
 				MisProductosController mps= new MisProductosController(wt, email);
 				List<Producto>prods= mps.getProductosEnVentaConReservado();
@@ -169,16 +171,12 @@ public class IntegrationTestController {
 	    	pmf=JDOHelper.getPersistenceManagerFactory("datanucleus.properties");
 	    	PersistenceManager pm=pmf.getPersistenceManager();
 	    	Usuario u=pm.getObjectById(Usuario.class,"u@gmail.com");
-	    	Producto p=pm.getObjectById(Producto.class,21);
-	    	Producto p2=pm.getObjectById(Producto.class,11);
-	    //	pm.deletePersistent(p);
-	    //	pm.deletePersistent(p2);
+	    	Usuario a=pm.getObjectById(Usuario.class,"a@gmail.com");
+	    	ProductoVehiculo p=pm.getObjectById(ProductoVehiculo.class,21);
+	    	ProductoOrdenador p2=pm.getObjectById(ProductoOrdenador.class,11);
+	   
 	    	
-	    	for (int i=u.getOfertasEnviadas().size()-1;i>=0;i--) {
-	    		if (u.getOfertasEnviadas().get(i).getId()==11) {
-	    			u.getOfertasEnviadas().remove(i);
-	    		}
-	    	}
+	    
 	    	
 	    	for (int i=u.getCompras().size()-1;i>=0;i--) {
 	    		if (u.getCompras().get(i).getId()==1) {
@@ -186,14 +184,73 @@ public class IntegrationTestController {
 	    		}
 	    	}
 	    	
+	    	for (int i=p.getOfertasRecibidas().size()-1;i>=0;i--) {
+	    		if (p.getOfertasRecibidas().get(i).getId()==11) {
+	    			p.getOfertasRecibidas().remove(i);
+	    		}
+	    	}
+	    	
+	    	for (int i=u.getOfertasEnviadas().size()-1;i>=0;i--) {
+	    		if (u.getOfertasEnviadas().get(i).getId()==11) {
+	    			u.getOfertasEnviadas().remove(i);
+	    		}
+	    	}
+	    
+	    	
+	    	for (int i=u.getProductosFavoritos().size()-1;i>=0;i--) {
+	    		if (u.getProductosFavoritos().get(i).getId()==11 || u.getProductosFavoritos().get(i).getId()==21) {
+	    			u.getProductosFavoritos().remove(i);
+	    		}
+	    	}
+	    	
+	    	for (int i=u.getVendedoresLike().size()-1;i>=0;i--) {
+	    		if (u.getVendedoresLike().get(i).getEmail().contentEquals("a@gmail.com")) {
+	    			u.getVendedoresLike().remove(i);
+	    		}
+	    	}
 	    	
 	    	
-	    	//TODO borrar compra
-	    	//TODO borrar anadir usuario fav
-	    	//TODO borrar producto fav
+	    	
+	    	for (int i=a.getMensajesRecibidos().size()-1;i>=0;i--) {
+	    		if (a.getMensajesRecibidos().get(i).getId()==11) {
+	    			a.getMensajesRecibidos().remove(i);
+	    		}
+	    	}
+	    	
+	    	for (int i=u.getMensajesEnviados().size()-1;i>=0;i--) {
+	    		if (u.getMensajesEnviados().get(i).getId()==11) {
+	    			u.getMensajesEnviados().remove(i);
+	    		}
+	    	}
+	    	
+	    	for (int i=u.getProductos().size()-1;i>=0;i--) {
+	    		if (u.getProductos().get(i).getId()==11 || u.getProductos().get(i).getId()==21) {
+	    			u.getProductos().remove(i);
+	    		}
+	    	}
+	    	
+	    //	Mensaje m=pm.getObjectById(Mensaje.class,11);
+	    	//pm.deletePersistent(m);
+	    	
+	    /*	for (int i=p.getOfertasRecibidas().size()-1;i>=0;i--) {
+	    		if (p.getOfertasRecibidas().get(i).getId()==11) {
+	    			p.getOfertasRecibidas().remove(i);
+	    		}
+	    	}
+	    	
+	    	//Oferta o=pm.getObjectById(Oferta.class, 11);
+	    	
+	    	u.setDenuncias(0);
+	    	
+	    	//pm.deletePersistent(o);
+	    	pm.deletePersistent(p);
+		    pm.deletePersistent(p2);
+	    	*/
+	    	
+	 
+	    	
 	    	//TODO eliminar oferta
-	    	//TODO eliminar reclamacion
-	    	//TODO eliminar denuncia
+		    //TODO eliminar mensajes
 	    }
 	    
 	    
