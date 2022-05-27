@@ -24,6 +24,7 @@ import javax.ws.rs.core.Response.Status;
 import client.controller.ChatController;
 import client.controller.ComprasController;
 import client.controller.MisProductosController;
+import client.controller.OfertaController;
 import client.controller.OfertasController;
 import client.controller.ProductoController;
 import client.controller.VentasController;
@@ -37,6 +38,9 @@ import serialization.ProductoVehiculo;
 import serialization.Usuario;
 import util.ReventaException;
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.*;
 
 
@@ -56,7 +60,10 @@ public class VentanaCompras extends JFrame{
 	private JPanel pCentro;
 	private JPanel pCategorias;
 	private JPanel pOrdenar;
-	
+	private JPanel pProductos;
+	private Producto p;
+	private JList<Producto> lProductos;
+	private DefaultListModel<Producto> mProductos;
 	/**Metodo que construye la ventanaCompras
 	 * @param cc Controller de la ventana donde se almacenan los metodos necesarios
 	 * @param cliente cliente de la aplicacion
@@ -70,21 +77,23 @@ public class VentanaCompras extends JFrame{
 		this.controller= cc;
 		v1 = this;
 		pCentro= new JPanel();
-		pCentro.setLayout(new BoxLayout(pCentro, BoxLayout.Y_AXIS));
+		pProductos= new JPanel();
+		pProductos.setLayout(new BoxLayout(pProductos, BoxLayout.Y_AXIS));
+		pCentro.setLayout(new BorderLayout());
 		JComboBox<String>cbOrdenar= new JComboBox<>();
 		cbOrdenar.addItem("Sin orden");
 		cbOrdenar.addItem("Ordenar por Ventas del Vendedor");
 		cbOrdenar.addItem("Ordenar por Fecha de Publicacion ascendente");
 		cbOrdenar.addItem("Ordenar por Fecha de Publicacion descendente");
-		cbOrdenar.addItem("Ordenar por Precio de Publicacion ascendente");
-		cbOrdenar.addItem("Ordenar por Precio de Publicacion descendente");
+		cbOrdenar.addItem("Ordenar por Precio ascendente");
+		cbOrdenar.addItem("Ordenar por Precio descendente");
 		cbOrdenar.addItem("Favoritos");
 		try {
 			 productos=controller.getProductosEnVenta();
 			 controller.setProductos(productos);
 			
 			for (Producto p:productos) {
-				controller.crearPanel(p, pCentro);
+				controller.crearPanel(p, pProductos);
 			}
 			
 		} catch (ReventaException e1) {
@@ -111,7 +120,7 @@ public class VentanaCompras extends JFrame{
 						controller.mostrarFavoritos(pCentro, email);
 						revalidate();
 					}*/
-					itemStateChangedVentana(cbOrdenar,pCentro,controller,email,v1);
+					itemStateChangedVentana(cbOrdenar,lProductos,mProductos,controller,email,v1);
 				}
 			}
 		});
@@ -159,13 +168,120 @@ public class VentanaCompras extends JFrame{
 						controller.mostrarFavoritos(pCentro, email);
 						revalidate();
 					}*/
-					itemStateChangedCategoria(cbCategorias,pCentro,controller,email,v1);
+					itemStateChangedCategoria(cbCategorias,lProductos,mProductos,controller,email,v1);
 				}
 			}
 		});
-		JScrollPane jsc= new JScrollPane(pCentro);
+		
+		
+		
+		
+		JButton button= new JButton("Comprar");
+		button.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (p!=null) {
+					try {
+						System.out.println(p.getId());
+						controller.comprar(email,p.getId(),p.getPrecioSalida());
+						pCentro.removeAll();
+						productos.remove(p);
+						pCentro.removeAll();
+						for (Producto p1: productos) {
+							controller.crearPanel(p1, pCentro);
+						}
+						pCentro.revalidate();
+						
+					} catch (ReventaException e1) {
+						System.out.println(e1.getMessage());
+					}
+				}
+			}
+			
+		});
+
+		JButton bMeGusta = new JButton("Anadir a favoritos");
+		JButton bUsuarioFav = new JButton("Me gusta");
+		
+		bMeGusta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (p!=null) {
+					try {
+						controller.anadirFav(p,email)	;				//ComprasController.this.();
+											
+					} catch (ReventaException e1) {
+						System.out.println(e1.getMessage());
+					}
+				}
+			}
+			
+		});
+		bUsuarioFav.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (p!=null) {
+					try {
+						controller.anadirUsuarioFav(p.getEmailVendedor(),email);				//ComprasController.this.();
+											
+					} catch (ReventaException e1) {
+						System.out.println(e1.getMessage());
+					}
+				}
+			}
+			
+		});
+		
+		JButton bOferta= new JButton("Oferta");
+		bOferta.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (p!=null) {
+				VentanaOferta v= new VentanaOferta(new OfertaController(webTarget, email, p.getId()), webTarget, email, p.getId());
+			
+				}
+			}
+			
+		});
+		
+		JPanel pBotonera= new JPanel();
+		
+		pBotonera.add(button);
+		pBotonera.add(bMeGusta);
+		pBotonera.add(bUsuarioFav);
+		pBotonera.add(bOferta);
+		
+		JPanel pBotoneraList= new JPanel();
+		pBotoneraList.setLayout(new BorderLayout());
+		
+		
+		lProductos= new JList<Producto>();
+		
+		mProductos= new DefaultListModel<>();
+		mProductos.addAll(productos);
+		lProductos.setModel(mProductos);
+		
+		lProductos.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				p=lProductos.getSelectedValue();
+			}
+		});
+		
+		lProductos.setSelectedIndex(0);
+		
+		JScrollPane jspProductos= new JScrollPane(lProductos);
+		
+		pCentro.add(jspProductos,BorderLayout.CENTER);
+		pCentro.add(pBotonera,BorderLayout.SOUTH);
+		
 	
-		v1.getContentPane().add(jsc,BorderLayout.CENTER);
+		v1.getContentPane().add(pCentro,BorderLayout.CENTER);
 		JPanel pVender= new JPanel();
 		JButton bVender= new JButton("Vender");
 		bVender.addActionListener(new ActionListener() {
@@ -264,29 +380,29 @@ public class VentanaCompras extends JFrame{
 	 * @param mail email del usuario
 	 * @param vc la ventana en cuestion
 	 */
-	public void itemStateChangedVentana(JComboBox<String> jc, JPanel pa, ComprasController cco, String mail, VentanaCompras vc) {
+	public void itemStateChangedVentana(JComboBox<String> jc, JList<Producto> lProductos,DefaultListModel<Producto>mProductos, ComprasController cco, String mail, VentanaCompras vc) {
 		String seleccion=(String)jc.getSelectedItem();
 		if (seleccion.compareTo("Ordenar por Ventas del Vendedor")==0) {
-			cco.ordenarPorVentas(pa);
+			cco.ordenarPorVentas(lProductos,mProductos);
 		}
 		else if (seleccion.compareTo("Ordenar por Fecha de Publicacion ascendente")==0) {
-			cco.ordenarPorFechaAsc(pa);
+			cco.ordenarPorFechaAsc(lProductos,mProductos);
 		}
 		else if (seleccion.compareTo("Sin orden")==0) {
-			cco.ordenarPorFechaAsc(pa);
+			cco.ordenarPorFechaAsc(lProductos,mProductos);
 		}
 		else if (seleccion.compareTo("Ordenar por Fecha de Publicacion descendente")==0) {
-			cco.ordenarPorFechaDesc(pa);
+			cco.ordenarPorFechaDesc(lProductos,mProductos);
 		}
 		else if (seleccion.compareTo("Favoritos")==0) {
-			cco.mostrarFavoritos(pa, mail);
+			cco.mostrarFavoritos(lProductos,mProductos);
 			vc.revalidate();
 		}
 		else if (seleccion.compareTo("Ordenar por Precio ascendente")==0) {
-			cco.ordenarPorPrecioAsc(pa);
+			cco.ordenarPorPrecioAsc(lProductos,mProductos);
 		}
-		else if (seleccion.compareTo("Ordenar por Precio  descendente")==0) {
-			cco.ordenarPorPrecioDesc(pa);
+		else if (seleccion.compareTo("Ordenar por Precio descendente")==0) {
+			cco.ordenarPorPrecioDesc(lProductos,mProductos);
 		}
 	}
 	
@@ -297,22 +413,22 @@ public class VentanaCompras extends JFrame{
 	 * @param mail email del usuario
 	 * @param vc la ventana en cuestion
 	 */
-	public void itemStateChangedCategoria(JComboBox<String> jc, JPanel pa, ComprasController cco, String mail, VentanaCompras vc) {
+	public void itemStateChangedCategoria(JComboBox<String> jc, JList<Producto> lProducto, DefaultListModel<Producto>mProducto, ComprasController cco, String mail, VentanaCompras vc) {
 		String seleccion=(String)jc.getSelectedItem();
 		if (seleccion.compareTo("Todas")==0) {
 			pNorte.removeAll();
 			crearPNorte(pCategorias, pOrdenar);
-			cco.ordenarPorFechaDesc(pa);
+			cco.ordenarPorFechaDesc(lProducto,mProducto);
 			revalidate();
 		}
 		else if (seleccion.compareTo("Ordenador")==0) {
-			cco.seleccionarOrdenador(pa);
+			cco.seleccionarOrdenador(lProducto,mProducto);
 			crearPNorte(pCategorias, pOrdenar);
 			generaFiltrosOrdenador();
 			revalidate();
 		}
 		else if (seleccion.compareTo("Vehiculo")==0) {
-			cco.seleccionarVehiculo(pa);
+			//cco.seleccionarVehiculo(pa);
 			crearPNorte(pCategorias, pOrdenar);
 			generaFiltrosVehiculo();
 			revalidate();

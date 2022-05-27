@@ -4,12 +4,19 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.JDOHelper;
 import javax.jdo.PersistenceManager;
 import javax.jdo.PersistenceManagerFactory;
+import javax.jdo.Query;
+import javax.jdo.datastore.JDOConnection;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.client.WebTarget;
@@ -229,6 +236,7 @@ public class IntegrationTestController {
 	    		}
 	    	}
 	    	
+	    	
 	    //	Mensaje m=pm.getObjectById(Mensaje.class,11);
 	    	//pm.deletePersistent(m);
 	    	
@@ -246,12 +254,55 @@ public class IntegrationTestController {
 	    	pm.deletePersistent(p);
 		    pm.deletePersistent(p2);
 	    	*/
-	    	
+	    /*	Query q = pm.newQuery("javax.jdo.query.SQL", "UPDATE sequence_table SET NEXT"
+	    			+ "_VAL = 11  WHERE SEQUENCE_NAME = serialization.Producto");
 	 
+	    	Query q2 = pm.newQuery("javax.jdo.query.SQL", "UPDATE sequence_table SET NEXT"
+	    			+ "_VAL = 11  WHERE SEQUENCE_NAME = serialization.Mensaje");
+	    	Query q3 = pm.newQuery("javax.jdo.query.SQL", "DELETE sequence_table WHERE SEQUENCE_NAME = serialization.Oferta");
+	    	*/
+	    	//Query q4 = pm.newQuery("javax.jdo.query.SQL", "DELETE sequence_table WHERE SEQUENCE_NAME = serialization.Oferta");
+	    	JDOConnection jdoCon=pm.getDataStoreConnection();
+	    	Object oCon=jdoCon.getNativeConnection();
+	    	if (oCon instanceof Connection) {
+	    		System.out.println("* Es instancia *");
+	    		Connection con=(Connection)oCon;
+	    		try {
+					System.out.println(con.getSchema());
+					con.setSchema("productsdb");
+					con.setAutoCommit(true);
+					System.out.println(con.getAutoCommit());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				try {
+					Statement stmt=con.createStatement();
+					stmt.executeUpdate("UPDATE `productsdb`.`sequence_table` SET `NEXT_VAL` = '11' WHERE (`SEQUENCE_NAME` = 'serialization.Producto');");
+					stmt.executeUpdate("UPDATE `productsdb`.`usuario` SET `DENUNCIAS` = '0' WHERE (`EMAIL` = 'u@gmail.com');");
+					stmt.executeUpdate("DELETE FROM `productsdb`.`sequence_table` WHERE (`SEQUENCE_NAME` = 'serialization.Compra');");
+					stmt.executeUpdate("DELETE FROM `productsdb`.`sequence_table` WHERE (`SEQUENCE_NAME` = 'serialization.Oferta');");
+					stmt.executeUpdate("DELETE FROM `productsdb`.`categoria` WHERE (`ID` != 1 and `ID`!=2);");
+					stmt.executeUpdate("DELETE FROM `productsdb`.`usuario_ofertasenviadas` WHERE (`EMAIL_OID` = 'u@gmail.com') and (`IDX` = '0');");
+					stmt.executeUpdate("DELETE FROM `productsdb`.`producto_ofertasrecibidas` WHERE (`ID_OID` = '1') and (`IDX` = '0');");
+					stmt.executeUpdate("DELETE FROM `productsdb`.`oferta` WHERE (`ID` = 1 );");
+					stmt.executeUpdate("UPDATE `productsdb`.`sequence_table` SET `NEXT_VAL` = '11' WHERE (`SEQUENCE_NAME` = 'serialization.Categoria');");
+					stmt.executeUpdate("UPDATE `productsdb`.`sequence_table` SET `NEXT_VAL` = '11' WHERE (`SEQUENCE_NAME` = 'serialization.Mensaje');");
+					stmt.executeUpdate("DELETE FROM `productsdb`.`usuario` WHERE (`EMAIL` = 'c@gmail.com');");
+					stmt.close();
+					con.close();
+					System.out.println("* TODO CORRECTO* ");
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	    	}
+	    	
 	    	
 	    	//TODO eliminar oferta
 		    //TODO eliminar mensajes
 	    }
+	    
 	    
 	    
 }

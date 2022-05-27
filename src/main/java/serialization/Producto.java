@@ -206,6 +206,10 @@ public class Producto {
 		this.emailVendedor = emailVendedor;
 	}
 	
+	public String toString() {
+		return nombre + " " + precioSalida + "Euros";
+	}
+	
 	
 
 	

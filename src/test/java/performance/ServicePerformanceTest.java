@@ -91,7 +91,7 @@ public class ServicePerformanceTest {
     @Required(max = 2600, average = 1000)
 	public void testGetProductosOrdenador() {
 		List<ProductoOrdenador> pos = vs.getProductosOrdenador();
-		assertEquals(vs.getProductosOrdenador().size(),3);
+		assertEquals(vs.getProductosOrdenador().size(),2);
 	}
 	
 	@Test
@@ -107,7 +107,7 @@ public class ServicePerformanceTest {
     @Required(max = 24000, average = 2000)
 	public void testGetProductosVehiculoEnVenta() {
 		List<ProductoVehiculo> c = vs.getProductosVehiculosEnVenta();
-		assertEquals(vs.getProductosVehiculosEnVenta().size(),3);
+		assertEquals(vs.getProductosVehiculosEnVenta().size(),2);
 	}
 	
 	

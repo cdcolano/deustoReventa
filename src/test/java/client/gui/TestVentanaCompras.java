@@ -7,7 +7,9 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
@@ -58,10 +60,11 @@ public class TestVentanaCompras {
 			jc.addItem("Ordenar por Fecha de Publicacion ascendente");
 			jc.addItem("Ordenar por Fecha de Publicacion descendente");
 			jc.addItem("Favoritos");
-			JPanel panel= new JPanel();
+			JList<Producto> lista= new JList<>();
+			DefaultListModel<Producto>model=new DefaultListModel<>();
 			for (int i=0;i<4;i++) {
 				jc.setSelectedIndex(i);
-				vs2.itemStateChangedVentana(jc, panel, cc, "j", vs2);
+				vs2.itemStateChangedVentana(jc, lista, model, cc, "j", vs2);
 			}	
 			vs2.dispose();
 		} catch (Exception e1) {

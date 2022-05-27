@@ -10,7 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.jdo.JDOUserException;
+import javax.swing.DefaultListModel;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.Entity;
@@ -65,7 +67,8 @@ public class ComprasControllerTest {
 	@Mock
 	Client cliente;
 	
-	JPanel panel;
+	private JList<Producto> lProductos;
+	private DefaultListModel<Producto> mProductos;
 	
 	@Before
 	public void setUp() {
@@ -74,7 +77,9 @@ public class ComprasControllerTest {
 		u1.setEmail("j");
 		u1.setPassword("j");
 		
-		panel = new JPanel();
+		
+		lProductos= new JList<Producto>();
+		mProductos= new DefaultListModel<>();
 		
 		u2 = new Usuario();
 		u2.setEmail("a");
@@ -322,7 +327,8 @@ public class ComprasControllerTest {
 		lp.add(p2);
 		p2.setEmailVendedor("b");
 		cc.setProductos(lp);
-		cc.ordenarPorVentas(panel);
+		mProductos.addAll(lp);
+		cc.ordenarPorVentas(lProductos,mProductos);
 		assertEquals(lp.get(0), p2);
 	}
 	@Test
@@ -335,7 +341,8 @@ public class ComprasControllerTest {
 		p2.setFechaPubli(1);
 		lp.add(p2);
 		cc.setProductos(lp);
-		cc.ordenarPorFechaAsc(panel);
+		mProductos.addAll(lp);
+		cc.ordenarPorFechaAsc(lProductos,mProductos);
 		assertEquals(lp.get(0),p1);
 	}
 	@Test
@@ -348,7 +355,8 @@ public class ComprasControllerTest {
 		p2.setFechaPubli(1);
 		lp.add(p2);
 		cc.setProductos(lp);
-		cc.ordenarPorFechaDesc(panel);
+		mProductos.addAll(lp);
+		cc.ordenarPorFechaDesc(lProductos,mProductos);
 		assertEquals(lp.get(0),p2);
 	}
 	@Test
@@ -383,8 +391,9 @@ public class ComprasControllerTest {
 		listaFinal.addAll(lpo);
 		listaFinal.addAll(lpv);
 		
-		cc.mostrarFavoritos(panel, "j");
-		assertEquals(listaFinal.size(),panel.getComponents().length);
+		mProductos.addAll(listaFinal);
+		cc.mostrarFavoritos(lProductos,mProductos);
+		assertEquals(listaFinal.size(),mProductos.getSize());
 		
 		
 		

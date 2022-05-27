@@ -8,8 +8,10 @@ import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.ws.rs.client.Entity;
@@ -162,77 +164,13 @@ public class ComprasController {
 		pContenido.setLayout(new BoxLayout(pContenido, BoxLayout.Y_AXIS));
 		JPanel pProducto= new JPanel();
 		pProducto.add(new JLabel (p.getNombre()));
-		pProducto.add(new JLabel(""+ p.getPrecioSalida()+ "€"));
-		JButton button= new JButton("Comprar");
-		button.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					System.out.println(p.getId());
-					comprar(ComprasController.this.email,p.getId(),p.getPrecioSalida());
-					pCentro.removeAll();
-					productos.remove(p);
-					pCentro.removeAll();
-					for (Producto p1: productos) {
-						crearPanel(p1, pCentro);
-					}
-					pCentro.revalidate();
-					
-				} catch (ReventaException e1) {
-					System.out.println(e1.getMessage());
-				}
-			}
-			
-		});
-
-		JButton bMeGusta = new JButton("Anadir a favoritos");
-		JButton bUsuarioFav = new JButton("Me gusta");
+		pProducto.add(new JLabel(""+ p.getPrecioSalida()+ "Euros"));
 		
-		bMeGusta.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					anadirFav(p,email)	;				//ComprasController.this.();
-										
-				} catch (ReventaException e1) {
-					System.out.println(e1.getMessage());
-				}
-			}
-			
-		});
-		bUsuarioFav.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				try {
-					anadirUsuarioFav(p.getEmailVendedor(),email);				//ComprasController.this.();
-										
-				} catch (ReventaException e1) {
-					System.out.println(e1.getMessage());
-				}
-			}
-			
-		});
-		
-		JButton bOferta= new JButton("Oferta");
-		bOferta.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				VentanaOferta v= new VentanaOferta(new OfertaController(webTarget, email, p.getId()), webTarget, email, p.getId());
-			}
-			
-		});
 		
 		
 		pContenido.add(pProducto);
 		
-		pContenido.add(button);
-		pContenido.add(bMeGusta);
-		pContenido.add(bUsuarioFav);
-		pContenido.add(bOferta);
+		
 		pCentro.add(pContenido);
 		pCentro.revalidate();
 		pCentro.repaint();
@@ -289,7 +227,8 @@ public class ComprasController {
 	/** Ordena un panel por numero de ventas
 	 * @param pCentro panel a ordenar
 	 */
-	public void ordenarPorVentas(JPanel pCentro) {
+	public void ordenarPorVentas(JList<Producto> pCentro, DefaultListModel<Producto>prueba) {
+		prueba.removeAllElements();
 		productos.sort(new Comparator<Producto>(){
 			   @Override
 			   public int compare(Producto p1,Producto p2) {
@@ -309,10 +248,7 @@ public class ComprasController {
 			     //     return 0 otherwise (meaning the order stays the same)
 			     }
 			 });
-		pCentro.removeAll();
-		for (Producto p:productos) {
-			crearPanel(p, pCentro);
-		}
+		prueba.addAll(productos);
 		pCentro.revalidate();
 		//TODO si no pCentro repaint
 		
@@ -322,7 +258,8 @@ public class ComprasController {
 	/**Ordena un panel por fecha ascendente
 	 * @param pCentro panel a ordenar
 	 */
-	public void ordenarPorFechaAsc( JPanel pCentro) {
+	public void ordenarPorFechaAsc( JList<Producto> lProducto, DefaultListModel<Producto> mProducto) {
+		mProducto.removeAllElements();
 		productos.sort(new Comparator<Producto>(){
 			   @Override
 			   public int compare(Producto p1,Producto p2) {
@@ -335,18 +272,15 @@ public class ComprasController {
 			     //     return 0 otherwise (meaning the order stays the same)
 			     }
 			 });
-		pCentro.removeAll();
-		for (Producto p:productos) {
-			crearPanel(p, pCentro);
-		}
-		pCentro.revalidate();
+		mProducto.addAll(productos);
+		lProducto.revalidate();
 		//TODO si no pCentro repaint
 	}
 	
 	/**Ordena un panel por precio ascendente
 	 * @param pCentro panel a ordenar
 	 */
-	public void ordenarPorPrecioAsc( JPanel pCentro) {
+	public void ordenarPorPrecioAsc( JList<Producto> lProducto, DefaultListModel<Producto> mProducto) {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
 			   public int compare(Producto p1,Producto p2) {
@@ -359,18 +293,17 @@ public class ComprasController {
 			     //     return 0 otherwise (meaning the order stays the same)
 			     }
 			 });
-		pCentro.removeAll();
-		for (Producto p:productos) {
-			crearPanel(p, pCentro);
-		}
-		pCentro.revalidate();
+		mProducto.removeAllElements();
+		mProducto.addAll(productos);
+		lProducto.revalidate();
+		lProducto.repaint();
 		//TODO si no pCentro repaint
 	}
 	
 	/**Ordena un panel por precio descendente
 	 * @param pCentro panel a ordenar
 	 */
-	public void ordenarPorPrecioDesc( JPanel pCentro) {
+	public void ordenarPorPrecioDesc( JList<Producto> lProducto, DefaultListModel<Producto> mProducto) {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
 			   public int compare(Producto p1,Producto p2) {
@@ -383,19 +316,17 @@ public class ComprasController {
 			     //     return 0 otherwise (meaning the order stays the same)
 			     }
 			 });
-		pCentro.removeAll();
-		for (Producto p:productos) {
-			crearPanel(p, pCentro);
-		}
-		pCentro.revalidate();
-		//TODO si no pCentro repaint
+		mProducto.removeAllElements();
+		mProducto.addAll(productos);
+		lProducto.revalidate();
+		lProducto.repaint();
 	}
 	
 	
 	/**Ordena un panel por fecha descendente
 	 * @param pCentro panel a ordenar
 	 */
-	public void ordenarPorFechaDesc(JPanel pCentro) {
+	public void ordenarPorFechaDesc(JList<Producto> lProducto, DefaultListModel<Producto> mProducto) {
 		productos.sort(new Comparator<Producto>(){
 			   @Override
 			   public int compare(Producto p1,Producto p2) {
@@ -408,12 +339,9 @@ public class ComprasController {
 			     //     return 0 otherwise (meaning the order stays the same)
 			     }
 			 });
-		pCentro.removeAll();
-		for (Producto p:productos) {
-			crearPanel(p, pCentro);
-		}
-		pCentro.revalidate();
-		//TODO si no pCentro repaint
+		mProducto.removeAllElements();
+		mProducto.addAll(productos);
+		lProducto.revalidate();
 	}
 	
 	
@@ -421,17 +349,13 @@ public class ComprasController {
 	 * @param pCentro panel en el que se muestra
 	 * @param email del usuario que tiene los productos en favoritos
 	 */
-	public void mostrarFavoritos(JPanel pCentro, String email) {
+	public void mostrarFavoritos(JList<Producto> lProducto, DefaultListModel<Producto> mProducto) {
 		try {
 			List<Producto>productos= getProductosFavoritos();
 			System.out.println("Se estan haciendo los favoritos");
-			pCentro.removeAll();
-			for (Producto p: productos) {
-				System.out.println("fav");
-				crearPanel(p, pCentro);
-			}
-			pCentro.revalidate();
-			pCentro.repaint();
+			mProducto.removeAllElements();
+			mProducto.addAll(productos);
+			lProducto.revalidate();
 		} catch (ReventaException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -457,28 +381,27 @@ public class ComprasController {
 	/**filtra unicamente los productos ordenador
 	 * @param pa Panel en el que se muestran
 	 */
-	public void seleccionarOrdenador(JPanel pa) {
-		pa.removeAll();
+	public void seleccionarOrdenador(JList<Producto> lProducto, DefaultListModel<Producto>mProducto) {
+		mProducto.removeAllElements();
 		for (Producto p: productos) {
 			if (p instanceof ProductoOrdenador) {
-				crearPanel(p, pa);
+				mProducto.addElement(p);
 			}
 		}
-		pa.revalidate();
+		lProducto.revalidate();
 	}
 
 	/**filtra unicamente los productos vehiculo
 	 * @param pa Panel en el que se muestran
 	 */
-	public void seleccionarVehiculo(JPanel pa) {
-		//List<ProductoVehiculo> productos= getProductosVehiculo();
-		pa.removeAll();
+	public void seleccionarVehiculo(JList<Producto> lProducto, DefaultListModel<Producto>mProducto) {
+		mProducto.removeAllElements();
 		for (Producto p: productos) {
 			if (p instanceof ProductoVehiculo) {
-				crearPanel(p, pa);
+				mProducto.addElement(p);
 			}
 		}
-		pa.revalidate();
+		lProducto.revalidate();
 	}
 
 	/**
