@@ -51,6 +51,12 @@ _Si se desea lanzar los test de integracion, sino saltar este paso_
 mvn test -Pintegration
 ```
 
+_Si se desea lanzar los test de performance, sino saltar este paso_
+
+```
+mvn test -Pperformance
+```
+
 _Lanzar el cliente_
 
 ```
