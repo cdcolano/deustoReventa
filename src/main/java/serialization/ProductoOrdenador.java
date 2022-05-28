@@ -74,7 +74,7 @@ public class ProductoOrdenador extends Producto {
 	}
 	
 	/**
-	 * @return modifica la grafica
+	 * @return devuelve la grafica
 	 */
 	public String getGrafica() {
 		return grafica;

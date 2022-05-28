@@ -10,14 +10,18 @@ import java.awt.event.ItemListener;
 import java.util.List;
 
 import javax.swing.BoxLayout;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.WebTarget;
 
@@ -48,7 +52,10 @@ public class VentanaMisProductos extends JFrame {
 	private JPanel pCentro;
 	private JPanel pCategorias;
 	private JPanel pOrdenar;
-
+	private JList<Producto> lProductos;
+	private DefaultListModel<Producto> mProductos;
+	private JButton bReservar, bDesReservar;
+	private Producto p;
 	
 	/**Metodo que construye la ventana de las compras de un usuario
 	 * @param cc controller para acceder a los metodos de la ventana
@@ -63,26 +70,91 @@ public class VentanaMisProductos extends JFrame {
 		this.controller= cc;
 		v1 = this;
 		pCentro= new JPanel();
-		pCentro.setLayout(new BoxLayout(pCentro, BoxLayout.Y_AXIS));
 		try {
 		productos=controller.getProductosEnVentaConReservado();
 		controller.setProductos(productos);
 		System.out.println(productos);
+		lProductos= new JList<Producto>();
+		mProductos= new DefaultListModel<Producto>();
+		
 		for (Producto p:productos) {
 			if(p.getEmailVendedor().equals(email)) {
-				System.out.println("Entro");
-				controller.crearPanel(p, pCentro);
+				mProductos.addElement(p);
 			}
 		}
 		} catch (ReventaException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
+		lProductos.setModel(mProductos);
+		bReservar= new JButton("Reservar");
+		bReservar.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (p!=null) {
+					try {
+						controller.reservar(p.getId());
+						//pCentro.removeAll();
+						bReservar.setEnabled(false);
+						pCentro.revalidate();
+						pCentro.repaint();
+					} catch (ReventaException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				
+			}
+		});	
+		
+		JPanel pBotonera= new JPanel();
+		
+		lProductos.addListSelectionListener(new ListSelectionListener() {
+			
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				p=lProductos.getSelectedValue();
+				if (p!=null) {
+					if(p.isReservado()) {
+						pBotonera.add(bDesReservar);
+						pBotonera.revalidate();
+					}
+					else {
+						pBotonera.add(bReservar);
+						pBotonera.revalidate();
+					}
+				}
+				
+			}
+		});
 		
 		
-		JScrollPane jsc= new JScrollPane(pCentro);
-	
-		v1.getContentPane().add(jsc,BorderLayout.CENTER);
+		bDesReservar = new JButton("Quitar reserva");
+		bDesReservar.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if (p!=null) {
+					try {
+						controller.desReservar(p.getId());
+						bDesReservar.setEnabled(false);
+						pCentro.revalidate();
+						pCentro.repaint();
+					} catch (ReventaException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					pCentro.revalidate();
+				}
+			}
+			
+		});
+		
+		pCentro.setLayout(new BorderLayout());
+		JScrollPane jsc= new JScrollPane(lProductos);
+		pCentro.add(jsc, BorderLayout.CENTER);
+		pCentro.add(pBotonera,BorderLayout.SOUTH);
+		v1.getContentPane().add(pCentro,BorderLayout.CENTER);
 		JPanel pVender= new JPanel();
 		JButton bCerrar = new JButton("Volver atras");
 		bCerrar.addActionListener(new ActionListener() {

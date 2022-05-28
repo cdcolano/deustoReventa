@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.beans.PropertyChangeListener;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -277,6 +278,18 @@ public class VentanaProducto extends JFrame{
 		      }
 		    });
 			
+			JButton bVolver= new JButton("Volver atras");
+			bVolver.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					VentanaCompras vc= new VentanaCompras(new ComprasController(webTarget, email), c, webTarget, email);
+					VentanaProducto.this.dispose();
+				}
+				
+				
+			});
+			pCrear.add(bVolver);
 			getContentPane().add(lError,BorderLayout.NORTH);
 			getContentPane().add(pCambiante,BorderLayout.CENTER);
 			getContentPane().add(pCrear,BorderLayout.SOUTH);

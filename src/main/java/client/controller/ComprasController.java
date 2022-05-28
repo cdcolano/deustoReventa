@@ -425,47 +425,51 @@ public class ComprasController {
 	 * @param pa panel en el que deben desplegarse los productos
 	 */
 	public void filtrarOrdenador(String cpu, String placaBase, String grafica, String ramMinima,
-			String ramMaxima, String memMinima, String memMaxima, JPanel pa) {
-			pa.removeAll();
+			String ramMaxima, String memMinima, String memMaxima, JList<Producto> lProd,DefaultListModel<Producto> mProd) {
 			ArrayList<Producto>filtrado= new ArrayList<>();
 			filtrado.addAll(productos);
 			for (int i=productos.size()-1;i>=0;i--) {
 				if(filtrado.get(i) instanceof ProductoOrdenador) {
 					ProductoOrdenador p=(ProductoOrdenador)filtrado.get(i);
-					if (!cpu.contentEquals("")) {
+					System.out.println(p.getCpu());
+					System.out.println(p.getGrafica());
+					System.out.println(p.getPlacaBase());
+					System.out.println(p.getRam());
+					System.out.println(p.getMemoria());
+					if (cpu!=null && !cpu.contentEquals("")) {
 						if (!cpu.contentEquals(p.getCpu())) {
 							filtrado.remove(i);
 						}
 					}
-					if (!placaBase.contentEquals("")) {
+					if (placaBase!=null && !placaBase.contentEquals("")) {
 						if (!placaBase.contentEquals(p.getPlacaBase())) {
 							filtrado.remove(i);
 						}
 					}
-					if (!grafica.contentEquals("")) {
+					if (grafica!=null && !grafica.contentEquals("")) {
 						if (!grafica.contentEquals(p.getGrafica())) {
 							filtrado.remove(i);
 						}
 					}
-					if (!ramMinima.contentEquals("")) {
+					if (ramMinima!=null && !ramMinima.contentEquals("")) {
 						int num=Integer.parseInt(ramMinima);
 						if (num<p.getRam()) {
 							filtrado.remove(i);
 						}
 					}
-					if (!ramMaxima.contentEquals("")) {
+					if (ramMaxima!=null && !ramMaxima.contentEquals("")) {
 						int num=Integer.parseInt(ramMaxima);
 						if (num>p.getRam()) {
 							filtrado.remove(i);
 						}
 					}
-					if (!memMinima.contentEquals("")) {
+					if (memMinima!=null &&!memMinima.contentEquals("")) {
 						int num=Integer.parseInt(memMinima);
 						if (num<p.getMemoria()) {
 							filtrado.remove(i);
 						}
 					}
-					if (!memMaxima.contentEquals("")) {
+					if (memMinima!=null && !memMaxima.contentEquals("")) {
 						int num=Integer.parseInt(memMaxima);
 						if (num>p.getMemoria()) {
 							filtrado.remove(i);
@@ -475,10 +479,9 @@ public class ComprasController {
 					filtrado.remove(i);
 				}
 			}
-			for (Producto po:filtrado) {
-				crearPanel(po, pa);
-			}
-			pa.revalidate();
+			mProd.removeAllElements();
+			mProd.addAll(filtrado);
+			lProd.revalidate();
 	}
 	
 	
@@ -494,8 +497,7 @@ public class ComprasController {
 	 * @param pa panel al que anadir los vehiculos
 	 */
 	public void filtrarVehiculo(String modelo, String marca, String cvMin, String cvMax, String kmMin,
-			String kmMax, String anyoMin, String anyoMax,JPanel pa) {
-			pa.removeAll();
+			String kmMax, String anyoMin, String anyoMax,JList<Producto> lProd,DefaultListModel<Producto> mProd) {
 			ArrayList<Producto>filtrado= new ArrayList<>();
 			filtrado.addAll(productos);
 			for (int i=productos.size()-1;i>=0;i--) {
@@ -551,10 +553,9 @@ public class ComprasController {
 					filtrado.remove(i);
 				}
 			}
-			for (Producto po:filtrado) {
-				crearPanel(po, pa);
-			}
-			pa.revalidate();
+			mProd.removeAllElements();
+			mProd.addAll(filtrado);
+			lProd.revalidate();
 	}
 	
 	

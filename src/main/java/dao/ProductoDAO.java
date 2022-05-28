@@ -178,7 +178,7 @@ public class ProductoDAO implements IProductoDAO{
 					p1.setEmailVendedor(p.getEmailVendedor());
 					p1.setCpu(p.getCpu());
 					p1.setMemoria(p.getMemoria());
-					p1.setGrafica(p1.getGrafica());
+					p1.setGrafica(p.getGrafica());
 					p1.setRam(p.getRam());
 					p1.setPlacaBase(p.getPlacaBase());
 				}
@@ -226,7 +226,7 @@ public class ProductoDAO implements IProductoDAO{
 				System.out.println(p.getNombre());
 				if (!(p.isReservado()||p.isVendido())) {
 					ProductoOrdenador p1=new ProductoOrdenador();
-					System.out.println("Se añade");
+					System.out.println("Se anade");
 					productos.add(p1);
 					p1.setNombre(p.getNombre());
 					p1.setCategoria(p.getCategoria());
@@ -239,7 +239,7 @@ public class ProductoDAO implements IProductoDAO{
 					p1.setEmailVendedor(p.getEmailVendedor());
 					p1.setCpu(p.getCpu());
 					p1.setMemoria(p.getMemoria());
-					p1.setGrafica(p1.getGrafica());
+					p1.setGrafica(p.getGrafica());
 					p1.setRam(p.getRam());
 					p1.setPlacaBase(p.getPlacaBase());
 				}

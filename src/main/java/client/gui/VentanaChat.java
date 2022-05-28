@@ -6,16 +6,12 @@ import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.text.StyledDocument;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -26,6 +22,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import client.controller.ChatController;
+import client.controller.ComprasController;
 import dao.UsuarioDAO;
 import serialization.Mensaje;
 import serialization.Usuario;
@@ -44,7 +41,7 @@ public class VentanaChat extends JFrame {
 	private JTextArea enviados, recibidos;
 	private JTextPane campoChat,campoChat1;
 	private JButton botonEnviar;
-	private JComboBox comboUsuarios;
+	private JComboBox<String> comboUsuarios;
 	private JScrollPane scroll,scroll1;
 	private static VentanaChat v1;
 	private ChatController cc;
@@ -67,11 +64,9 @@ public class VentanaChat extends JFrame {
 		setBounds(100,100,450,300);
 		this.cc = cc;
 		v1=this;
-		v1.setTitle("");
-		v1.setLayout( new GridLayout(2,0));
 		
 		
-		comboUsuarios = new JComboBox();
+		comboUsuarios = new JComboBox<String>();
 		enviados = new JTextArea();
 		recibidos = new JTextArea();
 		enviados.setEditable(false);
@@ -133,7 +128,9 @@ public class VentanaChat extends JFrame {
 				enviarMensaje(email1,enviados,mensaje,v1,comboUsuarios,cc);
 			}
 		});
-	
+		
+		JPanel pContent= new JPanel();
+		pContent.setLayout(new BorderLayout());
 		
 		panelCentro.add(panelEnviados);
 		panelCentro.add(panelRecibidos);
@@ -141,10 +138,26 @@ public class VentanaChat extends JFrame {
 		panelSur.add(mensaje);
 		panelSur.add(comboUsuarios);
 		panelSur.add(botonEnviar);
-		v1.add(panelCentro);
-		v1.add(panelSur);
-		setLocationRelativeTo(null);
+		pContent.add(panelCentro, BorderLayout.CENTER);
+		pContent.add(panelSur, BorderLayout.SOUTH);
+		getContentPane().add(pContent, BorderLayout.CENTER);
+		
+		JPanel pVolver= new JPanel();
+		JButton bVolver = new JButton("Volver atras");
+		bVolver.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				VentanaCompras v= new VentanaCompras(new ComprasController(wt, email1), c, wt, email1);
+				VentanaChat.this.dispose();
+			}
+			
+		});
+		pVolver.add(bVolver);
+		
+		getContentPane().add(pVolver, BorderLayout.SOUTH);
 		this.pack();
+		setLocationRelativeTo(null);
 		setVisible(true);
 	}
 	

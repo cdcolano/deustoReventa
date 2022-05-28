@@ -185,14 +185,10 @@ public class VentanaCompras extends JFrame{
 					try {
 						System.out.println(p.getId());
 						controller.comprar(email,p.getId(),p.getPrecioSalida());
-						pCentro.removeAll();
+						mProductos.removeAllElements();
 						productos.remove(p);
-						pCentro.removeAll();
-						for (Producto p1: productos) {
-							controller.crearPanel(p1, pCentro);
-						}
+						mProductos.addAll(productos);
 						pCentro.revalidate();
-						
 					} catch (ReventaException e1) {
 						System.out.println(e1.getMessage());
 					}
@@ -242,7 +238,7 @@ public class VentanaCompras extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				if (p!=null) {
 				VentanaOferta v= new VentanaOferta(new OfertaController(webTarget, email, p.getId()), webTarget, email, p.getId());
-			
+				
 				}
 			}
 			
@@ -419,18 +415,24 @@ public class VentanaCompras extends JFrame{
 			pNorte.removeAll();
 			crearPNorte(pCategorias, pOrdenar);
 			cco.ordenarPorFechaDesc(lProducto,mProducto);
+			this.pack();
+			setLocationRelativeTo(null);
 			revalidate();
 		}
 		else if (seleccion.compareTo("Ordenador")==0) {
 			cco.seleccionarOrdenador(lProducto,mProducto);
 			crearPNorte(pCategorias, pOrdenar);
 			generaFiltrosOrdenador();
+			this.pack();
+			setLocationRelativeTo(null);
 			revalidate();
 		}
 		else if (seleccion.compareTo("Vehiculo")==0) {
 			//cco.seleccionarVehiculo(pa);
 			crearPNorte(pCategorias, pOrdenar);
 			generaFiltrosVehiculo();
+			this.pack();
+			setLocationRelativeTo(null);
 			revalidate();
 		}
 	}
@@ -527,9 +529,12 @@ public class VentanaCompras extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				System.out.println(tGrafica.getText());
 				controller.filtrarOrdenador(tCpu.getText(),tPlacaBase.getText(), tGrafica.getText(),
 						tRamMinima.getText(), tRamMaxima.getText(), tMemoriaMinima.getText(), tMemoriaMaxima.getText(),
-						VentanaCompras.this.pCentro);
+						lProductos,mProductos);
+				VentanaCompras.this.pack();
+				VentanaCompras.this.setLocationRelativeTo(null);
 			}
 			
 		});
@@ -637,7 +642,10 @@ public class VentanaCompras extends JFrame{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				controller.filtrarOrdenador(email, email, email, email, email, email, email, pAnyoFabriMax);
+				controller.filtrarVehiculo(tModelo.getText(),tMarca.getText(), tCVMin.getText(), tCVMax.getText(),
+						tKMMin.getText(), tKMMax.getText(), tAnyoFabriMin.getText(), tAnyoFabriMax.getText(), lProductos, mProductos);
+				VentanaCompras.this.pack();
+				VentanaCompras.this.setLocationRelativeTo(null);
 			}
 			
 		});
