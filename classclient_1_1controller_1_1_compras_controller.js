@@ -1,0 +1,27 @@
+var classclient_1_1controller_1_1_compras_controller =
+[
+    [ "ComprasController", "classclient_1_1controller_1_1_compras_controller.html#ad4f13c5375480d14883d76c03535be19", null ],
+    [ "anadirFav", "classclient_1_1controller_1_1_compras_controller.html#a10c47361d3643075d759d06a89cdb21e", null ],
+    [ "anadirUsuarioFav", "classclient_1_1controller_1_1_compras_controller.html#a6476c92d6eced6a4c417fa37319bdd4c", null ],
+    [ "anadirUsuarioFav", "classclient_1_1controller_1_1_compras_controller.html#abb0638a1c8b7b5104abf05b40cbd2be8", null ],
+    [ "comprar", "classclient_1_1controller_1_1_compras_controller.html#a856abcb1cd3f75a339e33abd390eaf41", null ],
+    [ "crearPanel", "classclient_1_1controller_1_1_compras_controller.html#a83b44331642ed992b9bab2e69c355555", null ],
+    [ "filtrarOrdenador", "classclient_1_1controller_1_1_compras_controller.html#ad851cf7739971470172678888f30d9fd", null ],
+    [ "filtrarVehiculo", "classclient_1_1controller_1_1_compras_controller.html#a9eb885590b794ead3b8af945b353f88f", null ],
+    [ "getProducto", "classclient_1_1controller_1_1_compras_controller.html#ae2b14c3f181ed9b53335e240ed4d7c86", null ],
+    [ "getProductos", "classclient_1_1controller_1_1_compras_controller.html#ab666ff2475df1a781ec5f68d9be19f84", null ],
+    [ "getProductosEnVenta", "classclient_1_1controller_1_1_compras_controller.html#acc7b8c4211e5b6b1d952565652e05541", null ],
+    [ "getProductosFavoritos", "classclient_1_1controller_1_1_compras_controller.html#a0a3f74b408a98a238094c45e232e9d3b", null ],
+    [ "getProductosOrdenador", "classclient_1_1controller_1_1_compras_controller.html#ad7591b738dd8107fce0f55a5079be8e6", null ],
+    [ "getProductosVehiculo", "classclient_1_1controller_1_1_compras_controller.html#ab689ca3a85f005b988dfc4d5601b2d98", null ],
+    [ "getVentas", "classclient_1_1controller_1_1_compras_controller.html#a090865c6f024442e7561ecf890978a75", null ],
+    [ "mostrarFavoritos", "classclient_1_1controller_1_1_compras_controller.html#a424db10c5b5187f0a3150bea17a9620d", null ],
+    [ "ordenarPorFechaAsc", "classclient_1_1controller_1_1_compras_controller.html#adcf14058a17c6c79e90a852bf5d94836", null ],
+    [ "ordenarPorFechaDesc", "classclient_1_1controller_1_1_compras_controller.html#a3d36cdb025915479f01ea33b5cc8636c", null ],
+    [ "ordenarPorPrecioAsc", "classclient_1_1controller_1_1_compras_controller.html#aafd3b3c021652fc1b736e5b1404698f4", null ],
+    [ "ordenarPorPrecioDesc", "classclient_1_1controller_1_1_compras_controller.html#a588485a9013d032f8f10777b3c26183a", null ],
+    [ "ordenarPorVentas", "classclient_1_1controller_1_1_compras_controller.html#a7f48c07a4942b87d6d38c5ac93bdb729", null ],
+    [ "seleccionarOrdenador", "classclient_1_1controller_1_1_compras_controller.html#a6eb392722f2b3e4ef5e8e9cb9ea840e9", null ],
+    [ "seleccionarVehiculo", "classclient_1_1controller_1_1_compras_controller.html#a925cae21430f4fdb832f1335cc69b93a", null ],
+    [ "setProductos", "classclient_1_1controller_1_1_compras_controller.html#a7ed596d5690ca8b5989c1c8456247def", null ]
+];

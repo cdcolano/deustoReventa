@@ -1,0 +1,15 @@
+var searchData=
+[
+  ['aceptar_367',['aceptar',['../classclient_1_1gui_1_1_ventana_oferta.html#a7b2c0c1012a057d93764ba50b6a195a2',1,'client::gui::VentanaOferta']]],
+  ['addcompra_368',['addCompra',['../classserver_1_1_reventa_server.html#a327e74ed0c8811b9b54e7cca8ce16c01',1,'server::ReventaServer']]],
+  ['addmensaje_369',['addMensaje',['../classserver_1_1_reventa_server.html#a45197c347a3d3f7a81f20968bb712c85',1,'server::ReventaServer']]],
+  ['addoferta_370',['addOferta',['../classclient_1_1controller_1_1_oferta_controller.html#a3badb50bc444d6e3be6cbe1c52b1c5b3',1,'client.controller.OfertaController.addOferta()'],['../classserver_1_1_reventa_server.html#a96b73e16666c07a2011aeab07e31a8d9',1,'server.ReventaServer.addOferta()']]],
+  ['addproductoenventa_371',['addProductoEnVenta',['../classserialization_1_1_usuario.html#ad7c1cf3a96b6e4420f8838d62ea8409e',1,'serialization::Usuario']]],
+  ['addproductofav_372',['addProductoFav',['../classserver_1_1_reventa_server.html#af6b3f3e0e1ad3f467873e5376f12c9f8',1,'server.ReventaServer.addProductoFav()'],['../classservice_1_1_ventas_service.html#a96b0d2a45b4daf3f2df840b882cf0b3f',1,'service.VentasService.addProductoFav()']]],
+  ['addproductoordenador_373',['addProductoOrdenador',['../classclient_1_1controller_1_1_producto_controller.html#afe21a5364043f6c570b046c3f937f705',1,'client.controller.ProductoController.addProductoOrdenador()'],['../classserver_1_1_reventa_server.html#a2d18b8da7b8d3cd2041d50ed4d65d2ed',1,'server.ReventaServer.addProductoOrdenador()']]],
+  ['addproductovehiculo_374',['addProductoVehiculo',['../classclient_1_1controller_1_1_producto_controller.html#a68596450eed1331c4d5f0ce9f2531a72',1,'client.controller.ProductoController.addProductoVehiculo()'],['../classserver_1_1_reventa_server.html#a2bf60e382aaa6b7bff3b6c8cc3ed0173',1,'server.ReventaServer.addProductoVehiculo()']]],
+  ['addreclamacion_375',['addReclamacion',['../classclient_1_1controller_1_1_ver_compras_controller.html#a7a693dd285f1d888e8d23f6f9233ef2a',1,'client.controller.VerComprasController.addReclamacion()'],['../classserver_1_1_reventa_server.html#a683c94aa55411ae8416161feaf465763',1,'server.ReventaServer.addReclamacion()'],['../classservice_1_1_ventas_service.html#a83226e7b5bdcbbf589cdb0ac94ab1dbf',1,'service.VentasService.addReclamacion()']]],
+  ['addusuariofav_376',['addUsuarioFav',['../classserver_1_1_reventa_server.html#aadef343352c4f5044a1601b88d83aaf8',1,'server.ReventaServer.addUsuarioFav()'],['../classservice_1_1_ventas_service.html#aabc58bf4a1be590c8368016c38623ad9',1,'service.VentasService.addUsuarioFav()']]],
+  ['anadirfav_377',['anadirFav',['../classclient_1_1controller_1_1_compras_controller.html#a10c47361d3643075d759d06a89cdb21e',1,'client::controller::ComprasController']]],
+  ['anadirusuariofav_378',['anadirUsuarioFav',['../classclient_1_1controller_1_1_compras_controller.html#abb0638a1c8b7b5104abf05b40cbd2be8',1,'client.controller.ComprasController.anadirUsuarioFav(Usuario u, String email)'],['../classclient_1_1controller_1_1_compras_controller.html#a6476c92d6eced6a4c417fa37319bdd4c',1,'client.controller.ComprasController.anadirUsuarioFav(String email2, String email)']]]
+];
